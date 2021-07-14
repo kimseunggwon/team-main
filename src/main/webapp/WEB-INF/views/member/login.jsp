@@ -12,6 +12,39 @@
 
 <script type="text/javascript">
 
+$(function(){
+	<%-- 
+	$("#submit2").click(function(e){
+		e.preventDefault(); */ 
+		if (confirm("삭제 하시겠습니까?")){
+		
+		}
+		--%>
+		
+	$("#sang-signup-btn").click(function(e){
+	
+		var path = '${appRoot}/member/signup';
+		$("#sang-login-form").attr("action", path);
+		$("#sang-login-form").submit();
+		
+	});
+	$("#sang-findid-btn").click(function(e){
+		
+		var path = '${appRoot}/member/findid';
+		$("#sang-login-form").attr("action", path);
+		$("#sang-login-form").submit();
+		
+	});
+	$("#sang-findpw-btn").click(function(e){
+		
+		var path = '${appRoot}/member/findpw';
+		$("#sang-login-form").attr("action", path);
+		$("#sang-login-form").submit();
+		
+	});
+	
+})
+
 </script>
 
 </head>
@@ -20,7 +53,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h1>로그인</h1>
-			<form id="sang-login-form" action="${appRoot }/member/signup" method="post">
+			<form id="sang-login-form" action="${appRoot}/member/signup" method="post">
 				<div>
 					<label for="input1">이름</label>				
 					<input id="input1" name="username" autofocus/>
@@ -39,8 +72,8 @@
 					<input type="submit" value="로그인">
 				</div>
 				<div>
-					<input type="submit" value="아이디 찾기">
-					<input type="submit" value="비밀번호 찾기">
+					<input id="sang-findid-btn" type="submit" value="아이디 찾기">
+					<input id="sang-findpw-btn" type="submit" value="비밀번호 찾기">
 					<input id="sang-signup-btn" type="submit" value="회원가입">
 				</div>
 				
