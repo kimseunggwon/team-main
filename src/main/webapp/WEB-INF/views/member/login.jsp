@@ -21,13 +21,13 @@ $(function(){
 		}
 		--%>
 		
-	$("#sang-signup-btn").click(function(e){
+	/* $("#sang-signup-btn").click(function(e){
 	
 		var path = '${appRoot}/member/signup';
 		$("#sang-login-form").attr("action", path);
 		$("#sang-login-form").submit();
 		
-	});
+	}); */
 	$("#sang-findid-btn").click(function(e){
 		
 		var path = '${appRoot}/member/findid';
@@ -53,7 +53,7 @@ $(function(){
 	<div class="row">
 		<div class="col-md-6">
 			<h1>로그인</h1>
-			<form id="sang-login-form" action="${appRoot}/member/signup" method="post">
+			<form id="sang-login-form" action="${appRoot}/login" method="post">
 				<div>
 					<label for="input1">이름</label>				
 					<input id="input1" name="username" autofocus/>
@@ -69,12 +69,12 @@ $(function(){
 				</div>
 								
 				<div>
-					<input type="submit" value="로그인">
+					<input id="sang-login-btn" type="submit" value="로그인">
 				</div>
 				<div>
 					<input id="sang-findid-btn" type="submit" value="아이디 찾기">
 					<input id="sang-findpw-btn" type="submit" value="비밀번호 찾기">
-					<input id="sang-signup-btn" type="submit" value="회원가입">
+					<a id="sang-signup-btn" class="btn btn-primary" href="${appRoot }/member/signup">회원가입</a>
 				</div>
 				
 			</form>

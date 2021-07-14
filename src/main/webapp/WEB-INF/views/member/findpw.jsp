@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>미정</h1>
+	<h1>비번 찾기</h1>
 </div>
 </body>
 </html>

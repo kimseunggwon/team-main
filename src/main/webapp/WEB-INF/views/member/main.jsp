@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>아이디 찾기</h1>
+	<h1>메인입니당</h1>
 </div>
 </body>
 </html>

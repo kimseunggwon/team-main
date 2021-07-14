@@ -7,12 +7,21 @@
 
 <security:http>
 	<security:http-basic/>
+	<!-- post방식을 자유롭게 이용하기 위해서 disabled 
+		 login을 참조하는 명령이 있다면 확인 후 default로 보내주는거
+		 logout 구현
+		 로그인 유지 시간 정의
+		  -->
 	<security:csrf disabled="true"/>
+	<security:form-login login-page="/member/login" default-target-url="/member/main"/>
+	<security:logout/>
+	<security:remember-me data-source-ref="dataSource" token-validity-seconds="3600"/>
 </security:http>
 
 <security:authentication-manager>
 	<security:authentication-provider>
 		<security:user-service>
+			<!-- login 되는지 확인차 member 아이디 비번 권한 줬습니다 -->
 			<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
 		</security:user-service>
 	</security:authentication-provider>
