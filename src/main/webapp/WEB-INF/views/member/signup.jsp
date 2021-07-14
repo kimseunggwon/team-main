@@ -172,7 +172,9 @@ $(function() {
 				
 				<button id="sang-nomal-btn">일반 회원 가입</button>
 				<button id="sang-b2b-btn">사업자 회원 가입</button>
-				<img id="sang-img" alt="눌러줭" src="${appRoot }/resources/image/1.PNG">
+				<a href="">
+					<img id="sang-img" alt="눌러줭" src="${appRoot }/resources/image/1.PNG">
+				</a>
 				
 			</div>
 			<form id="sang-signup-form" action="${appRoot }/member/signup" method="post">
