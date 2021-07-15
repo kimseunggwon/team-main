@@ -12,12 +12,13 @@ public class MemberVO {
 	private String userid;
 	private String userpw;
 	private String userName;
-	private String useraddress;
+	private String userAddress;
 	private Date birthDate;
-	private String userphonenum;
-	private String useremail;
-	private int usersex;
-	private Date regdate;
+	private String userPhonenum;
+	private String userEmail;
+	private int userSex;
+	private String userNickname;
+	
 	private boolean enabled;
 	
 	private List<AuthVO> authList;

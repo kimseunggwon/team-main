@@ -141,22 +141,28 @@ $(function() {
 		});
 	});
 	
-	$("#sang-nomal-btn").click(function(){
+	$("#sang-normal-img").click(function(e){
+		e.preventDefault();
+		
 		var path = '${appRoot }/member/signup';
 		$("#sang-signup-form").attr("action", path);
 		
 		$(".b2bsignup").attr("hidden", "hidden");
 		
-		$("#sang-img").attr("src", "${appRoot}/resources/image/2.PNG");
+		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/회원가입2.png");
+		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자1.png");
 	})
 	
-	$("#sang-b2b-btn").click(function(){
+	$("#sang-b2b-img").click(function(e){
+		e.preventDefault();
+		
 		var path = '${appRoot}/member/b2bsignup';
 		$("#sang-signup-form").attr("action", path);
 		
 		$(".b2bsignup").removeAttr("hidden");
 		
-		$("#sang-img").attr("src", "${appRoot}/resources/image/1.PNG");
+		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/회원가입1.png");
+		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자2.png");
 	})
 	
 });
@@ -170,10 +176,11 @@ $(function() {
 			<div class="conainer mt-5">
 				<h1>회원 가입</h1>
 				
-				<button id="sang-nomal-btn">일반 회원 가입</button>
-				<button id="sang-b2b-btn">사업자 회원 가입</button>
 				<a href="">
-					<img id="sang-img" alt="눌러줭" src="${appRoot }/resources/image/1.PNG">
+					<img style="text-decoration: none;" id="sang-normal-img" alt="눌러줭" src="${appRoot }/resources/image/회원가입2.png">
+				</a>
+				<a href="">
+					<img style="text-decoration: none;" id="sang-b2b-img" alt="눌러줭" src="${appRoot }/resources/image/사업자1.png">
 				</a>
 				
 			</div>
@@ -209,29 +216,45 @@ $(function() {
 					<label for="sang-name">name</label>
 					<input type="text" name="userName" id="sang-name" class="">
 				</div>
+				<div>
+					<label for="sang-name">address</label>
+					<input type="text" name="userAddress" id="sang-address" class="">
+				</div>
+				<div class="">
+					<label for="sang-pnum">nickname</label>
+					<input type="text" name="userNickname" id="sang-nickname" class="">
+				</div>
 				<div class="">
 					<label for="sang-birth">birth day</label>
 					<input type="date" name="birthDate" id="sang-birth" class="">
 				</div>
 				<div class="">
 					<label for="sang-email">E-mail</label>
-					<input type="text" name="idE" id="sang-email" class="">
-					<button class="" id="sang-authnum" type="button">인증번호 전송</button>
+					<input type="text" name="userEmail" id="sang-email" class="">
+					<button class="" id="userEmail" type="button">인증번호 전송</button>
 				</div>
 				<div class="">
 					<label for="sang-pnum">P-number</label>
-					<input type="text" name="idP" id="sang-pnum" class="">
+					<input type="text" name="userPhonenum" id="sang-pnum" class="">
 				</div>
+				
+				<div class="">
+					<select id="" name="userSex" class="">
+						<option selected="selected" value="1">남자</option>
+						<option value="2">여자</option>
+					</select>
+				</div>
+				
 				
 				<hr>
 				
 				<div class="b2bsignup" hidden>
-					<label for="sang-storeaddress">store address</label>
-					<input type="text" name="storeaddress" id="sang-storeaddress" class="">
-				</div>
-				<div class="b2bsignup" hidden>
 					<label for="sang-pnum">store name</label>
 					<input type="text" name="storename" id="sang-storename" class="">
+				</div>
+				<div class="b2bsignup" hidden>
+					<label for="sang-storeaddress">store address</label>
+					<input type="text" name="storeaddress" id="sang-storeaddress" class="">
 				</div>
 				<div class="b2bsignup" hidden>
 					<label for="sang-pnum">store phonenumber</label>
@@ -249,9 +272,9 @@ $(function() {
 			<input class="col-3" hidden name="inz" id="sang-inz-input"/>
 			<button hidden class="" id="sang-inz-btn" type="button">인증</button>
 	
-	
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 			<div class="container mt-5">
-				<input hidden id="signup" type="submit" value="가입" class="" >
+				<input id="signup" type="submit" value="가입" class="" >
 			</div>
 			
 			</form>

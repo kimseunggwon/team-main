@@ -1,11 +1,14 @@
 package org.zerock.controller.Sangpil.mapper;
 
 import org.zerock.controller.Sangpil.domain.AuthVO;
+import org.zerock.controller.Sangpil.domain.B2BmemberVO;
 import org.zerock.controller.Sangpil.domain.MemberVO;
 
 public interface MemberMapper {
 
 	public int insert(MemberVO vo);
+	
+	public int insertb2b(B2BmemberVO vo);
 	
 	public int insertAuth(AuthVO vo);
 	

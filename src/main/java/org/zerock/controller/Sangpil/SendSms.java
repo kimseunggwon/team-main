@@ -10,8 +10,8 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;*/
  * @brief This sample code demonstrate how to send sms through CoolSMS Rest API PHP
  */
 public class SendSms {
-  public static void sendSms(String idP) {
-  /*  String api_key = "NCSNBKHRRNHYC31R";
+  /* public static void sendSms(String idP) {
+    String api_key = "NCSNBKHRRNHYC31R";
     String api_secret = "UMPSHJVGHAJ9OINOPCK21BIDTKNIVOTV";
     Message coolsms = new Message(api_key, api_secret);
 
@@ -30,6 +30,6 @@ public class SendSms {
       System.out.println(e.getMessage());
       System.out.println(e.getCode());
     }
-   */
   }
+  */
 }

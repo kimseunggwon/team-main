@@ -5,6 +5,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<bean id="bcryptPasswordEncoder" 
+class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+<!-- 
+<bean id="customUserDetailsService"
+class="org.zerock.controller.Sangpil.security.CustomUserDetailsService"></bean> -->
+
 <security:http>
 	<security:http-basic/>
 	<!-- post방식을 자유롭게 이용하기 위해서 disabled 
@@ -14,15 +20,24 @@
 		  -->
 	<security:csrf disabled="true"/>
 	<security:form-login login-page="/member/login" default-target-url="/member/main"/>
+	<security:form-login login-page="/member/b2blogin" default-target-url="/member/main"/>
 	<security:logout/>
 	<security:remember-me data-source-ref="dataSource" token-validity-seconds="3600"/>
 </security:http>
+
+<!-- <security:authentication-manager>
+	<security:authentication-provider user-service-ref="customUserDetailsService">
+		<security:password-encoder ref="bcryptPasswordEncoder"/>
+	</security:authentication-provider>
+</security:authentication-manager> -->
+
 
 <security:authentication-manager>
 	<security:authentication-provider>
 		<security:user-service>
 			<!-- login 되는지 확인차 member 아이디 비번 권한 줬습니다 -->
 			<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+			<security:user name="b2b" password="{noop}b2b"  authorities="ROLE_B2B"/>
 		</security:user-service>
 	</security:authentication-provider>
 </security:authentication-manager>

@@ -11,17 +11,13 @@ public class B2BmemberVO {
 	private String userid;
 	private String userpw;
 	private String userName;
-	private String useraddress;
+	private String userAddress;
 	private Date birthDate;
-	private String userphonenum;
-	private String useremail;
-	private int usersex;
-	private String storeaddress;
-	private String storename;
-	private String storephonenum;
-	private int businessnum;
+	private String userPhonenum;
+	private String userEmail;
+	private int userSex;
+	private String userNickname;
 	
-	private Date regdate;
 	private boolean enabled;
 	
 	private List<AuthVO> authList;

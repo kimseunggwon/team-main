@@ -43,6 +43,30 @@ $(function(){
 		
 	});
 	
+	$("#sang-normal-img").click(function(e){
+		e.preventDefault();
+		
+		var path = '${appRoot}/login';
+		$("#sang-login-form").attr("action", path);
+		
+		$(".b2blogin").attr("hidden", "hidden");
+		
+		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/로그인2.png");
+		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자 로그인1.png");
+	})
+	
+	$("#sang-b2b-img").click(function(e){
+		e.preventDefault();
+		
+		var path = '${appRoot}/b2blogin';
+		$("#sang-login-form").attr("action", path);
+		
+		$(".b2blogin").removeAttr("hidden");
+		
+		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/로그인1.png");
+		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자 로그인2.png");
+	})
+	
 })
 
 </script>
@@ -51,8 +75,16 @@ $(function(){
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<h1>로그인</h1>
+			
+			<a href="">
+				<img style="text-decoration: none;" id="sang-normal-img" alt="눌러줭" src="${appRoot }/resources/image/로그인2.png">
+			</a>
+			<a href="">
+				<img style="text-decoration: none;" id="sang-b2b-img" alt="눌러줭" src="${appRoot }/resources/image/사업자 로그인1.png">
+			</a>
+				
 			<form id="sang-login-form" action="${appRoot}/login" method="post">
 				<div>
 					<label for="input1">이름</label>				
@@ -60,6 +92,10 @@ $(function(){
 				</div>
 				<div>
 					<label for="input2">패스워드</label>
+					<input id="input2" type="password" name="password" />
+				</div>
+				<div class="b2blogin" hidden>
+					<label for="input2">사업자 번호</label>
 					<input id="input2" type="password" name="password" />
 				</div>
 				

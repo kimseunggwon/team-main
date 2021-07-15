@@ -1,22 +1,28 @@
 package org.zerock.controller.Sangpil.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.controller.Sangpil.SendEmail;
+import org.zerock.controller.Sangpil.domain.B2BmemberVO;
 import org.zerock.controller.Sangpil.domain.MemberVO;
+import org.zerock.controller.Sangpil.service.MemberService;
 
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -27,6 +33,9 @@ public class testController {
 	/*
 	 * @Setter(onMethod_ = @Autowired) private MemberService service;
 	 */
+	
+	@Setter(onMethod_ = @Autowired)
+	private MemberService service;
 
 	@RequestMapping("/login")
 	public void login() {
@@ -96,18 +105,29 @@ public class testController {
 		log.info("Post 회원가입 들어왔습니당.");
 		log.info(vo);
 		
-//		boolean ok = service.insert(vo);
-//		
-//		if(ok) {
-		return "redirect:/member/login";
-//		}else {
-//			return "redirect:/member/signup?error";
-//		}
+		boolean ok = service.insert(vo);
+		
+		if(ok) {
+			return "redirect:/member/login";
+		}else {
+			return "redirect:/member/signup?error";
+		}
+//		return "redirect:/member/login";
 	}
 	
 	@PostMapping("/b2bsignup")
-	public void B2BsignUp() {
+	public String B2BsignUp(B2BmemberVO vo, RedirectAttributes rttr) {
 		log.info("Post b2b회원가입 들어왔습니당.");
+		log.info(vo);
+		
+		boolean ok = service.b2binsert(vo);
+		
+		if(ok) {
+			return "redirect:/member/login";
+		}else {
+			return "redirect:/member/signup?error";
+		}
+//		return "redirect:/member/login";
 	}
 	
 	/*
@@ -127,5 +147,12 @@ public class testController {
 		
 	}
 	*/
+	
+	@InitBinder 
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
 	
 }

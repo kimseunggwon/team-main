@@ -3,8 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="org.zerock.mapper.MemberMapper">
+<mapper namespace="org.zerock.controller.Sangpil.mapper.MemberMapper">
 
+	<insert id="insert">
+		INSERT INTO user
+		(userid, userpw, userName, userAddress, birthDate, userPhonenum, userEmail, userSex, userNickname)
+		VALUES
+		(#{userid},#{userpw},#{userName},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname})
+	</insert>
+	
+	<insert id="insertb2b">
+		INSERT INTO b2buser
+		(userid, userpw, userName, userAddress, birthDate, userPhonenum, userEmail, userSex, userNickname)
+		VALUES
+		(#{userid},#{userpw},#{userName},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname})
+	</insert>
+		
+	<insert id="insertAuth">
+		INSERT INTO tbl_member_auth
+		(userid, auth)
+		VALUES
+		(#{userid}, #{auth})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<delete id="removeAuth">
 		DELETE FROM tbl_member_auth
 		WHERE userid = #{userid}
@@ -24,20 +56,6 @@
 			userid = #{userid}
 	</update>
 
-	<insert id="insert">
-		INSERT INTO tbl_member
-		(userid, userpw, username)
-		VALUES
-		(#{userid},#{userpw},#{userName})
-	</insert>
-
-	<insert id="insertAuth">
-		INSERT INTO tbl_member_auth
-		(userid, auth)
-		VALUES
-		(#{userid}, #{auth})
-	</insert>
-	
 	<select id="read" resultMap="memberMap"> <!-- resultMap에 이 쿼리의 결과가 담기게 된다. -->
 		SELECT
 			m.userid userid,
@@ -55,7 +73,7 @@
 	</select>
 	
 	<!-- 책 662쪽 -->
-	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
+	<resultMap type="org.zerock.controller.Sangpil.domain.MemberVO" id="memberMap">
 		<id property="userid" column="userid"/> <!-- userid라는걸 MemberVO에 넣는것! -->
 		<result property="userpw" column="userpw"/>
 		<result property="userName" column="username"/>
@@ -64,7 +82,7 @@
 		<result property="enabled" column="enabled"/>
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
-	<resultMap type="org.zerock.domain.AuthVO" id="authMap">
+	<resultMap type="org.zerock.controller.Sangpil.domain.AuthVO" id="authMap">
 		<result property="userid" column="userid"/>
 		<result property="auth" column="auth"/>
 	</resultMap>
