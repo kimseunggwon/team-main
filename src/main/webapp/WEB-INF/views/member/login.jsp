@@ -10,6 +10,22 @@
 
 <title>Insert title here</title>
 
+<style type="text/css">
+.container-1 input#search{
+  width: 300px;
+  height: 50px;
+  background: rgb(244, 244, 244);
+  border: none;
+  font-size: 12pt;
+  float: left;
+  color: rgb(255, 255, 0);
+  padding-left: 45px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+}
+</style>
+
 <script type="text/javascript">
 
 $(function(){
@@ -84,6 +100,16 @@ $(function(){
 			<a href="">
 				<img style="text-decoration: none;" id="sang-b2b-img" alt="눌러줭" src="${appRoot }/resources/image/사업자 로그인1.png">
 			</a>
+			
+            <!-- 신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉 -->
+            <div class="box">
+			  <div class="container-1">
+			      <span style="position: absolute; margin-top: 14px; margin-left: 16px" class="icon"><i class="fa fa-search"></i></span>
+			      <input type="search" id="search" placeholder="아이디" />
+			  </div>
+			</div>
+			
+			
 				
 			<form id="sang-login-form" action="${appRoot}/login" method="post">
 				<div>
