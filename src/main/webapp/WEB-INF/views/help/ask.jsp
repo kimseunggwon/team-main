@@ -14,8 +14,19 @@
 </head>
 <body>
 	<div class="container">
+		
+		<div>
+			<h1>1:1 문의 글 작성</h1>
 
-		<h1>1:1 문의 글 작성</h1>
+			<div class="row justify-content-end">
+    			<form action="#" class="mr-2">
+			 		<input class="btn btn-warning" type="submit" value="로그아웃">
+			 	</form>
+    			<form action="#">
+				 	<input class="btn btn-warning" type="submit" value="Mypage">
+				 </form>
+	  		</div>
+		</div>
 
 		<div>
 			<form action="${appRoot }/help/askList">
@@ -44,6 +55,61 @@
 				
 			</form>
 		</div>
+		
+		<div class="row justify-content-center">
+			
+			<h1>
+				1588 - 0000
+			</h1>
+			
+		</div>
+		
+		<div class="row justify-content-center">
+			고객 센터 운영 시간
+			 평일(월~금) 09:00 ~ 18:30
+			 / 주말(토) 09:00 ~ 13:00
+		</div>
+		
+		<br>
+		
+		<hr>
+		
+		 <div class="row justify-content-around">
+		 	<div class="row">
+		 
+		 		<div class="mr-10">
+		 			<img src="${appRoot }/resources/image/logo.jpg" alt="...">
+		 		</div>
+		 	
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<div>
+		 			서울시 강남구 삼성동 1234 우 : 123-1234
+		 			<br>
+					TEL:02-123-1234 Email:email@domain.com
+					<br>
+					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
+					<br>
+				</div>
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<span >
+		 			<a href="#">
+		 			 	<img src="${appRoot }/resources/image/blog.jpg">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			</a>
+		 		</span>
+		 	</div>
+		 		
+		 </div>
+		
 	</div>
 </body>
 </html>
