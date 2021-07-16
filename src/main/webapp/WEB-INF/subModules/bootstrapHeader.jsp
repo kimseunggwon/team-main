@@ -12,6 +12,11 @@
 <link href="${pageContext.request.contextPath }/res/css/all.css" rel="stylesheet">
  -->
 
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
 <script defer src="${pageContext.request.contextPath }/resources/js/all.js"></script>
 
 <%--
