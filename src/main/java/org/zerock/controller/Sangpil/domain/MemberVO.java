@@ -12,14 +12,20 @@ public class MemberVO {
 	private String userid;
 	private String userpw;
 	private String userName;
+	
 	private String userAddress;
+	private String address;
+	private Double lat; //경도
+	private Double lag; //위도
+	
 	private Date birthDate;
 	private String userPhonenum;
 	private String userEmail;
-	private int userSex;
+	private Integer userSex;
 	private String userNickname;
 	
-	private boolean enabled;
+	
+	private Boolean enabled;
 	
 	private List<AuthVO> authList;
 }

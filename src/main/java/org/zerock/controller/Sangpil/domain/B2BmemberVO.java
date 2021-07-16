@@ -11,7 +11,10 @@ public class B2BmemberVO {
 	private String userid;
 	private String userpw;
 	private String userName;
+	
 	private String userAddress;
+	private String address;
+	
 	private Date birthDate;
 	private String userPhonenum;
 	private String userEmail;

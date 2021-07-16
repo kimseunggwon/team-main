@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.controller.Sangpil.domain.AuthVO;
 import org.zerock.controller.Sangpil.domain.B2BmemberVO;
 import org.zerock.controller.Sangpil.domain.MemberVO;
 import org.zerock.controller.Sangpil.mapper.MemberMapper;
@@ -37,10 +38,10 @@ public class MemberServiceImpl implements MemberService {
 		int cnt = mapper.insert(vo);
 		
 		// 권한 입력
-//		AuthVO avo = new AuthVO();
-//		avo.setUserid(vo.getUserid());
-//		avo.setAuth("ROLE_USER");
-//		mapper.insertAuth(avo);
+		AuthVO avo = new AuthVO();
+		avo.setUserid(vo.getUserid());
+		avo.setAuth("ROLE_USER");
+		mapper.insertAuth(avo);
 		
 		return cnt == 1;
 	}
@@ -54,10 +55,10 @@ public class MemberServiceImpl implements MemberService {
 		int cnt = mapper.insertb2b(vo);
 				
 		// 권한 입력
-//		AuthVO avo = new AuthVO();
-//		avo.setUserid(vo.getUserid());
-//		avo.setAuth("ROLE_USER");
-//		mapper.insertAuth(avo);
+		AuthVO avo = new AuthVO();
+		avo.setUserid(vo.getUserid());
+		avo.setAuth("ROLE_B2BUSER");
+		mapper.insertAuth(avo);
 				
 		return cnt == 1;
 	}

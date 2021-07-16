@@ -7,24 +7,25 @@
 
 	<insert id="insert">
 		INSERT INTO user
-		(userid, userpw, userName, userAddress, birthDate, userPhonenum, userEmail, userSex, userNickname)
+		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname})
+		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 	
 	<insert id="insertb2b">
-		INSERT INTO b2buser
-		(userid, userpw, userName, userAddress, birthDate, userPhonenum, userEmail, userSex, userNickname)
+		INSERT INTO user
+		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname})
+		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 		
 	<insert id="insertAuth">
-		INSERT INTO tbl_member_auth
+		INSERT INTO user_auth
 		(userid, auth)
 		VALUES
 		(#{userid}, #{auth})
 	</insert>
+	
 	
 	
 	

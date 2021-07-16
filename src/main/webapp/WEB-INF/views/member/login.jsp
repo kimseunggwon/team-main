@@ -14,15 +14,16 @@
 .container-1 input#search{
   width: 300px;
   height: 50px;
-  background: rgb(244, 244, 244);
+  background: rgb(136, 201, 242);
   border: none;
   font-size: 12pt;
   float: left;
-  color: rgb(255, 255, 0);
+  color: rgb(244, 244, 244);
   padding-left: 45px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
+  outline-style: none;
 }
 </style>
 
@@ -94,21 +95,29 @@ $(function(){
 		<div class="col-md-12">
 			<h1>로그인</h1>
 			
-			<a href="">
-				<img style="text-decoration: none;" id="sang-normal-img" alt="눌러줭" src="${appRoot }/resources/image/로그인2.png">
+			<a style="text-decoration: none;" href="">
+				<img id="sang-normal-img" alt="" src="${appRoot }/resources/image/로그인2.png">
 			</a>
-			<a href="">
-				<img style="text-decoration: none;" id="sang-b2b-img" alt="눌러줭" src="${appRoot }/resources/image/사업자 로그인1.png">
+			<a style="text-decoration: none;" href="">
+				<img id="sang-b2b-img" alt="" src="${appRoot }/resources/image/사업자 로그인1.png">
 			</a>
 			
             <!-- 신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉신기하죠잉 -->
-            <div class="box">
-			  <div class="container-1">
-			      <span style="position: absolute; margin-top: 14px; margin-left: 16px" class="icon"><i class="fa fa-search"></i></span>
-			      <input type="search" id="search" placeholder="아이디" />
-			  </div>
+            <br>
+            
+			<div class="container-1 row">
+				<span style="position: absolute; margin-top: 13px; margin-left: 16px" class="icon"><i class="fas fa-user"></i></span>
+				<input type="search" id="search" placeholder="아이디" />
 			</div>
 			
+			<br>
+			
+			<div class="container-1 row">
+				<span style="position: absolute; margin-top: 13px; margin-left: 16px" class="icon"><i class="fas fa-lock"></i></span>
+				<input type="search" id="search" placeholder="비밀번호" />
+			</div>
+
+			<br>
 			
 				
 			<form id="sang-login-form" action="${appRoot}/login" method="post">
