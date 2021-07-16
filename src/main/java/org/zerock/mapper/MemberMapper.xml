@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.MemberMapper">
+
+
+
+
+ <insert id="insertAuth">
+  	INSERT INTO user
+  	(userid, auth)
+  	VALUES
+  	(#{userid}, #{auth})
+  </insert>
+
+
+<delete id="remove">
+	DELETE FROM user
+	WHERE user_id = #{userid}
+	</delete>
+	 
+	
+  <update id="update"> 
+  UPDATE user
+  SET user_pw = #{userpw},
+      user_Name = #{username}
+  WHERE
+      user_id = #{userid}
+  
+  </update>
+
+
+
+<select id="read" >
+  SELECT 
+	m.userid userid,
+	m.userpw userpw,
+	m.username username,
+	m.useraddress useraddress,
+	m.userbirth userbirth,
+	m.usertel usertel,
+	m.useremail useremail,
+	m.usersex usersex,
+	a.auth auth
+  FROM 
+    tbl_member m LEFT JOIN tbl_member_auth a ON m.userid = a.userid
+  WHERE
+    m.userid = #{userid}
+  </select>
+</mapper>

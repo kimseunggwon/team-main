@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+ 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Insert title here</title>
@@ -14,9 +14,14 @@
 <style type="text/css">
 .jumbotron{
  
-  background-color:#08d2ff;
+  background-color:#50C2FF;
+  
 }
-</style> 
+.btn-group-vertical{
+ float:left;
+  
+}
+</style>
 <div class="container">	
  
  <ul class="nav justify-content-end">
@@ -24,7 +29,7 @@
     <a class="nav-link active" href="#">고객센터</a>
   </li>
   <li class="nav-item2"> 
-    <a class="nav-link" href="${appRoot }/member/logout">로그아웃</a>
+    <a class="nav-link" href="">로그인</a>
   </li> 
    <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="검색" >
@@ -32,31 +37,28 @@
   </form> 
 </ul>   
 
-  <div class="dropdown">  
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   메뉴보기
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="${appRoot }/member/info">회원정보</a>
-    <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
-    <a class="dropdown-item" href="#">진행상황</a>
-    <a class="dropdown-item" href="#">매장찾기</a> 
-    <a class="dropdown-item" href="#">1:1문의</a>
-    <a class="dropdown-item" href="#">사용자후기</a>
+<div class="btn-group-vertical" id="button1">
+  <button type="button" class="btn btn-info">회원정보</button>
+  <button type="button" class="btn btn-info">구독정보</button>
+  <button type="button" class="btn btn-info">진행상황</button>
+  <button type="button" class="btn btn-info">매장찾기</button>
+  <button type="button" class="btn btn-info">1:1문의</button>
+  <button type="button" class="btn btn-info">사용자후기</button>
   </div>
-</div>
-
+ 
  
   
   <div class="jumbotron"> 
-  <h1 class="display-4">안녕하세요 박진아 구독자님!</h1>
-  <p class="lead">고객님이 이용중인 서비스는 '1인 가구 이용 서비스 입니다'.<br>
+  <h1 class="display-4">안녕하세요 고객님!</h1>
+  <p class="lead">로그인을 완료하고 저희 구독 서비시를 이용해보세요.<br>
    혹시 아직 서비스를 이용하지 않고 계신가요~? <br>
    서둘러 밑에 구독하기 버튼을 눌러주세요.! 
   </p>
   <hr class="my-4">
   
-  <div class="row">
+  <!--  구독  -->
+  
+ <div class="row">
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
@@ -77,8 +79,11 @@
   </div>
 </div>
   
+  <!--  <p></p>
+  <a class="btn btn-light" href="#" role="button">구독하기</a> -->
 </div>
   
+ 
   
   
   
@@ -89,4 +94,9 @@
 
 </body>
 </html>
+
+
+
+
+
 
