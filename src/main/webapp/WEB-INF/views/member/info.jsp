@@ -37,13 +37,13 @@
  
 </script> 
 <div class="container">	 
-<h1>내 정보</h1> 
+<h1>내 정보</h1>  
 <body>
 		<section id="container">
 			<form id="member-form" action="${appRoot }/member/kim" method="post">
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userId">아이디</label>
-					<input class="form-control" type="text" id="userId" name="userid"/>
+					<input class="form-control" value="kim" type="text" id="userId" name="userid"/>
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userPass">패스워드</label>
