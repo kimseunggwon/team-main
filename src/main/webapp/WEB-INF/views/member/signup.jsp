@@ -366,7 +366,7 @@ $(function() {
 				<div class="">
 					<label for="sang-email">E-mail</label>
 					<input type="text" name="userEmail" id="sang-email" class="">
-					<button class="" id="userEmail" type="button">인증번호 전송</button>
+					<button class="" id="sang-authnum" type="button">인증번호 전송</button>
 				</div>
 				<div class="">
 					<label for="sang-pnum">P-number</label>
