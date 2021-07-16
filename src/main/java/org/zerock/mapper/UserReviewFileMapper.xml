@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.UserReviewFileMapper">
+	
+	<insert id="reviewFileInsert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO user_review_file (bno, fileName)
+		VALUES (#{bno}, #{fileName})
+	</insert>
+	
+	<delete id="deleteReviewByBno">
+		DELETE FROM user_review_file
+		WHERE 
+			bno = #{bno}
+	</delete>
+	
+	<!-- 
+	<delete id="removeReviewByUserid">
+		DELETE FROM user_review_file
+		WHERE bno IN (
+			SELECT re_bno FROM user_review
+			WHERE re_writer = #{userid}
+		)
+	</delete>
+	 -->
+</mapper>
