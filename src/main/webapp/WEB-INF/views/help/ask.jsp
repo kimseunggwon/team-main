@@ -16,7 +16,7 @@
 	<div class="container">
 		
 		<div>
-			<h1>1:1 문의 글 작성</h1>
+			<h1 class="text-center mt-4">1:1 문의 글 작성</h1>
 
 			<div class="row justify-content-end">
     			<form action="#" class="mr-2">
