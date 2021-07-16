@@ -1,4 +1,4 @@
-package org.zerock.controller.Sangpil;
+package org.zerock;
 
 /*import java.util.HashMap;
 import org.json.simple.JSONObject;

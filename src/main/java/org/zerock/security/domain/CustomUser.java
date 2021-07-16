@@ -1,4 +1,4 @@
-package org.zerock.controller.Sangpil.security.domain;
+package org.zerock.security.domain;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.zerock.controller.Sangpil.domain.MemberVO;
+import org.zerock.domain.MemberVO;
 
 import lombok.Getter;
 import lombok.Setter;

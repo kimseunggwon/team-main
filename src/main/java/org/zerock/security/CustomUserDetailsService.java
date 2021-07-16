@@ -1,12 +1,12 @@
-package org.zerock.controller.Sangpil.security;
+package org.zerock.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.zerock.controller.Sangpil.domain.MemberVO;
-import org.zerock.controller.Sangpil.mapper.MemberMapper;
-import org.zerock.controller.Sangpil.security.domain.CustomUser;
+import org.zerock.domain.MemberVO;
+import org.zerock.mapper.MemberMapper;
+import org.zerock.security.domain.CustomUser;
 
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package org.zerock.controller.Sangpil.controller;
+package org.zerock.controller.sangpil;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.controller.Sangpil.SendEmail;
-import org.zerock.controller.Sangpil.domain.B2BmemberVO;
-import org.zerock.controller.Sangpil.domain.MemberVO;
-import org.zerock.controller.Sangpil.service.MemberService;
+import org.zerock.SendEmail;
+import org.zerock.domain.B2BmemberVO;
+import org.zerock.domain.MemberVO;
+import org.zerock.service.MemberService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -28,7 +28,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @RequestMapping("/member")
 @Log4j
-public class testController {
+public class SangpilController {
 	
 	/*
 	 * @Setter(onMethod_ = @Autowired) private MemberService service;
@@ -51,11 +51,6 @@ public class testController {
 	@PostMapping("/findpw")
 	public void findpw() {
 		log.info("비밀번호 찾기 들어왔습니당");
-	}
-	
-	@RequestMapping("/main")
-	public void main() {
-		log.info("메인입니다!");
 	}
 	
 	@PostMapping("/authNumber")
