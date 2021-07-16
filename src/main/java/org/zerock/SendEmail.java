@@ -1,4 +1,4 @@
-package org.zerock.controller.Sangpil;
+package org.zerock;
 import java.util.Properties;
 
 import javax.mail.Message;

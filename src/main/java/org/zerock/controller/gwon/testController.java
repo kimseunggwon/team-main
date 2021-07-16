@@ -49,7 +49,7 @@ public class testController {
 	
 	@PostMapping("/kim")
 	public String kim(MemberVO vo) {
-		log.info(vo.getUsername());
+		log.info(vo.getUserName());
 		
 		service.modify(vo);
 		
