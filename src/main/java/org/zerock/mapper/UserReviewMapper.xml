@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.UserReviewMapper">
+
+<sql id="ReviewCriteria">
+	<where>
+		<foreach item="type" separator="OR" collection="reviewTypeArr">
+			<choose>
+				<when test='type == "T"'>
+					re_title LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test='type == "W"'>
+					re_title LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test='type == "C"'>
+					re_title LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+			</choose>
+		</foreach>
+	</where>
+</sql>
+
+<select id="getReviewList" resultType="org.zerock.domain.UserReviewVO">
+
+	<![CDATA[
+		SELECT 
+			re_bno reBno,
+			re_title reTitle,
+			re_content reContent,
+			re_writer reWriter,
+			re_regdate reRegdate,
+			re_update reUpdatedate
+		FROM user_review
+		WHERE reBno > 0 ORDER BY reBno DESC
+	]]>
+
+</select>
+
+<select id="getReviewListWithPaging" resultType="org.zerock.domain.UserReviewVO">
+	SELECT
+		r.re_bno reBno,
+		r.re_title reTitle,
+		r.re_content reContent,
+		r.re_writer reWriter,
+		r.re_regdate reRegdate,
+		r.re_updatedate reUpdatedate
+	FROM user_review r JOIN user u
+	ON r.re_writer = u.user_nickname
+	
+	<include refid="ReviewCriteria"></include>
+	GROUP BY r.re_bno
+	ORDER BY r.re_bno DESC
+	LIMIT #{from}, #{amount}
+</select>
+
+<insert id="insertReviewSelectKey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
+	INSERT INTO user_review (re_title, re_content, re_writer)
+	VALUES (#{reTitle}, #{reContent}, #{reWriter})
+</insert>
+
+<select id="readReview" resultType="org.zerock.domain.UserReviewVO">
+	SELECT 
+		r.re_bno reBno,
+		r.re_title reTitle,
+		r.re_content reContent,
+		r.re_writer reWriter,
+		r.re_regdate reRegdate,
+		r.re_updatedate reUpdatedate,
+		f.fileName fileName,
+		
+		FROM user_review r
+		LEFT JOIN user_review_file f ON r.re_bno = f.bno
+			 JOIN user u ON r.re_writer = u.user_nickname
+</select>
+
+<update id="updateReview">
+	UPDATE user_review
+	SET
+		re_title = #{reTitle},
+		re_content = #{reContent},
+		re_writer = #{reWriter},
+		re_updatedate = #{reUpdatedate},
+	WHERE
+		re_bno = #{reBno}
+</update>
+
+<delete id="deleteReview">
+	DELETE FROM user_review
+	WHERE re_bno = #{reBno}
+</delete>
+
+<delete id="removeReviewByUserid">
+	DELETE FROM user_review
+	WHERE re_writer = #{userid}
+</delete>
+ 
+<select id="getReviewTotalCount" resultType="int">
+	SELECT COUNT(*) FROM user_review ur
+	<include refid="ReviewCriteria"></include>
+</select>
+ 
+</mapper>
