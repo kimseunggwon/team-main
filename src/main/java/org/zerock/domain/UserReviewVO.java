@@ -11,6 +11,7 @@ public class UserReviewVO {
 	private String reTitle;
 	private String reContent;
 	private String reWriter;
+	private String reWriterName;
 	private Timestamp reRegdate;
 	private Timestamp reUpdatedate;
 	
