@@ -43,12 +43,12 @@ public class SangpilController {
 	}
 	
 	
-	@PostMapping("/findid")
+	@GetMapping("/findid")
 	public void findid() {
 		log.info("아이디 찾기 들어왔습니당");
 	}
 	
-	@PostMapping("/findpw")
+	@GetMapping("/findpw")
 	public void findpw() {
 		log.info("비밀번호 찾기 들어왔습니당");
 	}
@@ -116,6 +116,21 @@ public class SangpilController {
 		log.info(vo);
 		
 		boolean ok = service.b2binsert(vo);
+		
+		if(ok) {
+			return "redirect:/member/login";
+		}else {
+			return "redirect:/member/signup?error";
+		}
+//		return "redirect:/member/login";
+	}
+	
+	@PostMapping("/empsignup")
+	public String EmpsignUp(B2BmemberVO vo, RedirectAttributes rttr) {
+		log.info("Post emp회원가입 들어왔습니당.");
+		log.info(vo);
+		
+		boolean ok = service.empinsert(vo);
 		
 		if(ok) {
 			return "redirect:/member/login";
