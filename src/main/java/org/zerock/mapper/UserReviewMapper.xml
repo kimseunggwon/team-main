@@ -34,7 +34,7 @@
 			re_regdate reRegdate,
 			re_update reUpdatedate
 		FROM user_review
-		WHERE reBno > 0 ORDER BY reBno DESC
+		WHERE re_bno > 0 ORDER BY re_bno DESC
 	]]>
 
 </select>
@@ -46,9 +46,10 @@
 		r.re_content reContent,
 		r.re_writer reWriter,
 		r.re_regdate reRegdate,
-		r.re_updatedate reUpdatedate
+		r.re_updatedate reUpdatedate,
+		u.userNickname reWriterName
 	FROM user_review r JOIN user u
-	ON r.re_writer = u.user_nickname
+	ON r.re_writer = u.userid
 	
 	<include refid="ReviewCriteria"></include>
 	GROUP BY r.re_bno
@@ -70,10 +71,11 @@
 		r.re_regdate reRegdate,
 		r.re_updatedate reUpdatedate,
 		f.fileName fileName,
+		u.userName reWriterName 
 		
 		FROM user_review r
 		LEFT JOIN user_review_file f ON r.re_bno = f.bno
-			 JOIN user u ON r.re_writer = u.user_nickname
+			 JOIN user u ON r.re_writer = u.userid
 </select>
 
 <update id="updateReview">

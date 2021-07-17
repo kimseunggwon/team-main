@@ -42,8 +42,8 @@
 					</c:if>	
 					<!-- 작성자 -->				
 					<label for="re-input2">리뷰 작성자</label>
-					<input type="hidden" readonly="readonly" id="re-input2" name="jinah-writer" value="${review.reWriter }">
-					<input readonly="readonly" value="${review.reWriter }">
+					<input type="hidden" readonly="readonly" id="re-input2" name="jinah-writer" value="${review.reWriterName }">
+					<input readonly="readonly" value="${review.reWriterName }">
 					
 					<!-- 리뷰 수정 -->
 					
