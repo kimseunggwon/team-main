@@ -184,127 +184,104 @@ $(function() {
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
 <script type="text/javascript">
 $(function() {
-      $("#signup").click(function(e) {
-		e.preventDefault();
-         var postcode = $("#sample6_postcode").val();
-         var address = $("#sample6_address").val();
-         var detailAddress = $("#sample6_detailAddress").val();
-         var extraAddress = $("#sample6_extraAddress").val();
-         var fullAddress = postcode.concat(address,detailAddress,detailAddress);
-         
-         var storepostcode = $("#store-postcode").val();
-         var storeaddress = $("#store-address").val();
-         var storedetailAddress = $("#store-detailAddress").val();
-         var storeextraAddress = $("#store-extraAddress").val();
-         var storefullAddress = storepostcode.concat(storeaddress,storedetailAddress,storedetailAddress);
-             
-         
-         var a = $("#sang-signup-form").attr("action");
-         var b = "${appRoot}/member/signup";
-         if(a == b){
-        	 naver.maps.Service.geocode({
-                 query: address // String 타입의 주소값
-             }, function(status, response) {
-                 if (status !== naver.maps.Service.Status.OK) {
-                     // 실행이 되지 않을 경우 
-                       return alert('Something wrong!');
-                       
-                 }
-                 var result = response.v2,
-                 items = result.addresses;
-
-                 var lat = parseFloat(items[0].x);
-                 var lag = parseFloat(items[0].y);
-                 
-                 console.log(lat);
-                 console.log(lag);
-                 
-                 $("#sample6_address").val(address);
-                 $("#sang-userAddress").val(fullAddress);
-                 $("#sang-lat").val(lat);
-                 $("#sang-lag").val(lag);
-                 
-                }
-        	$("#sang-signup-form").submit();
-         	});
-         }else{
-        	 
-        
-         
-         naver.maps.Service.geocode({
-              query: address // String 타입의 주소값
-          }, function(status, response) {
-              if (status !== naver.maps.Service.Status.OK) {
-                  // 실행이 되지 않을 경우 
-                    return alert('Something wrong!');
-                    
-              }
-              var result = response.v2,
-              items = result.addresses;
-
-              var lat = parseFloat(items[0].x);
-              var lag = parseFloat(items[0].y);
-              
-              console.log(lat);
-              console.log(lag);
-              
-              $("#sample6_address").val(address);
-              $("#sang-userAddress").val(fullAddress);
-              $("#sang-lat").val(lat);
-              $("#sang-lag").val(lag);
-              
-             }
-            /* var data = {
-               address : address,
-               fullAddress : fullAddress,
-               lat : lat,
-               lag : lag
-               
-            }
-            $.ajax({
-               type : "post",
-               url : "${appRoot}/member/signup",
-               data : JSON.stringify(data),
-               contentType : "application/json",
-               success : function() {
-                  console.log("성공");
-               },
-               error : function() {
-                  console.log("실패");
+    $("#signup").click(function(e) {
+    e.preventDefault();
+       var postcode = $("#sample6_postcode").val();
+       var address = $("#sample6_address").val();
+       var detailAddress = $("#sample6_detailAddress").val();
+       var extraAddress = $("#sample6_extraAddress").val();
+       var fullAddress = postcode.concat(address,detailAddress,detailAddress);
+       
+       var storepostcode = $("#store-postcode").val();
+       var storeaddress = $("#store-address").val();
+       var storedetailAddress = $("#store-detailAddress").val();
+       var storeextraAddress = $("#store-extraAddress").val();
+       var storefullAddress = storepostcode.concat(storeaddress,storedetailAddress,storedetailAddress);
+           
+       
+       var a = $("#sang-signup-form").attr("action");
+       var b = "${appRoot}/member/signup";
+       if(a == b){
+          naver.maps.Service.geocode({
+               query: address // String 타입의 주소값
+           }, function(status, response) {
+               if (status !== naver.maps.Service.Status.OK) {
+                   // 실행이 되지 않을 경우 
+                     return alert('Something wrong!');
+                     
                }
-            }) */
+               var result = response.v2,
+               items = result.addresses;
+
+               var lat = parseFloat(items[0].x);
+               var lag = parseFloat(items[0].y);
+               
+               console.log(lat);
+               console.log(lag);
+               
+               $("#sample6_address").val(address);
+               $("#sang-userAddress").val(fullAddress);
+               $("#sang-lat").val(lat);
+               $("#sang-lag").val(lag);
+               
+         $("#sang-signup-form").submit();
+              });
+      
+       }else{
+          
+       naver.maps.Service.geocode({
+            query: address // String 타입의 주소값
+        }, function(status, response) {
+            if (status !== naver.maps.Service.Status.OK) {
+                // 실행이 되지 않을 경우 
+                  return alert('Something wrong!');
+                  
+            }
+            var result = response.v2,
+            items = result.addresses;
+
+            var lat = parseFloat(items[0].x);
+            var lag = parseFloat(items[0].y);
             
+            console.log(lat);
+            console.log(lag);
+            
+            $("#sample6_address").val(address);
+            $("#sang-userAddress").val(fullAddress);
+            $("#sang-lat").val(lat);
+            $("#sang-lag").val(lag);
+            
+        });
+       
+       naver.maps.Service.geocode({
+           query: storeaddress // String 타입의 주소값
+       }, function(status, response) {
+           if (status !== naver.maps.Service.Status.OK) {
+               // 실행이 되지 않을 경우 
+                 return alert('Something wrong!');
+                 
+           }
+           var result = response.v2,
+           items1 = result.addresses;
+
+           var storelat = parseFloat(items1[0].x);
+           var storelag = parseFloat(items1[0].y);
+           
+           console.log(storelat);
+           console.log(storelag);
+           
+           $("#store-address").val(storeaddress);
+           $("#sang-storeAddress").val(storefullAddress);
+           $("#sang-storelat").val(storelat);
+           $("#sang-storelag").val(storelag);
+           
+          $("#sang-signup-form").submit();
           });
          
-         naver.maps.Service.geocode({
-             query: storeaddress // String 타입의 주소값
-         }, function(status, response) {
-             if (status !== naver.maps.Service.Status.OK) {
-                 // 실행이 되지 않을 경우 
-                   return alert('Something wrong!');
-                   
-             }
-             var result = response.v2,
-             items1 = result.addresses;
-
-             var storelat = parseFloat(items1[0].x);
-             var storelag = parseFloat(items1[0].y);
-             
-             console.log(storelat);
-             console.log(storelag);
-             
-             $("#store-address").val(storeaddress);
-             $("#sang-storeAddress").val(storefullAddress);
-             $("#sang-storelat").val(storelat);
-             $("#sang-storelag").val(storelag);
-             
-            $("#sang-signup-form").submit();
-         });
-           
-		}
-      
-      });
-   });
+    }
+    
+    });
+ });
 </script>
 
 
