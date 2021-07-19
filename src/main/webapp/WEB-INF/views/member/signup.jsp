@@ -10,17 +10,29 @@
 
 <title>Insert title here</title>
 
+<style type="text/css">
+	.ps_box, .ps_box_disable {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 110px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+	}
+</style>
+
 <script type="text/javascript">
+
+// 아이디 중복 확인 focusout
 $(function() {
 	
-	
-	// 아이디 중복 확인
-	$("#id-dup-btn").click(function() {
+	/* .on("propertychange change keyup paste input",function(){ */
+	$("#sang-id").focusout(function(){
 		var idVal = $("#sang-id").val();
 		var messageElem = $("#id-message");
-		canUseId = false;
-		toggleEnableSubmit();
-		
 		if (idVal == "") {
 			// 아이디가 입력되지 않았을 때
 			$("#id-message").removeClass("text-success");
@@ -38,15 +50,10 @@ $(function() {
 				success: function (data) {
 					if (data == "success") {
 						console.log("사용 가능한 아이디");
-						canUseId = true;
-						var ans = confirm("사용 가능한 아이디 입니다. 사용하시겠습니까?");
 						
-							if(ans){
-								$("#id-message").removeClass("text-danger");
-								$("#id-message").addClass("text-success");
-								messageElem.text("사용가능한 아이디 입니다.");											
-								$("#signup-input1").attr("readonly", "readonly");
-							}
+						messageElem.text("사용 가능한 아이디입니다.");
+						$("#id-message").removeClass("text-danger");
+						$("#id-message").addClass("text-success");
 							
 					} else if (data == "exist") {
 						console.log("사용 불가능한 아이디");
@@ -55,7 +62,6 @@ $(function() {
 						messageElem.text("이미 있는 아이디 입니다.");
 					}
 					
-					toggleEnableSubmit();
 				}, 
 				error: function() {
 					console.log("아이디 중복 체크 실패");
@@ -63,9 +69,7 @@ $(function() {
 				
 			});
 		}
-	})
-	
-	
+	});
 	
 	$("#sang-pw-conform, #sang-pw").keyup(function() {
 		var pw1 = $("#sang-pw").val();
@@ -166,71 +170,122 @@ $(function() {
 		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자2.png");
 	})
 	
+	$("#sang-businessnum").keyup(function(){
+		var businessnum = $("#sang-businessnum").val();
+		var companynum = "1111";
+		if(businessnum == companynum){
+			var path = '${appRoot}/member/empsignup';
+			$("#sang-signup-form").attr("action", path);
+		}else{
+			var path = '${appRoot}/member/b2bsignup';
+			$("#sang-signup-form").attr("action", path);
+		}
+	})
+	
 });
 </script>
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
 <script type="text/javascript">
 $(function() {
-      $("#signup").click(function(e) {
-		e.preventDefault();
-         var postcode = $("#sample6_postcode").val();
-         var address = $("#sample6_address").val();
-         var detailAddress = $("#sample6_detailAddress").val();
-         var extraAddress = $("#sample6_extraAddress").val();
-         var fullAddress = postcode.concat(address,detailAddress,detailAddress);
-         
-         console.log(fullAddress);
-         naver.maps.Service.geocode({
-              query: address // String 타입의 주소값
-          }, function(status, response) {
-              if (status !== naver.maps.Service.Status.OK) {
-                  // 실행이 되지 않을 경우 
-                    return alert('Something wrong!');
-                    
-              }
-              var result = response.v2,
-              items = result.addresses;
-
-              var lat = parseFloat(items[0].x);
-              var lag = parseFloat(items[0].y);
-              
-              console.log(lat);
-              console.log(lag);
-              
-              $("#sample6_address").val(address);
-              $("#sang-userAddress").val(fullAddress);
-              $("#sang-lat").val(lat);
-              $("#sang-lag").val(lag);
-              
-              
-         
-            /* var data = {
-               address : address,
-               fullAddress : fullAddress,
-               lat : lat,
-               lag : lag
-               
-            }
-            $.ajax({
-               type : "post",
-               url : "${appRoot}/member/signup",
-               data : JSON.stringify(data),
-               contentType : "application/json",
-               success : function() {
-                  console.log("성공");
-               },
-               error : function() {
-                  console.log("실패");
-               }
-            }) */
-            
-            $("#sang-signup-form").submit();
-          });
+    $("#signup").click(function(e) {
+    e.preventDefault();
+       var postcode = $("#sample6_postcode").val();
+       var address = $("#sample6_address").val();
+       var detailAddress = $("#sample6_detailAddress").val();
+       var extraAddress = $("#sample6_extraAddress").val();
+       var fullAddress = postcode.concat(address,detailAddress,detailAddress);
+       
+       var storepostcode = $("#store-postcode").val();
+       var storeaddress = $("#store-address").val();
+       var storedetailAddress = $("#store-detailAddress").val();
+       var storeextraAddress = $("#store-extraAddress").val();
+       var storefullAddress = storepostcode.concat(storeaddress,storedetailAddress,storedetailAddress);
            
+       
+       var a = $("#sang-signup-form").attr("action");
+       var b = "${appRoot}/member/signup";
+       if(a == b){
+          naver.maps.Service.geocode({
+               query: address // String 타입의 주소값
+           }, function(status, response) {
+               if (status !== naver.maps.Service.Status.OK) {
+                   // 실행이 되지 않을 경우 
+                     return alert('Something wrong!');
+                     
+               }
+               var result = response.v2,
+               items = result.addresses;
+
+               var lat = parseFloat(items[0].x);
+               var lag = parseFloat(items[0].y);
+               
+               console.log(lat);
+               console.log(lag);
+               
+               $("#sample6_address").val(address);
+               $("#sang-userAddress").val(fullAddress);
+               $("#sang-lat").val(lat);
+               $("#sang-lag").val(lag);
+               
+         $("#sang-signup-form").submit();
+              });
       
-      })
-   })
+       }else{
+          
+       naver.maps.Service.geocode({
+            query: address // String 타입의 주소값
+        }, function(status, response) {
+            if (status !== naver.maps.Service.Status.OK) {
+                // 실행이 되지 않을 경우 
+                  return alert('Something wrong!');
+                  
+            }
+            var result = response.v2,
+            items = result.addresses;
+
+            var lat = parseFloat(items[0].x);
+            var lag = parseFloat(items[0].y);
+            
+            console.log(lat);
+            console.log(lag);
+            
+            $("#sample6_address").val(address);
+            $("#sang-userAddress").val(fullAddress);
+            $("#sang-lat").val(lat);
+            $("#sang-lag").val(lag);
+            
+        });
+       
+       naver.maps.Service.geocode({
+           query: storeaddress // String 타입의 주소값
+       }, function(status, response) {
+           if (status !== naver.maps.Service.Status.OK) {
+               // 실행이 되지 않을 경우 
+                 return alert('Something wrong!');
+                 
+           }
+           var result = response.v2,
+           items1 = result.addresses;
+
+           var storelat = parseFloat(items1[0].x);
+           var storelag = parseFloat(items1[0].y);
+           
+           console.log(storelat);
+           console.log(storelag);
+           
+           $("#store-address").val(storeaddress);
+           $("#sang-storeAddress").val(storefullAddress);
+           $("#sang-storelat").val(storelat);
+           $("#sang-storelag").val(storelag);
+           
+          $("#sang-signup-form").submit();
+          });
+         
+    }
+    
+    });
+ });
 </script>
 
 
@@ -290,6 +345,59 @@ $(function() {
                }
             }).open();
    }
+   function sample7_execDaumPostcode() {
+	      new daum.Postcode(
+	              {
+	                 oncomplete : function(data) {
+	                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                    var addr = ''; // 주소 변수
+	                    var extraAddr = ''; // 참고항목 변수
+
+	                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                       addr = data.roadAddress;
+	                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                       addr = data.jibunAddress;
+	                    }
+
+	                    // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                    if (data.userSelectedType === 'R') {
+	                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                       if (data.bname !== ''
+	                             && /[동|로|가]$/g.test(data.bname)) {
+	                          extraAddr += data.bname;
+	                       }
+	                       // 건물명이 있고, 공동주택일 경우 추가한다.
+	                       if (data.buildingName !== ''
+	                             && data.apartment === 'Y') {
+	                          extraAddr += (extraAddr !== '' ? ', '
+	                                + data.buildingName : data.buildingName);
+	                       }
+	                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                       if (extraAddr !== '') {
+	                          extraAddr = ' (' + extraAddr + ')';
+	                       }
+	                       // 조합된 참고항목을 해당 필드에 넣는다.
+	                       document.getElementById("store-extraAddress").value = extraAddr;
+
+	                    } else {
+	                       document.getElementById("store-extraAddress").value = '';
+	                    }
+
+	                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                    document.getElementById('store-postcode').value = data.zonecode;
+	                    document.getElementById("store-address").value = addr;
+	                    // 커서를 상세주소 필드로 이동한다.
+	                    document.getElementById("store-detailAddress")
+	                          .focus();
+	                 }
+	              }).open();
+	     }
+   
 </script>
 
 
@@ -297,8 +405,8 @@ $(function() {
 </head>
 <body>
 <div class="container">
-	<div class="row">
-		<div class="col-12">
+	<div style="text-align: center;" class="row">
+		<div class="col-12 ">
 			<div class="conainer mt-5">
 				<h1>회원 가입</h1>
 				
@@ -310,34 +418,48 @@ $(function() {
 				</a>
 				
 			</div>
-			<form id="sang-signup-form" action="${appRoot }/member/signup" method="post">
-				<div class="row">
-					<div class="col-8">
-						<label for="sang-id">id</label> <!-- 이 아래줄 부터 맘에 안들면 삭제 ㄱㄱ -->
-						<input id="sang-id" name="userid" type="text">
-							<span id="span1"></span>
-						
-					</div>
-					<div class="col-4">
-						<button class="" type="button" id="id-dup-btn">아이디 중복 체크</button>
-						<small id="id-message" class="form-text"></small>
-					</div>
-					
-					
-					<!-- <button class="btn btn-primary" id="button1" type="button">중복 확인</button>
-					<span id="span1"></span> -->
+			<form id="sang-signup-form" action="${appRoot }/member/signup" method="post" class="was-validated">
+			
+			<div style="margin-top: 50px">
+			
+			</div>
 				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						아이디
+					</h5>
 				</div>
-	
-				<div>
-					<label for="sang-pw">pw</label>
-					<input type="password" name="userpw" id="sang-pw">
 				</div>
-				<div>
-					<label for="sang-pw-conform">pw conform</label>
-					<input type="password" name="password" id="sang-pw-conform">
-					<small id="password-message" class="form-text text-danger"></small>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-id" name="userid" class="" title="ID" maxlength="30">
+                </div>
+				<small style="white-space: pre-wrap;" id="id-message" class="form-text"> </small>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						비밀번호
+					</h5>
 				</div>
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="password" id="sang-pw" name="userpw" class="" title="PW" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						비밀번호 확인
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="password" id="sang-pw-conform" name="password" class="" title="PW" maxlength="30">
+                </div>
+				<small style="white-space: pre-wrap;" id="password-message" class="form-text text-danger"> </small>
+				
 				<div>
 					<label for="sang-name">name</label>
 					<input type="text" name="userName" id="sang-name" class="">
@@ -366,7 +488,7 @@ $(function() {
 				<div class="">
 					<label for="sang-email">E-mail</label>
 					<input type="text" name="userEmail" id="sang-email" class="">
-					<button class="" id="userEmail" type="button">인증번호 전송</button>
+					<button class="" id="sang-authnum" type="button">인증번호 전송</button>
 				</div>
 				<div class="">
 					<label for="sang-pnum">P-number</label>
@@ -377,6 +499,7 @@ $(function() {
 					<select id="" name="userSex" class="">
 						<option selected="selected" value="1">남자</option>
 						<option value="2">여자</option>
+						<option value="3">선택 안함</option>
 					</select>
 				</div>
 				
@@ -385,19 +508,29 @@ $(function() {
 				
 				<div class="b2bsignup" hidden>
 					<label for="sang-pnum">store name</label>
-					<input type="text" name="storename" id="sang-storename" class="">
+					<input type="text" name="storeName" id="sang-storename" class="">
 				</div>
 				<div class="b2bsignup" hidden>
 					<label for="sang-storeaddress">store address</label>
-					<input type="text" name="storeaddress" id="sang-storeaddress" class="">
+					
+					<input type="button" onclick="sample7_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="text" id="store-postcode" placeholder="우편번호"> 
+					<input name="storeAddress" value="" type="text" id="store-address" placeholder="주소"><br>
+					<input type="text" id="store-detailAddress" placeholder="상세주소">
+					<input type="text" id="store-extraAddress" n placeholder="참고항목">
+				
+					<input hidden type="text" name="storeUserAddress" id="sang-storeAddress" >
+					<input hidden type="text" name="storelat" id="sang-storelat" >
+					<input hidden type="text" name="storelag" id="sang-storelag">
+					
 				</div>
 				<div class="b2bsignup" hidden>
 					<label for="sang-pnum">store phonenumber</label>
-					<input type="text" name="storephonenum" id="sang-storepnum" class="">
+					<input type="text" name="storePhonenum" id="sang-storepnum" class="">
 				</div>
 				<div class="b2bsignup" hidden>
 					<label for="sang-pnum">business number</label>
-					<input type="text" name="businessnum" id="sang-businessnum" class="">
+					<input type="text" name="businessNum" id="sang-businessnum" class="">
 				</div>
 				
 				
@@ -408,9 +541,7 @@ $(function() {
 			<button hidden class="" id="sang-inz-btn" type="button">인증</button>
 	
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<div class="container mt-5">
-				<input id="signup" type="submit" value="가입" class="" >
-			</div>
+			<input id="signup" type="submit" value="가입" class="" >
 			
 			</form>
 		</div>
