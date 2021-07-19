@@ -23,25 +23,43 @@
 	  <div class="row justify-content-end mt-3">
 	  	<div class="row justify-content-around">
 	  		
+	  		<!-- 로그인하지 않은 상태로 접근하면 보이는 버튼을 구현하였다. -->
 	  		<form action="${appRoot }/member/login">
-	  			<input class="btn btn-primary mr-1" type="submit" value="로그인"> 
-	  		</form>
-	  		
-	  		<form action="${appRoot }/main/realmain">
-	  			<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
-	  		</form>
-	  		
-	  		<form action="${appRoot }/member/mypage">
-	  			<input class="btn btn-primary mr-1" type="submit" value="MyPage"> 
+	  			<c:if test="${empty main.userid }">
+	  				<input class="btn btn-primary mr-1" type="submit" value="로그인"> 
+	  			</c:if>
 	  		</form>
 	  		
 	  		<form action="${appRoot }/member/signup">
-	  			<input class="btn btn-primary mr-1" type="submit" value="회원가입"> 
+	  			<c:if test="${empty main.userid }">	
+	  				<input class="btn btn-primary mr-1" type="submit" value="회원가입"> 
+	  			</c:if>	
+	  		</form>
+	  
+	  		
+	  		<!-- 
+	  			(1) 로그인시에만 보이도록 <c:if> tag 사용함.
+	  			(2) 로그아웃 버튼에 경로 수정.
+	  			(3) Mypage 버튼에 경로 수정.
+	  		       -->
+	  		<form action="${appRoot }/main/mainpage">
+	  			<c:if test="${not empty main.userid }">
+	  				<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
+	  			</c:if>
+	  		</form>
+	  		
+	  		<form action="${appRoot }/member/mypage">
+	  			<c:if test="${not empty main.userid }">
+	  				<input class="btn btn-primary mr-1" type="submit" value="MyPage"> 
+	  			</c:if>	
 	  		</form>
 	  		
 	  		<form action="${appRoot }/help/helpdesk">
-	  			<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
+	  			<c:if test="${not empty main.userid }">	
+	  				<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
+	  			</c:if>
 	  		</form>
+	  		
 	  	</div>
 	  </div>
 	
