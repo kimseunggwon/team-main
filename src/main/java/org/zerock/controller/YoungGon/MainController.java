@@ -12,11 +12,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MainController {
 	
-	@RequestMapping("/realmain")
+	@RequestMapping("/mainpage")
 	public String main() {
 		log.info("메인 페이지 접속");
 		
-		return "main/realmain";
+		return "main/main";
 	}
 	
 	
@@ -39,7 +39,7 @@ public class MainController {
 	public String myPage() {
 		log.info("마이페이지 접속");
 		
-		return "member/main";
+		return "member/mypage";
 	}
 	
 	@RequestMapping("mainSignup")
