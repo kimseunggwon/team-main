@@ -18,7 +18,7 @@
   border: none;
   font-size: 12pt;
   float: left;
-  color: rgb(5, 131, 242);
+  color: rgb(255, 255, 255);
   padding-left: 45px;
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;

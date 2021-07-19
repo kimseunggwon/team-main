@@ -10,12 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.SendEmail;
 import org.zerock.domain.B2BmemberVO;
@@ -140,11 +143,11 @@ public class SangpilController {
 //		return "redirect:/member/login";
 	}
 	
-	/*
 	@GetMapping("/dup")
 	@ResponseBody
 	public ResponseEntity<String> duplicate(String id) {
 		log.info("duplicate method");
+		log.info(id);
 		
 		// 서비스 일 시키고
 		MemberVO vo = service.read(id);
@@ -156,7 +159,6 @@ public class SangpilController {
 		}
 		
 	}
-	*/
 	
 	@InitBinder 
     public void initBinder(WebDataBinder binder) {

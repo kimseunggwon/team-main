@@ -10,17 +10,29 @@
 
 <title>Insert title here</title>
 
+<style type="text/css">
+	.ps_box, .ps_box_disable {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 110px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+	}
+</style>
+
 <script type="text/javascript">
+
+// 아이디 중복 확인 focusout
 $(function() {
 	
-	
-	// 아이디 중복 확인
-	$("#id-dup-btn").click(function() {
+	/* .on("propertychange change keyup paste input",function(){ */
+	$("#sang-id").focusout(function(){
 		var idVal = $("#sang-id").val();
 		var messageElem = $("#id-message");
-		canUseId = false;
-		toggleEnableSubmit();
-		
 		if (idVal == "") {
 			// 아이디가 입력되지 않았을 때
 			$("#id-message").removeClass("text-success");
@@ -38,15 +50,10 @@ $(function() {
 				success: function (data) {
 					if (data == "success") {
 						console.log("사용 가능한 아이디");
-						canUseId = true;
-						var ans = confirm("사용 가능한 아이디 입니다. 사용하시겠습니까?");
 						
-							if(ans){
-								$("#id-message").removeClass("text-danger");
-								$("#id-message").addClass("text-success");
-								messageElem.text("사용가능한 아이디 입니다.");											
-								$("#signup-input1").attr("readonly", "readonly");
-							}
+						messageElem.text("사용 가능한 아이디입니다.");
+						$("#id-message").removeClass("text-danger");
+						$("#id-message").addClass("text-success");
 							
 					} else if (data == "exist") {
 						console.log("사용 불가능한 아이디");
@@ -55,7 +62,6 @@ $(function() {
 						messageElem.text("이미 있는 아이디 입니다.");
 					}
 					
-					toggleEnableSubmit();
 				}, 
 				error: function() {
 					console.log("아이디 중복 체크 실패");
@@ -63,9 +69,7 @@ $(function() {
 				
 			});
 		}
-	})
-	
-	
+	});
 	
 	$("#sang-pw-conform, #sang-pw").keyup(function() {
 		var pw1 = $("#sang-pw").val();
@@ -401,8 +405,8 @@ $(function() {
 </head>
 <body>
 <div class="container">
-	<div class="row">
-		<div class="col-12">
+	<div style="text-align: center;" class="row">
+		<div class="col-12 ">
 			<div class="conainer mt-5">
 				<h1>회원 가입</h1>
 				
@@ -414,34 +418,48 @@ $(function() {
 				</a>
 				
 			</div>
-			<form id="sang-signup-form" action="${appRoot }/member/signup" method="post">
-				<div class="row">
-					<div class="col-8">
-						<label for="sang-id">id</label> <!-- 이 아래줄 부터 맘에 안들면 삭제 ㄱㄱ -->
-						<input id="sang-id" name="userid" type="text">
-							<span id="span1"></span>
-						
-					</div>
-					<div class="col-4">
-						<button class="" type="button" id="id-dup-btn">아이디 중복 체크</button>
-						<small id="id-message" class="form-text"></small>
-					</div>
-					
-					
-					<!-- <button class="btn btn-primary" id="button1" type="button">중복 확인</button>
-					<span id="span1"></span> -->
+			<form id="sang-signup-form" action="${appRoot }/member/signup" method="post" class="was-validated">
+			
+			<div style="margin-top: 50px">
+			
+			</div>
 				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						아이디
+					</h5>
 				</div>
-	
-				<div>
-					<label for="sang-pw">pw</label>
-					<input type="password" name="userpw" id="sang-pw">
 				</div>
-				<div>
-					<label for="sang-pw-conform">pw conform</label>
-					<input type="password" name="password" id="sang-pw-conform">
-					<small id="password-message" class="form-text text-danger"></small>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-id" name="userid" class="" title="ID" maxlength="30">
+                </div>
+				<small style="white-space: pre-wrap;" id="id-message" class="form-text"> </small>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						비밀번호
+					</h5>
 				</div>
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="password" id="sang-pw" name="userpw" class="" title="PW" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						비밀번호 확인
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="password" id="sang-pw-conform" name="password" class="" title="PW" maxlength="30">
+                </div>
+				<small style="white-space: pre-wrap;" id="password-message" class="form-text text-danger"> </small>
+				
 				<div>
 					<label for="sang-name">name</label>
 					<input type="text" name="userName" id="sang-name" class="">
@@ -481,6 +499,7 @@ $(function() {
 					<select id="" name="userSex" class="">
 						<option selected="selected" value="1">남자</option>
 						<option value="2">여자</option>
+						<option value="3">선택 안함</option>
 					</select>
 				</div>
 				
@@ -522,9 +541,7 @@ $(function() {
 			<button hidden class="" id="sang-inz-btn" type="button">인증</button>
 	
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<div class="container mt-5">
-				<input id="signup" type="submit" value="가입" class="" >
-			</div>
+			<input id="signup" type="submit" value="가입" class="" >
 			
 			</form>
 		</div>
