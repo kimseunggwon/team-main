@@ -25,6 +25,28 @@
   border-radius: 40px;
   outline-style: none;
 }
+.button {
+	background-color: #ff5fa8;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 16px;
+	margin: 4px 2px;
+	opacity: 0.6;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:420px;
+    font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
+}
+.button:hover {
+	background: #f0348a; 
+}
 </style>
 
 <script type="text/javascript">
@@ -87,10 +109,14 @@ $(function(){
 			</div>
 			
 			
+				<div>
+					<img style="position: absolute; z-index: -1" alt="" src="${appRoot }/resources/image/로그인 테두리.png">
+				</div>
 			<div class="row justify-content-center mt-5">
 			
 			<form id="sang-login-form" action="${appRoot}/login" method="post">
 			
+				
 	            <br>
 	            
 				<div class="container-1 row">
@@ -123,10 +149,10 @@ $(function(){
 					<label style="text-align: right;" class="form-check-label col-12" for="checkbox1">로그인 유지</label>
 				</div>
 								
-				<div class="row justify-content-center mt-5">
-					<input id="sang-login-btn" type="submit" value="로그인">
+				<div class="row justify-content-center">
+					<input class="button" id="sang-login-btn" type="submit" value="로그인">
 				</div>
-				<div class="row justify-content-center" style="text-align: center;">
+				<div class="row justify-content-center mt-5" style="text-align: center;">
 					<a style="text-decoration: none; color: black;" id="sang-findid-btn" class="col-4" href="${appRoot}/member/findid">아이디 찾기</a>
 					<a style="text-decoration: none; color: black;" id="sang-findpw-btn" class="col-4" href="${appRoot}/member/findpw">비밀번호 찾기</a>
 					<a style="text-decoration: none; color: black;" id="sang-signup-btn" class="col-4" href="${appRoot }/member/signup">회원가입</a>

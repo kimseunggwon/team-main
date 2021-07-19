@@ -9,21 +9,21 @@
 		INSERT INTO user
 		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
+		(#{userid},#{userpw},#{userName},#{userDetailAddress},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 	
 	<insert id="insertb2b">
 		INSERT INTO user
 		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
+		(#{userid},#{userpw},#{userName},#{userDetailAddress},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 	
 	<insert id="insertemp">
 		INSERT INTO user
 		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
+		(#{userid},#{userpw},#{userName},#{userDetailAddress},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 	
 	<insert id="insertstoreinfo">
