@@ -1,3 +1,4 @@
+
 package org.zerock.controller.gwon;
 
 import java.security.Principal;
@@ -24,7 +25,7 @@ public class testController {
     private MemberService service;
 
 
-	@RequestMapping("/main")
+	@RequestMapping("/mypage")
 	public void info() {
 		log.info("메인페이지");
 	}
@@ -35,7 +36,7 @@ public class testController {
 	} 
 	 
 	
-	@GetMapping("/info")
+	@GetMapping("/myinfo")
 	public void info( Model model) {
 		log.info("내정보 확인");
 	}

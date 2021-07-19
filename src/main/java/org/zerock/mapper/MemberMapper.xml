@@ -39,17 +39,17 @@
 	
 	
 	<delete id="removeAuth">
-		DELETE FROM tbl_member_auth
+		DELETE FROM user_auth
 		WHERE userid = #{userid}
 	</delete>
 
 	<delete id="remove">
-		DELETE FROM tbl_member
+		DELETE FROM user
 		WHERE userid = #{userid}
 	</delete>
 
 	<update id="update">
-		UPDATE tbl_member
+		UPDATE user
 		SET userpw = #{userpw},
 			userName = #{userName},
 			updatedate = now()
