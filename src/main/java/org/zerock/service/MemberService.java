@@ -9,6 +9,8 @@ public interface MemberService {
 
 	boolean b2binsert(B2BmemberVO vo);
 	
+	boolean empinsert(B2BmemberVO vo);
+	
 	MemberVO read(String name);
 
 	boolean modify(MemberVO vo);
@@ -18,4 +20,5 @@ public interface MemberService {
 	boolean remove(MemberVO vo, String oldPassword);
 
 	boolean modify(MemberVO vo, String oldPassword);
+
 }

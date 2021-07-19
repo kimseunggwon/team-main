@@ -29,7 +29,7 @@
     <a class="nav-link active" href="#">고객센터</a>
   </li>
   <li class="nav-item2"> 
-    <a class="nav-link" href="">로그인</a>
+    <a class="nav-link" href="${appRoot }/member/login">로그인</a>
   </li> 
    <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="검색" >

@@ -10,12 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.SendEmail;
 import org.zerock.domain.B2BmemberVO;
@@ -43,12 +46,12 @@ public class SangpilController {
 	}
 	
 	
-	@PostMapping("/findid")
+	@GetMapping("/findid")
 	public void findid() {
 		log.info("아이디 찾기 들어왔습니당");
 	}
 	
-	@PostMapping("/findpw")
+	@GetMapping("/findpw")
 	public void findpw() {
 		log.info("비밀번호 찾기 들어왔습니당");
 	}
@@ -125,11 +128,26 @@ public class SangpilController {
 //		return "redirect:/member/login";
 	}
 	
-	/*
+	@PostMapping("/empsignup")
+	public String EmpsignUp(B2BmemberVO vo, RedirectAttributes rttr) {
+		log.info("Post emp회원가입 들어왔습니당.");
+		log.info(vo);
+		
+		boolean ok = service.empinsert(vo);
+		
+		if(ok) {
+			return "redirect:/member/login";
+		}else {
+			return "redirect:/member/signup?error";
+		}
+//		return "redirect:/member/login";
+	}
+	
 	@GetMapping("/dup")
 	@ResponseBody
 	public ResponseEntity<String> duplicate(String id) {
 		log.info("duplicate method");
+		log.info(id);
 		
 		// 서비스 일 시키고
 		MemberVO vo = service.read(id);
@@ -141,7 +159,6 @@ public class SangpilController {
 		}
 		
 	}
-	*/
 	
 	@InitBinder 
     public void initBinder(WebDataBinder binder) {

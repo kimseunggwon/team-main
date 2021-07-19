@@ -18,6 +18,21 @@
 		VALUES
 		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
+	
+	<insert id="insertemp">
+		INSERT INTO user
+		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
+		VALUES
+		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
+	</insert>
+	
+	<insert id="insertstoreinfo">
+		INSERT INTO storeinfo
+		(storename, storeaddress, address, storePhonenum, businessNum, storelat, storelag, userid)
+		VALUES
+		(#{storeName}, #{storeUserAddress}, #{storeAddress}, #{storePhonenum}, #{businessNum}, #{storelat}, #{storelag}, #{userid})
+	</insert>
+		
 		
 	<insert id="insertAuth">
 		INSERT INTO user_auth
@@ -62,12 +77,9 @@
 			m.userid userid,
 			m.userpw userpw,
 			m.username username,
-			m.enabled enabled,
-			m.regdate regdate,
-			m.updateDate updateDate,
 			a.auth auth
 		FROM
-			tbl_member m LEFT JOIN tbl_member_auth a ON m.userid = a.userid
+			user m LEFT JOIN user_auth a ON m.userid = a.userid
 		WHERE
 			m.userid = #{userid}
 	

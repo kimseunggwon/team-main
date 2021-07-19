@@ -7,11 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.AuthVO;
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.StoreVO;
 import org.zerock.mapper.MemberMapper;
 
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 @Service
+@Log4j
 public class MemberServiceImpl implements MemberService {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -59,6 +62,47 @@ public class MemberServiceImpl implements MemberService {
 		avo.setUserid(vo.getUserid());
 		avo.setAuth("ROLE_B2BUSER");
 		mapper.insertAuth(avo);
+		
+		// store정보 입력
+		StoreVO svo = new StoreVO();
+		svo.setUserid(vo.getUserid());
+		svo.setStoreName(vo.getStoreName());
+		svo.setStoreUserAddress(vo.getStoreUserAddress());
+		svo.setStoreAddress(vo.getStoreAddress());
+		svo.setStorePhonenum(vo.getStorePhonenum());
+		svo.setBusinessNum(vo.getBusinessNum());
+		svo.setStorelat(vo.getStorelat());
+		svo.setStorelag(vo.getStorelag());
+		mapper.insertstoreinfo(svo);
+				
+		return cnt == 1;
+	}
+	
+	@Override
+	@Transactional
+	public boolean empinsert(B2BmemberVO vo) {
+		
+		// 패스워드 암호화
+		vo.setUserpw(encoder.encode(vo.getUserpw()));
+		int cnt = mapper.insertemp(vo);
+				
+		// 권한 입력
+		AuthVO avo = new AuthVO();
+		avo.setUserid(vo.getUserid());
+		avo.setAuth("ROLE_EMPUSER");
+		mapper.insertAuth(avo);
+		
+		// store정보 입력
+		StoreVO svo = new StoreVO();
+		svo.setUserid(vo.getUserid());
+		svo.setStoreName(vo.getStoreName());
+		svo.setStoreUserAddress(vo.getStoreUserAddress());
+		svo.setStoreAddress(vo.getStoreAddress());
+		svo.setStorePhonenum(vo.getStorePhonenum());
+		svo.setBusinessNum(vo.getBusinessNum());
+		svo.setStorelat(vo.getStorelat());
+		svo.setStorelag(vo.getStorelag());
+		mapper.insertstoreinfo(svo);
 				
 		return cnt == 1;
 	}

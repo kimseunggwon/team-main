@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class MemberVO {
 
-	
 	private String userid;
 	private String userpw;
 	private String userName;
@@ -23,7 +22,6 @@ public class MemberVO {
 	private String userEmail;
 	private Integer userSex;
 	private String userNickname;
-	
 	
 	private Boolean enabled;
 	

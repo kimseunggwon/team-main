@@ -7,9 +7,9 @@
 
 <bean id="bcryptPasswordEncoder" 
 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-<!-- 
+
 <bean id="customUserDetailsService"
-class="org.zerock.controller.Sangpil.security.CustomUserDetailsService"></bean> -->
+class="org.zerock.security.CustomUserDetailsService"></bean>
 
 <security:http>
 	<security:http-basic/>
@@ -25,21 +25,21 @@ class="org.zerock.controller.Sangpil.security.CustomUserDetailsService"></bean> 
 	<security:remember-me data-source-ref="dataSource" token-validity-seconds="3600"/>
 </security:http>
 
-<!-- <security:authentication-manager>
+<security:authentication-manager>
 	<security:authentication-provider user-service-ref="customUserDetailsService">
 		<security:password-encoder ref="bcryptPasswordEncoder"/>
 	</security:authentication-provider>
-</security:authentication-manager> -->
+</security:authentication-manager>
 
 
-<security:authentication-manager>
+<!-- <security:authentication-manager>
 	<security:authentication-provider>
 		<security:user-service>
-			<!-- login 되는지 확인차 member 아이디 비번 권한 줬습니다 -->
+			login 되는지 확인차 member 아이디 비번 권한 줬습니다
 			<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
 			<security:user name="b2b" password="{noop}b2b"  authorities="ROLE_B2B"/>
 		</security:user-service>
 	</security:authentication-provider>
-</security:authentication-manager>
+</security:authentication-manager> -->
 
 </beans>
