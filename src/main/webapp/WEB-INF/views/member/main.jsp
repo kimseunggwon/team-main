@@ -40,7 +40,7 @@
 	  			(2) Mypage 버튼에 경로 수정.
 	  		       -->
 	  		<sec:authorize access="isAuthenticated()">       
-	  			<form action="${appRoot }/member/main">
+	  			<form action="${appRoot }/logout" method="post">
 	  					<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
 	  			</form>
 	  		
