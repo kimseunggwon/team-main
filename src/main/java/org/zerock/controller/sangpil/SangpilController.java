@@ -45,6 +45,11 @@ public class SangpilController {
 		log.info("login 들어왔습니당");
 	}
 	
+	@RequestMapping("/b2blogin")
+	public void b2blogin() {
+		log.info("b2blogin 들어왔습니당");
+	}
+	
 	
 	@GetMapping("/findid")
 	public void findid() {
