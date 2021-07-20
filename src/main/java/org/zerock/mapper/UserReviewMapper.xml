@@ -57,7 +57,7 @@
 	LIMIT #{from}, #{amount}
 </select>
 
-<insert id="insertReviewSelectKey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
+<insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
 	INSERT INTO user_review (re_title, re_content, re_writer)
 	VALUES (#{reTitle}, #{reContent}, #{reWriter})
 </insert>

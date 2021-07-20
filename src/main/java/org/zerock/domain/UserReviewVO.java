@@ -17,6 +17,5 @@ public class UserReviewVO {
 	
 	// file
 	private String fileName;
-	// reply 추가해야 함
 	
 }

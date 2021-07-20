@@ -73,7 +73,7 @@ public class UserReviewController {
 	// ***** Authentication에 따른 userReviewWrite 구현해야 함
 	@GetMapping("/write")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
-		
+		// Forwarding to /WEB-INF/views/review/write.jsp
 	}
 	
 	// userReviewGet
