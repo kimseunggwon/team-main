@@ -76,6 +76,28 @@
 	-moz-border-radius: 40px;
 	border-radius: 40px;
 	}
+	.signbutton {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:420px;
+    font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
+	}
+	.signbutton:hover {
+		background: #0583F2;
+	}
 </style>
 
 <script type="text/javascript">
@@ -236,6 +258,28 @@ $(function() {
 			$("#sang-signup-form").attr("action", path);
 		}
 	})
+	
+    
+    $("#sang-pnum, #sang-storepnum").keyup(function(){
+		var userp = $("#sang-pnum").val();
+		var b2bp = $("#sang-storepnum").val();
+    	
+		if(userp.indexOf('-') != -1) {
+
+			alert("숫자만 사용해주세요.");
+			$("#sang-pnum").val("");
+		
+		}
+
+		else if(b2bp.indexOf('-') != -1) {
+			
+			alert("숫자만 사용해주세요.");
+			$("#sang-storepnum").val("");
+
+		}
+   	
+    });
+
 	
 });
 </script>
@@ -653,29 +697,71 @@ $(function() {
 					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-storename" name="storeName" class="" title="STORENAME" maxlength="30">
                 </div>
                 <div style="margin-top: 25px"></div>
+
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						가게 주소
+						<input type="button" onclick="sample7_execDaumPostcode()" value="우편번호 찾기" class="addressbtn"><br>
+					</h5>
+				</div>
+				</div>
+				<div hidden class="row justify-content-center b2bsignup">
+				<div class="col-5">
+					<div class="add_a">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="우편번호" type="text" id="store-postcode" class="" title="SPOST" maxlength="30">
+					</div>
+					</div>
+					<div class="add_b">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="주소" type="text" id="store-address" name="storeAddress" class="" title="SADDRESS" maxlength="30">
+					</div>
+	                </div>
+				</div>
+				</div>
+				<div hidden class="row justify-content-center b2bsignup">
+				<div class="col-5">
+					<div class="add_a">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="상세주소" type="text" id="store-detailAddress" class="" title="SDADDRESS" maxlength="30">
+					</div>
+					</div>
+					<div class="add_b">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="참고항목" type="text" id="store-extraAddress" class="" title="SUNIC" maxlength="30">
+					</div>
+	                </div>
+				</div>
+				</div>
+				<input hidden type="text" name="storeUserAddress" id="sang-storeAddress" >
+				<input hidden type="text" name="storelat" id="sang-storelat" >
+				<input hidden type="text" name="storelag" id="sang-storelag">
+				<div style="margin-top: 25px"></div>
 				
-				<div class="b2bsignup" hidden>
-					<label for="sang-storeaddress">store address</label>
-					
-					<input type="button" onclick="sample7_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="store-postcode" placeholder="우편번호"> 
-					<input name="storeAddress" value="" type="text" id="store-address" placeholder="주소"><br>
-					<input type="text" id="store-detailAddress" placeholder="상세주소">
-					<input type="text" id="store-extraAddress" n placeholder="참고항목">
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						가게 전화번호
+					</h5>
+				</div>
+				</div>
+				<div hidden class="ps_box col-5 b2bsignup">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-storepnum" name="storePhonenum" class="" title="STORENUM" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
 				
-					<input hidden type="text" name="storeUserAddress" id="sang-storeAddress" >
-					<input hidden type="text" name="storelat" id="sang-storelat" >
-					<input hidden type="text" name="storelag" id="sang-storelag">
-					
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						사업자 번호
+					</h5>
 				</div>
-				<div class="b2bsignup" hidden>
-					<label for="sang-pnum">store phonenumber</label>
-					<input type="text" name="storePhonenum" id="sang-storepnum" class="">
 				</div>
-				<div class="b2bsignup" hidden>
-					<label for="sang-pnum">business number</label>
-					<input type="text" name="businessNum" id="sang-businessnum" class="">
-				</div>
+				<div hidden class="ps_box col-5 b2bsignup">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-businessnum" name="businessNum" class="" title="STOREBUSINUM" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
 				
 				
 		
@@ -684,7 +770,7 @@ $(function() {
 			
 	
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<input id="signup" type="submit" value="가입" class="" >
+			<input id="signup" type="submit" value="가입" class="signbutton" >
 			
 			</form>
 		</div>

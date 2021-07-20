@@ -12,13 +12,13 @@
 
 <style type="text/css">
 .container-1 input.search{
-  width: 450px;
+  width: 420px;
   height: 78px;
-  background: rgb(136, 201, 242);
+  background: rgb(242, 242, 242);
   border: none;
   font-size: 12pt;
   float: left;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding-left: 45px;
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
@@ -26,14 +26,14 @@
   outline-style: none;
 }
 .button {
-	background-color: #ff5fa8;
+	background-color: #169EF2;
 	border: none;
 	color: white;
 	padding: 16px 32px;
 	text-align: center;
-	font-size: 16px;
+	font-size: 18px;
 	margin: 4px 2px;
-	opacity: 0.6;
+	opacity: 1;
 	transition: 0.3s;
 	display: inline-block;
 	text-decoration: none;
@@ -45,7 +45,7 @@
     font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
 }
 .button:hover {
-	background: #f0348a; 
+	background: #0583F2;
 }
 </style>
 
@@ -71,7 +71,7 @@ $(function(){
 	$("#sang-normal-img").click(function(e){
 		e.preventDefault();
 		
-		var path = '${appRoot}/login';
+		var path = '${appRoot}/member/login';
 		$("#sang-login-form").attr("action", path);
 		
 		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/로그인2.png");
@@ -81,7 +81,7 @@ $(function(){
 	$("#sang-b2b-img").click(function(e){
 		e.preventDefault();
 		
-		var path = '${appRoot}/b2blogin';
+		var path = '${appRoot}/member/b2blogin';
 		$("#sang-login-form").attr("action", path);
 		
 		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/로그인1.png");
@@ -110,7 +110,7 @@ $(function(){
 			
 			
 				<div>
-					<img style="position: absolute; z-index: -1" alt="" src="${appRoot }/resources/image/로그인 테두리.png">
+					<img style="position: absolute; z-index: -1" alt="" src="${appRoot }/resources/image/로그인 테두리3.png">
 				</div>
 			<div class="row justify-content-center mt-5">
 			
@@ -157,8 +157,6 @@ $(function(){
 					<a style="text-decoration: none; color: black;" id="sang-findpw-btn" class="col-4" href="${appRoot}/member/findpw">비밀번호 찾기</a>
 					<a style="text-decoration: none; color: black;" id="sang-signup-btn" class="col-4" href="${appRoot }/member/signup">회원가입</a>
 				</div>
-				
-				<hr>
 				
 				<sec:authorize access="isAuthenticated()">
 				  <form action="${appRoot }/logout" method="post">
