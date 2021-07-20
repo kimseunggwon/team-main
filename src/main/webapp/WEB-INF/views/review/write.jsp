@@ -31,6 +31,18 @@
   border-radius: 40px;
   outline-style: none;
 }
+
+img {
+	padding: 50px;
+}
+
+/* 왜 안될까? */
+#jinah-search-form1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-content: center;
+}
 </style>
 
 <script>
@@ -38,7 +50,12 @@
 
 </head>
 <body>
-		<%-- 여기는 [글쓰기] JSP 파일입니다 :) --%>
+		<%-- 여기는 [글쓰기] JSP 파일입니다 :) 
+		1. 검색 기능이 완전하지 않아요.
+		2. 도대체 왜 item 수평 정렬이 안되는지 화가 나요. 
+		3. 리뷰 작성자는 user table이 정리된 이후에 다시 할 수 있어요. 
+		4. authentication 설정 이후 test가 필요해요..
+		--%>
 	<div class="container">
 		<div class="row justify-content-center">
 			<img alt="jinah-logo"
@@ -46,13 +63,41 @@
 		</div>
 	</div>
 	
-	<!-- 검색 버튼 -->
-	<div class="container-1 row justify-content-center">
-		<span style="position: absolute; margin-top: 27px; margin-left: 18px"
-			class="icon"></span> <input
-			name="username" class="search" type="text" id="input1"
-			placeholder="SEARCH" />
+	<!-- Search Start -->
+	<div id="jinah-search-form1"
+		class="container-1 row justify-content-center">
+		<form action="${appRoot }/review/list" method="get">
+			<div class="item">
+				<select name="type" class="form-inline my-2 my-lg-0">
+					<option value="">Select</option>
+					<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>
+					<option value="C" ${recri.type	== "C" ? 'selected' : '' }>내용</option>
+					<option value="W" ${recri.type	== "W" ? 'selected' : '' }>글쓴이</option>
+					<option value="TC" ${recri.type	== "TC" ? 'selected' : '' }>제목
+						+ 내용</option>
+					<option value="TW" ${recri.type	== "TW" ? 'selected' : '' }>제목
+						+ 글쓴이</option>
+					<option value="TWC" ${recri.type	== "TWC" ? 'selected' : '' }>제목
+						+ 글쓴이 + 작성자</option>
+				</select>
+			</div>
+			<div class="item">
+				<span
+					style="position: absolute; margin-top: 27px; margin-left: 18px"
+					class="icon"></span> <input name="keyword"
+					value="${recri.keyword }" class="search" type="search"
+					id="jinah-search1" placeholder="Search" />
+			</div>
+
+			<div class="item">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+			</div>
+
+			<input type="hidden" name="pageNum" value="1"> <input
+				type="hidden" name="amount" value="${recri.amount }">
+		</form>
 	</div>
+	<!-- Search End -->
 
 	<div class="container">
 		 <div class="row justify-content-center">
