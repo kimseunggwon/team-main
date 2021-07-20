@@ -11,8 +11,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+</head>
+<body class="row justify-content-center mt-5">
 <div class="container">
-	<h1>아이디 찾기</h1>
+	<div class="row">
+		<div class="col-md-12">
+			<h1>아이디 찾기</h1>
+			
+			
+			
+			
+			
+		</div>
+	</div>
 </div>
 </body>
 </html>

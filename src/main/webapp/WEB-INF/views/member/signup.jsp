@@ -11,7 +11,11 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-	.ps_box, .ps_box_disable {
+	h5 {
+	font-weight:bold;
+	font-size: 15px;
+	}
+	.ps_box {
     display: inline-block;
     position: relative;
     width: 100%;
@@ -21,6 +25,78 @@
     background: #fff;
     box-sizing: border-box;
     vertical-align: top;
+	}
+	.ps_box2 {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 10px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+	}
+	.add_a, .add_b, .add_c, .add_d {
+    display: inline-block;
+    table-layout: fixed;
+    width: 220px;
+    vertical-align: middle;
+    *display: block;
+    *float: left;
+	}
+	.sel {
+    width: 100%;
+    height: 29px;
+    padding: 7px 8px 6px 7px\9;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000;
+    border: none;
+    border-radius: 0;
+    *height: auto;
+    -webkit-appearance: none;
+	}
+	:root .sel {
+    background: #fff url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
+    background-size: 20px 8px;
+	}
+	.addressbtn {
+	font-size: 12px;
+	border: solid 1px #dadada;
+	background-color:white; 
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	}
+	.emailbtn {
+	border: solid 1px #dadada;
+	background-color:white; 
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	}
+	.signbutton {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:420px;
+    font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
+	}
+	.signbutton:hover {
+		background: #0583F2;
 	}
 </style>
 
@@ -125,7 +201,7 @@ $(function() {
 		
 		$.post(authurl, {idE: idE/* ,idP: idP */}, function(data) {
 			if (data == 'ok1') {
-				$("#sang-inz-input, #sang-inz-btn").removeAttr("hidden");
+				$("#sang-inz-div").removeAttr("hidden");
 			} else {
 			
 			}
@@ -138,6 +214,7 @@ $(function() {
 			var idI = $("#sang-inz-input").val();
 			$.post(authurl, {idI: idI}, function(data) {
 				if (data == 'ok2') {
+					console.log("인증번호 맞습니다!");
 					$("#signup").removeAttr("hidden");
 				} else {
 				
@@ -181,6 +258,28 @@ $(function() {
 			$("#sang-signup-form").attr("action", path);
 		}
 	})
+	
+    
+    $("#sang-pnum, #sang-storepnum").keyup(function(){
+		var userp = $("#sang-pnum").val();
+		var b2bp = $("#sang-storepnum").val();
+    	
+		if(userp.indexOf('-') != -1) {
+
+			alert("숫자만 사용해주세요.");
+			$("#sang-pnum").val("");
+		
+		}
+
+		else if(b2bp.indexOf('-') != -1) {
+			
+			alert("숫자만 사용해주세요.");
+			$("#sang-storepnum").val("");
+
+		}
+   	
+    });
+
 	
 });
 </script>
@@ -407,7 +506,7 @@ $(function() {
 <div class="container">
 	<div style="text-align: center;" class="row">
 		<div class="col-12 ">
-			<div class="conainer mt-5">
+			<div style="margin-top: 150px" class="conainer">
 				<h1>회원 가입</h1>
 				
 				<a style="text-decoration: none;" href="">
@@ -460,88 +559,218 @@ $(function() {
                 </div>
 				<small style="white-space: pre-wrap;" id="password-message" class="form-text text-danger"> </small>
 				
-				<div>
-					<label for="sang-name">name</label>
-					<input type="text" name="userName" id="sang-name" class="">
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						이름
+					</h5>
 				</div>
-				<div>
-					<label for="sang-name">address</label>
-					
-					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample6_postcode" placeholder="우편번호"> 
-					<input name="address" value="" type="text" id="sample6_address" placeholder="주소"><br>
-					<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-					<input type="text" id="sample6_extraAddress" n placeholder="참고항목">
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-name" name="userName" class="" title="NAME" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
 				
-					<input hidden type="text" name="userAddress" id="sang-userAddress" >
-					<input hidden type="text" name="lat" id="sang-lat" >
-					<input hidden type="text" name="lag" id="sang-lag">
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						집 주소
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="addressbtn"><br>
+					</h5>
 				</div>
-				<div class="">
-					<label for="sang-pnum">nickname</label>
-					<input type="text" name="userNickname" id="sang-nickname" class="">
 				</div>
-				<div class="">
-					<label for="sang-birth">birth day</label>
-					<input type="date" name="birthDate" id="sang-birth" class="">
+				<div class="row justify-content-center">
+				<div class="col-5">
+					<div class="add_a">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="우편번호" type="text" id="sample6_postcode" class="" title="NAME" maxlength="30">
+					</div>
+					</div>
+					<div class="add_b">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="주소" type="text" id="sample6_address" name="userAddress" class="" title="NAME" maxlength="30">
+					</div>
+	                </div>
 				</div>
-				<div class="">
-					<label for="sang-email">E-mail</label>
-					<input type="text" name="userEmail" id="sang-email" class="">
-					<button class="" id="sang-authnum" type="button">인증번호 전송</button>
 				</div>
-				<div class="">
-					<label for="sang-pnum">P-number</label>
-					<input type="text" name="userPhonenum" id="sang-pnum" class="">
+				<div class="row justify-content-center">
+				<div class="col-5">
+					<div class="add_a">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="상세주소" type="text" id="sample6_detailAddress" class="" title="NAME" maxlength="30">
+					</div>
+					</div>
+					<div class="add_b">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="참고항목" type="text" id="sample6_extraAddress" class="" title="NAME" maxlength="30">
+					</div>
+	                </div>
 				</div>
+				</div>
+				<input hidden type="text" name="userDetailAddress" id="sang-userAddress" >
+				<input hidden type="text" name="lat" id="sang-lat" >
+				<input hidden type="text" name="lag" id="sang-lag">
+				<div style="margin-top: 25px"></div>
 				
-				<div class="">
-					<select id="" name="userSex" class="">
-						<option selected="selected" value="1">남자</option>
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						별명
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-nickname" name="userNickname" class="" title="NICKNAME" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						생일
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box2 col-5">
+					<input style="border:none; outline: none; width: 330px;" type="date" id="sang-birth" name="birthDate" class="" title="Birth" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						E-mail
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box2 col-5">
+					<input style="border:none; outline: none; width: 230px;" type="text" id="sang-email" name="userEmail" class="" title="Email" maxlength="30">
+					<button style="display: inline;" class="emailbtn" id="sang-authnum" type="button">인증번호 전송</button>
+                </div>
+                <div style="margin-top: 25px"></div>
+                
+                <div hidden class="ps_box2 col-5" id="sang-inz-div">
+	                <input style="border:none; outline: none; width: 230px;" type="text" class="" name="inz" id="sang-inz-input" maxlength="30"/>
+					<button class="emailbtn" id="sang-inz-btn" type="button">인증</button>
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						핸드폰 번호
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box col-5">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-pnum" name="userPhonenum" class="" title="Email" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div style="margin: 0 auto;" class="col-5">
+				<div style="text-align: left;">
+					<h5>
+						성별
+					</h5>
+				</div>
+				</div>
+				<div class="ps_box2 col-5">
+					<select id="" name="userSex" class="sel">
+						<option selected="selected" value="0">성별</option>
+						<option value="1">남자</option>
 						<option value="2">여자</option>
 						<option value="3">선택 안함</option>
 					</select>
-				</div>
-				
+                </div>
+                <div style="margin-top: 25px"></div>
 				
 				<hr>
 				
-				<div class="b2bsignup" hidden>
-					<label for="sang-pnum">store name</label>
-					<input type="text" name="storeName" id="sang-storename" class="">
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						가게 이름
+					</h5>
 				</div>
-				<div class="b2bsignup" hidden>
-					<label for="sang-storeaddress">store address</label>
-					
-					<input type="button" onclick="sample7_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="store-postcode" placeholder="우편번호"> 
-					<input name="storeAddress" value="" type="text" id="store-address" placeholder="주소"><br>
-					<input type="text" id="store-detailAddress" placeholder="상세주소">
-					<input type="text" id="store-extraAddress" n placeholder="참고항목">
+				</div>
+				<div hidden class="ps_box col-5 b2bsignup">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-storename" name="storeName" class="" title="STORENAME" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						가게 주소
+						<input type="button" onclick="sample7_execDaumPostcode()" value="우편번호 찾기" class="addressbtn"><br>
+					</h5>
+				</div>
+				</div>
+				<div hidden class="row justify-content-center b2bsignup">
+				<div class="col-5">
+					<div class="add_a">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="우편번호" type="text" id="store-postcode" class="" title="SPOST" maxlength="30">
+					</div>
+					</div>
+					<div class="add_b">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="주소" type="text" id="store-address" name="storeAddress" class="" title="SADDRESS" maxlength="30">
+					</div>
+	                </div>
+				</div>
+				</div>
+				<div hidden class="row justify-content-center b2bsignup">
+				<div class="col-5">
+					<div class="add_a">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="상세주소" type="text" id="store-detailAddress" class="" title="SDADDRESS" maxlength="30">
+					</div>
+					</div>
+					<div class="add_b">
+					<div class="ps_box">
+						<input style="border:none; outline: none; width: 200px;" placeholder="참고항목" type="text" id="store-extraAddress" class="" title="SUNIC" maxlength="30">
+					</div>
+	                </div>
+				</div>
+				</div>
+				<input hidden type="text" name="storeUserAddress" id="sang-storeAddress" >
+				<input hidden type="text" name="storelat" id="sang-storelat" >
+				<input hidden type="text" name="storelag" id="sang-storelag">
+				<div style="margin-top: 25px"></div>
 				
-					<input hidden type="text" name="storeUserAddress" id="sang-storeAddress" >
-					<input hidden type="text" name="storelat" id="sang-storelat" >
-					<input hidden type="text" name="storelag" id="sang-storelag">
-					
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						가게 전화번호
+					</h5>
 				</div>
-				<div class="b2bsignup" hidden>
-					<label for="sang-pnum">store phonenumber</label>
-					<input type="text" name="storePhonenum" id="sang-storepnum" class="">
 				</div>
-				<div class="b2bsignup" hidden>
-					<label for="sang-pnum">business number</label>
-					<input type="text" name="businessNum" id="sang-businessnum" class="">
+				<div hidden class="ps_box col-5 b2bsignup">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-storepnum" name="storePhonenum" class="" title="STORENUM" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
+				
+				<div hidden style="margin: 0 auto;" class="col-5 b2bsignup">
+				<div style="text-align: left;">
+					<h5>
+						사업자 번호
+					</h5>
 				</div>
+				</div>
+				<div hidden class="ps_box col-5 b2bsignup">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-businessnum" name="businessNum" class="" title="STOREBUSINUM" maxlength="30">
+                </div>
+                <div style="margin-top: 25px"></div>
 				
 				
 		
 	
 			
-			<input class="col-3" hidden name="inz" id="sang-inz-input"/>
-			<button hidden class="" id="sang-inz-btn" type="button">인증</button>
+			
 	
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<input id="signup" type="submit" value="가입" class="" >
+			<input id="signup" type="submit" value="가입" class="signbutton" >
 			
 			</form>
 		</div>

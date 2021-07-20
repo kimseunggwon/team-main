@@ -31,7 +31,7 @@
 	  			<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
 	  		</form>
 	  		
-	  		<form action="${appRoot }/member/main">
+	  		<form action="${appRoot }/member/mypage">
 	  			<input class="btn btn-primary mr-1" type="submit" value="MyPage"> 
 	  		</form>
 	  		
