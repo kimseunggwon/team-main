@@ -93,7 +93,7 @@ $(function(){
 </script>
 
 </head>
-<body class="row justify-content-center mt-5">
+<body style="overflow: hidden;" class="row justify-content-center mt-5">
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">

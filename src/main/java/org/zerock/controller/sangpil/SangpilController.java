@@ -17,6 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -166,20 +167,27 @@ public class SangpilController {
 	
 	@PostMapping("/findid")
 	@ResponseBody
-	public ResponseEntity<String> findid(MemberVO vo) {
+	public /*ResponseEntity<String>*/ String findid(@RequestBody MemberVO vo) {
 		log.info("아이디 찾는중....");
-		log.info(vo.getUserid());
 		
 		// 서비스 일 시키고
 		MemberVO vo2 = service.read(vo.getUserid());
 		String useremail = vo2.getUserEmail();
 		
 		String email = vo.getUserEmail();
-		
-		if (email == useremail) {
+		String userid = vo.getUserid();
+		/*
+		if (email.equals(useremail)) {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
+		*/
+		
+		if(email.equals(useremail)) {
+			return userid;
+		}else {
+			return null;
 		}
 		
 	}

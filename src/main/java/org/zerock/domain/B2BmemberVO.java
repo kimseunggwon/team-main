@@ -12,8 +12,8 @@ public class B2BmemberVO {
 	private String userpw;
 	private String userName;
 	
-	private String userDetailAddress;
 	private String userAddress;
+	private String address;
 	private Double lat; //경도
 	private Double lag; //위도
 	
@@ -22,6 +22,8 @@ public class B2BmemberVO {
 	private String userEmail;
 	private int userSex;
 	private String userNickname;
+	
+	private Integer id;
 	
 	private String storeName;
 	private String storeUserAddress;

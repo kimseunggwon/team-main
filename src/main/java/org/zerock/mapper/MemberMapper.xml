@@ -76,10 +76,19 @@
 		SELECT
 			m.userid userid,
 			m.userpw userpw,
-			m.username username,
+			m.userName userName,
+			m.userAddress userAddress,
+			m.address address,
+			m.birthDate birthDate,
+			m.userPhonenum userPhonenum,
+			m.userEmail userEmail,
+			m.userSex userSex,
+			m.userNickname userNickname,
+			si.id id,
 			a.auth auth
 		FROM
-			user m LEFT JOIN user_auth a ON m.userid = a.userid
+			user m LEFT JOIN user_auth a ON m.userid = a.userid 
+				   left join storeinfo si on m.userid = si.userid
 		WHERE
 			m.userid = #{userid}
 	
@@ -90,9 +99,19 @@
 		<id property="userid" column="userid"/> <!-- userid라는걸 MemberVO에 넣는것! -->
 		<result property="userpw" column="userpw"/>
 		<result property="userName" column="username"/>
-		<result property="regdate" column="regdate"/>
-		<result property="updateDate" column="updateDate"/>
-		<result property="enabled" column="enabled"/>
+		<result property="userEmail" column="userEmail"/>
+		
+		<result property="userAddress" column="userAddress"/>
+		<result property="address" column="address"/>
+		
+		<result property="birthDate" column="birthdate"/>
+		<result property="userPhonenum" column="userphonenum"/>
+		
+		<result property="userSex" column="usersex"/>
+		<result property="userNickname" column="usernickname"/>
+		<result property="id" column="id"/>
+		
+		
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 	<resultMap type="org.zerock.domain.AuthVO" id="authMap">

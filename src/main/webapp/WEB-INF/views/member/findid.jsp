@@ -39,38 +39,41 @@
 </style>
 
 <script type="text/javascript">
-$("#signup").click(function() {
-	
-	console.log("ㅎㅎㅎㅎ");
-	var idName = $("#sang-userName").val();	
-	var idEmail = $("#sang-userEmail").val();
-	var data = {id : idName, email : idEmail};
-	
-	$.ajax({
-		type: "post",
-		url: "${appRoot}/member/findid",
-		data : JSON.stringify(data),
-		contentType : "application/json",
-		success: function (data) {
-			if (data == "success") {
-				console.log("있는 아이디.");
+
+$(function() {
+	$("#signup").click(function() {
+		
+		var idName = $("#sang-userName").val();	
+		var idEmail = $("#sang-userEmail").val();
+		var data = {userid : idName, userEmail : idEmail};
+		
+		$.ajax({
+			type: "post",
+			url: "${appRoot}/member/findid",
+			data : JSON.stringify(data),
+			contentType : "application/json",
+			success: function (data) {
+				if (data != "") {
+					
+					$(".result").removeAttr("hidden");
+					$("#resultid").val(data);
+				} else if (data == "") {
+					alert("일치하는 아이디와 Email이 없습니다.");
+					
+					$(".result").attr("hidden", "hidden");
+					$("#resultid").val("");
+				}
 				
-				$(".result").removeAttr("hidden");
-			} else if (data == "exist") {
-				console.log("없는 아이디.");
-				
-				$(".result").attr("hidden", "hidden");
+			},
+			error: function() {
+				alert("정확한 정보를 적어주세요.");
+				$("#sang-userName").val("");
+				$("#sang-userEmail").val("");
 			}
 			
-		},
-		error: function() {
-			alert("정확한 정보를 적어주세요.");
-			$("#sang-userName").val("");
-			$("#sang-userEmail").val("");
-		}
+		});
 		
 	});
-	
 });
 </script>
 </head>
@@ -91,7 +94,7 @@ $("#signup").click(function() {
 				</div>
 				</div>
 				<div class="ps_box col-5">
-					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-userName" name="userName" class="" title="userName" maxlength="30">
+					<input style="border:none; outline: none; width: 330px;" type="text" id="sang-userName" name="userName" class="" title="userName" maxlength="30" autofocus>
 				</div>
 				<div style="margin-top: 25px"></div>
 				<div style="margin: 0 auto;" class="col-5">
@@ -109,15 +112,17 @@ $("#signup").click(function() {
 				<input type="button" id="signup" value="버튼">
 			</form>
 			
+			<hr hidden class="result">
+			
 			<div hidden style="margin: 0 auto;" class="col-5 result">
 			<div style="text-align: left;">
 				<h5>
-					고객님의 정보와 일치하는 아이디 목록입니다.
+					고객님의 정보와 일치하는 아이디 입니다.
 				</h5>
 			</div>
 			</div>
 			<div hidden class="ps_boxv col-5 result">
-				<input style="border:none; outline: none; width: 330px;" type="text" id="" name="userEmail" class="" title="userEmail" maxlength="30">
+				<input readonly="readonly" style="border:none; outline: none; width: 430px;" type="text" id="resultid" name="" class="" title="userEmail" maxlength="30">
 			</div>
 			<div style="margin-top: 25px"></div>
 			
