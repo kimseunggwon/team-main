@@ -31,5 +31,5 @@ public interface UserReviewMapper {
 	// 리뷰 게시물 총 개수 가져오기 - getReviewTotalCount
 	public int getReviewTotalCount(ReviewCriteria recri);
 	
-	// 
+	// 리뷰 평점 매기기 - setReviewGrade
 }
