@@ -26,6 +26,10 @@ public class HelpController {
 		return "help/ask";
 	}
 	
+	@RequestMapping("/register")
+	public String register()
+	
+	
 	@RequestMapping("/askList")
 	public String checkAsk() {
 		log.info("1:1 문의글 리스트 확인");
