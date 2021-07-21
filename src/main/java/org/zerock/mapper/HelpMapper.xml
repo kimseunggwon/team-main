@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.HelpMapper">
+	
+	<sql id="pagenation">
+		<where>
+			<foreach item="type" separator="OR" collection="typeArr">
+				<choose>
+					<when test='type == "T"'>
+						A.title Like CONCAT('%', #{keyword}, '%')
+					</when>
+					<when test='type == "W"'>
+						A.writer Like CONCAT('%', #{keyword}, '%')
+					</when>
+					<when test='type == "C"'>
+						A.content Like CONCAT('%', #{keyword}, '%')
+					</when>
+				</choose>
+			</foreach>
+		</where>
+	</sql>
+
+  <select id="getTotalCount" resultType="int">
+  	SELECT COUNT(*) FROM ask_board A
+  	<include refid="pagenation"></include>
+  </select>
+
+	<!-- 권한 부여와 관련해서 추가 작성 필요 -->
+	<select id="getList" resultType="org.zerock.domain.BoardVO">
+		
+		SELECT
+			bno bno,
+			title title,
+			content content,
+			writer writer,
+			regdate regdate,
+			updatedate updatedate
+		FROM ask_board
+		
+	</select>
+	
+  <select id="getListWithPaging" resultType="org.zerock.domain.HelpVO">
+  	
+  	SELECT
+  		A.bno bno,
+  		A.title title,
+  		A.content content,
+  		A.writer writer,
+  		A.regdate regdate,
+  		A.updatedate updatedate,
+  		u.username userNickName,
+  		count(r.rno) replyCnt  		
+  	FROM ask_board A LEFT JOIN ask_reply r ON A.bno = r.bno
+  				   INNER JOIN user u ON A.writer = u.userid
+  	<include refid="pagenation"></include>
+  	GROUP BY A.bno
+  	ORDER BY A.bno DESC
+  	LIMIT #{from}, #{amount}			   
+  				   
+  </select>
+
+	<insert id="insert">
+		INSERT INTO ask_board (title, content, writer)
+		VALUES (#{title}, #{content}, #{writer})
+	</insert>
+
+	<insert id="insertSelectkey" useGeneratedKeys="true" keyProperty="bno" keyColumn="bno">
+		INSERT INTO ask_board (title, content, writer)
+		VALUES (#{title}, #{content}, #{writer})
+	</insert>
+
+	 <select id="read" resultType="org.zerock.domain.HelpVO">
+  		SELECT
+  			A.bno bno,
+  			A.title title,
+  			A.content content,
+  			A.writer writer,
+  			A.regdate regdate,
+  			A.updatedate updatedate,
+  			f.fileName fileName,
+  			u.username writerName
+  		FROM ask_board A LEFT JOIN ask_board_file f ON A.bno = f.bno
+  							  JOIN user u ON A.writer = u.userid
+  		WHERE A.bno = #{bno}
+ 	 </select>
+
+	<delete id="delete">
+  		DELETE FROM ask_board WHERE bno = #{bno}
+  	</delete>
+   
+ 	<update id="update">
+  		UPDATE ask_board
+  	
+  		SET 
+  			title = #{title},
+  			content = #{content},
+  			writer = #{writer},
+  			updateDate = NOW()
+  		
+  		WHERE
+  			bno = #{bno}	
+ 	 </update>
+  
+  	<delete id="removeByUserid">
+  		DELETE FROM ask_board
+  		WHERE writer = #{userid}
+  	</delete>
+	
+
+</mapper>
