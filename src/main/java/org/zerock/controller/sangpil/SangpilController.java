@@ -50,15 +50,14 @@ public class SangpilController {
 		log.info("b2blogin 들어왔습니당");
 	}
 	
-	
 	@GetMapping("/findid")
 	public void findid() {
-		log.info("아이디 찾기 들어왔습니당");
+		log.info("findid 들어왔다");
 	}
 	
 	@GetMapping("/findpw")
 	public void findpw() {
-		log.info("비밀번호 찾기 들어왔습니당");
+		log.info("findpw 들어왔다");
 	}
 	
 	@PostMapping("/authNumber")
@@ -158,6 +157,26 @@ public class SangpilController {
 		MemberVO vo = service.read(id);
 		
 		if (vo == null) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
+		
+	}
+	
+	@PostMapping("/findid")
+	@ResponseBody
+	public ResponseEntity<String> findid(MemberVO vo) {
+		log.info("아이디 찾는중....");
+		log.info(vo.getUserid());
+		
+		// 서비스 일 시키고
+		MemberVO vo2 = service.read(vo.getUserid());
+		String useremail = vo2.getUserEmail();
+		
+		String email = vo.getUserEmail();
+		
+		if (email == useremail) {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<> ("exist", HttpStatus.OK);
