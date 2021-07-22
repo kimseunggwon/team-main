@@ -19,21 +19,21 @@
 			<h1 class="text-center mt-4">1:1 문의 글 작성</h1>
 
 			<div class="row justify-content-end">
-    			<form action="${appRoot }/logout" method="post" class="mr-2 mb-2">
+    			<form action="#" class="mr-2">
 			 		<input class="btn btn-warning" type="submit" value="로그아웃">
 			 	</form>
-    			<form action="${appRoot }/member/mypage" class="mr-2 mb-2">
+    			<form action="#">
 				 	<input class="btn btn-warning" type="submit" value="Mypage">
 				 </form>
 	  		</div>
 		</div>
 
 		<div>
-			<form action="${appRoot }/help/askList">
+			<form action="${appRoot }/help/askList" method="post" enctype="multipart/form-data">
 
 				<div class="form-group">
-					<label for="input1">제목</label> <input id="input1"
-						class="form-control" name="title">
+					<label for="input1">제목</label> 
+					<input id="input1" class="form-control" name="title">
 				</div>
 
 				<div class="form-group">
@@ -42,8 +42,8 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="input3">파일</label> <input id="input3"
-						class="form-control" type="file" name="file" accept="image/*" />
+					<label for="input3">파일</label> 
+					<input id="input3" class="form-control" type="file" name="file" accept="image/*" />
 				</div>
 
 				<div class="form-group">
@@ -102,6 +102,7 @@
 		 			<a href="#">
 		 				<img  src="${appRoot }/resources/image/facebook.gif">
 		 			</a>
+		 			
 		 			<a href="#">
 		 				<img  src="${appRoot }/resources/image/twitter.gif">
 		 			</a>

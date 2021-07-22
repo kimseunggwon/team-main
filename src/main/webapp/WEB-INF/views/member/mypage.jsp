@@ -20,12 +20,29 @@
 <div class="container">	
  
  <ul class="nav justify-content-end">
-  <li class="nav-item1">
-    <a class="nav-link active" href="#">고객센터</a>
-  </li>
-  <li class="nav-item2"> 
-    <a class="nav-link" href="${appRoot }/member/logout">로그아웃</a>
-  </li> 
+  
+  <sec:authorize access="isAnonymous()">
+		  		<form action="${appRoot }/member/login">
+		  			<input class="btn btn-primary mr-1" type="submit" value="로그인"> 
+	  			</form>
+	  		
+		  		<form action="${appRoot }/help/helpdesk">
+		  			<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
+	  			</form>
+	  		</sec:authorize>
+	  		
+	  		<!--  로그인 했을때 -->
+	  		<sec:authorize access="isAuthenticated()">       
+	  			<form action="${appRoot }/logout" method="post">
+	  					<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
+	  			</form>
+	  	
+	  		
+	  			<form action="${appRoot }/help/helpdesk">	
+	  					<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
+	  			</form>
+	  		</sec:authorize>
+  
    <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="검색" >
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
@@ -34,10 +51,10 @@
 
   <div class="dropdown">  
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   메뉴보기
+   메뉴보기 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="${appRoot }/member/info">회원정보</a>
+    <a class="dropdown-item" href="${appRoot }/member/myinfo">회원정보</a>
     <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
     <a class="dropdown-item" href="#">진행상황</a>
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
@@ -80,11 +97,19 @@
 </div>
   
   
-  
-  
-
-
-  
+</div>
+ 
+<div class="row no-gutters bg-light position-relative">
+  <div class="col-md-6 mb-md-0 p-md-4">
+    <img src="너구리.jpg" class="w-100" alt="...">
+  </div> 
+  <div class="col-md-6 position-static p-4 pl-md-0">
+    <h5 class="mt-0">회사소개</h5>
+    <p>우리 구독 회사는 
+       이렇고 저렇고 이렇고
+       저렇고 합니다.</p>
+    <a href="#" class="stretched-link">Go somewhere</a>
+  </div>
 </div>
 
 </body>

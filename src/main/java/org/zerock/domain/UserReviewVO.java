@@ -14,9 +14,11 @@ public class UserReviewVO {
 	private String reWriterName;
 	private Timestamp reRegdate;
 	private Timestamp reUpdatedate;
+	private int viewCount;
+	private int likeCount;
+	private int reStars;
 	
 	// file
 	private String fileName;
-	// reply 추가해야 함
 	
 }

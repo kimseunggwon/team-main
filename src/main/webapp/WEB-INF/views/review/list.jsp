@@ -33,9 +33,9 @@
 		 		<tr>
 		 			<th>#</th>
 		 			<th>제목</th>
-		 			<th>작성자</th>
-		 			<th>작성일</th>
-		 			<th>수정일</th>
+		 			<th>글쓴이</th>
+		 			<th>작성 날짜</th>
+		 			<th>수정 날짜</th>
 		 		</tr>
 		 	</thead>
 		 	<tbody>
@@ -55,7 +55,7 @@
 		 					</a>
 		 				</td>
 		 				
-		 				<td>${review.reWriter }</td>
+		 				<td>${review.reWriterName }</td>
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
 		 			</tr>
@@ -89,7 +89,7 @@
 		 	뭔지 잘 모르겠다...
 		 	--%>
 			<div style="display: none">
-				<form id="actionForm" action="${appRoot }/board/list" method="get">
+				<form id="actionForm" action="${appRoot }/review/list" method="get">
 					<input name="pageNum" value="${recri.pageNum }" /> 
 					<input name="amount" value="${recri.amount }" />
 					<input name="type" value="${recri.type }" />

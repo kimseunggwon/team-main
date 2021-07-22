@@ -64,10 +64,11 @@
 	</delete>
 
 	<update id="update">
-		UPDATE user
-		SET userpw = #{userpw},
+		UPDATE user  
+		SET
+            userpw = #{userpw},
 			userName = #{userName},
-			updatedate = now()
+			userEmail =#{userEmail}
 		WHERE
 			userid = #{userid}
 	</update>
