@@ -128,7 +128,7 @@ $(function(){
 				
 				<div class="container-1 row">
 					<span style="position: absolute; margin-top: 27px; margin-left: 18px" class="icon"><i class="fas fa-lock"></i></span>
-					<input name="password" class="search" type="text" id="input2" placeholder="비밀번호" />
+					<input name="password" class="search" type="password" id="input2" placeholder="비밀번호" />
 				</div>
 	
 				<br>

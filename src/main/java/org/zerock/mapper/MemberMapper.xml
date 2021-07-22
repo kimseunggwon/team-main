@@ -9,14 +9,14 @@
 		INSERT INTO user
 		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userDetailAddress},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
+		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 	
 	<insert id="insertb2b">
 		INSERT INTO user
 		(userid, userpw, userName, userAddress, address, birthDate, userPhonenum, userEmail, userSex, userNickname, lat, lag)
 		VALUES
-		(#{userid},#{userpw},#{userName},#{userDetailAddress},#{userAddress},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
+		(#{userid},#{userpw},#{userName},#{userAddress},#{address},#{birthDate},#{userPhonenum},#{userEmail},#{userSex},#{userNickname},#{lat},#{lag})
 	</insert>
 	
 	<insert id="insertemp">
@@ -95,6 +95,28 @@
 	
 	</select>
 	
+	<select id="read2" resultMap="memberMap">
+		SELECT
+			m.userid userid,
+			m.userName userName,
+			m.userEmail userEmail
+		FROM
+			user m
+		WHERE
+			m.userName = #{userName} AND m.userEmail = #{userEmail}
+	</select>
+	
+	<select id="read3" resultMap="memberMap">
+		SELECT
+			m.userid userid,
+			m.userName userName,
+			m.userEmail userEmail
+		FROM
+			user m
+		WHERE
+			m.userid = #{userid} AND m.userName = #{userName} AND m.userEmail = #{userEmail}
+	</select>
+	
 	<!-- 책 662쪽 -->
 	<resultMap type="org.zerock.domain.MemberVO" id="memberMap">
 		<id property="userid" column="userid"/> <!-- userid라는걸 MemberVO에 넣는것! -->
@@ -111,7 +133,6 @@
 		<result property="userSex" column="usersex"/>
 		<result property="userNickname" column="usernickname"/>
 		<result property="id" column="id"/>
-		
 		
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
