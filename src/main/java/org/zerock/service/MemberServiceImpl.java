@@ -125,6 +125,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean modify(MemberVO vo, String oldPassword) {
 		MemberVO old = mapper.read(vo.getUserid());
+		
 		if(encoder.matches(oldPassword, old.getUserpw())) {
 			return modify(vo);
 		}
@@ -132,6 +133,7 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
+	
 	@Override
 	public boolean modify(MemberVO vo) {
 		

@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.MemberVO;
+import org.zerock.security.domain.CustomUser;
 import org.zerock.service.MemberService;
 
 import lombok.Setter;
@@ -36,34 +38,41 @@ public class testController {
 	} 
 	 
 	
-	@GetMapping("/myinfo")
-	public void info( Model model) {
-		log.info("내정보 확인");
-	}
 	
-	@GetMapping("/logout")
-	public void logout() {
-		log.info("로그아웃");
-	}
-	
-	
-	
-	@PostMapping("/kim")
-	public String kim(MemberVO vo) {
-		log.info(vo.getUserName());
+	@RequestMapping("/myinfo")
+	public void info( Model model, Principal principal) {
+		log.info("내정보 확인 : " + principal.getName());
+		MemberVO member = service.read(principal.getName());
 		
-		service.modify(vo);
-		
-		return "redirect:/member/info";
-	}
+		model.addAttribute("member", member);
+	} 
 	
+	@GetMapping("/exp")
+	public String logout() {
+		log.info("실험");
+		   
+		return "";
+	}  
+	
+	
+	
+	@PostMapping("/modify")
+	public String modify(MemberVO vo,RedirectAttributes rttr) {
+		log.info(vo);
+		log.info("아이디:" + vo.getUserpw() + "비번:"+ vo.getUserpw());
+
+		 service.modify(vo);
+		
+		return "redirect:/member/myinfo";
+	} 
+	 
 	@PostMapping("/remove")
 	public String remove(MemberVO vo) {
 		log.info(vo.getUserid());
 		
 		service.remove(vo);
 		
-		return "redirect:/member/info";
+		return "redirect:/member/myinfo";
 	}
 	
 	

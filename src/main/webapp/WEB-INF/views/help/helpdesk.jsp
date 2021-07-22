@@ -43,7 +43,7 @@
 			
 			<!-- 로그인 -->
 			<div class="row justify-content-end">
-    		<form action="${appRoot }/member/main" class="mr-2 mb-2">
+    		<form action="${appRoot }/logout" class="mr-2 mb-2">
 			 	<input class="btn btn-warning" type="submit" value="로그아웃">
 			 </form>
     		<form action="${appRoot }/member/mypage" class="mr-2 mb-2">
