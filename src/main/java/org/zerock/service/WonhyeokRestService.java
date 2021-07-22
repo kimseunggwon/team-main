@@ -9,5 +9,6 @@ public interface WonhyeokRestService {
 	public List<AddressVO> getsearchbystorename(String storename);
 
 	public List<AddressVO> getlatlag(AddressVO vo);
+
 	
 }

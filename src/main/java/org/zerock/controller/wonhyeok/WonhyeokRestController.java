@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.domain.AddressVO;
 import org.zerock.service.WonhyeokRestService;
@@ -40,5 +41,10 @@ public class WonhyeokRestController {
 		return list;
 		
 	}
-
+	@PostMapping(value = "/tagGetB2bStoreInfo", produces = {"application/json; charset=utf-8"})
+	@ResponseBody
+	public List<AddressVO> tagGetB2bStoreInfo(@RequestBody AddressVO vo) {
+		List<AddressVO> list = service.getlatlag(vo);
+		return list;
+	}
 }
