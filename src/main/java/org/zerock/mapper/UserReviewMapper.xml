@@ -13,10 +13,10 @@
 					re_title LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test='type == "W"'>
-					re_title LIKE CONCAT('%', #{keyword}, '%')
+					re_writer LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test='type == "C"'>
-					re_title LIKE CONCAT('%', #{keyword}, '%')
+					re_content LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 			</choose>
 		</foreach>
@@ -57,9 +57,13 @@
 	LIMIT #{from}, #{amount}
 </select>
 
-<insert id="insertReviewSelectKey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
+<insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
+	INSERT INTO user_review (re_title, re_content)
+	VALUES (#{reTitle}, #{reContent})
+	<!-- 
 	INSERT INTO user_review (re_title, re_content, re_writer)
-	VALUES (#{reTitle}, #{reContent}, #{reWriter})
+	VALUES (#{reTitle}, #{reContent}, #{reWriterName})
+	 -->
 </insert>
 
 <select id="readReview" resultType="org.zerock.domain.UserReviewVO">
@@ -76,6 +80,8 @@
 		FROM user_review r
 		LEFT JOIN user_review_file f ON r.re_bno = f.bno
 			 JOIN user u ON r.re_writer = u.userid
+		WHERE 
+			r.re_bno = #{reBno}
 </select>
 
 <update id="updateReview">

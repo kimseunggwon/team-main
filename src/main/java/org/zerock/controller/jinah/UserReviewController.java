@@ -73,7 +73,7 @@ public class UserReviewController {
 	// ***** Authentication에 따른 userReviewWrite 구현해야 함
 	@GetMapping("/write")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
-		
+		// Forwarding to /WEB-INF/views/review/write.jsp
 	}
 	
 	// userReviewGet
@@ -140,6 +140,25 @@ public class UserReviewController {
 		rttr.addAttribute("keyword", recri.getKeyword());
 		
 		return "redirect:/review/list";
-		
 	}
+	
+	// 리뷰 좋아요 - userReviewLikeCount
+	// 회원(user)만 접근 가능하다
+	// Modal을 사용하자
+	/*
+	 * 
+	@PostMapping("/get")
+	public String reviewLikeCount(@RequestParam("reBno") int reBno) {
+		
+		log.info("userReviewLikeCount is working");
+		
+		service.reviewLikecount(reBno);
+		
+		return "redirect:/review/get?reBno=" + reBno;
+	}
+	 */
+	
+	// 리뷰 조회수 - userReviewViewCount
+	
+	// 리뷰 평점 - userReviewStars
 }
