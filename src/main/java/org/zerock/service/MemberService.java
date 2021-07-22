@@ -1,5 +1,7 @@
 package org.zerock.service;
 
+import java.util.List;
+
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
 
@@ -13,6 +15,10 @@ public interface MemberService {
 	
 	MemberVO read(String name);
 
+	List<MemberVO> read2(MemberVO vo);
+	
+	List<MemberVO> read3(MemberVO vo);
+	
 	boolean modify(MemberVO vo);
 
 	boolean remove(MemberVO vo);
@@ -20,5 +26,6 @@ public interface MemberService {
 	boolean remove(MemberVO vo, String oldPassword);
 
 	boolean modify(MemberVO vo, String oldPassword);
+
 
 }

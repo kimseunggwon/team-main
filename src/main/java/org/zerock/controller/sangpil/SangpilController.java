@@ -2,7 +2,9 @@ package org.zerock.controller.sangpil;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -166,16 +169,15 @@ public class SangpilController {
 	}
 	
 	@PostMapping("/findid")
-	@ResponseBody
-	public /*ResponseEntity<String>*/ String findid(@RequestBody MemberVO vo) {
+	public ResponseEntity<List<String>> findid(@RequestBody MemberVO vo, Model model) {
 		log.info("아이디 찾는중....");
+		log.info(vo);
+		List<String> userid = new ArrayList<String>();
 		
 		// 서비스 일 시키고
-		MemberVO vo2 = service.read(vo.getUserid());
-		String useremail = vo2.getUserEmail();
+		List<MemberVO> vo2 = service.read2(vo);
+		log.info(vo2);
 		
-		String email = vo.getUserEmail();
-		String userid = vo.getUserid();
 		/*
 		if (email.equals(useremail)) {
 			return new ResponseEntity<>("success", HttpStatus.OK);
@@ -184,12 +186,32 @@ public class SangpilController {
 		}
 		*/
 		
-		if(email.equals(useremail)) {
-			return userid;
-		}else {
-			return null;
+		if (vo2.size() == 0) {
+			return new ResponseEntity<List<String>> (HttpStatus.BAD_REQUEST);
+		} else {
+			for(MemberVO wow : vo2) {
+				if (wow.getUserEmail().equals(vo.getUserEmail())) {
+					userid.add(wow.getUserid());
+				}
+			}
+			return new ResponseEntity<List<String>> (userid, HttpStatus.OK);
 		}
+
+	}
+	
+	@PostMapping("/findpw")
+	public ResponseEntity<String> findpw(@RequestBody MemberVO vo) {
 		
+		log.info(vo);
+		
+		// 서비스 일 시키고
+		List<MemberVO> vo2 = service.read3(vo);
+		
+		if (!vo2.isEmpty()) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
 	}
 	
 	@InitBinder 

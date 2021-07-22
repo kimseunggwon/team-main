@@ -1,5 +1,7 @@
 package org.zerock.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -120,6 +122,18 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO read(String name) {
 		
 		return mapper.read(name);
+	}
+	
+	@Override
+	public List<MemberVO> read2(MemberVO vo) {
+		
+		return mapper.read2(vo);
+	}
+	
+	@Override
+	public List<MemberVO> read3(MemberVO vo) {
+		
+		return mapper.read3(vo);
 	}
 	
 	@Override
