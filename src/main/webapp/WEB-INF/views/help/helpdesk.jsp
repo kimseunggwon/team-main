@@ -11,6 +11,20 @@
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 
 <title>Insert title here</title>
+
+<style type="text/css">
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ body {	
+   font-family: 'GongGothicMedium';
+}
+</style>
+
 </head>
 <body>
 	<div class="container">
@@ -23,8 +37,10 @@
 				 </div>
 			
 				<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
-				<div class="col align-self-center">
-					<img src="${appRoot }/resources/image/logo.jpg" alt="...">
+				<div class="col align-self-center mt-3">
+					<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
 				</div>
 			
 				<!-- 간단한 검색을 할 수 있는 검색창 구현 -->
@@ -38,11 +54,15 @@
 			</div>
 		
 		<div >
-			<h1 class="text-center mt-4">고객 센터</h1>
+			<h1 class="text-center mt-5">고객 센터</h1>
 			
 			
 			<!-- 로그인 -->
 			<div class="row justify-content-end">
+			
+			<form action="${appRoot }/member/main" class="mr-2 mb-2">
+				<input class="btn btn-warning" type="submit" value="메인">
+			</form>
     		<form action="${appRoot }/logout" class="mr-2 mb-2">
 			 	<input class="btn btn-warning" type="submit" value="로그아웃">
 			 </form>
