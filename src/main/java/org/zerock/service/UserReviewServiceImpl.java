@@ -28,7 +28,8 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Service
 @Log4j
 public class UserReviewServiceImpl implements UserReviewService {
-
+	
+	// AWS related
 	private String bucketName;
 	private String profileName;
 	private S3Client s3;
@@ -117,6 +118,14 @@ public class UserReviewServiceImpl implements UserReviewService {
 	public UserReviewVO reviewGet(int reBno) {
 		return reviewMapper.readReview(reBno);
 	}
+	
+	// 리뷰 좋아요 수
+	@Override
+	public int reviewLikecount(int reBno) {
+		reviewMapper.setLikeCount(reBno);
+		return reviewMapper.getLikeCount(reBno);
+		
+	}
 
 	// 리뷰 게시물 수정
 	@Override
@@ -148,8 +157,6 @@ public class UserReviewServiceImpl implements UserReviewService {
 	// 리뷰 게시물 삭제
 	@Override
 	public boolean reviewRemove(int reBno) {
-		
-		// 댓글 삭제
 		
 		// 파일 삭제 (s3)
 		UserReviewVO rvo = reviewMapper.readReview(reBno);

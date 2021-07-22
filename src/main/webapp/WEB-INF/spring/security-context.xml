@@ -17,11 +17,11 @@ class="org.zerock.security.CustomUserDetailsService"></bean>
 		 login을 참조하는 명령이 있다면 확인 후 default로 보내주는거
 		 logout 구현
 		 로그인 유지 시간 정의
-		  -->
+		  -->   
 	<security:csrf disabled="true"/>
 	<security:form-login login-page="/member/login" default-target-url="/member/main"/>
 	<security:form-login login-page="/member/b2blogin" default-target-url="/member/main"/>
-	<security:logout/>
+    <security:logout logout-success-url="/member/main"/>
 	<security:remember-me data-source-ref="dataSource" token-validity-seconds="3600"/>
 </security:http>
 

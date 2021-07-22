@@ -7,16 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/main/*")
+@RequestMapping("/member/*")
 @AllArgsConstructor
 @Log4j
 public class MainController {
 	
-	@RequestMapping("/mainpage")
+	@RequestMapping("/main")
 	public String main() {
 		log.info("메인 페이지 접속");
 		
-		return "main/main";
+		return "member/main";
 	}
 	
 	
@@ -31,7 +31,7 @@ public class MainController {
 	public String logout() {
 		log.info("로그아웃 후 메인화면으로 이동");
 		
-		return "main/realmain";
+		return "member/main";
 	}
 	
 	

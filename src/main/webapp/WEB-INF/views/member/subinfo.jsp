@@ -31,6 +31,20 @@
   </div>
 </form>
 
+<br>
+<br>
+<h1>요일별 사용량</h1> 
+<div style="height: 100px; background-color: rgba(255,0,0,0.1);">
+  <div class="h-25 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">월요일 </div>
+  <div class="h-50 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">화요일 </div>
+  <div class="h-75 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">수요일 </div>
+  <div class="h-100 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">목요일 </div>
+  <div class="h-25 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">금요일</div>
+  <div class="h-65 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">토요일</div>
+  <div class="h-75 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">일요일</div>
+</div>
+ 
+
 </div>
 </body>
 </html>

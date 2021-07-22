@@ -1,4 +1,4 @@
-package org.zerock.controller.service;
+package org.zerock.service;
 
 import java.util.List;
 
@@ -9,5 +9,6 @@ public interface WonhyeokRestService {
 	public List<AddressVO> getsearchbystorename(String storename);
 
 	public List<AddressVO> getlatlag(AddressVO vo);
+
 	
 }

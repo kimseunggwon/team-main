@@ -10,4 +10,5 @@ public interface WonhyeokMapper {
 	
 	public List<AddressVO> getSearchArroundPlaces(AddressVO vo);
 
+
 }

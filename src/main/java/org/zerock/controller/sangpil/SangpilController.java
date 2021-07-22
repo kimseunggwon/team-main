@@ -2,7 +2,9 @@ package org.zerock.controller.sangpil;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +15,12 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -50,15 +54,14 @@ public class SangpilController {
 		log.info("b2blogin 들어왔습니당");
 	}
 	
-	
 	@GetMapping("/findid")
 	public void findid() {
-		log.info("아이디 찾기 들어왔습니당");
+		log.info("findid 들어왔다");
 	}
 	
 	@GetMapping("/findpw")
 	public void findpw() {
-		log.info("비밀번호 찾기 들어왔습니당");
+		log.info("findpw 들어왔다");
 	}
 	
 	@PostMapping("/authNumber")
@@ -163,6 +166,52 @@ public class SangpilController {
 			return new ResponseEntity<> ("exist", HttpStatus.OK);
 		}
 		
+	}
+	
+	@PostMapping("/findid")
+	public ResponseEntity<List<String>> findid(@RequestBody MemberVO vo, Model model) {
+		log.info("아이디 찾는중....");
+		log.info(vo);
+		List<String> userid = new ArrayList<String>();
+		
+		// 서비스 일 시키고
+		List<MemberVO> vo2 = service.read2(vo);
+		log.info(vo2);
+		
+		/*
+		if (email.equals(useremail)) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
+		*/
+		
+		if (vo2.size() == 0) {
+			return new ResponseEntity<List<String>> (HttpStatus.BAD_REQUEST);
+		} else {
+			for(MemberVO wow : vo2) {
+				if (wow.getUserEmail().equals(vo.getUserEmail())) {
+					userid.add(wow.getUserid());
+				}
+			}
+			return new ResponseEntity<List<String>> (userid, HttpStatus.OK);
+		}
+
+	}
+	
+	@PostMapping("/findpw")
+	public ResponseEntity<String> findpw(@RequestBody MemberVO vo) {
+		
+		log.info(vo);
+		
+		// 서비스 일 시키고
+		List<MemberVO> vo2 = service.read3(vo);
+		
+		if (!vo2.isEmpty()) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
 	}
 	
 	@InitBinder 

@@ -1,5 +1,7 @@
 package org.zerock.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -123,8 +125,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public List<MemberVO> read2(MemberVO vo) {
+		
+		return mapper.read2(vo);
+	}
+	
+	@Override
+	public List<MemberVO> read3(MemberVO vo) {
+		
+		return mapper.read3(vo);
+	}
+	
+	@Override
 	public boolean modify(MemberVO vo, String oldPassword) {
 		MemberVO old = mapper.read(vo.getUserid());
+		
 		if(encoder.matches(oldPassword, old.getUserpw())) {
 			return modify(vo);
 		}
@@ -132,6 +147,7 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
+	
 	@Override
 	public boolean modify(MemberVO vo) {
 		
