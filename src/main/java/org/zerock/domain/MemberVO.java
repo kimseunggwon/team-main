@@ -12,8 +12,8 @@ public class MemberVO {
 	private String userpw;
 	private String userName;
 	
-	private String userDetailAddress;
 	private String userAddress;
+	private String address;
 	private Double lat; //경도
 	private Double lag; //위도
 	
@@ -22,6 +22,8 @@ public class MemberVO {
 	private String userEmail;
 	private Integer userSex;
 	private String userNickname;
+	
+	private Integer id;
 	
 	private Boolean enabled;
 	

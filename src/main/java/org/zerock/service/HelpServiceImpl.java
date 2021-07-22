@@ -183,7 +183,7 @@ public class HelpServiceImpl implements HelpService {
 
 	@Override
 	public List<HelpVO> getList(Pagenation pag) {
-		return mapper.getListWithPagein(pag);
+		return mapper.getListWithPaging(pag);
 	}
 	
 	@Override

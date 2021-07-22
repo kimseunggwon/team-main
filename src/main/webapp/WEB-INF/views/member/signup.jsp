@@ -10,9 +10,16 @@
 
 <title>Insert title here</title>
 
+
 <style type="text/css">
+	@font-face {
+	    font-family: 'GongGothicMedium';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
 	h5 {
-	font-weight:bold;
+	font-family: GongGothicMedium;
 	font-size: 15px;
 	}
 	.ps_box {
@@ -100,10 +107,13 @@
 	}
 </style>
 
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
 <script type="text/javascript">
 
+var passwordfin = false;
 // 아이디 중복 확인 focusout
 $(function() {
+	
 	
 	/* .on("propertychange change keyup paste input",function(){ */
 	$("#sang-id").focusout(function(){
@@ -167,7 +177,8 @@ $(function() {
 				passwordConfirm = true;
 				$("#password-message").removeClass("text-danger");
 				$("#password-message").addClass("text-success");
-				$("#password-message").text("패스워드가 일치합니다.");	
+				$("#password-message").text("패스워드가 일치합니다.");
+				passwordfin = true;
 			}
 		}
 	});
@@ -282,13 +293,64 @@ $(function() {
 
 	
 });
-</script>
-
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
-<script type="text/javascript">
 $(function() {
     $("#signup").click(function(e) {
-    e.preventDefault();
+    	e.preventDefault();
+    
+		if($("#sang-id").val().trim() == ""){
+			console.log("#sang-id");
+			alert("아이디는 필수 입력 사항입니다.");
+			$("#sang-id").focus();
+			return false;
+		}
+		
+		if($("#sang-pw").val().trim() == "") {
+			alert("비밀번호는 필수 입력 사항입니다.");
+			$("#sang-pw").focus();
+			return false;
+		}
+		if($("#sang-name").val().trim() == "") { 
+			alert("이름은 필수 입력 사항입니다.");
+			$("#sang-name").focus();
+			return false;
+		}
+		if($("#sample6_detailAddress").val().trim() == ""){
+			alert("상세주소는 필수 입력 사항입니다.");
+			$("#sample6_detailAddress").focus();
+			return false;
+		}
+		if($("#sang-nickname").val().trim() == ""){
+			alert("별명은 필수 입력 사항입니다.");
+			$("#sang-nickname").focus();
+			return false;
+		}
+		if($("#sang-birth").val() == ""){
+			alert("생일은 필수 입력 사항입니다.");
+			$("#sang-birth").focus();
+			return false;
+		}
+		if($("#sang-email").val().trim() == ""){
+			alert("Email은 필수 입력 사항입니다.");
+			$("#sang-email").focus();
+			return false;
+		}
+		if($("#sang-pnum").val().trim() == ""){
+			alert("전화번호는 필수 입력 사항입니다.");
+			$("#sang-pnum").focus();
+			return false;
+		}
+		if($("#userSex").val() == 0){
+			alert("성별을 선택해 주세요.");
+			$("#userSex").focus();
+			return false;
+		}
+		if(passwordfin == true){
+			
+		}else{
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			return false;
+		}
+    
        var postcode = $("#sample6_postcode").val();
        var address = $("#sample6_address").val();
        var detailAddress = $("#sample6_detailAddress").val();
@@ -331,6 +393,27 @@ $(function() {
               });
       
        }else{
+    	   
+    		if($("#sang-storename").val().trim() == ""){
+    			alert("가게 이름은 필수 입력사항입니다.");
+    			$("#sang-storename").focus();
+    			return false;
+    		}
+    		if($("#store-detailAddress").val().trim() == ""){
+    			alert("가게 상세주소는 필수 입력사항입니다.");
+    			$("#store-detailAddress").focus();
+    			return false;
+    		}
+    		if($("#sang-storepnum").val().trim() == ""){
+    			alert("가게 전화번호는 필수 입력사항입니다.");
+    			$("#sang-storepnum").focus();
+    			return false;
+    		}
+    		if($("#sang-businessnum").val().trim() == ""){
+    			alert("사업자 번호는 필수 입력 사항입니다.");
+    			$("#sang-businessnum").focus();
+    			return false;
+    		}
           
        naver.maps.Service.geocode({
             query: address // String 타입의 주소값
@@ -588,7 +671,7 @@ $(function() {
 					</div>
 					<div class="add_b">
 					<div class="ps_box">
-						<input style="border:none; outline: none; width: 200px;" placeholder="주소" type="text" id="sample6_address" name="userAddress" class="" title="NAME" maxlength="30">
+						<input style="border:none; outline: none; width: 200px;" placeholder="주소" type="text" id="sample6_address" name="address" class="" title="NAME" maxlength="30">
 					</div>
 	                </div>
 				</div>
@@ -607,7 +690,7 @@ $(function() {
 	                </div>
 				</div>
 				</div>
-				<input hidden type="text" name="userDetailAddress" id="sang-userAddress" >
+				<input hidden type="text" name="userAddress" id="sang-userAddress" >
 				<input hidden type="text" name="lat" id="sang-lat" >
 				<input hidden type="text" name="lag" id="sang-lag">
 				<div style="margin-top: 25px"></div>
@@ -770,7 +853,7 @@ $(function() {
 			
 	
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-			<input id="signup" type="submit" value="가입" class="signbutton" >
+			<input hidden id="signup" type="submit" value="가입" class="signbutton" >
 			
 			</form>
 		</div>

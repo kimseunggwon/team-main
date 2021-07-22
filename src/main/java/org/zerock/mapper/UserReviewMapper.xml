@@ -110,4 +110,18 @@
 	<include refid="ReviewCriteria"></include>
 </select>
  
+ <update id="setLikeCount">
+ 	UPDATE user_review r
+ 	SET
+ 		r.likecount = r.likecount + 1
+ 	WHERE
+ 		r.re_bno = #{reBno}
+ </update>
+ 
+ <select id="getLikeCount" resultType="int">
+ 	SELECT r.likecount FROM user_review r
+ 	WHERE 
+ 		r.re_bno = #{reBno}
+ </select>
+ 
 </mapper>

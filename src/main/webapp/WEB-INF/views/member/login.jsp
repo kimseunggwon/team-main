@@ -93,7 +93,7 @@ $(function(){
 </script>
 
 </head>
-<body class="row justify-content-center mt-5">
+<body style="overflow: hidden;" class="row justify-content-center mt-5">
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -121,14 +121,14 @@ $(function(){
 	            
 				<div class="container-1 row">
 					<span style="position: absolute; margin-top: 27px; margin-left: 18px" class="icon"><i class="fas fa-user"></i></span>
-					<input name="username" class="search" type="text" id="input1" placeholder="아이디" />
+					<input autofocus name="username" class="search" type="text" id="input1" placeholder="아이디" />
 				</div>
 				
 				<br>
 				
 				<div class="container-1 row">
 					<span style="position: absolute; margin-top: 27px; margin-left: 18px" class="icon"><i class="fas fa-lock"></i></span>
-					<input name="password" class="search" type="text" id="input2" placeholder="비밀번호" />
+					<input name="password" class="search" type="password" id="input2" placeholder="비밀번호" />
 				</div>
 	
 				<br>

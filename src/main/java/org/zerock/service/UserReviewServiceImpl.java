@@ -118,6 +118,14 @@ public class UserReviewServiceImpl implements UserReviewService {
 	public UserReviewVO reviewGet(int reBno) {
 		return reviewMapper.readReview(reBno);
 	}
+	
+	// 리뷰 좋아요 수
+	@Override
+	public int reviewLikecount(int reBno) {
+		reviewMapper.setLikeCount(reBno);
+		return reviewMapper.getLikeCount(reBno);
+		
+	}
 
 	// 리뷰 게시물 수정
 	@Override

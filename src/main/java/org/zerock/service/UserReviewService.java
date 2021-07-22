@@ -24,7 +24,8 @@ public interface UserReviewService {
 
 	boolean reviewRemove(int reBno);
 
-	 
+	int reviewLikecount(int reBno);
+
 	
 	
 	
