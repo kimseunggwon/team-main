@@ -80,6 +80,8 @@
 		FROM user_review r
 		LEFT JOIN user_review_file f ON r.re_bno = f.bno
 			 JOIN user u ON r.re_writer = u.userid
+		WHERE 
+			r.re_bno = #{reBno}
 </select>
 
 <update id="updateReview">

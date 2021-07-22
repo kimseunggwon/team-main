@@ -89,7 +89,7 @@
 		 	뭔지 잘 모르겠다...
 		 	--%>
 			<div style="display: none">
-				<form id="actionForm" action="${appRoot }/board/list" method="get">
+				<form id="actionForm" action="${appRoot }/review/list" method="get">
 					<input name="pageNum" value="${recri.pageNum }" /> 
 					<input name="amount" value="${recri.amount }" />
 					<input name="type" value="${recri.type }" />

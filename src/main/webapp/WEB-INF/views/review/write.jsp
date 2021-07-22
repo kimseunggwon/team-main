@@ -78,7 +78,7 @@ img {
 	<div class="container">
 		<div class="row justify-content-center">
 			<img alt="jinah-logo"
-				src="${appRoot }/resources/image/review/logo.png">
+				src="${appRoot }/resources/image/others/brand_logo_400px.png">
 		</div>
 	</div>
 	
