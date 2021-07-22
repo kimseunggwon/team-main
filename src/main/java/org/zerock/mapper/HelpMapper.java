@@ -10,7 +10,7 @@ public interface HelpMapper {
 	
 	public List<HelpVO> getList();
 	
-	public List<HelpVO> getListWithPagein(Pagenation pag);
+	public List<HelpVO> getListWithPaging(Pagenation pag);
 	
 	public int insert(HelpVO help);
 	
