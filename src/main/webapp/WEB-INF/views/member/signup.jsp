@@ -289,6 +289,72 @@ $(function() {
 $(function() {
     $("#signup").click(function(e) {
     e.preventDefault();
+    
+    
+    /*
+	if($("#sang-id").val().trim() == ""){
+		alert("아이디는 필수 입력 사항입니다.");
+		
+		if($("#sang-pw").val().trim() == ""){
+			alert("비밀번호는 필수 입력 사항입니다.");
+			
+			if($("#sang-name").val().trim() == ""){
+				alert("이름은 필수 입력 사항입니다.");
+				
+				if($("#sample6_detailAddress").val().trim() == ""){
+					alert("상세주소는 필수 입력 사항입니다.");
+					
+					if($("#sang-nickname").val().trim() == ""){
+						alert("별명은 필수 입력 사항입니다.");
+						
+						 if($("#sang-birth").val() == ""){
+							 alert("생일은 필수 입력 사항입니다.");
+							 
+							 if($("#sang-email").val().trim() == ""){
+								 alert("Email은 필수 입력 사항입니다.");
+								 
+								 if($("#sang-pnum").val().trim() == ""){
+									 alert("전화번호는 필수 입력 사항입니다.");
+									 
+									 if($("#userSex").val() == 0){
+										 alert("성별을 선택해 주세요.");
+										 
+										 
+										 
+										 
+										 
+										 if($("#sang-storename").val().trim() == ""){
+											 alert("가게 이름은 필수 입력사항입니다.");
+											 
+											 if($("#store-detailAddress").val().trim() == ""){
+												 alert("가게 상세주소는 필수 입력사항입니다.");
+												 
+												 if($("#sang-storepnum").val().trim() == ""){
+													 alert("가게 전화번호는 필수 입력사항입니다.");
+													 
+													 if($("#sang-businessnum").val().trim() == ""){
+														 alert("사업자 번호는 필수 입력 사항입니다.")
+													 }
+												 }
+											 }
+										 }
+											 
+											 
+											 
+											 
+									 }
+								 }
+							 }
+						 }
+					}
+				}
+			}
+		}
+	}
+	*/
+    
+    
+    
        var postcode = $("#sample6_postcode").val();
        var address = $("#sample6_address").val();
        var detailAddress = $("#sample6_detailAddress").val();

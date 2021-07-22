@@ -17,6 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -50,15 +51,14 @@ public class SangpilController {
 		log.info("b2blogin 들어왔습니당");
 	}
 	
-	
 	@GetMapping("/findid")
 	public void findid() {
-		log.info("아이디 찾기 들어왔습니당");
+		log.info("findid 들어왔다");
 	}
 	
 	@GetMapping("/findpw")
 	public void findpw() {
-		log.info("비밀번호 찾기 들어왔습니당");
+		log.info("findpw 들어왔다");
 	}
 	
 	@PostMapping("/authNumber")
@@ -161,6 +161,33 @@ public class SangpilController {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
+		
+	}
+	
+	@PostMapping("/findid")
+	@ResponseBody
+	public /*ResponseEntity<String>*/ String findid(@RequestBody MemberVO vo) {
+		log.info("아이디 찾는중....");
+		
+		// 서비스 일 시키고
+		MemberVO vo2 = service.read(vo.getUserid());
+		String useremail = vo2.getUserEmail();
+		
+		String email = vo.getUserEmail();
+		String userid = vo.getUserid();
+		/*
+		if (email.equals(useremail)) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
+		*/
+		
+		if(email.equals(useremail)) {
+			return userid;
+		}else {
+			return null;
 		}
 		
 	}
