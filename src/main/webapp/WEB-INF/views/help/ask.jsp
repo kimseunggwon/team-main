@@ -19,10 +19,10 @@
 			<h1 class="text-center mt-4">1:1 문의 글 작성</h1>
 
 			<div class="row justify-content-end">
-    			<form action="${appRoot }/logout" method="post" class="mr-2 mb-2">
+    			<form action="#" class="mr-2">
 			 		<input class="btn btn-warning" type="submit" value="로그아웃">
 			 	</form>
-    			<form action="${appRoot }/member/mypage" class="mr-2 mb-2">
+    			<form action="#">
 				 	<input class="btn btn-warning" type="submit" value="Mypage">
 				 </form>
 	  		</div>
@@ -102,6 +102,7 @@
 		 			<a href="#">
 		 				<img  src="${appRoot }/resources/image/facebook.gif">
 		 			</a>
+		 			
 		 			<a href="#">
 		 				<img  src="${appRoot }/resources/image/twitter.gif">
 		 			</a>
