@@ -10,7 +10,18 @@
 <meta charset="UTF-8">
 <title>Review - get JSP File</title>
 
-<style>
+<style type="text/css">
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: 'GongGothicMedium';
+}
+
 #re-starItem {
 	padding: 5px;
 	background-color: white;
@@ -66,8 +77,12 @@ img {
 </style>
 
 <script>
-
+	const appRoot = "${appRoot}";
+	// const reBno = "${review.reBno}"
 </script>
+
+<script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
+
 </head>
 <body>
 	<div class="container">
@@ -203,6 +218,13 @@ img {
 		</div>
 	</div>
 
+	<div class="container">
+		<div class="row justify-content-center">
+			<span id="review-total-count"> ${review.likeCount }</span> 명이 이 게시물을
+			좋아합니다.
+		</div>
+	</div>
+
 	<!-- 좋아요 Modal -->
 	<div class="container">
 		<div class="row justify-content-center">
@@ -219,17 +241,17 @@ img {
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+							<h5 class="modal-title" id="staticBackdropLabel">리뷰 추천</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div class="modal-body">...</div>
+						<div class="modal-body">${review.reWriterName }님의 게시물을 추천하시겠습니까?</div>
 						<div class="modal-footer">
+							<button data-reBno="${review.reBno}" type="button" id="review-like-up" class="btn btn-primary">추천할게요!</button>
 							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Understood</button>
+								data-dismiss="modal">안 할게요</button>
 						</div>
 					</div>
 				</div>

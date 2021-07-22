@@ -1,7 +1,9 @@
 package org.zerock.controller.jinah;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.ReviewCriteria;
@@ -53,6 +56,7 @@ public class UserReviewController {
 	
 	// userReviewWrite
 	@PostMapping("/write")
+	@PreAuthorize("isAuthenticated()")
 	public String reviewWrite(UserReviewVO review,
 								@RequestParam("file") MultipartFile file,
 								RedirectAttributes rttr) {
@@ -72,12 +76,13 @@ public class UserReviewController {
 	
 	// ***** Authentication에 따른 userReviewWrite 구현해야 함
 	@GetMapping("/write")
+	@PreAuthorize("isAuthenticated()")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
 		// Forwarding to /WEB-INF/views/review/write.jsp
 	}
 	
 	// userReviewGet
-	@GetMapping({"/get", "/modify"})
+	@GetMapping("/get")
 	public void reviewGet(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
 						  Model model) {
@@ -91,7 +96,18 @@ public class UserReviewController {
 	}
 	
 	// userReviewModify
+	@GetMapping("/modify")
+	@PreAuthorize("isAuthenticated()")
+	public void reviewModify(@RequestParam("reBno") int reBno,
+						  @ModelAttribute("recri") ReviewCriteria recri,
+						  Model model) {
+		
+		reviewGet(reBno, recri, model);
+	}
+	
+	// userReviewModify
 	@PostMapping("/modify")
+	@PreAuthorize("isAuthenticated()")
 	public String reviewModify(UserReviewVO review,
 							   ReviewCriteria recri,
 							   @RequestParam("file") MultipartFile file,
@@ -117,6 +133,7 @@ public class UserReviewController {
 	
 	// userReviewRemove
 	@PostMapping("/remove")
+	@PreAuthorize("isAuthenticated()")
 	public String reviewRemove(@RequestParam("reBno") int reBno,
 							   ReviewCriteria recri,
 							   RedirectAttributes rttr,
@@ -145,18 +162,18 @@ public class UserReviewController {
 	// 리뷰 좋아요 - userReviewLikeCount
 	// 회원(user)만 접근 가능하다
 	// Modal을 사용하자
-	/*
-	 * 
 	@PostMapping("/get")
-	public String reviewLikeCount(@RequestParam("reBno") int reBno) {
+	@PreAuthorize("isAuthenticated()")
+	@ResponseBody
+	public int reviewLikeCount(@RequestParam("reBno") int reBno) {
 		
 		log.info("userReviewLikeCount is working");
 		
-		service.reviewLikecount(reBno);
+		int likecnt = service.reviewLikecount(reBno);
 		
-		return "redirect:/review/get?reBno=" + reBno;
+		return likecnt;
 	}
-	 */
+	
 	
 	// 리뷰 조회수 - userReviewViewCount
 	
