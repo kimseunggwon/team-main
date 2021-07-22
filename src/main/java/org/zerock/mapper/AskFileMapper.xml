@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AskFileMapper">
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="rno" keyColumn="rno">
+		INSERT INTO ask_board_file (bno, fileName)
+		VALUES (#{bno}, #{fileName})
+	</insert>
+	
+	<delete id="deleteByBno">
+		DELETE FROM ask_board_file
+		WHERE bno = #{bno}
+	</delete>
+	
+	<delete id="removeByUserid">
+		DELETE FROM ask_board_file
+		WHERE bno IN (
+			SELECT bno FROM ask_board
+			WHERE writer = #{userid}
+		)
+	</delete>
+	
+</mapper>

@@ -29,11 +29,11 @@
 		</div>
 
 		<div>
-			<form action="${appRoot }/help/askList">
+			<form action="${appRoot }/help/askList" method="post" enctype="multipart/form-data">
 
 				<div class="form-group">
-					<label for="input1">제목</label> <input id="input1"
-						class="form-control" name="title">
+					<label for="input1">제목</label> 
+					<input id="input1" class="form-control" name="title">
 				</div>
 
 				<div class="form-group">
@@ -42,8 +42,8 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="input3">파일</label> <input id="input3"
-						class="form-control" type="file" name="file" accept="image/*" />
+					<label for="input3">파일</label> 
+					<input id="input3" class="form-control" type="file" name="file" accept="image/*" />
 				</div>
 
 				<div class="form-group">

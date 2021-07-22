@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AskReplyMapper">
+
+	<delete id="removeByBnoByUser">
+		DELETE FROM ask_reply
+		WHERE bno IN (
+			SELECT bno FROM ask_board WHERE writer = #{userid}
+		)
+	</delete>
+
+	<delete id="removebyUserid">
+	DELETE FROM ask_reply
+	WHERE replyer = #{userid}
+	</delete>
+
+
+	<insert id="insert">
+		INSERT INTO ask_reply (bno, reply, replyer)
+		VALUES (#{bno}, #{reply}, #{replyer})
+	</insert>
+
+<select id="read" resultType="org.zerock.domain.AskReplyVO">
+	SELECT 
+		r.rno rno,
+		r.bno bno,
+		r.reply reply,
+		r.replyer replyer,
+		r.replyDate replyDate,
+		r.updateDate updateDate,
+		u.username replyerName
+	FROM 
+	    ask_reply r JOIN user u ON r.replyer = u.userid
+	WHERE
+		r.rno = #{rno}		
+
+
+</select>
+
+	<delete id="delete">
+		DELETE FROM ask_reply WHERE rno = #{rno}
+	</delete>
+
+	<insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="rno" keyColumn="rno">
+		INSERT INTO ask_reply (bno, reply, replyer)
+		VALUES (#{bno}, #{reply}, #{replyer})
+	</insert>
+
+	<update id="update">
+		UPDATE ask_reply
+		SET reply = #{reply},
+		replyer = #{replyer},
+		updateDate = now()
+		WHERE rno = #{rno}
+	</update>
+	
+	<select id="getList" resultType="org.zerock.domain.AskReplyVO">
+		SELECT
+			r.rno rno,
+			r.bno bno,
+			r.reply reply,
+			r.replyer replyer,
+			r.replyDate replyDate,
+			r.updateDate updateDate,
+			u.username replyerName
+		FROM
+			ask_reply r JOIN user u ON r.replyer = u.userid
+		WHERE
+			r.bno = #{bno}
+		ORDER BY r.rno ASC
+		
+	</select>
+
+	<select id="getCountByBno" resultType="int">
+		SELECT COUNT(*) FROM ask_reply WHERE bno = #{bno}
+	</select>
+
+	<delete id="deleteByBno">
+	DELETE FROM ask_reply
+	WHERE bno = #{bno}
+	</delete>
+
+</mapper>
