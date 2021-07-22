@@ -21,7 +21,7 @@ class="org.zerock.security.CustomUserDetailsService"></bean>
 	<security:csrf disabled="true"/>
 	<security:form-login login-page="/member/login" default-target-url="/member/main"/>
 	<security:form-login login-page="/member/b2blogin" default-target-url="/member/main"/>
-	<security:logout/>
+	<security:logout logout-success-url="/member/main"/>
 	<security:remember-me data-source-ref="dataSource" token-validity-seconds="3600"/>
 </security:http>
 

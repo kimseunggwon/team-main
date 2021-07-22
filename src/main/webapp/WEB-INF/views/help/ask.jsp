@@ -19,10 +19,10 @@
 			<h1 class="text-center mt-4">1:1 문의 글 작성</h1>
 
 			<div class="row justify-content-end">
-    			<form action="#" class="mr-2">
+    			<form action="${appRoot }/logout" method="post" class="mr-2 mb-2">
 			 		<input class="btn btn-warning" type="submit" value="로그아웃">
 			 	</form>
-    			<form action="#">
+    			<form action="${appRoot }/member/mypage" class="mr-2 mb-2">
 				 	<input class="btn btn-warning" type="submit" value="Mypage">
 				 </form>
 	  		</div>

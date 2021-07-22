@@ -23,25 +23,36 @@
 	  <div class="row justify-content-end mt-3">
 	  	<div class="row justify-content-around">
 	  		
-	  		<form action="${appRoot }/member/login">
-	  			<input class="btn btn-primary mr-1" type="submit" value="로그인"> 
-	  		</form>
+	  		<sec:authorize access="isAnonymous()">
+		  		<form action="${appRoot }/member/login">
+		  			<input class="btn btn-primary mr-1" type="submit" value="로그인"> 
+	  			</form>
 	  		
-	  		<form action="${appRoot }/main/realmain">
-	  			<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
-	  		</form>
+		  		<form action="${appRoot }/member/signup">
+		  			<input class="btn btn-primary mr-1" type="submit" value="회원가입"> 
+	  			</form>
+	  		</sec:authorize>
 	  		
-	  		<form action="${appRoot }/member/mypage">
-	  			<input class="btn btn-primary mr-1" type="submit" value="MyPage"> 
-	  		</form>
+	  
 	  		
-	  		<form action="${appRoot }/member/signup">
-	  			<input class="btn btn-primary mr-1" type="submit" value="회원가입"> 
-	  		</form>
+	  		<!-- 
+	  			(1) 로그아웃 버튼에 경로 수정.
+	  			(2) Mypage 버튼에 경로 수정.
+	  		       -->
+	  		<sec:authorize access="isAuthenticated()">       
+	  			<form action="${appRoot }/logout" method="post">
+	  					<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
+	  			</form>
 	  		
-	  		<form action="${appRoot }/help/helpdesk">
-	  			<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
-	  		</form>
+	  			<form action="${appRoot }/member/mypage">
+	  					<input class="btn btn-primary mr-1" type="submit" value="MyPage"> 
+	  			</form>
+	  		
+	  			<form action="${appRoot }/help/helpdesk">	
+	  					<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
+	  			</form>
+	  		</sec:authorize>
+	  		
 	  	</div>
 	  </div>
 	
