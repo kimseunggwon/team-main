@@ -40,4 +40,8 @@ public class WonhyeokRestController {
 		return list;
 		
 	}
+	@PostMapping("/register")
+	public String register() {
+		
+	}
 }

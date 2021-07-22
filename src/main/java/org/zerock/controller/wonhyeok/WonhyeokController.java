@@ -15,4 +15,9 @@ public class WonhyeokController {
 	public void searchstore() {
 		
 	}
+	
+	@RequestMapping("/b2bIntroduceBoard")
+	public void b2bIntroduce() {
+		
+	}
 }
