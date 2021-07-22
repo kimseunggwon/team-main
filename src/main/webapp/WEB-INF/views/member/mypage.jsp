@@ -57,9 +57,9 @@
     <a class="dropdown-item" href="${appRoot }/member/myinfo">회원정보</a>
     <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
     <a class="dropdown-item" href="#">진행상황</a>
-    <a class="dropdown-item" href="#">매장찾기</a> 
-    <a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a>
-    <a class="dropdown-item" href="${appRoot }/review/list">사용자후기</a>
+    <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
+    <a class="dropdown-item" href="${appRoot }/help/asklist">나의 1:1문의내역</a>
+    <a class="dropdown-item" href="#">사용자후기</a>
   </div>
 </div>
 
