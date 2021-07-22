@@ -331,6 +331,7 @@
 		</div>
 	</div>
 
+<h1>${pinfo.member.userid }</h1>
 
 </body>
 

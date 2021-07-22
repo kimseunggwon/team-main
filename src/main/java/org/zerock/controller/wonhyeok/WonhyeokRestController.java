@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerock.controller.service.WonhyeokRestService;
 import org.zerock.domain.AddressVO;
+import org.zerock.service.WonhyeokRestService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -40,4 +40,5 @@ public class WonhyeokRestController {
 		return list;
 		
 	}
+
 }

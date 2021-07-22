@@ -1,4 +1,4 @@
-package org.zerock.controller.service;
+package org.zerock.service;
 
 import java.util.List;
 
