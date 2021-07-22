@@ -3,6 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.zerock.domain.HelpVO;
+import org.zerock.domain.MemberVO;
 import org.zerock.domain.Pagenation;
 
 public interface HelpMapper {
@@ -17,11 +18,11 @@ public interface HelpMapper {
 	
 	public HelpVO read(long bno);
 		
-	public int delete(long help);
+	public int delete(long bno);
 	
 	public int update(HelpVO help);
 	
 	public int getTotalCount(Pagenation pag);
 	
-	public void removeByUserId(HelpVO help);
+	public void removeByUserId(MemberVO vo);
 }

@@ -29,7 +29,7 @@
   </select>
 
 	<!-- 권한 부여와 관련해서 추가 작성 필요 -->
-	<select id="getList" resultType="org.zerock.domain.BoardVO">
+	<select id="getList" resultType="org.zerock.domain.HelpVO">
 		
 		SELECT
 			bno bno,
