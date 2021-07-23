@@ -596,6 +596,8 @@ $(function() {
 						<img id="" alt="" src="${appRoot }/resources/image/others/brand_logo_400px.png">
 					</a>
 				</div>
+				<div class="row mt-5">
+				</div>
 				
 				<a style="text-decoration: none;" href="">
 					<img id="sang-normal-img" alt="눌러줭" src="${appRoot }/resources/image/회원가입2.png">

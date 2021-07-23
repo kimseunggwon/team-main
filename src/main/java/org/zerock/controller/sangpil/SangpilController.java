@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.SendEmail;
+import org.zerock.SendSms;
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.service.MemberService;
@@ -72,6 +73,7 @@ public class SangpilController {
 		String idI = request.getParameter("idI");
 		String idE = request.getParameter("idE");
 		String idP = request.getParameter("idB");
+//		idP = "01091628235";
 		
 		log.info(idE);
 		
@@ -81,7 +83,7 @@ public class SangpilController {
 			int num = (int) (Math.random()*999999);
 			
 			SendEmail.sendEmail(num, idE);
-//			SendSms.sendSms(idP);
+//			SendSms.sendSms(num, idP);
 			session.setAttribute("authRandomNumber", num);
 			System.out.println(num);
 			
