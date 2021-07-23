@@ -103,7 +103,7 @@ public class HelpServiceImpl implements HelpService {
 		try(InputStream is = file.getInputStream()) {		
 		PutObjectRequest objectRequeset = PutObjectRequest.builder()
 				.bucket(bucketName)
-				.key(help.getBno() + "/" + file.getOriginalFilename())
+				.key("help" + "/" + file.getOriginalFilename())
 				.contentType(file.getContentType())
 				.acl(ObjectCannedACL.PUBLIC_READ)
 				.build();

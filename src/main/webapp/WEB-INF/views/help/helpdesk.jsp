@@ -296,7 +296,9 @@
 		 	<div class="row">
 		 
 		 		<div class="mr-10">
-		 			<img src="${appRoot }/resources/image/logo.jpg" alt="...">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
 		 		</div>
 		 	
 		 	</div>

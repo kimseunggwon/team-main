@@ -86,7 +86,7 @@
 					<td>${help.bno }</td>
 					<td>
 					
-					<c:url value="/help/get" var="getUrl">
+					<c:url value="/help/askGet" var="getUrl">
 						<c:param name="bno" value="${help.bno }" />
 						<c:param name="pageNum" value="${pageMaker.pag.pageNum }" />
 						<c:param name="amount" value="${pageMaker.pag.amount }" />
@@ -165,7 +165,9 @@
 		 	<div class="row">
 		 
 		 		<div class="mr-10">
-		 			<img src="${appRoot }/resources/image/logo.jpg" alt="...">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
 		 		</div>
 		 	
 		 	</div>
