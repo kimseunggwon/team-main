@@ -97,7 +97,11 @@ $(function(){
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1>로그인</h1>
+			<div class="row justify-content-center mt-5">
+				<a style="text-decoration: none;" href="${appRoot }/member/main">
+					<img id="" alt="" src="${appRoot }/resources/image/others/brand_logo_400px.png">
+				</a>
+			</div>
 			
 			<div class="row justify-content-center mt-5">
 				<a style="text-decoration: none;" href="">

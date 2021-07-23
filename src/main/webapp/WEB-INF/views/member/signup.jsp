@@ -339,7 +339,7 @@ $(function() {
 			$("#sang-pnum").focus();
 			return false;
 		}
-		if($("#userSex").val() == 0){
+		if($("#userSex").val() == '0'){
 			alert("성별을 선택해 주세요.");
 			$("#userSex").focus();
 			return false;
@@ -590,7 +590,12 @@ $(function() {
 	<div style="text-align: center;" class="row">
 		<div class="col-12 ">
 			<div style="margin-top: 150px" class="conainer">
-				<h1>회원 가입</h1>
+			
+				<div class="row justify-content-center mt-5">
+					<a style="text-decoration: none;" href="${appRoot }/member/main">
+						<img id="" alt="" src="${appRoot }/resources/image/others/brand_logo_400px.png">
+					</a>
+				</div>
 				
 				<a style="text-decoration: none;" href="">
 					<img id="sang-normal-img" alt="눌러줭" src="${appRoot }/resources/image/회원가입2.png">
@@ -758,7 +763,7 @@ $(function() {
 				</div>
 				</div>
 				<div class="ps_box2 col-5">
-					<select id="" name="userSex" class="sel">
+					<select id="userSex" name="userSex" class="sel">
 						<option selected="selected" value="0">성별</option>
 						<option value="1">남자</option>
 						<option value="2">여자</option>
