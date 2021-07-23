@@ -128,8 +128,13 @@ $(function() {
 <body>
 <div class="container">
 	<div style="text-align: center;" class="row">
-		<h1 class="mt-5">아이디 찾기</h1>
 		<div class="col-12 mt-5">
+			
+			<div class="row justify-content-center mt-5">
+				<a style="text-decoration: none;" href="${appRoot }/member/main">
+					<img id="" alt="" src="${appRoot }/resources/image/others/brand_logo_400px.png">
+				</a>
+			</div>
 			
 			<form action="">
 				<div style="margin: 0 auto;" class="col-5">
