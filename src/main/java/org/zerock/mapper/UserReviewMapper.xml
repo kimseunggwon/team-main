@@ -58,12 +58,8 @@
 </select>
 
 <insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
-	INSERT INTO user_review (re_title, re_content)
-	VALUES (#{reTitle}, #{reContent})
-	<!-- 
 	INSERT INTO user_review (re_title, re_content, re_writer)
 	VALUES (#{reTitle}, #{reContent}, #{reWriterName})
-	 -->
 </insert>
 
 <select id="readReview" resultType="org.zerock.domain.UserReviewVO">
@@ -74,6 +70,7 @@
 		r.re_writer reWriter,
 		r.re_regdate reRegdate,
 		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
 		f.fileName fileName,
 		u.userName reWriterName 
 		
@@ -89,8 +86,8 @@
 	SET
 		re_title = #{reTitle},
 		re_content = #{reContent},
-		re_writer = #{reWriter},
-		re_updatedate = #{reUpdatedate},
+		re_writer = #{reWriterName},
+		re_updatedate = NOW()
 	WHERE
 		re_bno = #{reBno}
 </update>

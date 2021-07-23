@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -58,6 +61,10 @@ img {
 
 </head>
 <body>
+
+	<rev:navbar></rev:navbar>
+
+
 	<div class="container">
 		<div class="row justify-content-center">
 			<img alt="jinah-logo"
@@ -70,41 +77,7 @@ img {
 		 	1. 게시물 상세로 잘 넘어가는지 확인해야 해요.
 		 --%>
 		 
-		<!-- Search Start -->
-		<div class="container-1 row justify-content-center">
-			<form class="d-flex align-items-center"
-				action="${appRoot }/review/list" method="get">
-				<div class="item">
-					<select name="type" class="form-inline my-2 my-lg-0">
-						<option value="">Select</option>
-						<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>
-						<option value="C" ${recri.type	== "C" ? 'selected' : '' }>내용</option>
-						<option value="W" ${recri.type	== "W" ? 'selected' : '' }>글쓴이</option>
-						<option value="TC" ${recri.type	== "TC" ? 'selected' : '' }>제목
-							+ 내용</option>
-						<option value="TW" ${recri.type	== "TW" ? 'selected' : '' }>제목
-							+ 글쓴이</option>
-						<option value="TWC" ${recri.type	== "TWC" ? 'selected' : '' }>제목
-							+ 글쓴이 + 작성자</option>
-					</select>
-				</div>
-				<div class="item">
-					<span
-						style="position: absolute; margin-top: 27px; margin-left: 18px"
-						class="icon"></span> <input name="keyword"
-						value="${recri.keyword }" class="search" type="search"
-						id="jinah-search1" placeholder="Search" />
-				</div>
-
-				<div class="item">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-				</div>
-
-				<input type="hidden" name="pageNum" value="1"> <input
-					type="hidden" name="amount" value="${recri.amount }">
-			</form>
-		</div>
-		<!-- Search End -->
+		<rev:search></rev:search>
 		
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
@@ -122,7 +95,7 @@ img {
 		 				<td>${review.reBno }</td>
 		 				<td>
 		 					<c:url value="/review/get" var="reviewGetUrl">
-		 						<c:param name="bno" value="${review.reBno }" />
+		 						<c:param name="reBno" value="${review.reBno }" />
 		 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
 		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
@@ -151,8 +124,16 @@ img {
 		 				</li>
 		 			</c:if>
 		 			<c:forEach begin="${reviewPageMaker.startPage }" end="${reviewPageMaker.endPage }" var="num">
+		 				<c:url value="/review/list" var="pageLink">
+		 					<c:param name="pageNum" value="${num }"></c:param>
+		 					<c:param name="amount" value="${recri.amount }"></c:param>
+		 					<c:param name="type" value="${recri.type }"></c:param>
+		 					<c:param name="keyword" value="${recri.keyword }"></c:param>
+		 					
+		 				</c:url>
+		 				
 		 				<li class="page-item ${num == recri.pageNum ? 'active' : '' }">
-		 					<a class="page-link" href="${num }">${num }</a>
+		 					<a class="page-link" href="${pageLink }">${num }</a>
 		 				</li>
 		 			</c:forEach>
 		 			<c:if test="${reviewPageMaker.next }">
@@ -162,8 +143,7 @@ img {
 		 			</c:if>
 		 		</ul>
 		 	</nav>
-		 	
-		 	<%-- Form for Page Link --%>
+		 	<%--
 			<div style="display: none">
 				<form id="actionForm" action="${appRoot }/review/list" method="get">
 					<input name="pageNum" value="${recri.pageNum }" /> 
@@ -172,7 +152,68 @@ img {
 					<input name="keyword" value="${recri.keyword }" />
 				</form>
 			</div>
+		 	 --%>
 		 </div>
+
+		<!-- 구독작성/구독하기/로그인 Root Forwarding Buttons -->
+		<div class="container">
+			<div class="row justify-content-center d-flex justify-content-around">
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<a href="${appRoot }/subscribe"><button
+							id="review-subscribe-btn" type="button" class="btn btn-primary">지금
+							빨래 구독하기</button></a>
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
+					<a href="${appRoot }/member/login"><button
+							id="review-subscribe-login-btn" type="button"
+							class="btn btn-primary">지금 빨래 구독하기</button></a>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<a href="${appRoot }/review/write"><button
+							id="review-write-btn" type="button" class="btn btn-primary">구독
+							리뷰 남기기</button></a>
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
+					<a href="${appRoot }/member/login"><button
+							id="review-write-login-btn" type="button" class="btn btn-primary">구독
+							리뷰 남기기</button></a>
+				</sec:authorize>
+			</div>
+		</div>
 	</div>
+	
+	<!-- 리뷰 등록 성공에 대한 메세지 Modal -->
+	<c:if test="${not empty result }">
+	<script>
+		$(document).ready(function () {
+			if (history.state == null) {
+				$("#review-write-success-modal").modal("show");
+				history.replaceState({}, null);
+			}			
+		});
+	</script>
+		<div id="review-write-success-modal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">${messageTitle }</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<p>${messageBody }</p>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</c:if>
 </body>
 </html>

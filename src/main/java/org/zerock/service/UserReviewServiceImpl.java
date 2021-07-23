@@ -101,7 +101,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 			
 			PutObjectRequest objectRequest = PutObjectRequest.builder()
 											 .bucket(bucketName)
-											 .key(review.getReBno() + "/" + file.getOriginalFilename())
+											 .key("review" + "/" + review.getReBno() + "/" + file.getOriginalFilename())
 											 .contentType(file.getContentType())
 											 .acl(ObjectCannedACL.PUBLIC_READ)
 											 .build();
