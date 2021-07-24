@@ -72,8 +72,7 @@ public class SangpilController {
 		
 		String idI = request.getParameter("idI");
 		String idE = request.getParameter("idE");
-		String idP = request.getParameter("idB");
-//		idP = "01091628235";
+//		String idP = request.getParameter("idB");
 		
 		log.info(idE);
 		
@@ -84,6 +83,7 @@ public class SangpilController {
 			
 			SendEmail.sendEmail(num, idE);
 //			SendSms.sendSms(num, idP);
+			
 			session.setAttribute("authRandomNumber", num);
 			System.out.println(num);
 			

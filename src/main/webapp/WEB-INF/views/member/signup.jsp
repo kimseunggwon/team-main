@@ -210,6 +210,13 @@ $(function() {
 		var idE = $("#sang-email").val();
 		/* var idP = $("#sang-pnum").val(); */
 		
+		$re=/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;			
+		if(!$re.test(idE)){
+			alert("정확한 형식의 Email을 입력해 주세요");
+			$("#sang-email").focus();
+			return false;
+		}
+		
 		$.post(authurl, {idE: idE/* ,idP: idP */}, function(data) {
 			if (data == 'ok1') {
 				$("#sang-inz-div").removeAttr("hidden");
@@ -226,9 +233,12 @@ $(function() {
 			$.post(authurl, {idI: idI}, function(data) {
 				if (data == 'ok2') {
 					console.log("인증번호 맞습니다!");
+					alert("인증되었습니다!");
 					$("#signup").removeAttr("hidden");
 				} else {
-				
+					console.log("인증번호 틀립니다 ㅠ");
+					alert("틀린 인증번호 입니다.");
+					$("#sang-inz-input").focus();
 				}
 			});
 		});
@@ -275,6 +285,18 @@ $(function() {
 		var userp = $("#sang-pnum").val();
 		var b2bp = $("#sang-storepnum").val();
     	
+		$re1=/^[0-9]*$/;		
+		if(!$re1.test(userp)){
+			alert("숫자만 사용해주세요.");
+			$("#sang-pnum").val("");
+		}else if(!$re1.test(b2bp)){
+			alert("숫자만 사용해주세요.");
+			$("#sang-storepnum").val("");
+		}else{
+			
+		}
+		
+		/* 
 		if(userp.indexOf('-') != -1) {
 
 			alert("숫자만 사용해주세요.");
@@ -287,7 +309,8 @@ $(function() {
 			alert("숫자만 사용해주세요.");
 			$("#sang-storepnum").val("");
 
-		}
+		} 
+		*/
    	
     });
 

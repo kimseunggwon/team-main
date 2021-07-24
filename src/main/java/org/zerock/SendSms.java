@@ -22,7 +22,7 @@ public class SendSms {
 	    params.put("to", idP);
 	    params.put("from", "01040836159");
 	    params.put("type", "SMS");
-	    params.put("text", "안녕하세요 인증번호는 [" + num + "]입니다");
+	    params.put("text", "안녕하세요 문자 전송 기능이 추가 되었습니다. 짜잔~ 인증번호는 [" + num + "]입니다");
 	    params.put("app_version", "test app 1.2");
 
 		try {
