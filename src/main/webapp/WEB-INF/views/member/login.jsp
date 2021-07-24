@@ -162,11 +162,11 @@ $(function(){
 					<a style="text-decoration: none; color: black;" id="sang-signup-btn" class="col-4" href="${appRoot }/member/signup">회원가입</a>
 				</div>
 				
-				<sec:authorize access="isAuthenticated()">
+				<%-- <sec:authorize access="isAuthenticated()">
 				  <form action="${appRoot }/logout" method="post">
 				  	<input type="submit" class="btn btn-outline-secondary" value="로그아웃">
 				  </form>
-			  	</sec:authorize>
+			  	</sec:authorize> --%>
 				
 			</form>
 			

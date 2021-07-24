@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -46,6 +47,7 @@ public class SangpilController {
 	private MemberService service;
 
 	@RequestMapping("/login")
+//	@PreAuthorize("!isAuthenticated()")
 	public void login() {
 		log.info("login 들어왔습니당");
 	}
