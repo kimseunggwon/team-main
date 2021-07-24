@@ -103,7 +103,7 @@ public class HelpServiceImpl implements HelpService {
 		try(InputStream is = file.getInputStream()) {		
 		PutObjectRequest objectRequeset = PutObjectRequest.builder()
 				.bucket(bucketName)
-				.key("help" + "/" + file.getOriginalFilename())
+				.key("help" + "/" + help.getBno() + "/" + file.getOriginalFilename())
 				.contentType(file.getContentType())
 				.acl(ObjectCannedACL.PUBLIC_READ)
 				.build();
@@ -116,7 +116,7 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 	@Override
-	public HelpVO get(Long bno) {
+	public HelpVO askGet(Long bno) {
 		return mapper.read(bno);
 	}
 

@@ -122,7 +122,7 @@
 		
 		<hr>
 		
-		 <div class="row justify-content-around">
+		 <div class="row justify-content-around mb-3">
 		 	<div class="row">
 		 
 		 		<div class="mr-10">

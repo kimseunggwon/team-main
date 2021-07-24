@@ -12,9 +12,10 @@
 
 <script type="text/javascript">
 var appRoot = "${appRoot}";
-var boardBno = "${board.bno}"
+var bno = "${help.bno}"
 var userid = "${pinfo.member.userid}";
 </script>
+
 
 <script src="${appRoot }/resources/js/get.js"></script>
 
@@ -149,7 +150,7 @@ var userid = "${pinfo.member.userid}";
 		
 		<hr>
 		
-		 <div class="row justify-content-around">
+		 <div class="row justify-content-around mb-3">
 		 	<div class="row">
 		 
 		 		<div class="mr-10">

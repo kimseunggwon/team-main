@@ -31,13 +31,16 @@ public class HelpController {
 	private HelpService service;
 	
 	@RequestMapping("/helpdesk")
+	@PreAuthorize("isAuthenticated()")
 	public String go() {
 		log.info("고객센터 접속");
 		
 		return "help/helpdesk";
 	}
 	
+	
 	@RequestMapping("/ask")
+	@PreAuthorize("isAuthenticated()")
 	public String goAsk() {
 		log.info("1:1 문의 글 작성창");
 		
@@ -46,6 +49,7 @@ public class HelpController {
 	
 	/* 글 작성 등록 */
 	@RequestMapping("register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(HelpVO help, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		help.setFileName(file.getOriginalFilename());
 		
@@ -62,7 +66,8 @@ public class HelpController {
 	}
 	
 	@GetMapping("/askList")
-	public String list(@ModelAttribute("pag") Pagenation pag, Model model) {
+	@PreAuthorize("isAuthenticated()")
+	public void list(@ModelAttribute("pag") Pagenation pag, Model model) {
 		
 		int total = service.getTotal(pag);
 		
@@ -70,20 +75,28 @@ public class HelpController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(pag, total));
-		
-		
-		return "help/askList";
+
 	}
 	
-	@GetMapping({"/askGet", "/modify"})
-	public void askGet(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
+	@GetMapping({"/askGetContent", "/modify"})
+	@PreAuthorize("isAuthenticated()")
+	public void askGetContent(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
 		log.info("1:1 문의글 들어감");
 		
-		HelpVO vo = service.get(bno);
-		
-		model.addAttribute("help", vo);
+		askGet(bno, pag, model);
 	}
 	
+	@GetMapping("/get")
+	   public void askGet(@RequestParam("bno") long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
+	      
+	      
+	      HelpVO vo = service.askGet(bno);
+	      
+	      model.addAttribute("help", vo);
+	      
+	   }
+
+
 	@PostMapping("/modify")
 	@PreAuthorize("principal.userid == #help.writer")
 	public String modify(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
