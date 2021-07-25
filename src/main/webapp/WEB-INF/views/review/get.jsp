@@ -85,7 +85,7 @@ img {
 	const userid = "${pinfo.member.userid}";
 </script>
 
-<script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
+<!-- script src="${appRoot }/resources/js/review/reviewlikecount.js"-->
 
 </head>
 <body>
@@ -148,7 +148,7 @@ img {
 						<c:if test="${not empty review.fileName }">
 							<div>
 								<img class="img-fluid"
-									src="${imgRoot }${review.reBno}/${review.fileName}">
+									src="${imgRoot }${review.reBno}/${review.fileName }">
 							</div>
 						</c:if>
 

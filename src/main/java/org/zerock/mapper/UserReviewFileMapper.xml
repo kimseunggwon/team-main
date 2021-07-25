@@ -16,7 +16,6 @@
 			bno = #{bno}
 	</delete>
 	
-	<!-- 
 	<delete id="removeReviewByUserid">
 		DELETE FROM user_review_file
 		WHERE bno IN (
@@ -24,5 +23,4 @@
 			WHERE re_writer = #{userid}
 		)
 	</delete>
-	 -->
 </mapper>

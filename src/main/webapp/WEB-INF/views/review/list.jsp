@@ -28,7 +28,7 @@
 }
 
 #review-list-table {
-	margin: 70px;
+	margin: 10px;
 	padding: 50px;
 }
 
@@ -59,6 +59,13 @@ img {
 }
 </style>
 
+<script>
+	const reBno = "${review.reBno }";
+	const appRoot = "${appRoot}";
+</script>
+
+<script src="${appRoot }/resources/js/review/viewcount.js"></script>
+
 </head>
 <body>
 
@@ -74,11 +81,15 @@ img {
 	<div class="container">
 		<%--
 		 	여기는 [리뷰 리스트] JSP 파일입니다 :)
-		 	1. 게시물 상세로 잘 넘어가는지 확인해야 해요.
 		 --%>
 		 
 		<rev:search></rev:search>
 		
+		<!-- 리뷰 게시물 총 개수 -->
+		<div class="container" style="margin: 10px; padding: 5px;">
+			<div class="row justify-content-left">총 게시물 수 : ${totalCount }</div>
+		</div>
+
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
@@ -87,6 +98,8 @@ img {
 		 			<th>글쓴이</th>
 		 			<th>작성 날짜</th>
 		 			<th>수정 날짜</th>
+		 			<th>좋아요</th>
+		 			<th>조회수</th>
 		 		</tr>
 		 	</thead>
 		 	<tbody>
@@ -101,7 +114,7 @@ img {
 		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
 		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
 		 					</c:url>
-		 					<a href="${reviewGetUrl }">
+		 					<a id="review-record-link"  href="${reviewGetUrl }">
 		 						${review.reTitle }
 		 					</a>
 		 				</td>
@@ -109,6 +122,8 @@ img {
 		 				<td>${review.reWriterName }</td>
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
+		 				<td>${review.likeCount }</td>
+		 				<td><c:out value="${review.viewCount }"></c:out></td>
 		 			</tr>
 		 		</c:forEach>
 		 	</tbody>
@@ -129,7 +144,6 @@ img {
 		 					<c:param name="amount" value="${recri.amount }"></c:param>
 		 					<c:param name="type" value="${recri.type }"></c:param>
 		 					<c:param name="keyword" value="${recri.keyword }"></c:param>
-		 					
 		 				</c:url>
 		 				
 		 				<li class="page-item ${num == recri.pageNum ? 'active' : '' }">

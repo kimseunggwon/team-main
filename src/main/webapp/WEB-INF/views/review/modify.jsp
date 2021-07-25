@@ -129,16 +129,6 @@ img {
 		 <div class="row justify-content-center">
 		 		<div class="col-8">
 			 		<form id="re-modify-form1" action="${appRoot }/review/modify" method="post" enctype="multipart/form-data"> 
-			 			<!-- 제목 -->
-			 			<div class="item form-group">
-				 			<label for="re-input1">리뷰 제목</label>
-				 			<input id="re-input1" class="form-control" name="reTitle" value="${review.reTitle }" placeholder="제목을 입력해주세요."> 
-			 			</div>
-			 			<!-- 내용 -->
-			 			<div class="item form-group">
-				 			<label for="re-textarea1">리뷰 내용</label>
-				 			<textarea class="form-control" name="reContent" col="2" rows="10" placeholder="내용을 입력해주세요.">${review.reContent }</textarea> 
-			 			</div>
 			 			<!-- 이미지 파일 -->
 			 			<c:if test="${not empty review.fileName }">
 			 				<div>
@@ -150,6 +140,16 @@ img {
 			 			<div class="item form-group">
 				 			<label for="re-input2">이미지 선택</label>
 				 			<input id="re-input2" class="form-control" type="file" accept="image/*" > 
+			 			</div>
+			 			<!-- 제목 -->
+			 			<div class="item form-group">
+				 			<label for="re-input1">리뷰 제목</label>
+				 			<input id="re-input1" class="form-control" name="reTitle" value="${review.reTitle }" placeholder="제목을 입력해주세요."> 
+			 			</div>
+			 			<!-- 내용 -->
+			 			<div class="item form-group">
+				 			<label for="re-textarea1">리뷰 내용</label>
+				 			<textarea class="form-control" name="reContent" col="2" rows="10" placeholder="내용을 입력해주세요.">${review.reContent }</textarea> 
 			 			</div>
 			 			<!-- 작성자 -->
 			 			<div class="item form-group">

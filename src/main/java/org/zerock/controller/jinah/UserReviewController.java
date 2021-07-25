@@ -1,7 +1,7 @@
 package org.zerock.controller.jinah;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -43,7 +43,8 @@ public class UserReviewController {
 	
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
-	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, Model model) {
+	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, 
+							Model model) {
 		log.info("userReviewList is working");
 		
 		int reviewTotal = service.getReviewTotal(recri);
@@ -52,6 +53,7 @@ public class UserReviewController {
 		
 		model.addAttribute("reList", reList);
 		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
+		model.addAttribute("totalCount", reviewTotal);
 	}
 	
 	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList
@@ -63,9 +65,9 @@ public class UserReviewController {
 								@RequestParam("file") MultipartFile file,
 								RedirectAttributes rttr) {
 		
-		log.info("userReviewWrite is working");
+		// log.info("userReviewWrite is working");
 		
-		review.setFileName(file.getOriginalFilename());
+		// review.setFileName(file.length); // getOriginalFileName()
 		
 		service.reviewWrite(review, file);
 		
@@ -96,6 +98,7 @@ public class UserReviewController {
 		model.addAttribute("review", revo);
 		
 	}
+	
 	
 	// 리뷰 파일 수정하기 (이미지 파일 없이) - userReviewModify
 	@GetMapping("/modify")
@@ -175,8 +178,6 @@ public class UserReviewController {
 		
 		return likecnt;
 	}
-	
-	// 리뷰 조회수 - userReviewViewCount
 	
 	// 리뷰 평점 - userReviewStars
 }

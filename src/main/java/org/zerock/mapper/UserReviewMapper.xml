@@ -47,6 +47,8 @@
 		r.re_writer reWriter,
 		r.re_regdate reRegdate,
 		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
@@ -71,8 +73,9 @@
 		r.re_regdate reRegdate,
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
+		r.viewcount viewCount,
 		f.fileName fileName,
-		u.userName reWriterName 
+		u.userNickname reWriterName 
 		
 		FROM user_review r
 		LEFT JOIN user_review_file f ON r.re_bno = f.bno
@@ -101,9 +104,9 @@
 	DELETE FROM user_review
 	WHERE re_writer = #{userid}
 </delete>
- 
+
 <select id="getReviewTotalCount" resultType="int">
-	SELECT COUNT(*) FROM user_review ur
+	SELECT COUNT(*) FROM user_review
 	<include refid="ReviewCriteria"></include>
 </select>
  
@@ -115,8 +118,24 @@
  		r.re_bno = #{reBno}
  </update>
  
+<!-- 
  <select id="getLikeCount" resultType="int">
  	SELECT r.likecount FROM user_review r
+ 	WHERE 
+ 		r.re_bno = #{reBno}
+ </select>
+ --> 
+ 
+ <update id="setViewCount">
+	UPDATE user_review r
+	 	SET
+	 		r.viewcount = r.viewcount + 1
+	 	WHERE
+	 		r.re_bno = #{reBno}
+ </update>
+ 
+ <select id="getViewCount" resultType="int">
+ 	SELECT r.viewcount FROM user_review r
  	WHERE 
  		r.re_bno = #{reBno}
  </select>

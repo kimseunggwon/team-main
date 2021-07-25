@@ -72,7 +72,6 @@
 						href="${appRoot }/member/login">Login<span class="sr-only">(current)</span></a>
 					</li>
 				</sec:authorize>
-
 			</ul>
 		</div>
 	</nav>

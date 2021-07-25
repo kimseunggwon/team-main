@@ -17,7 +17,7 @@
 					<option value="TW" ${recri.type	== "TW" ? 'selected' : '' }>제목
 						+ 글쓴이</option>
 					<option value="TWC" ${recri.type	== "TWC" ? 'selected' : '' }>제목
-						+ 글쓴이 + 작성자</option>
+						+ 글쓴이 + 내용</option>
 				</select>
 			</div>
 			<div class="item">
