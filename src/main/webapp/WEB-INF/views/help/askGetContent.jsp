@@ -115,7 +115,7 @@ var userid = "${pinfo.member.userid}";
 					<input readonly="readonly" class="form-control" value="${help.writerName }">
 				</div>				
 				
-				<c:url value="/help/modify" var="modifyUrl">
+				<c:url value="/help/askModifyContent" var="modifyUrl">
 					<c:param name="bno" value="${help.bno }" />
 					<c:param name="pageNum" value="${pag.pageNum }" />
 					<c:param name="amount" value="${pag.amount }" />
@@ -124,7 +124,7 @@ var userid = "${pinfo.member.userid}";
 				</c:url>
 				
 				<c:if test="${pinfo.member.userid eq help.writer }">
-				<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
+					<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
 				</c:if>	
 			
 			

@@ -168,7 +168,7 @@ public class HelpServiceImpl implements HelpService {
 
 	private void removeFile(HelpVO vo) {
 		//String buckeyName = "";
-		String key =  vo.getBno() + "/" + vo.getFileName();
+		String key =  "help" + "/" + vo.getBno() + "/" + vo.getFileName();
 		
 		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
 				.bucket(bucketName)

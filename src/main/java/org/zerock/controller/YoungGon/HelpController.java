@@ -78,7 +78,7 @@ public class HelpController {
 
 	}
 	
-	@GetMapping({"/askGetContent", "/modify"})
+	@GetMapping({"/askGetContent", "/askModifyContent"})
 	@PreAuthorize("isAuthenticated()")
 	public void askGetContent(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
 		log.info("1:1 문의글 들어감");
@@ -97,9 +97,9 @@ public class HelpController {
 	   }
 
 
-	@PostMapping("/modify")
+	@PostMapping("/askModifyContent")
 	@PreAuthorize("principal.userid == #help.writer")
-	public String modify(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+	public String askModifyContent(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		
 		boolean success = service.modify(help, file);
 		
