@@ -1,7 +1,6 @@
 package org.zerock.mapper;
 
 import java.util.List;
-
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.UserReviewVO;
@@ -36,9 +35,10 @@ public interface UserReviewMapper {
 	
 	// 리뷰 좋아요 수 얻어오기 - getLikeCount
 	public int getLikeCount(int reBno);
-	
-	// 리뷰 조회수 얻어오기 - getViewCount
-	
+
+	// 리뷰 조회수 설정하기 - setViewCount
+	public void setViewCount(int reBno);
+
 	// 리뷰 평점 가져오기 - getReviewGrade
 
 }

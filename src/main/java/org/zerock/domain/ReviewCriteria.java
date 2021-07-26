@@ -36,7 +36,9 @@ public class ReviewCriteria {
 		if (type == null) {
 			return new String[] {};
 		} else {
+			
 			String[] types = type.split("");
+			
 			return types;
  		}
 	}

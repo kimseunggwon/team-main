@@ -1,6 +1,7 @@
 package org.zerock.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class UserReviewVO {
 	private int reStars;
 	
 	// file
-	private String fileName;
+	// private String fileName;
+	private List<String> fileName;
 	
 }

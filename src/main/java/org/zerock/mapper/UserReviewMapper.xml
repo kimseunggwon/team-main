@@ -47,6 +47,8 @@
 		r.re_writer reWriter,
 		r.re_regdate reRegdate,
 		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
@@ -58,15 +60,11 @@
 </select>
 
 <insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
-	INSERT INTO user_review (re_title, re_content)
-	VALUES (#{reTitle}, #{reContent})
-	<!-- 
 	INSERT INTO user_review (re_title, re_content, re_writer)
 	VALUES (#{reTitle}, #{reContent}, #{reWriterName})
-	 -->
 </insert>
 
-<select id="readReview" resultType="org.zerock.domain.UserReviewVO">
+<select id="readReview" resultMap="reviewMap">
 	SELECT 
 		r.re_bno reBno,
 		r.re_title reTitle,
@@ -74,8 +72,10 @@
 		r.re_writer reWriter,
 		r.re_regdate reRegdate,
 		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
 		f.fileName fileName,
-		u.userName reWriterName 
+		u.userNickname reWriterName 
 		
 		FROM user_review r
 		LEFT JOIN user_review_file f ON r.re_bno = f.bno
@@ -84,13 +84,31 @@
 			r.re_bno = #{reBno}
 </select>
 
+<resultMap type="org.zerock.domain.UserReviewVO" id="reviewMap">
+<id property="reBno" column="reBno" />
+<result property="reTitle" column="reTitle" />
+<result property="reContent" column="reContent" />
+<result property="reWriter" column="reWriter" />
+<result property="reRegdate" column="reRegdate" />
+<result property="reUpdatedate" column="reUpdatedate" />
+<result property="likeCount" column="likeCount" />
+<result property="viewCount" column="viewCount" />
+<result property="reWriterName" column="reWriterName" />
+<!-- association property="writerName" column="userName" javaType="org.zerock.domain.MemberVO" /-->
+<collection property="fileName" resultMap="fileNameMap"></collection>
+</resultMap>
+
+<resultMap type="string" id="fileNameMap">
+<result column="fileName" />
+</resultMap> 
+
 <update id="updateReview">
 	UPDATE user_review
 	SET
 		re_title = #{reTitle},
 		re_content = #{reContent},
-		re_writer = #{reWriter},
-		re_updatedate = #{reUpdatedate},
+		re_writer = #{reWriterName},
+		re_updatedate = NOW()
 	WHERE
 		re_bno = #{reBno}
 </update>
@@ -104,9 +122,9 @@
 	DELETE FROM user_review
 	WHERE re_writer = #{userid}
 </delete>
- 
+
 <select id="getReviewTotalCount" resultType="int">
-	SELECT COUNT(*) FROM user_review ur
+	SELECT COUNT(*) FROM user_review
 	<include refid="ReviewCriteria"></include>
 </select>
  
@@ -123,5 +141,13 @@
  	WHERE 
  		r.re_bno = #{reBno}
  </select>
+ 
+ <update id="setViewCount">
+	UPDATE user_review r
+	 	SET
+	 		r.viewcount = r.viewcount + 1
+	 	WHERE
+	 		r.re_bno = #{reBno}
+ </update>
  
 </mapper>

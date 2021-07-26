@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,21 +51,6 @@
 	align-content: center;
 }
 
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
-}
-
 img {
 	padding: 50px;
 }
@@ -79,12 +67,16 @@ img {
 <script>
 	const appRoot = "${appRoot}";
 	// const reBno = "${review.reBno}"
+	const userid = "${pinfo.member.userid}";
 </script>
 
 <script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
 
 </head>
 <body>
+
+	<rev:navbar></rev:navbar>
+
 	<div class="container">
 		<%--
 		여기는 리뷰를 얻어오는 [리뷰 상세] JSP 파일입니다 :) 
@@ -100,41 +92,7 @@ img {
 			</div>
 		</div>
 
-		<!-- Search Start -->
-		<div class="container-1 row justify-content-center">
-			<form class="d-flex align-items-center"
-				action="${appRoot }/review/list" method="get">
-				<div class="item">
-					<select name="type" class="form-inline my-2 my-lg-0">
-						<option value="">Select</option>
-						<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>
-						<option value="C" ${recri.type	== "C" ? 'selected' : '' }>내용</option>
-						<option value="W" ${recri.type	== "W" ? 'selected' : '' }>글쓴이</option>
-						<option value="TC" ${recri.type	== "TC" ? 'selected' : '' }>제목
-							+ 내용</option>
-						<option value="TW" ${recri.type	== "TW" ? 'selected' : '' }>제목
-							+ 글쓴이</option>
-						<option value="TWC" ${recri.type	== "TWC" ? 'selected' : '' }>제목
-							+ 글쓴이 + 작성자</option>
-					</select>
-				</div>
-				<div class="item">
-					<span
-						style="position: absolute; margin-top: 27px; margin-left: 18px"
-						class="icon"></span> <input name="keyword"
-						value="${recri.keyword }" class="search" type="search"
-						id="jinah-search1" placeholder="Search" />
-				</div>
-
-				<div class="item">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-				</div>
-
-				<input type="hidden" name="pageNum" value="1"> <input
-					type="hidden" name="amount" value="${recri.amount }">
-			</form>
-		</div>
-		<!-- Search End -->
+		<rev:search></rev:search>
 
 		<!-- Review Grading (stars) Start -->
 		<div id="re-stare" style="display: inline;" class="container">
@@ -173,10 +131,12 @@ img {
 
 						<!-- 이미지 파일 -->
 						<c:if test="${not empty review.fileName }">
-							<div>
-								<img class="img-fluid"
-									src="${imgRoot }${review.reBno}/${review.fileName}">
-							</div>
+							<c:forEach items="${review.fileName }" var="rfile">
+								<div>
+									<img class="img-fluid"
+										src="${imgRoot }${review.reBno}/${rfile }">
+								</div>
+							</c:forEach>
 						</c:if>
 
 						<!-- 제목 -->
@@ -190,7 +150,7 @@ img {
 						<div class="item form-group">
 							<label for="re-textarea1">리뷰 내용</label>
 							<textarea readonly="readonly" class="form-control"
-								name="reContent" col="2" rows="10">
+								name="reContent" cols="2" rows="10" >
 				 				<c:out value="${review.reContent }"></c:out>
 				 			</textarea>
 						</div>
@@ -210,8 +170,17 @@ img {
 						-->
 							
 						<!-- 리뷰 수정/삭제 버튼 -->
-						<input class="btn btn-warning" type="submit" value="리뷰 수정하기">
-						<input id="review-remove-btn1" class="btn btn-danger" type="submit" value="리뷰 삭제하기">
+						<c:url value="/review/modify" var="reModifyUrl">
+							<c:param name="reBno" value="${review.reBno }" />
+							<c:param name="pageNum" value="${recri.pageNum }" />
+							<c:param name="amount" value="${recri.amount }" />
+							<c:param name="type" value="${recri.type }" />
+							<c:param name="keyword" value="${recri.keyword }" />
+						</c:url>
+	
+						<c:if test="${pinfo.member.userid eq review.reWriter}">
+							<a class="btn btn-danger" href="${reModifyUrl }">나의 리뷰 수정 or 삭제</a>
+						</c:if>
 						</div>
 				</div>
 			</div>
@@ -225,17 +194,18 @@ img {
 		</div>
 	</div>
 
-	<!-- 좋아요 Modal -->
+	<!-- 좋아요 Modal (회원 접근 가능) -->
+	<sec:authorize access="isAuthenticated()">
 	<div class="container">
 		<div class="row justify-content-center">
 			<!-- Button trigger modal -->
 			<button id="review-like-btn" type="button" class="btn btn-primary"
-				data-toggle="modal" data-target="#staticBackdrop">
+				data-toggle="modal" data-target="#staticBackdrop1">
 				<img alt="likebtn" src="${appRoot }/resources/image/review/like.png">
 			</button>
 
 			<!-- Modal -->
-			<div class="modal fade" id="staticBackdrop" data-backdrop="static"
+			<div class="modal fade" id="staticBackdrop1" data-backdrop="static"
 				data-keyboard="false" tabindex="-1"
 				aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -256,6 +226,50 @@ img {
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+		</sec:authorize>
+	
+	
+	<!-- 좋아요 Modal (비회원 접근 가능) -->
+		<sec:authorize access="!isAuthenticated()">
+	<div class="container">
+		<div class="row justify-content-center">
+			<!-- Button trigger modal -->
+			<button id="review-like-btn" type="button" class="btn btn-primary"
+				data-toggle="modal" data-target="#staticBackdrop2">
+				<img alt="likebtn" src="${appRoot }/resources/image/review/like.png">
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop2" data-backdrop="static"
+				data-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">리뷰 추천</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">[빨래널자]의 회원에 한해서만 게시물 추천이 가능합니다. 회원가입 및 로그인 페이지로 이동하시겠습니까?</div>
+						<div class="modal-footer">
+							<a href="${appRoot }/member/login" type="button" id="review-forward-login" class="btn btn-primary">로그인 할게요!</a>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">안 할게요</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</sec:authorize>
+	<div class="container">
+		<div class="row justify-content-center">
+			<a href="${appRoot }/review/list"><button type="button"
+					class="btn btn-info">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
 </body>
