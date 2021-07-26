@@ -51,21 +51,6 @@
 	align-content: center;
 }
 
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
-}
-
 img {
 	padding: 50px;
 }
@@ -85,7 +70,7 @@ img {
 	const userid = "${pinfo.member.userid}";
 </script>
 
-<!-- script src="${appRoot }/resources/js/review/reviewlikecount.js"-->
+<script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
 
 </head>
 <body>
@@ -146,10 +131,12 @@ img {
 
 						<!-- 이미지 파일 -->
 						<c:if test="${not empty review.fileName }">
-							<div>
-								<img class="img-fluid"
-									src="${imgRoot }${review.reBno}/${review.fileName }">
-							</div>
+							<c:forEach items="${review.fileName }" var="rfile">
+								<div>
+									<img class="img-fluid"
+										src="${imgRoot }${review.reBno}/${rfile }">
+								</div>
+							</c:forEach>
 						</c:if>
 
 						<!-- 제목 -->

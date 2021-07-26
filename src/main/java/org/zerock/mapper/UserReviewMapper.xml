@@ -64,7 +64,7 @@
 	VALUES (#{reTitle}, #{reContent}, #{reWriterName})
 </insert>
 
-<select id="readReview" resultType="org.zerock.domain.UserReviewVO">
+<select id="readReview" resultMap="reviewMap">
 	SELECT 
 		r.re_bno reBno,
 		r.re_title reTitle,
@@ -83,6 +83,24 @@
 		WHERE 
 			r.re_bno = #{reBno}
 </select>
+
+<resultMap type="org.zerock.domain.UserReviewVO" id="reviewMap">
+<id property="reBno" column="reBno" />
+<result property="reTitle" column="reTitle" />
+<result property="reContent" column="reContent" />
+<result property="reWriter" column="reWriter" />
+<result property="reRegdate" column="reRegdate" />
+<result property="reUpdatedate" column="reUpdatedate" />
+<result property="likeCount" column="likeCount" />
+<result property="viewCount" column="viewCount" />
+<result property="reWriterName" column="reWriterName" />
+<!-- association property="writerName" column="userName" javaType="org.zerock.domain.MemberVO" /-->
+<collection property="fileName" resultMap="fileNameMap"></collection>
+</resultMap>
+
+<resultMap type="string" id="fileNameMap">
+<result column="fileName" />
+</resultMap> 
 
 <update id="updateReview">
 	UPDATE user_review
@@ -118,13 +136,11 @@
  		r.re_bno = #{reBno}
  </update>
  
-<!-- 
  <select id="getLikeCount" resultType="int">
  	SELECT r.likecount FROM user_review r
  	WHERE 
  		r.re_bno = #{reBno}
  </select>
- --> 
  
  <update id="setViewCount">
 	UPDATE user_review r
@@ -133,11 +149,5 @@
 	 	WHERE
 	 		r.re_bno = #{reBno}
  </update>
- 
- <select id="getViewCount" resultType="int">
- 	SELECT r.viewcount FROM user_review r
- 	WHERE 
- 		r.re_bno = #{reBno}
- </select>
  
 </mapper>

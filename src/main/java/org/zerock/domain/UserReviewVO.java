@@ -20,6 +20,7 @@ public class UserReviewVO {
 	private int reStars;
 	
 	// file
-	private String fileName;
+	// private String fileName;
+	private List<String> fileName;
 	
 }

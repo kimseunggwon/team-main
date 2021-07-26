@@ -32,21 +32,6 @@
 	padding: 50px;
 }
 
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
-}
-
 img {
 	padding: 70px;
 }
@@ -63,8 +48,6 @@ img {
 	const reBno = "${review.reBno }";
 	const appRoot = "${appRoot}";
 </script>
-
-<script src="${appRoot }/resources/js/review/viewcount.js"></script>
 
 </head>
 <body>

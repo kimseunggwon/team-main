@@ -3,10 +3,31 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 
+<style>
+
+.container-1 input.search{
+  width: 420px;
+  height: 78px;
+  background: rgb(242, 242, 242);
+  border: none;
+  font-size: 12pt;
+  float: left;
+  color: rgb(0, 0, 0);
+  padding-left: 45px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  outline-style: none;
+}
+
+#select-list {
+}
+</style>
+
 <!-- Search Start -->
 	<div class="container-1 row justify-content-center">
 		<form class="d-flex align-items-center"action="${appRoot }/review/list" method="get">
-			<div class="item">
+			<div id="select-list" class="item">
 				<select name="type" class="form-inline my-2 my-lg-0">
 					<option value="">Select</option>
 					<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>

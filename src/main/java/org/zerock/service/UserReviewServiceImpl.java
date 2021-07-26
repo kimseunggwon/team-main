@@ -81,10 +81,11 @@ public class UserReviewServiceImpl implements UserReviewService {
 	// 리뷰 게시물 작성 (이미지 파일 업로드 포함)
 	@Override
 	@Transactional
-	public void reviewWrite(UserReviewVO review, MultipartFile file) {
+	public void reviewWrite(UserReviewVO review, MultipartFile[] mfile) {
 		
 		reviewWrite(review);
 		
+		for (MultipartFile file : mfile) {
 			
 			if (file != null && file.getSize() > 0) {
 				UserReviewFileVO ufvo = new UserReviewFileVO();
@@ -94,6 +95,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 				reviewFileMapper.reviewFileInsert(ufvo);
 				upload(review, file);
 			}
+		}
 	}
 	
 	// 리뷰 이미지 파일 업로드

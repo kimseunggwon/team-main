@@ -62,7 +62,7 @@ public class UserReviewController {
 	@PostMapping("/write")
 	@PreAuthorize("isAuthenticated()")
 	public String reviewWrite(UserReviewVO review,
-								@RequestParam("file") MultipartFile file,
+								@RequestParam("file") MultipartFile[] file,
 								RedirectAttributes rttr) {
 		
 		// log.info("userReviewWrite is working");

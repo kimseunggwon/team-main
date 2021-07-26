@@ -22,7 +22,7 @@ public interface UserReviewService {
 
 	void reviewWrite(UserReviewVO review);
 
-	void reviewWrite(UserReviewVO review, MultipartFile file);
+	void reviewWrite(UserReviewVO review, MultipartFile[] file);
 	
 	int reviewLikecount(int reBno);
 

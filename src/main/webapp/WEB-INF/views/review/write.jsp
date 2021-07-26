@@ -43,23 +43,16 @@
 	align-content: center;
 }
 
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
-}
-
 img {
 	padding: 50px;
+}
+
+#re-input2-label {
+  padding: 6px 25px;
+  background-color:#FF84A9;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 }
 
 /* 왜 안될까? */
@@ -130,10 +123,11 @@ img {
 				 			<label for="re-textarea1">리뷰 내용</label>
 				 			<textarea class="form-control" name="reContent" col="2" rows="10" placeholder="내용을 입력해주세요."></textarea> 
 			 			</div>
-			 			<!-- 이미지 파일 -->
+			 			
+						<!-- 이미지 파일 -->
 			 			<div class="item form-group">
-				 			<label for="re-input2">사진 파일</label>
-				 			<input id="re-input2" class="form-control" type="file" name="file" accept="image/*" > 
+				 				<label id="re-input2-label" for="re-input2">이미지 업로드</label>
+				 			<input style="display:none;"id="re-input2" class="form-control" multiple="multiple" type="file" name="file" accept="image/*" > 
 			 			</div>
 			 			<!-- 작성자 -->
 			 			<div class="item form-group">

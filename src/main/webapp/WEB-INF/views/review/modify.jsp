@@ -52,23 +52,16 @@
 	align-content: center;
 }
 
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
-}
-
 img {
 	padding: 50px;
+}
+
+#re-input2-label {
+  padding: 6px 25px;
+  background-color:#FF84A9;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 }
 
 #jinah-search-form1 {
@@ -130,16 +123,17 @@ img {
 		 		<div class="col-8">
 			 		<form id="re-modify-form1" action="${appRoot }/review/modify" method="post" enctype="multipart/form-data"> 
 			 			<!-- 이미지 파일 -->
-			 			<c:if test="${not empty review.fileName }">
-			 				<div>
-			 					<img class="img-fluid" 
-			 					alt="user-review-file" 
-			 					src="${imgRoot }${review.reBno }/${review.fileName }">
-			 				</div>
-			 			</c:if>
+						<c:if test="${not empty review.fileName }">
+							<c:forEach items="${review.fileName }" var="rfile">
+								<div>
+									<img class="img-fluid"
+										src="${imgRoot }${review.reBno}/${rfile }">
+								</div>
+							</c:forEach>
+						</c:if>
 			 			<div class="item form-group">
-				 			<label for="re-input2">이미지 선택</label>
-				 			<input id="re-input2" class="form-control" type="file" accept="image/*" > 
+				 			<label id="re-input2-label" for="re-input2">이미지 선택</label>
+				 			<input style="display:none;"id="re-input2" multiple="multiple" class="form-control" type="file" accept="image/*" > 
 			 			</div>
 			 			<!-- 제목 -->
 			 			<div class="item form-group">
