@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.SendEmail;
+import org.zerock.SendSms;
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.service.MemberService;
@@ -45,6 +47,7 @@ public class SangpilController {
 	private MemberService service;
 
 	@RequestMapping("/login")
+//	@PreAuthorize("!isAuthenticated()")
 	public void login() {
 		log.info("login 들어왔습니당");
 	}
@@ -71,7 +74,7 @@ public class SangpilController {
 		
 		String idI = request.getParameter("idI");
 		String idE = request.getParameter("idE");
-		String idP = request.getParameter("idB");
+//		String idP = request.getParameter("idB");
 		
 		log.info(idE);
 		
@@ -81,7 +84,8 @@ public class SangpilController {
 			int num = (int) (Math.random()*999999);
 			
 			SendEmail.sendEmail(num, idE);
-//			SendSms.sendSms(idP);
+//			SendSms.sendSms(num, idP);
+			
 			session.setAttribute("authRandomNumber", num);
 			System.out.println(num);
 			

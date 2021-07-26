@@ -12,10 +12,6 @@ public interface UserReviewService {
 
 	List<UserReviewVO> getReviewList(ReviewCriteria recri);
 
-	void reviewWrite(UserReviewVO review, MultipartFile file);
-	
-	void reviewWrite(UserReviewVO review);
-
 	UserReviewVO reviewGet(int reBno);
 	
 	boolean reviewModify(UserReviewVO review);
@@ -24,9 +20,12 @@ public interface UserReviewService {
 
 	boolean reviewRemove(int reBno);
 
+	void reviewWrite(UserReviewVO review);
+
+	void reviewWrite(UserReviewVO review, MultipartFile[] file);
+	
 	int reviewLikecount(int reBno);
 
-	
 	
 	
 }

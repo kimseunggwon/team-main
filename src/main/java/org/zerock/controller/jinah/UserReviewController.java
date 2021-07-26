@@ -1,7 +1,7 @@
 package org.zerock.controller.jinah;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -41,9 +41,10 @@ public class UserReviewController {
 	
 	private UserReviewService service;
 	
-	// userReviewList
+	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
-	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, Model model) {
+	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, 
+							Model model) {
 		log.info("userReviewList is working");
 		
 		int reviewTotal = service.getReviewTotal(recri);
@@ -52,18 +53,21 @@ public class UserReviewController {
 		
 		model.addAttribute("reList", reList);
 		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
+		model.addAttribute("totalCount", reviewTotal);
 	}
 	
-	// userReviewWrite
+	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList
+	
+	// 리뷰 작성하기 (이미지 파일 포함) - userReviewWrite
 	@PostMapping("/write")
 	@PreAuthorize("isAuthenticated()")
 	public String reviewWrite(UserReviewVO review,
-								@RequestParam("file") MultipartFile file,
+								@RequestParam("file") MultipartFile[] file,
 								RedirectAttributes rttr) {
 		
-		log.info("userReviewWrite is working");
+		// log.info("userReviewWrite is working");
 		
-		review.setFileName(file.getOriginalFilename());
+		// review.setFileName(file.length); // getOriginalFileName()
 		
 		service.reviewWrite(review, file);
 		
@@ -74,14 +78,14 @@ public class UserReviewController {
 		return "redirect:/review/list";
 	}
 	
-	// ***** Authentication에 따른 userReviewWrite 구현해야 함
+	// 리뷰 작성하기 - 이미지 파일 없이
 	@GetMapping("/write")
 	@PreAuthorize("isAuthenticated()")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
 		// Forwarding to /WEB-INF/views/review/write.jsp
 	}
 	
-	// userReviewGet
+	// 리뷰 상세 얻어오기 - userReviewGet
 	@GetMapping("/get")
 	public void reviewGet(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
@@ -95,7 +99,8 @@ public class UserReviewController {
 		
 	}
 	
-	// userReviewModify
+	
+	// 리뷰 파일 수정하기 (이미지 파일 없이) - userReviewModify
 	@GetMapping("/modify")
 	@PreAuthorize("isAuthenticated()")
 	public void reviewModify(@RequestParam("reBno") int reBno,
@@ -103,14 +108,16 @@ public class UserReviewController {
 						  Model model) {
 		
 		reviewGet(reBno, recri, model);
+		
+
 	}
 	
-	// userReviewModify
+	// 리뷰 파일 수정하기 (이미지 파일 포함) - userReviewModify
 	@PostMapping("/modify")
 	@PreAuthorize("isAuthenticated()")
 	public String reviewModify(UserReviewVO review,
 							   ReviewCriteria recri,
-							   @RequestParam("file") MultipartFile file,
+							   MultipartFile file,
 							   RedirectAttributes rttr) {
 		
 		log.info("userReviewModify is working");
@@ -131,13 +138,13 @@ public class UserReviewController {
 		return "redirect:/review/list";
 	}
 	
-	// userReviewRemove
+	// 리뷰 삭제하기 - userReviewRemove
 	@PostMapping("/remove")
 	@PreAuthorize("isAuthenticated()")
 	public String reviewRemove(@RequestParam("reBno") int reBno,
 							   ReviewCriteria recri,
 							   RedirectAttributes rttr,
-							   String reWriter
+							   String reWriterName
 							   ) {
 		
 		log.info("userReviewRemove is working");
@@ -160,8 +167,6 @@ public class UserReviewController {
 	}
 	
 	// 리뷰 좋아요 - userReviewLikeCount
-	// 회원(user)만 접근 가능하다
-	// Modal을 사용하자
 	@PostMapping("/get")
 	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
@@ -173,9 +178,6 @@ public class UserReviewController {
 		
 		return likecnt;
 	}
-	
-	
-	// 리뷰 조회수 - userReviewViewCount
 	
 	// 리뷰 평점 - userReviewStars
 }

@@ -28,7 +28,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Service
 @Log4j
 public class UserReviewServiceImpl implements UserReviewService {
-	
+	 
 	// AWS related
 	private String bucketName;
 	private String profileName;
@@ -81,17 +81,20 @@ public class UserReviewServiceImpl implements UserReviewService {
 	// 리뷰 게시물 작성 (이미지 파일 업로드 포함)
 	@Override
 	@Transactional
-	public void reviewWrite(UserReviewVO review, MultipartFile file) {
+	public void reviewWrite(UserReviewVO review, MultipartFile[] mfile) {
 		
 		reviewWrite(review);
 		
-		if (file != null && file.getSize() > 0) {
-			UserReviewFileVO ufvo = new UserReviewFileVO();
-			ufvo.setBno(review.getReBno());
-			ufvo.setFileName(file.getOriginalFilename());
+		for (MultipartFile file : mfile) {
 			
-			reviewFileMapper.reviewFileInsert(ufvo);
-			upload(review, file);
+			if (file != null && file.getSize() > 0) {
+				UserReviewFileVO ufvo = new UserReviewFileVO();
+				ufvo.setBno(review.getReBno());
+				ufvo.setFileName(file.getOriginalFilename());
+				
+				reviewFileMapper.reviewFileInsert(ufvo);
+				upload(review, file);
+			}
 		}
 	}
 	
@@ -101,7 +104,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 			
 			PutObjectRequest objectRequest = PutObjectRequest.builder()
 											 .bucket(bucketName)
-											 .key(review.getReBno() + "/" + file.getOriginalFilename())
+											 .key("review" + "/" + review.getReBno() + "/" + file.getOriginalFilename())
 											 .contentType(file.getContentType())
 											 .acl(ObjectCannedACL.PUBLIC_READ)
 											 .build();
@@ -113,9 +116,12 @@ public class UserReviewServiceImpl implements UserReviewService {
 		}
 	}
 	
+	
 	// 리뷰 게시물 상세
 	@Override
+	@Transactional
 	public UserReviewVO reviewGet(int reBno) {
+		reviewMapper.setViewCount(reBno);
 		return reviewMapper.readReview(reBno);
 	}
 	
@@ -137,20 +143,22 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public boolean reviewModify(UserReviewVO review, MultipartFile file) {
 		
-		if (file != null && file.getSize() > 0) {
-			UserReviewVO oldReview = reviewMapper.readReview(review.getReBno());
-			removeReviewFile(oldReview);
-			upload(review, file);
-			
-			reviewFileMapper.deleteReviewByBno(review.getReBno());
-			
-			UserReviewFileVO rfvo = new UserReviewFileVO();
-			
-			rfvo.setBno(review.getReBno());
-			rfvo.setFileName(file.getOriginalFilename());
-			
-			reviewFileMapper.reviewFileInsert(rfvo);
-		}
+
+			if (file != null && file.getSize() > 0) {
+				UserReviewVO oldReview = reviewMapper.readReview(review.getReBno());
+				removeReviewFile(oldReview);
+				upload(review, file);
+
+				reviewFileMapper.deleteReviewByBno(review.getReBno());
+
+				UserReviewFileVO rfvo = new UserReviewFileVO();
+
+				rfvo.setBno(review.getReBno());
+				rfvo.setFileName(file.getOriginalFilename());
+
+				reviewFileMapper.reviewFileInsert(rfvo);
+			}
+
 		return reviewModify(review);
 	}
 
@@ -174,7 +182,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 	// 리뷰 이미지 파일 삭제
 	private void removeReviewFile(UserReviewVO review) {
 		log.info("working good");
-		String key = review.getReBno()	+ "/" + review.getFileName();
+		String key = "review" + "/" + review.getReBno()	+ "/" + review.getFileName();
 		
 		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
 												  .bucket(bucketName)

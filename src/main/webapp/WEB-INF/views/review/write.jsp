@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,23 +43,16 @@
 	align-content: center;
 }
 
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
-}
-
 img {
 	padding: 50px;
+}
+
+#re-input2-label {
+  padding: 6px 25px;
+  background-color:#FF84A9;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
 }
 
 /* 왜 안될까? */
@@ -75,11 +70,14 @@ img {
 
 </head>
 <body style="overflow-x:hidden;">
+
+		<rev:navbar></rev:navbar>
+
 		<%-- 선택자 우선순위 구글링 --%>
 		
 		<%-- 여기는 [글쓰기] JSP 파일입니다 :) 
 		1. 검색 기능이 완전하지 않아요.
-		2. 도대체 왜 item 수평 정렬이 안되는지 화가 나요. 
+		2. 도대체 왜 item 수평 정렬이 안되는지 화가 나요. (해결 완)
 		3. 리뷰 작성자는 user table이 정리된 이후에 다시 할 수 있어요. 
 		4. authentication 설정 이후 test가 필요해요.. (MyPage랑 연결시켜야 해요)
 		5. 서버 실행을 위해 잠시 작성자 reWriterName - NULL값 가능하게.? 만들기 + mapper.xml도 잠시 변경함
@@ -92,40 +90,7 @@ img {
 		</div>
 	</div>
 	
-	<!-- Search Start -->
-	<div class="container-1 row justify-content-center">
-		<form class="d-flex align-items-center"action="${appRoot }/review/list" method="get">
-			<div class="item">
-				<select name="type" class="form-inline my-2 my-lg-0">
-					<option value="">Select</option>
-					<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>
-					<option value="C" ${recri.type	== "C" ? 'selected' : '' }>내용</option>
-					<option value="W" ${recri.type	== "W" ? 'selected' : '' }>글쓴이</option>
-					<option value="TC" ${recri.type	== "TC" ? 'selected' : '' }>제목
-						+ 내용</option>
-					<option value="TW" ${recri.type	== "TW" ? 'selected' : '' }>제목
-						+ 글쓴이</option>
-					<option value="TWC" ${recri.type	== "TWC" ? 'selected' : '' }>제목
-						+ 글쓴이 + 작성자</option>
-				</select>
-			</div>
-			<div class="item">
-				<span
-					style="position:absolute; margin-top: 27px; margin-left: 18px"
-					class="icon"></span> <input name="keyword"
-					value="${recri.keyword }" class="search" type="search"
-					id="jinah-search1" placeholder="Search" />
-			</div>
-
-			<div class="item">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-			</div>
-
-			<input type="hidden" name="pageNum" value="1"> <input
-				type="hidden" name="amount" value="${recri.amount }">
-		</form>
-	</div>
-	<!-- Search End -->
+		<rev:search></rev:search>
 
 	<!-- Review Grading (stars) Start -->
 	<div id="re-star" style="display:inline;" class="container">
@@ -158,24 +123,30 @@ img {
 				 			<label for="re-textarea1">리뷰 내용</label>
 				 			<textarea class="form-control" name="reContent" col="2" rows="10" placeholder="내용을 입력해주세요."></textarea> 
 			 			</div>
-			 			<!-- 이미지 파일 -->
+			 			
+						<!-- 이미지 파일 -->
 			 			<div class="item form-group">
-				 			<label for="re-input2">사진 파일</label>
-				 			<input id="re-input2" class="form-control" type="file" name="file" accept="image/*" > 
+				 				<label id="re-input2-label" for="re-input2">이미지 업로드</label>
+				 			<input style="display:none;"id="re-input2" class="form-control" multiple="multiple" type="file" name="file" accept="image/*" > 
 			 			</div>
 			 			<!-- 작성자 -->
 			 			<div class="item form-group">
 				 			<label for="re-input3">리뷰 작성자</label>
-				 			<!-- input id="re-input3" class="form-control" value="" type="hidden" name="jinah-writer"-->
-				 			<input id="re-input3" class="form-control" name="reWriter" value="테스터 박진아" readonly>
+				 			<input id="re-input3" class="form-control" value="${pinfo.member.userNickname }" readonly>
 			 			</div>
+			 			<input type="hidden" name="reWriterName" value="${pinfo.member.userid }" readonly>
 			 			
+						<input class="btn btn-primary" type="submit" value="리뷰 등록하기">
 			 			
-			 			<!-- Submit -->
-			 			<input class="btn btn-primary" type="submit" value="리뷰 등록하기">
-			 		</form>
+			 	</form>
 		 	</div>
 		 </div>
+	</div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<a href="${appRoot }/review/list"><button type="button"
+					class="btn btn-info">다른 리뷰 보러가기</button></a>
+		</div>
 	</div>
 </body>
 </html>
