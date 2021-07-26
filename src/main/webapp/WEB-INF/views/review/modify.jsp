@@ -127,7 +127,7 @@ img {
 							<c:forEach items="${review.fileName }" var="rfile">
 								<div>
 									<img class="img-fluid"
-										src="${imgRoot }${review.reBno}/${rfile }">
+										src="${imgReviewRoot }${review.reBno}/${rfile }">
 								</div>
 							</c:forEach>
 						</c:if>

@@ -67,7 +67,7 @@ img {
 <script>
 	const appRoot = "${appRoot}";
 	// const reBno = "${review.reBno}"
-	const userid = "${pinfo.member.userid}";
+	const $userid = "${pinfo.member.userid}";
 </script>
 
 <script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
@@ -134,7 +134,7 @@ img {
 							<c:forEach items="${review.fileName }" var="rfile">
 								<div>
 									<img class="img-fluid"
-										src="${imgRoot }${review.reBno}/${rfile }">
+										src="${imgReviewRoot }${review.reBno}/${rfile }">
 								</div>
 							</c:forEach>
 						</c:if>
