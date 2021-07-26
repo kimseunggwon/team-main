@@ -33,7 +33,7 @@ public class AppListener implements ServletContextListener {
     	
     	// aws s3 bucket 주소
     	String bucketUrl = "https://swteam1.s3.ap-northeast-2.amazonaws.com/help/";
-    	application.setAttribute("imgRoot", bucketUrl);
+    	application.setAttribute("askImgRoot", bucketUrl);
     }
 	
 }
