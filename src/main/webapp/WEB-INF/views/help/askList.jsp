@@ -1,7 +1,7 @@
 <%@ page  contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -86,7 +86,7 @@
 					<td>${help.bno }</td>
 					<td>
 					
-					<c:url value="/help/get" var="getUrl">
+					<c:url value="/help/askGetContent" var="getUrl">
 						<c:param name="bno" value="${help.bno }" />
 						<c:param name="pageNum" value="${pageMaker.pag.pageNum }" />
 						<c:param name="amount" value="${pageMaker.pag.amount }" />
@@ -101,7 +101,7 @@
 					</c:if>
 					</a> 
 					</td>					
-					<td>${help.writerName }</td>
+					<td>${help.userNickName }</td>
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${help.regdate }"/>
 					</td>
@@ -116,31 +116,36 @@
 	
 	
 	<!-- pagenation -->
- 
-
-<nav aria-label="Page navigation example">
-  <ul id="list-pagenation1" class="pagination justify-content-center">
-    
-    <c:if test="${pageMaker.prev }">
-    	<li class="page-item">
-      		<a class="page-link" href="${pageMaker.startPage - 1 }">Previous</a>
-    	</li>
-    </c:if>
-
-	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
-     <li class="page-item ${num == cri.pageNum ? 'active' : '' }"><a class="page-link" 
-     href="${num }">${num }</a></li>	
-	</c:forEach>
-
-	<c:if test="${pageMaker.next }">
-    	<li class="page-item">
-      		<a class="page-link" href="${pageMaker.endPage + 1 }">Next</a>
-    	</li>
-	</c:if>
-  </ul>
-</nav>
 	
+	<!-- pagenation 적용을 위한 코드 추가 -->
 
+	<div>
+          <nav aria-label="Page navigation example">
+             <ul id="list-pagination1" class="pagination justify-content-center">
+                <c:if test="${pageMaker.prev }">
+                   <li class="page-item">
+                      <a class="page-link" href="${pageMaker.startPage - 1}">Previous</a>
+                   </li>
+                </c:if>
+                <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+                   <c:url value="/help/askList" var="pageLink">
+                      <c:param name="pageNum" value="${num }"></c:param>
+                      <c:param name="amount" value="${pag.amount }"></c:param>
+                      <c:param name="type" value="${pag.type }"></c:param>
+                      <c:param name="keyword" value="${pag.keyword }"></c:param>
+                   </c:url>
+                   
+                   <li class="page-item ${num == pag.pageNum ? 'active' : '' }">
+                      <a class="page-link" href="${pageLink }">${num }</a>
+                   </li>
+                </c:forEach>
+                <c:if test="${pageMaker.next }">
+                   <li class="page-item">
+                      <a class="page-link" href="${pageMaker.endPage + 1}">Next</a>
+                   </li>
+                </c:if>
+             </ul>
+          </nav>
 	
 	
 	<div class="row justify-content-center">
@@ -161,11 +166,13 @@
 		
 		<hr>
 		
-		 <div class="row justify-content-around">
+		 <div class="row justify-content-around mb-3">
 		 	<div class="row">
 		 
 		 		<div class="mr-10">
-		 			<img src="${appRoot }/resources/image/logo.jpg" alt="...">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
 		 		</div>
 		 	
 		 	</div>
@@ -198,7 +205,7 @@
 		 </div>
 	
 		</div>
-	
+</div>
 	
 
 </body>

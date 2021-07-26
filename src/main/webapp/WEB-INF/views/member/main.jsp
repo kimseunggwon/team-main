@@ -100,7 +100,48 @@
 	  		</form>
 	</div>
 	
+			<br>
+		
+		<hr>
+		
+		 <div class="row justify-content-around mb-3">
+		 	<div class="row">
+		 
+		 		<div class="mr-10">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+		 		</div>
+		 	
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<div>
+		 			서울시 강남구 삼성동 1234 우 : 123-1234
+		 			<br>
+					TEL:02-123-1234 Email:email@domain.com
+					<br>
+					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
+					<br>
+				</div>
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<span >
+		 			<a href="#">
+		 			 	<img src="${appRoot }/resources/image/blog.jpg">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			</a>
+		 		</span>
+		 	</div>
+		 		
+		 </div>
 	
-</div>
+		</div>
 </body>
 </html>

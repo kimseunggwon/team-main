@@ -31,13 +31,16 @@ public class HelpController {
 	private HelpService service;
 	
 	@RequestMapping("/helpdesk")
+	@PreAuthorize("isAuthenticated()")
 	public String go() {
 		log.info("고객센터 접속");
 		
 		return "help/helpdesk";
 	}
 	
+	
 	@RequestMapping("/ask")
+	@PreAuthorize("isAuthenticated()")
 	public String goAsk() {
 		log.info("1:1 문의 글 작성창");
 		
@@ -46,6 +49,7 @@ public class HelpController {
 	
 	/* 글 작성 등록 */
 	@RequestMapping("register")
+	@PreAuthorize("isAuthenticated()")
 	public String register(HelpVO help, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		help.setFileName(file.getOriginalFilename());
 		
@@ -62,7 +66,8 @@ public class HelpController {
 	}
 	
 	@GetMapping("/askList")
-	public String list(@ModelAttribute("pag") Pagenation pag, Model model) {
+	@PreAuthorize("isAuthenticated()")
+	public void list(@ModelAttribute("pag") Pagenation pag, Model model) {
 		
 		int total = service.getTotal(pag);
 		
@@ -70,23 +75,31 @@ public class HelpController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(pag, total));
-		
-		
-		return "help/askList";
+
 	}
 	
-	@GetMapping({"/get", "/modify"})
-	public void get(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
+	@GetMapping({"/askGetContent", "/askModifyContent"})
+	@PreAuthorize("isAuthenticated()")
+	public void askGetContent(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
 		log.info("1:1 문의글 들어감");
 		
-		HelpVO vo = service.get(bno);
-		
-		model.addAttribute("help", vo);
+		askGet(bno, pag, model);
 	}
 	
-	@PostMapping("/modify")
-	@PreAuthorize("principal.username == #help.writer")
-	public String modify(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+	@GetMapping("/get")
+	   public void askGet(@RequestParam("bno") long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
+	      
+	      
+	      HelpVO vo = service.askGet(bno);
+	      
+	      model.addAttribute("help", vo);
+	      
+	   }
+
+
+	@PostMapping("/askModifyContent")
+	@PreAuthorize("principal.userid == #help.writer")
+	public String askModifyContent(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		
 		boolean success = service.modify(help, file);
 		
@@ -106,5 +119,34 @@ public class HelpController {
 		
 	}
 	
+	@PostMapping("/remove")
+	@PreAuthorize("principal.userName == #writer") // 720 쪽
+	public String remove(@RequestParam("bno") Long bno, 
+			Pagenation pag, RedirectAttributes rttr, String writer) {
+		//parameter 수집
+		
+		//service 일 시킴
+		boolean success = service.remove(bno);
+		//결과 담고
+		if (success) {
+			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("messageTitle", "삭제 성공");
+			rttr.addFlashAttribute("messageBody", "삭제 되었습니다.");
+		}
+		
+		rttr.addAttribute("pageNum", pag.getPageNum());
+		rttr.addAttribute("amount", pag.getAmount());
+		rttr.addAttribute("type", pag.getType());
+		rttr.addAttribute("keyword", pag.getKeyword());
+		
+		//forward or redirect
+		return "redirect:/help/askList";
+	}
+	
+	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()") // 교재 673~674p
+	public void register(@ModelAttribute("pag") Pagenation pag) {
+		// forward /WEB-INF/views/board/register.jsp
+	}
 	
 }

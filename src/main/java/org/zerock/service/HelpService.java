@@ -10,7 +10,7 @@ public interface HelpService {
 	
 	public void register(HelpVO help);
 	
-	public HelpVO get(Long help);
+	public HelpVO askGet(Long help);
 	
 	public boolean modify(HelpVO help);
 	

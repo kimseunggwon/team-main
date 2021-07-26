@@ -81,7 +81,7 @@
   			A.regdate regdate,
   			A.updatedate updatedate,
   			f.fileName fileName,
-  			u.username writerName
+  			u.userName writerName
   		FROM ask_board A LEFT JOIN ask_board_file f ON A.bno = f.bno
   							  JOIN user u ON A.writer = u.userid
   		WHERE A.bno = #{bno}
