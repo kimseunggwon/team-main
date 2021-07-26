@@ -165,7 +165,7 @@ img {
 							id="review-subscribe-login-btn" type="button"
 							class="btn btn-primary">지금 빨래 구독하기</button></a>
 				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_USER')">
+				<sec:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
 					<a href="${appRoot }/review/write"><button
 							id="review-write-btn" type="button" class="btn btn-primary">구독
 							리뷰 남기기</button></a>
