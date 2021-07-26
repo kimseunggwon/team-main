@@ -105,7 +105,7 @@ var userid = "${pinfo.member.userid}";
 				<c:if test="${not empty help.fileName }">
 					<div>
 						<img class="img-fluid"
-						src="${imgRoot}${help.bno }/${help.fileName}">
+						src="${askImgRoot}${help.bno }/${help.fileName}">
 					</div>
 				</c:if>
 				
