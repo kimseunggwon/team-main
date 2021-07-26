@@ -11,6 +11,15 @@
 <title>Insert title here</title>
 
 <style type="text/css">
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+	font-family: 'GongGothicMedium';
+}
 .container-1 input.search{
   width: 420px;
   height: 78px;
@@ -42,7 +51,7 @@
 	-moz-border-radius: 40px;
 	border-radius: 40px;
 	width:420px;
-    font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
+    font-family: 'GongGothicMedium';
 }
 .button:hover {
 	background: #0583F2;
@@ -162,11 +171,11 @@ $(function(){
 					<a style="text-decoration: none; color: black;" id="sang-signup-btn" class="col-4" href="${appRoot }/member/signup">회원가입</a>
 				</div>
 				
-				<sec:authorize access="isAuthenticated()">
+				<%-- <sec:authorize access="isAuthenticated()">
 				  <form action="${appRoot }/logout" method="post">
 				  	<input type="submit" class="btn btn-outline-secondary" value="로그아웃">
 				  </form>
-			  	</sec:authorize>
+			  	</sec:authorize> --%>
 				
 			</form>
 			

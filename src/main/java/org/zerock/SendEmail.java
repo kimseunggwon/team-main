@@ -17,7 +17,7 @@ public class SendEmail {
   final String password  = "sso02005";
 
   String to = idE;
-
+  System.out.println(to);
   
   // Get the session object
   Properties props = new Properties();
