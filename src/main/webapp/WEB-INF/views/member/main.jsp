@@ -39,7 +39,7 @@
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 	border-radius: 40px;
-	width:20px;
+	width:200px;
     font-family: 'GongGothicMedium';
 }
 .button1:hover {
@@ -116,11 +116,13 @@
 	
 	<hr>
 	
-	<div class="row justify-content-center">
-		<button class="button1"></button>
-		<button class="button1"></button>
-		<button class="button1"></button>
-	</div>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<div class="row justify-content-center">
+			<button class="button1">고객센터 답변</button>
+			<button class="button1"></button>
+			<button class="button1"></button>
+		</div>
+	</sec:authorize>
 	
 	<div class="row justify-content-center">
 		<form action="${appRoot }/review/list">

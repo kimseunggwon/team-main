@@ -12,6 +12,8 @@ public interface UserReviewService {
 
 	List<UserReviewVO> getReviewList(ReviewCriteria recri);
 
+	List<UserReviewVO> getAnnounceList(ReviewCriteria recri);
+	
 	UserReviewVO reviewGet(int reBno);
 	
 	boolean reviewModify(UserReviewVO review);
@@ -26,6 +28,4 @@ public interface UserReviewService {
 	
 	int reviewLikecount(int reBno);
 
-	
-	
 }
