@@ -25,9 +25,10 @@
 } 
 
 </style>
+
+	<!-- 미리보기 -->
 <script type="text/javascript">
 	$(function() {
-
 		$("#introduceImage").on('change', function() {
 			readURL(this);
 		})
@@ -55,25 +56,26 @@ $(function() {
 
 <script type="text/javascript">
 $(function() {
-	("#register").click(function() {
+	$("#register").click(function() {
+		var form = new FormData();
+		form.append("file",$("#introduceImage")[0].files[0]);
+		form.append("id",$("#b2bid").val());
+		form.append("introduce",$("#introduce").val());
 		
-		var b2bid = $("#b2bid").val();
-		var introduce = $("#introduce"),val();
-		
-		data = {
-			b2bid = b2bid
-			introduce = introduce
-		}
 		$.ajax({
-			type : "post",
-			url : "${appRoot}/won/register",
-			enctype : "multipart/form-data"
-			data: ,
-			success: function() {
-				
+			type : "POST",
+			url : "${appRoot}/searchstore/b2bIntroduceBoard",
+			data : form,
+			enctype : "multipart/form-data",
+			processData : false,
+			contentType : false,
+			cache: false,
+			success : function() {
+				alert("등록성공 !! " + "이쁘게 홍보해드릴게여^*^");
+			},
+			error : function() {
+				console.log("등록실패");
 			}
-				
-			
 		})
 	})
 })
@@ -85,7 +87,7 @@ $(function() {
 			<div style="float:left">
 				<div class="form-group ">
 					<label for="b2bid">b2bid (*회원정보에서 확인해주세요)</label>
-					 <input type="text" class="form-control" id="b2bid" value="${pinfo.id }">
+					 <input type="text" class="form-control" id="b2bid" value="${pinfo.member.id }">
 				</div>
 				<div class="form-group">
 					<label for="introduceImage">홍보배너이미지</label>

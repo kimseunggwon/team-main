@@ -27,14 +27,64 @@ SELECT
 	storePhonenum storePhonenum, 
 	storelat storelat,
 	storelag storelag
-FROM storeinfo
+FROM storeinfo 
 
 WHERE
-	  storelat > #{storelat} - 0.005 AND storelat < #{storelat} + 0.005 AND
-	  storelag > #{storelag} - 0.005 AND storelag < #{storelag} + 0.005
+	  storelat > #{storelat} - 0.01 AND storelat < #{storelat} + 0.01 AND
+	  storelag > #{storelag} - 0.01 AND storelag < #{storelag} + 0.01
 
  ]]>
 </select>
 
+
+<!-- b2bboard xml  -->
+
+<select id="getid" resultType="Int">
+SELECT id id
+FROM b2bIntroduce
+WHERE id = #{id}
+</select>
+
+<select id="read" resultType="org.zerock.domain.B2bIntroduceVO">
+SELECT
+	id id,
+	introduce introduce,
+	fileName fileName
+FROM b2bIntroduce
+WHERE id= #{id}
+</select>
+
+
+<insert id="B2bIntroduceRegister">
+INSERT INTO b2bIntroduce (id, introduce, fileName)
+VALUES (#{id}, #{introduce}, #{fileName})
+</insert>
+
+<delete id="deleteById">
+DELETE FROM b2bIntroduce
+WHERE id = #{id}
+</delete>
+
+
+<!-- 구독페이지 xml -->
+<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeVO">
+<![CDATA[
+
+SELECT
+	s.id id,
+	s.storename storename,
+	s.storeaddress storeaddress,
+	s.storePhonenum storePhonenum, 
+	s.storelat storelat,
+	s.storelag storelag,
+	b.fileName fileName
+FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
+
+WHERE
+	  storelat > #{lat} - 0.01 AND storelat < #{lat} + 0.01 AND
+	  storelag > #{lag} - 0.01 AND storelag < #{lag} + 0.01
+
+ ]]>
+</select>
 
 </mapper>

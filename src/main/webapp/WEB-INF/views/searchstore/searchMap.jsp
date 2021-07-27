@@ -83,8 +83,11 @@
 </script>
 
 <script type="text/javascript">
+
+
 	$(function() {
 		$("#searchName-btn").click(function() {
+
 			var storename = $("#name-store").val()
 			
 			var data = {
@@ -326,7 +329,7 @@
 							<button id="searchName-btn" type="submit">찾기</button>
 						</div>
 						<div>
-							<div id="map1" style="width: 1200px; height: 600px;"></div>
+							<div id="map1" style="width: 900px; height: 400px;"></div>
 							<!-- 가게정보 -->
 							<div id="storeinfo1" style="display: none"></div>
 						</div>
@@ -342,10 +345,9 @@
 							<input type="text" id="address" placeholder="주소"><br> 
 							<input type="text" id="detailAddress" placeholder="상세주소"> 
 							<input type="text" id="extraAddress" placeholder="참고항목">
-							<button id="searchAddress-btn" type="submit">찾기</button>
 						</div>
 						<div>
-							<div id="map2" style="width: 1200px; height: 600px;"></div>
+							<div id="map2" style="width: 900px; height: 400px;"></div>
 							<!-- 가게정보 -->
 							<div id="storeinfo2" style="display: none"></div>
 						</div>
