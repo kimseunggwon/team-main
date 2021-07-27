@@ -8,12 +8,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.UserReviewFileVO;
+import org.zerock.domain.UserReviewLikersVO;
 import org.zerock.domain.UserReviewVO;
 import org.zerock.mapper.UserReviewFileMapper;
+import org.zerock.mapper.UserReviewLikeMapper;
 import org.zerock.mapper.UserReviewMapper;
+
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -30,12 +36,12 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 public class UserReviewServiceImpl implements UserReviewService {
 	 
 	// AWS related
-	private String bucketName;
+	private String bucketName2;
 	private String profileName;
 	private S3Client s3;
 	
 	public UserReviewServiceImpl() {
-		this.bucketName = "swteam1";
+		this.bucketName2 = "swteam1";
 		this.profileName= "swteam1";
 		
 		Path contentLocation = new File(System.getProperty("user.home") + "/.aws/credentials").toPath();
@@ -58,7 +64,10 @@ public class UserReviewServiceImpl implements UserReviewService {
 	private UserReviewMapper reviewMapper;
 	
 	@Setter(onMethod_ = @Autowired)
-	private UserReviewFileMapper reviewFileMapper;
+	private UserReviewFileMapper fileMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private UserReviewLikeMapper likeMapper;
 	
 	// 리뷰 게시물 총 개수
 	@Override
@@ -92,7 +101,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 				ufvo.setBno(review.getReBno());
 				ufvo.setFileName(file.getOriginalFilename());
 				
-				reviewFileMapper.reviewFileInsert(ufvo);
+				fileMapper.reviewFileInsert(ufvo);
 				upload(review, file);
 			}
 		}
@@ -103,7 +112,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 		try (InputStream is = file.getInputStream()) {
 			
 			PutObjectRequest objectRequest = PutObjectRequest.builder()
-											 .bucket(bucketName)
+											 .bucket(bucketName2)
 											 .key("review" + "/" + review.getReBno() + "/" + file.getOriginalFilename())
 											 .contentType(file.getContentType())
 											 .acl(ObjectCannedACL.PUBLIC_READ)
@@ -125,11 +134,32 @@ public class UserReviewServiceImpl implements UserReviewService {
 		return reviewMapper.readReview(reBno);
 	}
 	
-	// 리뷰 좋아요 수
+	// 특정 리뷰 게시물에 대한 좋아요 사용자 리스트
 	@Override
-	public int reviewLikecount(int reBno) {
-		reviewMapper.setLikeCount(reBno);
-		return reviewMapper.getLikeCount(reBno);
+	public List<UserReviewLikersVO> getLikersList(int reBno, String userid) {
+		return likeMapper.getLikersPicked(reBno);
+	}
+	
+	// 리뷰 좋아요 수 설정 및 얻기
+	@Override
+	@Transactional
+		public int reviewLikecount(@RequestParam("reBno") int reBno, @RequestParam("userid") String userid) {
+		
+		// 좋아요를 누른 사용자 리스트 조회하고
+		List<UserReviewLikersVO> likers = likeMapper.getLikersPicked(reBno);
+		
+		// 만약 내가 좋아요를 누른 사람 중에 없으면, 목록에 넣기
+		for (UserReviewLikersVO userlikers : likers) {
+			
+			// 좋아요 수 늘리고
+			if (userlikers.getUserid().equals(userid)) {
+//				return likeMapper.getLikeCount(reBno);
+				throw new RuntimeException("이미 추천하였습니다.");
+			}
+		}
+		likeMapper.setLikeCount(reBno);
+		likeMapper.insertLikers(reBno, userid);
+		return likeMapper.getLikeCount(reBno);
 		
 	}
 
@@ -149,14 +179,14 @@ public class UserReviewServiceImpl implements UserReviewService {
 				removeReviewFile(oldReview);
 				upload(review, file);
 
-				reviewFileMapper.deleteReviewByBno(review.getReBno());
+				fileMapper.deleteReviewByBno(review.getReBno());
 
 				UserReviewFileVO rfvo = new UserReviewFileVO();
 
 				rfvo.setBno(review.getReBno());
 				rfvo.setFileName(file.getOriginalFilename());
 
-				reviewFileMapper.reviewFileInsert(rfvo);
+				fileMapper.reviewFileInsert(rfvo);
 			}
 
 		return reviewModify(review);
@@ -171,7 +201,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 		removeReviewFile(rvo);
 		
 		// 파일 삭제 (DB)
-		reviewFileMapper.deleteReviewByBno(reBno);
+		fileMapper.deleteReviewByBno(reBno);
 		
 		// 게시물 삭제
 		int cnt = reviewMapper.deleteReview(reBno);
@@ -185,7 +215,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 		String key = "review" + "/" + review.getReBno()	+ "/" + review.getFileName();
 		
 		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-												  .bucket(bucketName)
+												  .bucket(bucketName2)
 												  .key(key)
 												  .build();
 		s3.deleteObject(deleteObjectRequest);

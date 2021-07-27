@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.ReviewPageDTO;
+import org.zerock.domain.UserReviewLikersVO;
 import org.zerock.domain.UserReviewVO;
 import org.zerock.service.UserReviewService;
 
@@ -40,6 +42,7 @@ public class UserReviewController {
 	// start
 	
 	private UserReviewService service;
+	
 	
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
@@ -89,6 +92,7 @@ public class UserReviewController {
 	@GetMapping("/get")
 	public void reviewGet(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
+						  @ModelAttribute("likers") UserReviewLikersVO likers,
 						  Model model) {
 		
 		log.info("userReviewGet is working");
@@ -96,6 +100,8 @@ public class UserReviewController {
 		UserReviewVO revo = service.reviewGet(reBno);
 		
 		model.addAttribute("review", revo);
+		model.addAttribute("likers", likers);
+		
 		
 	}
 	
@@ -105,9 +111,10 @@ public class UserReviewController {
 	@PreAuthorize("isAuthenticated()")
 	public void reviewModify(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
+						  UserReviewLikersVO likers,
 						  Model model) {
 		
-		reviewGet(reBno, recri, model);
+		reviewGet(reBno, recri, likers, model);
 		
 
 	}
@@ -170,12 +177,13 @@ public class UserReviewController {
 	@PostMapping("/get")
 	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
-	public int reviewLikeCount(@RequestParam("reBno") int reBno) {
+	public int reviewLikeCount(@RequestParam("reBno") int reBno,
+							   @RequestParam("userid") String userid) {
 		
 		log.info("userReviewLikeCount is working");
 		
-		int likecnt = service.reviewLikecount(reBno);
-		
+		int likecnt = service.reviewLikecount(reBno, userid);
+
 		return likecnt;
 	}
 	

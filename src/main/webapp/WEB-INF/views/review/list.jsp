@@ -69,8 +69,19 @@ img {
 		<rev:search></rev:search>
 		
 		<!-- 리뷰 게시물 총 개수 -->
-		<div class="container" style="margin: 10px; padding: 5px;">
+		<div class="container d-flex justify-content-between" style="margin: 10px; padding: 5px;">
 			<div class="row justify-content-left">총 게시물 수 : ${totalCount }</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-secondary dropdown-toggle"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Right-aligned menu</button>
+				<div class="dropdown-menu dropdown-menu-right">
+					<button class="dropdown-item" type="button">Action</button>
+					<button class="dropdown-item" type="button">Another action</button>
+					<button class="dropdown-item" type="button">Something else
+						here</button>
+				</div>
+			</div>
 		</div>
 
 		<table id="review-list-table" class="table table-striped">

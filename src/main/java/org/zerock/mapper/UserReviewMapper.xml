@@ -13,7 +13,7 @@
 					re_title LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test='type == "W"'>
-					re_writer LIKE CONCAT('%', #{keyword}, '%')
+					userNickname LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test='type == "C"'>
 					re_content LIKE CONCAT('%', #{keyword}, '%')
@@ -124,23 +124,10 @@
 </delete>
 
 <select id="getReviewTotalCount" resultType="int">
-	SELECT COUNT(*) FROM user_review
+	SELECT COUNT(*) FROM user_review r JOIN user u
+	ON r.re_writer = u.userid
 	<include refid="ReviewCriteria"></include>
 </select>
- 
- <update id="setLikeCount">
- 	UPDATE user_review r
- 	SET
- 		r.likecount = r.likecount + 1
- 	WHERE
- 		r.re_bno = #{reBno}
- </update>
- 
- <select id="getLikeCount" resultType="int">
- 	SELECT r.likecount FROM user_review r
- 	WHERE 
- 		r.re_bno = #{reBno}
- </select>
  
  <update id="setViewCount">
 	UPDATE user_review r

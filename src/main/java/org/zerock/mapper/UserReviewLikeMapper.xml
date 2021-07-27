@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.UserReviewLikeMapper">
+
+<!-- 좋아요 수 설정 -->
+ <update id="setLikeCount">
+ 	UPDATE user_review r
+ 	SET
+ 		r.likecount = r.likecount + 1
+ 	WHERE
+ 		r.re_bno = #{review.reBno}
+ </update>
+ 
+<!-- 좋아요 수 얻어오기 --> 
+ <select id="getLikeCount" resultType="int">
+ 	SELECT r.likecount FROM user_review r
+ 	WHERE 
+ 		r.re_bno = #{review.reBno}
+ </select>
+ 
+ <!-- 좋아요 사용자 목록 -->
+ <insert id="insertLikers" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+ 	INSERT INTO user_review_like (re_bno, userid)
+ 	VALUES (#{reBno}, #{userid})
+ </insert> 
+ 
+ <!-- 사용자 좋아요 게시물 -->
+ <select id="getLikersPicked" resultType="org.zerock.domain.UserReviewLikersVO">
+	SELECT DISTINCT l.userid FROM user_review_like l
+	JOIN user_review r
+	ON l.re_bno = r.re_bno
+	WHERE l.re_bno = #{reBno}
+ </select>
+ 	
+</mapper>
