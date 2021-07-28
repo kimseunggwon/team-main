@@ -85,6 +85,11 @@ public class UserReviewServiceImpl implements UserReviewService {
 		return reviewMapper.getReviewListWithPaging(recri);
 	}
 	
+	@Override
+	public List<UserReviewVO> getAnnounceList(ReviewCriteria recri) {
+		return reviewMapper.getAnnounceListWithPaging(recri);
+	}
+	
 	// 리뷰 정렬 방식 
 	@Override
 	public List<UserReviewVO> getPopularList(ReviewCriteria recri) {
@@ -101,11 +106,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 		return orderMapper.getViewCountReviewList(recri);
 	}
 
-	@Override
-	public List<UserReviewVO> getAnnounceList(ReviewCriteria recri) {
-		return reviewMapper.getAnnounceListWithPaging(recri);
-	}
-
+	
 	// 리뷰 게시물 작성
 	@Override
 	public void reviewWrite(UserReviewVO review) {

@@ -78,16 +78,15 @@ img {
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					정렬 방식</button>
 				<div class="dropdown-menu dropdown-menu-right">
-
 					<a class="dropdown-item" href="#">BEST 5</a>
-					<div class="dropdown-divider"></div>
-					<button id="order-popular" class="dropdown-item" type="button">인기도순</button>
-					<button id="order-latest" class="dropdown-item" type="button">최신순</button>
-					<button id="order-viewcount" class="dropdown-item" type="button">조회수순</button>
+					<div class="order-new dropdown-divider"></div>
+					<c:set var="orderby" value="${popularlist }"><button id="order-popular" class="dropdown-item" type="button">인기도순</button></c:set>
+					<c:set var="orderby" value="${latestlist }" ><button id="order-latest" class="dropdown-item" type="button">최신순</button></c:set>
+					<c:set var="orderby" value="${viewcountlist }"><button id="order-viewcount" class="dropdown-item" type="button">조회수순</button></c:set>
 				</div>
 			</div>
 		</div>
-		
+		<c:set var="popularlist" value="$ }"></c:set>
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
@@ -101,7 +100,6 @@ img {
 		 		</tr>
 		 	</thead>
 		 	<tbody>
-		 	
 		 		<c:forEach items="${reList2 }" var="review">
 		 			<tr style="color: red;">
 		 				<td>공지</td>
@@ -151,6 +149,7 @@ img {
 		 		</c:forEach>
 		 	</tbody>
 		 </table>
+		 
 		 
 		 <!-- 페이지네이션 -->
 		 <div>
