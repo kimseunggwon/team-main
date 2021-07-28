@@ -5,6 +5,7 @@
   
 <mapper namespace="org.zerock.mapper.UserReviewMapper">
 
+<!-- 리뷰 페이지네이션 -->
 <sql id="ReviewCriteria">
 	<where>
 		<foreach item="type" separator="OR" collection="reviewTypeArr">
@@ -13,7 +14,7 @@
 					re_title LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test='type == "W"'>
-					re_writer LIKE CONCAT('%', #{keyword}, '%')
+					userNickname LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test='type == "C"'>
 					re_content LIKE CONCAT('%', #{keyword}, '%')
@@ -23,6 +24,7 @@
 	</where>
 </sql>
 
+<!-- 리뷰 전체 목록 -->
 <select id="getReviewList" resultType="org.zerock.domain.UserReviewVO">
 
 	<![CDATA[
@@ -36,6 +38,28 @@
 		FROM user_review
 		WHERE re_bno > 0 ORDER BY re_bno DESC
 	]]>
+
+</select>
+
+<select id="getAnnounceListWithPaging" resultType="org.zerock.domain.UserReviewVO">
+
+	SELECT
+		r.re_bno reBno,
+		r.re_title reTitle,
+		r.re_content reContent,
+		r.re_writer reWriter,
+		r.re_regdate reRegdate,
+		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
+		u.userNickname reWriterName
+	FROM user_review r JOIN user u
+	ON r.re_writer = 'admin'
+	
+	<include refid="ReviewCriteria"></include>
+	GROUP BY r.re_bno
+	ORDER BY r.re_bno DESC
+	LIMIT #{from}, #{amount}
 
 </select>
 
@@ -59,11 +83,13 @@
 	LIMIT #{from}, #{amount}
 </select>
 
+<!-- 리뷰 작성 및 레코드 삽입(insert)  -->
 <insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
 	INSERT INTO user_review (re_title, re_content, re_writer)
 	VALUES (#{reTitle}, #{reContent}, #{reWriterName})
 </insert>
 
+<!-- 리뷰 상세 읽기 -->
 <select id="readReview" resultMap="reviewMap">
 	SELECT 
 		r.re_bno reBno,
@@ -94,7 +120,6 @@
 <result property="likeCount" column="likeCount" />
 <result property="viewCount" column="viewCount" />
 <result property="reWriterName" column="reWriterName" />
-<!-- association property="writerName" column="userName" javaType="org.zerock.domain.MemberVO" /-->
 <collection property="fileName" resultMap="fileNameMap"></collection>
 </resultMap>
 
@@ -102,6 +127,7 @@
 <result column="fileName" />
 </resultMap> 
 
+<!-- 리뷰 수정하기 -->
 <update id="updateReview">
 	UPDATE user_review
 	SET
@@ -113,35 +139,26 @@
 		re_bno = #{reBno}
 </update>
 
+<!-- 게시물 번호에 따른 리뷰 삭제하기 -->
 <delete id="deleteReview">
 	DELETE FROM user_review
 	WHERE re_bno = #{reBno}
 </delete>
 
+<!-- 해당 사용자의 리뷰 삭제하기 -->
 <delete id="removeReviewByUserid">
 	DELETE FROM user_review
 	WHERE re_writer = #{userid}
 </delete>
 
+<!-- 총 리뷰 게시물 수 -->
 <select id="getReviewTotalCount" resultType="int">
-	SELECT COUNT(*) FROM user_review
+	SELECT COUNT(*) FROM user_review r JOIN user u
+	ON r.re_writer = u.userid
 	<include refid="ReviewCriteria"></include>
 </select>
  
- <update id="setLikeCount">
- 	UPDATE user_review r
- 	SET
- 		r.likecount = r.likecount + 1
- 	WHERE
- 		r.re_bno = #{reBno}
- </update>
- 
- <select id="getLikeCount" resultType="int">
- 	SELECT r.likecount FROM user_review r
- 	WHERE 
- 		r.re_bno = #{reBno}
- </select>
- 
+<!-- 리뷰 조회수 설정하기 -->
  <update id="setViewCount">
 	UPDATE user_review r
 	 	SET

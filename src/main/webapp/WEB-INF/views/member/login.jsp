@@ -96,7 +96,6 @@ $(function(){
 		$("#sang-normal-img").attr("src", "${appRoot}/resources/image/로그인1.png");
 		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자 로그인2.png");
 	})
-	
 })
 
 </script>

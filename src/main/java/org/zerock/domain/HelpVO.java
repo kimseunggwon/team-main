@@ -12,6 +12,7 @@ public class HelpVO {
 	private String content;
 	private String writer;
 	private String writerName;
+	private String userNickName;
 	private Date regdate;
 	private Date updateDate;
 	

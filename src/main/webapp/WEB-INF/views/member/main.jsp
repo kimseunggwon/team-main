@@ -23,6 +23,28 @@
  body {	
    font-family: 'GongGothicMedium';
 }
+.button1 {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:200px;
+    font-family: 'GongGothicMedium';
+}
+.button1:hover {
+	background: #0583F2;
+}
 </style>
 
 </head>
@@ -94,17 +116,66 @@
 	
 	<hr>
 	
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<div class="row justify-content-center">
+			<button class="button1">고객센터 답변</button>
+			<button class="button1"></button>
+			<button class="button1"></button>
+		</div>
+	</sec:authorize>
+	
 	<div class="row justify-content-center">
 		<form action="${appRoot }/review/list">
 	  			<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
 	  		</form>
 	</div>
 	
-	
-</div>
+			<br>
+		
+		<hr>
+		
+		 <div class="row justify-content-around mb-3">
+		 	<div class="row">
+		 
+		 		<div class="mr-10">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+		 		</div>
+		 	
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<div>
+		 			서울시 강남구 삼성동 1234 우 : 123-1234
+		 			<br>
+					TEL:02-123-1234 Email:email@domain.com
+					<br>
+					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
+					<br>
+				</div>
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<span >
+		 			<a href="#">
+		 			 	<img src="${appRoot }/resources/image/blog.jpg">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			</a>
+		 		</span>
+		 	</div>
+		 		
+		 </div>
+
 
 <tags:MainMapTags>
 </tags:MainMapTags>
 
+</div>
 </body>
 </html>

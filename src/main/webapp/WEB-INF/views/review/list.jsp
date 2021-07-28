@@ -69,10 +69,25 @@ img {
 		<rev:search></rev:search>
 		
 		<!-- 리뷰 게시물 총 개수 -->
-		<div class="container" style="margin: 10px; padding: 5px;">
+		<div class="container d-flex justify-content-between"
+			style="margin: 10px; padding: 5px;">
 			<div class="row justify-content-left">총 게시물 수 : ${totalCount }</div>
-		</div>
+			<!-- 정렬 방식 -->
+			<div class="btn-group">
+				<button type="button" class="btn btn-secondary dropdown-toggle"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					정렬 방식</button>
+				<div class="dropdown-menu dropdown-menu-right">
 
+					<a class="dropdown-item" href="#">BEST 5</a>
+					<div class="dropdown-divider"></div>
+					<button id="order-popular" class="dropdown-item" type="button">인기도순</button>
+					<button id="order-latest" class="dropdown-item" type="button">최신순</button>
+					<button id="order-viewcount" class="dropdown-item" type="button">조회수순</button>
+				</div>
+			</div>
+		</div>
+		
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
@@ -86,6 +101,31 @@ img {
 		 		</tr>
 		 	</thead>
 		 	<tbody>
+		 	
+		 		<c:forEach items="${reList2 }" var="review">
+		 			<tr style="color: red;">
+		 				<td>공지</td>
+		 				<td>
+		 					<c:url value="/review/get" var="reviewGetUrl">
+		 						<c:param name="reBno" value="${review.reBno }" />
+		 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
+		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
+		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
+		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+		 					</c:url>
+		 					<a style="color: red; text-decoration: none;" id="review-record-link"  href="${reviewGetUrl }">
+		 						${review.reTitle }
+		 					</a>
+		 				</td>
+		 				
+		 				<td>${review.reWriterName }</td>
+		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
+		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
+		 				<td>${review.likeCount }</td>
+		 				<td><c:out value="${review.viewCount }"></c:out></td>
+		 			</tr>
+		 		</c:forEach>
+		 		
 		 		<c:forEach items="${reList }" var="review">
 		 			<tr>
 		 				<td>${review.reBno }</td>

@@ -226,21 +226,19 @@ $(function() {
 		});
 	});
 	
-	$("#sang-authnum").click(function(){
 		
-		$("#sang-inz-btn").click(function(){
-			var idI = $("#sang-inz-input").val();
-			$.post(authurl, {idI: idI}, function(data) {
-				if (data == 'ok2') {
-					console.log("인증번호 맞습니다!");
-					alert("인증되었습니다!");
-					$("#signup").removeAttr("hidden");
-				} else {
-					console.log("인증번호 틀립니다 ㅠ");
-					alert("틀린 인증번호 입니다.");
-					$("#sang-inz-input").focus();
-				}
-			});
+	$("#sang-inz-btn").click(function(){
+		var idI = $("#sang-inz-input").val();
+		$.post(authurl, {idI: idI}, function(data) {
+			if (data == 'ok2') {
+				console.log("인증번호 맞습니다!");
+				alert("인증되었습니다!");
+				$("#signup").removeAttr("hidden");
+			} else {
+				console.log("인증번호 틀립니다 ㅠ");
+				alert("틀린 인증번호 입니다.");
+				$("#sang-inz-input").focus();
+			}
 		});
 	});
 	
@@ -416,7 +414,15 @@ $(function() {
               });
       
        }else{
-    	   
+    	    let normalAddressProcessDone = false;
+    	    let storeAddressProcessDone = false;
+    	    
+    	    let signUpFormsubmit = function () {
+				if (normalAddressProcessDone && storeAddressProcessDone) {
+					$("#sang-signup-form").submit();
+				}
+    	    }
+    	    
     		if($("#sang-storename").val().trim() == ""){
     			alert("가게 이름은 필수 입력사항입니다.");
     			$("#sang-storename").focus();
@@ -460,6 +466,9 @@ $(function() {
             $("#sang-lat").val(lat);
             $("#sang-lag").val(lag);
             
+            normalAddressProcessDone = true;
+            signUpFormsubmit();
+            
         });
        
        naver.maps.Service.geocode({
@@ -484,7 +493,9 @@ $(function() {
            $("#sang-storelat").val(storelat);
            $("#sang-storelag").val(storelag);
            
-          $("#sang-signup-form").submit();
+   	       storeAddressProcessDone = true;
+   	       signUpFormsubmit();
+          /*$("#sang-signup-form").submit();*/
           });
          
     }

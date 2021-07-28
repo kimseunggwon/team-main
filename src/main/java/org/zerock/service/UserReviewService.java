@@ -2,8 +2,12 @@ package org.zerock.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
+import org.zerock.domain.UserReviewLikersVO;
 import org.zerock.domain.UserReviewVO;
 
 public interface UserReviewService {
@@ -12,6 +16,8 @@ public interface UserReviewService {
 
 	List<UserReviewVO> getReviewList(ReviewCriteria recri);
 
+	List<UserReviewVO> getAnnounceList(ReviewCriteria recri);
+	
 	UserReviewVO reviewGet(int reBno);
 	
 	boolean reviewModify(UserReviewVO review);
@@ -24,8 +30,17 @@ public interface UserReviewService {
 
 	void reviewWrite(UserReviewVO review, MultipartFile[] file);
 	
-	int reviewLikecount(int reBno);
+	int reviewLikecount(int reBno, String userid);
 
+	List<UserReviewLikersVO> getLikersList(int reBno, String userid);
 	
+	// Order By
+
+	List<UserReviewVO> getPopularList(ReviewCriteria recri);
+
+	List<UserReviewVO> getLatestList(ReviewCriteria recri);
+
+	List<UserReviewVO> getviewCountList(ReviewCriteria recri);
 	
+
 }

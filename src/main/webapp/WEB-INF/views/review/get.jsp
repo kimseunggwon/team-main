@@ -68,6 +68,7 @@ img {
 	const appRoot = "${appRoot}";
 	// const reBno = "${review.reBno}"
 	const userid = "${pinfo.member.userid}";
+	const likersid = "${likers.userid}";
 </script>
 
 <script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
@@ -122,7 +123,7 @@ img {
 
 		<!-- Main Writing Content -->
 		<div id="re-write-content" class="container">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center"">
 				<div class="col-8">
 						<!-- 평점 -->
 						<%--
@@ -134,7 +135,7 @@ img {
 							<c:forEach items="${review.fileName }" var="rfile">
 								<div>
 									<img class="img-fluid"
-										src="${imgRoot }${review.reBno}/${rfile }">
+										src="${imgReviewRoot }${review.reBno}/${rfile }">
 								</div>
 							</c:forEach>
 						</c:if>
@@ -150,9 +151,7 @@ img {
 						<div class="item form-group">
 							<label for="re-textarea1">리뷰 내용</label>
 							<textarea readonly="readonly" class="form-control"
-								name="reContent" cols="2" rows="10" >
-				 				<c:out value="${review.reContent }"></c:out>
-				 			</textarea>
+								name="reContent" cols="2" rows="10" ><c:out value="${review.reContent }"></c:out></textarea>
 						</div>
 						
 						<!-- 작성자 -->
@@ -193,6 +192,7 @@ img {
 			좋아합니다.
 		</div>
 	</div>
+	<div style="display:none;" id="likerslist"></div>
 
 	<!-- 좋아요 Modal (회원 접근 가능) -->
 	<sec:authorize access="isAuthenticated()">
