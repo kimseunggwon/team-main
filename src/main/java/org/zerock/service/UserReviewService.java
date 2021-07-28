@@ -22,7 +22,7 @@ public interface UserReviewService {
 	
 	boolean reviewModify(UserReviewVO review);
 
-	boolean reviewModify(UserReviewVO review, MultipartFile file);
+	boolean reviewModify(UserReviewVO review, MultipartFile[] file);
 
 	boolean reviewRemove(int reBno);
 

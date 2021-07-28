@@ -8,6 +8,7 @@ $(document).ready(function() {
     const $reRemoveBtn = $("#review-remove-btn");
 
     $reModifyBtn.click(function () {  
+         //   $("#re-modify-form1").attr("action", $reModifyUrl);
             $("#re-modify-form1").submit();
     })
     $reRemoveBtn.click(function () {

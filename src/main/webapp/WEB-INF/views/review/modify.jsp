@@ -72,11 +72,15 @@ img {
 }
 </style>
 
+<link rel="stylesheet" type="text/css" href="${appRoot }/resources/css/uploadajax.css">
+
 <script>
 	const appRoot = "${appRoot}";
 	const userid = "${pinfo.member.userid}";
 </script>
 <script src="${appRoot }/resources/js/review/modifyandremove.js"></script>
+<script src="${appRoot }/resources/js/review/uploadajax.js"></script>
+
 
 <body>
 
@@ -131,9 +135,13 @@ img {
 								</div>
 							</c:forEach>
 						</c:if>
+						<div class="uploadResult">
+			 				<ul>
+			 				</ul>
+			 			</div>
 			 			<div class="item form-group">
 				 			<label id="re-input2-label" for="re-input2">이미지 선택</label>
-				 			<input style="display:none;"id="re-input2" multiple="multiple" class="form-control" type="file" accept="image/*" > 
+				 			<input style="display:none;"id="re-input2" name="file" multiple="multiple" class="form-control" type="file" accept="image/*" > 
 			 			</div>
 			 			<!-- 제목 -->
 			 			<div class="item form-group">

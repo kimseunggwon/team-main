@@ -16,6 +16,8 @@ public class ReviewCriteria {
 	private String type;
 	private String keyword;
 	
+	private int sort;
+	
 	// Constructor
 	public ReviewCriteria() {
 		this(1, 10);

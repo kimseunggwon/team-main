@@ -62,7 +62,7 @@
 	
 	<include refid="ReviewCriteria"></include>
 	GROUP BY r.re_bno
-	ORDER BY r.regdate DESC
+	ORDER BY r.re_regdate DESC
 	LIMIT #{from}, #{amount}
 </select>
 

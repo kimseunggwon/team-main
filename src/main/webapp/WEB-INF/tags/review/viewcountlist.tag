@@ -5,8 +5,7 @@
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
 
-<c:if test="${orderby eq popularlist }">
-<table id="review-list-table" class="table table-striped">
+	<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
 		 			<th>#</th>
@@ -29,11 +28,12 @@
 		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
 		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+		 						<c:param name="sort" value="300" />
 		 					</c:url>
-		 					<a style="color: red; text-decoration: none;" id="review-record-link"  href="${reviewGetUrl }">
-		 						${review.reTitle }
-		 					</a>
-		 				</td>
+						<a style="color: red; text-decoration: none;"
+						id="review-record-link" href="${reviewGetUrl }">
+							${review.reTitle } </a>
+						</td>
 		 				
 		 				<td>${review.reWriterName }</td>
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
@@ -43,7 +43,7 @@
 		 			</tr>
 		 		</c:forEach>
 		 		
-		 		<c:forEach items="${reList }" var="review">
+		 		<c:forEach items="${viewcountlist }" var="review">
 		 			<tr>
 		 				<td>${review.reBno }</td>
 		 				<td>
@@ -53,6 +53,7 @@
 		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
 		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+		 						<c:param name="sort" value="300" />
 		 					</c:url>
 		 					<a id="review-record-link"  href="${reviewGetUrl }">
 		 						${review.reTitle }
@@ -68,5 +69,3 @@
 		 		</c:forEach>
 		 	</tbody>
 		 </table>
-</c:if>
-		 
