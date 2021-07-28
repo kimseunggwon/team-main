@@ -87,7 +87,7 @@ img {
 				</div>
 			</div>
 		</div>
-
+		
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
