@@ -137,7 +137,6 @@ public class SangpilController {
 		}else {
 			return "redirect:/member/signup?error";
 		}
-//		return "redirect:/member/login";
 	}
 	
 	@PostMapping("/empsignup")
@@ -152,7 +151,6 @@ public class SangpilController {
 		}else {
 			return "redirect:/member/signup?error";
 		}
-//		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/dup")

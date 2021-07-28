@@ -99,6 +99,10 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public List<UserReviewVO> getviewCountList(ReviewCriteria recri) {
 		return orderMapper.getViewCountReviewList(recri);
+
+	@Override
+	public List<UserReviewVO> getAnnounceList(ReviewCriteria recri) {
+		return reviewMapper.getAnnounceListWithPaging(recri);
 	}
 
 	// 리뷰 게시물 작성

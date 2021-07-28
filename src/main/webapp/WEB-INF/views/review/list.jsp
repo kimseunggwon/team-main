@@ -101,6 +101,31 @@ img {
 		 		</tr>
 		 	</thead>
 		 	<tbody>
+		 	
+		 		<c:forEach items="${reList2 }" var="review">
+		 			<tr style="color: red;">
+		 				<td>공지</td>
+		 				<td>
+		 					<c:url value="/review/get" var="reviewGetUrl">
+		 						<c:param name="reBno" value="${review.reBno }" />
+		 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
+		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
+		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
+		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+		 					</c:url>
+		 					<a style="color: red; text-decoration: none;" id="review-record-link"  href="${reviewGetUrl }">
+		 						${review.reTitle }
+		 					</a>
+		 				</td>
+		 				
+		 				<td>${review.reWriterName }</td>
+		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
+		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
+		 				<td>${review.likeCount }</td>
+		 				<td><c:out value="${review.viewCount }"></c:out></td>
+		 			</tr>
+		 		</c:forEach>
+		 		
 		 		<c:forEach items="${reList }" var="review">
 		 			<tr>
 		 				<td>${review.reBno }</td>
