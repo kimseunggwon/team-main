@@ -67,7 +67,8 @@ img {
 <script>
 	const appRoot = "${appRoot}";
 	// const reBno = "${review.reBno}"
-	const $userid = "${pinfo.member.userid}";
+	const userid = "${pinfo.member.userid}";
+	const likersid = "${likers.userid}";
 </script>
 
 <script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
@@ -191,6 +192,7 @@ img {
 			좋아합니다.
 		</div>
 	</div>
+	<div style="display:none;" id="likerslist"></div>
 
 	<!-- 좋아요 Modal (회원 접근 가능) -->
 	<sec:authorize access="isAuthenticated()">

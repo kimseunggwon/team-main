@@ -22,5 +22,6 @@ public class UserReviewVO {
 	// file
 	// private String fileName;
 	private List<String> fileName;
+	private List<UserReviewLikersVO> likers;
 	
 }

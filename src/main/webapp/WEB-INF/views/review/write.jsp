@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
+<%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,9 +64,13 @@ img {
 }
 </style>
 
+<link rel="stylesheet" type="text/css" href="${appRoot }/resources/css/uploadajax.css">
+
 <script>
-// 리뷰 평점을 매기자...
+	const appRoot = "${appRoot}";
 </script>
+
+<script src="${appRoot }/resources/js/review/uploadajax.js"></script>
 
 </head>
 <body style="overflow-x:hidden;">
@@ -122,13 +126,17 @@ img {
 			 			<!-- 내용 -->
 			 			<div class="item form-group">
 				 			<label for="re-textarea1">리뷰 내용</label>
-				 			<textarea class="form-control" name="reContent" col="2" rows="10" placeholder="내용을 입력해주세요." required></textarea> 
+				 			<textarea class="form-control" name="reContent" cols="2" rows="10" placeholder="내용을 입력해주세요." required></textarea> 
 			 			</div>
 			 			
 						<!-- 이미지 파일 -->
-			 			<div class="item form-group">
+			 			<div id="uploadDiv" class="item form-group">
 				 				<label id="re-input2-label" for="re-input2">이미지 업로드</label>
 				 			<input style="display:none;"id="re-input2" class="form-control" multiple="multiple" type="file" name="file" accept="image/*" > 
+			 			</div>
+			 			<div class="uploadResult">
+			 				<ul>
+			 				</ul>
 			 			</div>
 			 			<!-- 작성자 -->
 			 			<div class="item form-group">
