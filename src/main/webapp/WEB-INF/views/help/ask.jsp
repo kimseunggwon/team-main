@@ -85,7 +85,7 @@
 				
 				<div class="form-group">
 					<label for="input3">파일</label> 
-					<input id="input3" class="form-control" type="file" name="file" accept="image/*" />
+					<input id="input3" class="form-control" type="file" name="file" accept="image/*" multiple="multiple" />
 				</div>
 
 				<div class="form-group">

@@ -97,17 +97,18 @@ var userid = "${pinfo.member.userid}";
 				</div>
 				<div class="form-group">
 					<label for="textarea1">내용</label>
-						<textarea readonly="readonly" id="textarea1" class="form-control" name="content">
-						<c:out value="${help.content }" />
-						</textarea>
+					<textarea readonly="readonly" id="textarea1" class="form-control" name="content"><c:out value="${help.content }" /></textarea>
 				</div>
 				
 				<c:if test="${not empty help.fileName }">
-					<div>
-						<img class="img-fluid"
-						src="${askImgRoot}${help.bno }/${help.fileName}">
-					</div>
+					 <c:forEach items="${help.fileName }" var="rfile">
+						<div>
+							<img class="img-fluid"
+							src="${askImgRoot}${help.bno }/${rfile}">
+						</div>
+					</c:forEach>
 				</c:if>
+				
 				
 				<div class="form-group">
 					<label for="input2">작성자</label>

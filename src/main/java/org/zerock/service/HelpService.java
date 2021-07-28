@@ -20,7 +20,7 @@ public interface HelpService {
 	
 	public int getTotal(Pagenation pag);
 	
-	public void register(HelpVO help, MultipartFile file);
+	public void register(HelpVO help, MultipartFile[] file);
 	
-	public boolean modify(HelpVO help, MultipartFile file);
+	public boolean modify(HelpVO help, MultipartFile[] file);
 }
