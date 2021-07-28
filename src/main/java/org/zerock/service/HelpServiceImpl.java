@@ -16,8 +16,8 @@ import org.zerock.mapper.AskFileMapper;
 import org.zerock.mapper.AskReplyMapper;
 import org.zerock.mapper.HelpMapper;
 
-
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.profiles.ProfileFile;
@@ -26,6 +26,7 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
+@Log4j
 @Service
 public class HelpServiceImpl implements HelpService {
 	
@@ -83,17 +84,20 @@ public class HelpServiceImpl implements HelpService {
 	
 	@Override
 	@Transactional
-	public void register(HelpVO help, MultipartFile file) {
+	public void register(HelpVO help, MultipartFile[] mfile) {
 		register(help);
 		
-		if(file != null && file.getSize() > 0) {
+		for (MultipartFile file : mfile) {
 			
-		AskFileVO vo = new AskFileVO();
-		vo.setBno(help.getBno());
-		vo.setFileName(file.getOriginalFilename());
-		
-		fileMapper.insert(vo);
-		upload(help, file);
+			if(file != null && file.getSize() > 0) {
+				
+				AskFileVO vo = new AskFileVO();
+				vo.setBno(help.getBno());
+				vo.setFileName(file.getOriginalFilename());
+				
+				fileMapper.insert(vo);
+				upload(help, file);
+		}
 		
 		}
 	}
@@ -127,21 +131,25 @@ public class HelpServiceImpl implements HelpService {
 	
 	@Override
 	@Transactional
-	public boolean modify(HelpVO help, MultipartFile file) {
+	public boolean modify(HelpVO help, MultipartFile[] mfile) {
+	
+		HelpVO oldBoard = mapper.read(help.getBno());
+		removeFile(oldBoard);
+
+		// tbl_board_file은 삭제 후 인서트
+		fileMapper.deleteByBno(help.getBno());
 		
-		if(file != null && file.getSize() > 0) {
-			// s3는 삭제 후 재업로드
-			HelpVO oldBoard = mapper.read(help.getBno());
-			removeFile(oldBoard);
-			upload(help, file);
-			
-			// tbl_board_file은 삭제 후 인서트
-			fileMapper.deleteByBno(help.getBno());
-			
-			AskFileVO vo = new AskFileVO();
-			vo.setBno(help.getBno());
-			vo.setFileName(file.getOriginalFilename());
-			fileMapper.insert(vo);
+		for (MultipartFile file : mfile) {
+			if(file != null && file.getSize() > 0) {
+				// s3는 삭제 후 재업로드
+				upload(help, file);
+				
+				
+				AskFileVO vo = new AskFileVO();
+				vo.setBno(help.getBno());
+				vo.setFileName(file.getOriginalFilename());
+				fileMapper.insert(vo);
+			}			
 		}
 		return modify(help);
 	}
@@ -168,14 +176,17 @@ public class HelpServiceImpl implements HelpService {
 
 	private void removeFile(HelpVO vo) {
 		//String buckeyName = "";
-		String key =  "help" + "/" + vo.getBno() + "/" + vo.getFileName();
+		for (String file : vo.getFileName()) {
+			String key =  "help" + "/" + vo.getBno() + "/" + file;
+			log.info(key);
+			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+					.bucket(bucketName)
+					.key(key)
+					.build();
+			
+			s3.deleteObject(deleteObjectRequest);
+		}
 		
-		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-				.bucket(bucketName)
-				.key(key)
-				.build();
-		
-		s3.deleteObject(deleteObjectRequest);
 		
 		
 		

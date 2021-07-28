@@ -50,8 +50,7 @@ public class HelpController {
 	/* 글 작성 등록 */
 	@RequestMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public String register(HelpVO help, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
-		help.setFileName(file.getOriginalFilename());
+	public String register(HelpVO help, @RequestParam("file") MultipartFile[] file, RedirectAttributes rttr) {
 		
 		// service에게 등록 업무 시키고
 		service.register(help, file);
@@ -98,8 +97,8 @@ public class HelpController {
 
 
 	@PostMapping("/askModifyContent")
-	@PreAuthorize("principal.userid == #help.writer")
-	public String askModifyContent(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+	@PreAuthorize("principal.username == #help.writer")
+	public String askModifyContent(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile[] file, RedirectAttributes rttr) {
 		
 		boolean success = service.modify(help, file);
 		
@@ -119,9 +118,9 @@ public class HelpController {
 		
 	}
 	
-	@PostMapping("/remove")
-	@PreAuthorize("principal.userName == #writer") // 720 쪽
-	public String remove(@RequestParam("bno") Long bno, 
+	@PostMapping("/askRemove")
+	@PreAuthorize("principal.username == #writer") // 720 쪽
+	public String askRemove(@RequestParam("bno") Long bno, 
 			Pagenation pag, RedirectAttributes rttr, String writer) {
 		//parameter 수집
 		

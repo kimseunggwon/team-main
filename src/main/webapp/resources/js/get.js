@@ -5,7 +5,7 @@
 	function showModifyModal(rno) {
 		$.ajax({
 			type: "get",
-			url: appRoot + "/replies/" + rno,
+			url: appRoot + "/askReplies/" + rno,
 			success: function (reply) {
 				$("#reply-rno-input2").val(reply.rno);
 				$("#reply-replyer-input2").val(reply.replyer);
@@ -79,7 +79,7 @@
 	function getReplyList() {
 		$.ajax({
 			type: "get",
-			url: appRoot + "/replies/pages/" + boardBno,
+			url: appRoot + "/askReplies/pages/" + bno,
 			success: function(list) {
 				console.log(list);
 				showReplyList(list);
@@ -106,7 +106,7 @@
 		
 		$.ajax({
 			type: "post",
-			url: appRoot + "/replies/new",
+			url: appRoot + "/askReplies/new",
 			data: JSON.stringify(data),
 			contentType: "application/json",
 			success: function() {
@@ -141,7 +141,7 @@
 		
 		$.ajax({
 			type: "put",
-			url: appRoot + "/replies/" + rno,
+			url: appRoot + "/askReplies/" + rno,
 			data: JSON.stringify(data),
 			contentType : "application/json",
 			success: function() {
@@ -175,7 +175,7 @@
 			
 			$.ajax({
 				type: "delete",
-				url: appRoot + "/replies/" + rno,
+				url: appRoot + "/askReplies/" + rno,
 				data : JSON.stringify(data),
 				contentType : "application/JSON",
 				success: function () {
