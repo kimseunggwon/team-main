@@ -143,7 +143,7 @@ img {
 			 			<!-- 내용 -->
 			 			<div class="item form-group">
 				 			<label for="re-textarea1">리뷰 내용</label>
-				 			<textarea class="form-control" name="reContent" col="2" rows="10" placeholder="내용을 입력해주세요.">${review.reContent }</textarea> 
+				 			<textarea class="form-control" name="reContent" cols="2" rows="10" placeholder="내용을 입력해주세요.">${review.reContent }</textarea> 
 			 			</div>
 			 			<!-- 작성자 -->
 			 			<div class="item form-group">

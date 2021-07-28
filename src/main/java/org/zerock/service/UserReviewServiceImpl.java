@@ -18,6 +18,7 @@ import org.zerock.domain.UserReviewVO;
 import org.zerock.mapper.UserReviewFileMapper;
 import org.zerock.mapper.UserReviewLikeMapper;
 import org.zerock.mapper.UserReviewMapper;
+import org.zerock.mapper.UserReviewOrderByMapper;
 
 import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 
@@ -69,6 +70,9 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Setter(onMethod_ = @Autowired)
 	private UserReviewLikeMapper likeMapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private UserReviewOrderByMapper orderMapper;
+	
 	// 리뷰 게시물 총 개수
 	@Override
 	public int getReviewTotal(ReviewCriteria recri) {
@@ -79,6 +83,22 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public List<UserReviewVO> getReviewList(ReviewCriteria recri) {
 		return reviewMapper.getReviewListWithPaging(recri);
+	}
+	
+	// 리뷰 정렬 방식 
+	@Override
+	public List<UserReviewVO> getPopularList(ReviewCriteria recri) {
+		return orderMapper.getPopularReviewList(recri);
+	}
+	
+	@Override
+	public List<UserReviewVO> getLatestList(ReviewCriteria recri) {
+		return orderMapper.getLatestReviewList(recri);
+	}
+	
+	@Override
+	public List<UserReviewVO> getviewCountList(ReviewCriteria recri) {
+		return orderMapper.getViewCountReviewList(recri);
 	}
 
 	// 리뷰 게시물 작성
@@ -124,7 +144,6 @@ public class UserReviewServiceImpl implements UserReviewService {
 			throw new RuntimeException();
 		}
 	}
-	
 	
 	// 리뷰 게시물 상세
 	@Override

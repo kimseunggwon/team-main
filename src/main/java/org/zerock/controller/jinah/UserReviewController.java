@@ -59,7 +59,21 @@ public class UserReviewController {
 		model.addAttribute("totalCount", reviewTotal);
 	}
 	
-	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList
+	// 리뷰 정렬하기
+	@PostMapping("/list")
+	public void reviewOrderBy(@ModelAttribute("recri") ReviewCriteria recri,
+							  Model model) {
+		List<UserReviewVO> popularlist = service.getPopularList(recri);
+		List<UserReviewVO> latestlist = service.getLatestList(recri);
+		List<UserReviewVO> viewcountlist = service.getviewCountList(recri);
+		
+		model.addAttribute("popularlist", popularlist);
+		model.addAttribute("latestlist", latestlist);
+		model.addAttribute("viewcountlist", viewcountlist);
+		
+	}
+	
+	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList + view
 	
 	// 리뷰 작성하기 (이미지 파일 포함) - userReviewWrite
 	@PostMapping("/write")

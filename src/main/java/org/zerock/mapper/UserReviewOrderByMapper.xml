@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.UserReviewOrderByMapper">
+
+<!-- 리뷰 페이지네이션 -->
+<sql id="ReviewCriteria">
+	<where>
+		<foreach item="type" separator="OR" collection="reviewTypeArr">
+			<choose>
+				<when test='type == "T"'>
+					re_title LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test='type == "W"'>
+					userNickname LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test='type == "C"'>
+					re_content LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+			</choose>
+		</foreach>
+	</where>
+</sql>
+
+<!-- 인기도순 -->
+<select id="getPopularReviewList" resultType="org.zerock.domain.UserReviewVO">
+	SELECT
+		r.re_bno reBno,
+		r.re_title reTitle,
+		r.re_content reContent,
+		r.re_writer reWriter,
+		r.re_regdate reRegdate,
+		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
+		u.userNickname reWriterName
+	FROM user_review r JOIN user u
+	ON r.re_writer = u.userid
+	
+	<include refid="ReviewCriteria"></include>
+	GROUP BY r.re_bno
+	ORDER BY r.likecount DESC
+	LIMIT #{from}, #{amount}
+</select>
+
+<!-- 최신순 -->
+<select id="getLatestReviewList" resultType="org.zerock.domain.UserReviewVO">
+	SELECT
+		r.re_bno reBno,
+		r.re_title reTitle,
+		r.re_content reContent,
+		r.re_writer reWriter,
+		r.re_regdate reRegdate,
+		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
+		u.userNickname reWriterName
+	FROM user_review r JOIN user u
+	ON r.re_writer = u.userid
+	
+	<include refid="ReviewCriteria"></include>
+	GROUP BY r.re_bno
+	ORDER BY r.regdate DESC
+	LIMIT #{from}, #{amount}
+</select>
+
+<!-- 조회수순 -->
+<select id="getViewCountReviewList" resultType="org.zerock.domain.UserReviewVO">
+	SELECT
+		r.re_bno reBno,
+		r.re_title reTitle,
+		r.re_content reContent,
+		r.re_writer reWriter,
+		r.re_regdate reRegdate,
+		r.re_updatedate reUpdatedate,
+		r.likecount likeCount,
+		r.viewcount viewCount,
+		u.userNickname reWriterName
+	FROM user_review r JOIN user u
+	ON r.re_writer = u.userid
+	
+	<include refid="ReviewCriteria"></include>
+	GROUP BY r.re_bno
+	ORDER BY r.viewcount DESC
+	LIMIT #{from}, #{amount}
+</select>
+</mapper>

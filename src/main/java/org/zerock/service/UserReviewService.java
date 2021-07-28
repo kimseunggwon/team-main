@@ -32,4 +32,12 @@ public interface UserReviewService {
 
 	List<UserReviewLikersVO> getLikersList(int reBno, String userid);
 	
+	// Order By
+
+	List<UserReviewVO> getPopularList(ReviewCriteria recri);
+
+	List<UserReviewVO> getLatestList(ReviewCriteria recri);
+
+	List<UserReviewVO> getviewCountList(ReviewCriteria recri);
+	
 }

@@ -69,17 +69,21 @@ img {
 		<rev:search></rev:search>
 		
 		<!-- 리뷰 게시물 총 개수 -->
-		<div class="container d-flex justify-content-between" style="margin: 10px; padding: 5px;">
+		<div class="container d-flex justify-content-between"
+			style="margin: 10px; padding: 5px;">
 			<div class="row justify-content-left">총 게시물 수 : ${totalCount }</div>
+			<!-- 정렬 방식 -->
 			<div class="btn-group">
 				<button type="button" class="btn btn-secondary dropdown-toggle"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Right-aligned menu</button>
+					정렬 방식</button>
 				<div class="dropdown-menu dropdown-menu-right">
-					<button class="dropdown-item" type="button">Action</button>
-					<button class="dropdown-item" type="button">Another action</button>
-					<button class="dropdown-item" type="button">Something else
-						here</button>
+
+					<a class="dropdown-item" href="#">BEST 5</a>
+					<div class="dropdown-divider"></div>
+					<button id="order-popular" class="dropdown-item" type="button">인기도순</button>
+					<button id="order-latest" class="dropdown-item" type="button">최신순</button>
+					<button id="order-viewcount" class="dropdown-item" type="button">조회수순</button>
 				</div>
 			</div>
 		</div>

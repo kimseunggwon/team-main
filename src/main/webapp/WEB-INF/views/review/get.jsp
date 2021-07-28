@@ -151,8 +151,7 @@ img {
 						<div class="item form-group">
 							<label for="re-textarea1">리뷰 내용</label>
 							<textarea readonly="readonly" class="form-control"
-								name="reContent" cols="2" rows="10" >
-				 				<c:out value="${review.reContent }"></c:out>
+								name="reContent" cols="2" rows="10" ><c:out value="${review.reContent }"></c:out>
 				 			</textarea>
 						</div>
 						
