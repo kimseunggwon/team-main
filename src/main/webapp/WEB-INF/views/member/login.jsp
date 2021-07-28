@@ -100,6 +100,53 @@ $(function(){
 
 </script>
 
+<script>
+    $(document).ready(function()
+    {
+        var userId = getCookie("cookieUserId"); 
+        $("input[name='username']").val(userId); 
+         
+        if($("input[name='username']").val() != ""){ // Cookie에 만료되지 않은 아이디가 있어 입력됬으면 체크박스가 체크되도록 표시
+            $("input[name='remember']").attr("checked", true);
+        }
+         
+        $("#sang-login-btn", $('#sang-login-form')).click(function(){ // Login Form을 Submit할 경우,
+            if($("input[name='remember']").is(":checked")){ // ID 기억하기 체크시 쿠키에 저장
+                var userId = $("input[name='username']").val();
+                setCookie("cookieUserId", userId, 7); // 7일동안 쿠키 보관
+            } else {
+                deleteCookie("cookieUserId");
+            }
+        });             
+    })
+ 
+    function setCookie(cookieName, value, exdays){
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate()+exdays);
+        var cookieValue = escape(value)+((exdays==null)? "": "; expires="+exdate.toGMTString());
+        document.cookie = cookieName+"="+cookieValue;
+    }
+    function deleteCookie(cookieName){
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate()-1);
+        document.cookie = cookieName+"= "+"; expires="+expireDate.toGMTString();
+    }
+    function getCookie(cookieName){
+        cookieName = cookieName + '=';
+        var cookieData = document.cookie;
+        var start = cookieData.indexOf(cookieName);
+        var cookieValue = '';
+        if(start != -1){
+            start += cookieName.length;
+            var end = cookieData.indexOf(';', start);
+            if(end == -1) end = cookieData.length;
+            cookieValue = cookieData.substring(start, end);
+        }
+        return unescape(cookieValue);
+         
+    }
+</script>
+
 </head>
 <body style="overflow: hidden;" class="row justify-content-center mt-5">
 <div class="container">
@@ -133,7 +180,7 @@ $(function(){
 	            
 				<div class="container-1 row">
 					<span style="position: absolute; margin-top: 27px; margin-left: 18px" class="icon"><i class="fas fa-user"></i></span>
-					<input autofocus name="username" class="search" type="text" id="input1" placeholder="아이디" />
+					<input spellcheck="false" autocomplete="off" autofocus name="username" class="search" type="text" id="input1" placeholder="아이디" />
 				</div>
 				
 				<br>
@@ -156,11 +203,13 @@ $(function(){
 				</div> 
 				-->
 				
-				<div class="row justify-content-end">
-					<input name="remember-me" type="checkbox" class="form-check-input" id="checkbox1"> <!-- name어트리뷰트가 가장 중요 -->
-					<label style="text-align: right;" class="form-check-label col-12" for="checkbox1">로그인 유지</label>
+				<div class="row align-items-center">
+					<input id="checkbox1" type="checkbox" name="remember-me" class="col-1"> <!-- name어트리뷰트가 가장 중요 -->
+					<label class="form-check-label col-5" for="checkbox1">로그인 유지</label>
+					<input id="checkbox2" type="checkbox" name="remember" value="1" class="col-1">
+					<label class="form-check-label col-5" for="checkbox2">아이디 저장</label>
 				</div>
-								
+				
 				<div class="row justify-content-center">
 					<input class="button" id="sang-login-btn" type="submit" value="로그인">
 				</div>

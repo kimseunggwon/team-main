@@ -16,7 +16,7 @@ class="org.zerock.security.CustomUserDetailsService"></bean>
 	<!-- post방식을 자유롭게 이용하기 위해서 disabled 
 		 login을 참조하는 명령이 있다면 확인 후 default로 보내주는거
 		 logout 구현
-		 로그인 유지 시간 정의
+		 로그인 유지 시간 정의 창을 닫았다 켜도 가능
 		  -->   
 	<security:csrf disabled="true"/>
 	<security:form-login login-page="/member/login" default-target-url="/member/main"/>

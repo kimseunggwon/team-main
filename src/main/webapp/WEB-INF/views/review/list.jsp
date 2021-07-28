@@ -55,12 +55,12 @@ img {
 	<rev:navbar></rev:navbar>
 
 
-	<div class="container">
-		<div class="row justify-content-center">
-			<img alt="jinah-logo"
-				src="${appRoot }/resources/image/others/brand_logo_400px.png">
-		</div>
+	<div class="row justify-content-center mt-5">
+		<a style="text-decoration: none;" href="${appRoot }/member/main">
+			<img id="" alt="" src="${appRoot }/resources/image/others/brand_logo_400px.png">
+		</a>
 	</div>
+	
 	<div class="container">
 		<%--
 		 	여기는 [리뷰 리스트] JSP 파일입니다 :)

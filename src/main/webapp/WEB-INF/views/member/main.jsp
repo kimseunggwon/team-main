@@ -158,14 +158,14 @@
 		 	
 		 	<div class="row">
 		 		<span >
-		 			<a href="#">
+		 			<a style="text-decoration: none;" href="#">
 		 			 	<img src="${appRoot }/resources/image/blog.jpg">
 		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			<a style="text-decoration: none;" href="#">
+		 				<img src="${appRoot }/resources/image/facebook.gif">
 		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			<a style="text-decoration: none;" href="#">
+		 				<img src="${appRoot }/resources/image/twitter.gif">
 		 			</a>
 		 		</span>
 		 	</div>
