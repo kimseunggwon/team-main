@@ -99,6 +99,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public List<UserReviewVO> getviewCountList(ReviewCriteria recri) {
 		return orderMapper.getViewCountReviewList(recri);
+	}
 
 	@Override
 	public List<UserReviewVO> getAnnounceList(ReviewCriteria recri) {
