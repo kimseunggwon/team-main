@@ -122,7 +122,7 @@ img {
 
 		<!-- Main Writing Content -->
 		<div id="re-write-content" class="container">
-			<div class="row justify-content-center">
+			<div class="row justify-content-center"">
 				<div class="col-8">
 						<!-- 평점 -->
 						<%--
@@ -150,9 +150,7 @@ img {
 						<div class="item form-group">
 							<label for="re-textarea1">리뷰 내용</label>
 							<textarea readonly="readonly" class="form-control"
-								name="reContent" cols="2" rows="10" >
-				 				<c:out value="${review.reContent }"></c:out>
-				 			</textarea>
+								name="reContent" cols="2" rows="10" ><c:out value="${review.reContent }"></c:out></textarea>
 						</div>
 						
 						<!-- 작성자 -->

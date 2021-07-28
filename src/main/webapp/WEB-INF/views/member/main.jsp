@@ -23,6 +23,28 @@
  body {	
    font-family: 'GongGothicMedium';
 }
+.button1 {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:200px;
+    font-family: 'GongGothicMedium';
+}
+.button1:hover {
+	background: #0583F2;
+}
 </style>
 
 </head>
@@ -93,6 +115,14 @@
 	
 	
 	<hr>
+	
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<div class="row justify-content-center">
+			<button class="button1">고객센터 답변</button>
+			<button class="button1"></button>
+			<button class="button1"></button>
+		</div>
+	</sec:authorize>
 	
 	<div class="row justify-content-center">
 		<form action="${appRoot }/review/list">

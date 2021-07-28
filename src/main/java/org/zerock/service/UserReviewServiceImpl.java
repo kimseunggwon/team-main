@@ -71,6 +71,11 @@ public class UserReviewServiceImpl implements UserReviewService {
 	public List<UserReviewVO> getReviewList(ReviewCriteria recri) {
 		return reviewMapper.getReviewListWithPaging(recri);
 	}
+	
+	@Override
+	public List<UserReviewVO> getAnnounceList(ReviewCriteria recri) {
+		return reviewMapper.getAnnounceListWithPaging(recri);
+	}
 
 	// 리뷰 게시물 작성
 	@Override

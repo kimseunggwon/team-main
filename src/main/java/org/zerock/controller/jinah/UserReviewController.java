@@ -1,7 +1,6 @@
 package org.zerock.controller.jinah;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -51,7 +50,10 @@ public class UserReviewController {
 		
 		List<UserReviewVO> reList = service.getReviewList(recri);
 		
+		List<UserReviewVO> announceList = service.getAnnounceList(recri);
+		
 		model.addAttribute("reList", reList);
+		model.addAttribute("reList2", announceList);
 		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
 		model.addAttribute("totalCount", reviewTotal);
 	}
