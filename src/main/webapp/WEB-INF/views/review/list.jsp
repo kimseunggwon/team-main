@@ -80,13 +80,13 @@ img {
 				<div class="dropdown-menu dropdown-menu-right">
 					<a class="dropdown-item" href="#">BEST 5</a>
 					<div class="order-new dropdown-divider"></div>
-					<c:set var="orderby" value="${popularlist }"><button id="order-popular" class="dropdown-item" type="button">인기도순</button></c:set>
-					<c:set var="orderby" value="${latestlist }" ><button id="order-latest" class="dropdown-item" type="button">최신순</button></c:set>
-					<c:set var="orderby" value="${viewcountlist }"><button id="order-viewcount" class="dropdown-item" type="button">조회수순</button></c:set>
+					<button id="order-popular" class="dropdown-item" type="button">인기도순</button>
+					<button id="order-latest" class="dropdown-item" type="button">최신순</button>
+					<button id="order-viewcount" class="dropdown-item" type="button">조회수순</button>
 				</div>
 			</div>
 		</div>
-		<c:set var="popularlist" value="$ }"></c:set>
+		
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
@@ -149,7 +149,6 @@ img {
 		 		</c:forEach>
 		 	</tbody>
 		 </table>
-		 
 		 
 		 <!-- 페이지네이션 -->
 		 <div>
