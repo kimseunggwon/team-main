@@ -67,25 +67,37 @@ WHERE id = #{id}
 
 
 <!-- 구독페이지 xml -->
-<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeViewVO">
-<![CDATA[
+	<!-- 가게추천정보 -->
+	<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeViewVO">
+	<![CDATA[
+	
+	SELECT
+		s.id id,
+		s.storename storename,
+		s.storeaddress storeaddress,
+		s.storePhonenum storePhonenum, 
+		s.storelat storelat,
+		s.storelag storelag,
+		b.fileName fileName
+	FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
+	
+	WHERE
+		  storelat > #{lat} - 0.01 AND storelat < #{lat} + 0.01 AND
+		  storelag > #{lag} - 0.01 AND storelag < #{lag} + 0.01
+	
+	 ]]>
+	</select>
+	<!-- 가게추천리스트 Modal -->
+	<select id="getStoreList" resultType="org.zerock.domain.SubscribeViewVO">
+	SELECT
+		id id,
+		storename storename,
+		storeaddress storeaddress,
+		storePhonenum storePhonenum
+	FROM storeinfo 
+	</select>
 
-SELECT
-	s.id id,
-	s.storename storename,
-	s.storeaddress storeaddress,
-	s.storePhonenum storePhonenum, 
-	s.storelat storelat,
-	s.storelag storelag,
-	b.fileName fileName
-FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
 
-WHERE
-	  storelat > #{lat} - 0.01 AND storelat < #{lat} + 0.01 AND
-	  storelag > #{lag} - 0.01 AND storelag < #{lag} + 0.01
-
- ]]>
-</select>
 
 <!-- 구독자 정보 저장 -->
 <insert id="SaveSubscriberInfo">

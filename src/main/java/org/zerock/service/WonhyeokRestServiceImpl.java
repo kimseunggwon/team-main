@@ -145,6 +145,13 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 	}
 
 
+	@Override
+	public List<SubscribeViewVO> getStoreList() {
+		
+		return mapper.getStoreList();
+	}
+
+
 	
 
 

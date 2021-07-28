@@ -13,9 +13,10 @@
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5"></script>
-<!-- jQuery -->
+<!-- jQuery 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+-->
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
@@ -71,7 +72,7 @@
 }
 
 .text4_sub {
-	font-size: 20px;
+	font-size: 80%;
 }
 
 .box2 {
@@ -88,6 +89,24 @@
 	box-shadow: 0px 0px 6px 10px #B4DDF5;
 }
 
+.button {
+	width: 25%;
+    display: inline-block;
+    border: 1px solid #bbb;
+    height: 90px;
+    color: black;
+    background: #B4DDF5;
+    margin: 2.5%;
+    box-shadow: 0px 0px 6px 10px rgb(32 33 36 / 28%);
+    border-color: rgba(223, 225, 229, 0);
+    text-align: center;
+}
+
+.button:hover {
+	box-shadow: 0px 0px 6px 10px #B4DDF5;
+}
+
+
 .box_sub1 {
 	display: block;
 	height: 300px;
@@ -96,14 +115,15 @@
 
 .box_sub2 {
 	display: block;
-	height: 100px;
+	height: 200px;
 	width: 100%;
 	text-align: left;
+	font-size: 120%
 }
 
 .box_sub3 {
 	display: block;
-	height: 400px;
+	height: 300px;
 	width: 100%;
 }
 </style>
@@ -116,8 +136,7 @@
 			$(elem1).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 			let finalAmount = $(elem1).find(".text3").text().substr(0,4);
 			let subsOptions = $(elem1).find(".text1").text();
-			console.log(finalAmount);
-			console.log(subsOptions);
+
 			
 			$("#finalAmount").val(finalAmount);
 			$("#finalSubsOptions").val(subsOptions);
@@ -180,16 +199,14 @@
 							let lat = parseFloat(items[0].x);
 							let lag = parseFloat(items[0].y);
 
-							console.log(lat);
-							console.log(lag);
+
 
 							let data = {
 								lat : lat,
 								lag : lag
 							}
 
-							$
-									.ajax({
+							$.ajax({
 										type : "POST",
 										url : "${appRoot}/subscribe/getNearStoreInfo",
 										data : data,
@@ -230,7 +247,7 @@
 															data[i].storelat),
 													map : map[i],
 													icon : {
-														content : [ `<div><img src="${appRoot}/resources/image/home_button.png"></div>`
+														content : [ `<div><img src="${appRoot}/resources/image/laundry_home.png"></div>`
 
 														].join('')
 
@@ -260,7 +277,7 @@
 												$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 												$(elem2).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 												let finalAddress = $(elem2).find(".text4_sub").text().substr(6);
-												console.log(finalAddress);
+
 												$("#finalAddress").val(finalAddress);
 												
 											}
@@ -305,8 +322,9 @@
 				<div class="text2">설명</div>
 				<div class="text3">3000 $</div>
 			</div>
-			<input id="finalAmount" value="" type="text" readonly="readonly">
-			<input id="finalSubsOptions" value="" type="text" readonly="readonly">
+			<input id="finalAmount" value="" type="text" readonly="readonly"
+				hidden> <input id="finalSubsOptions" value="" type="text"
+				readonly="readonly" hidden>
 		</div>
 		<div class="col">
 			<div class="title" style="text-align: center;">빨래방 선택</div>
@@ -318,31 +336,104 @@
 				<div class="box_sub1">사진</div>
 				<div class="box_sub2" id="box_sub2-1"></div>
 				<div class="box_sub3">
-					<div id="map1" style="width: 100%; height: 400px;"></div>
+					<div id="map1" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-2">
 				<div class="box_sub1">사진</div>
 				<div class="box_sub2" id="box_sub2-2"></div>
 				<div class="box_sub3">
-					<div id="map2" style="width: 100%; height: 400px;"></div>
+					<div id="map2" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-3">
 				<div class="box_sub1">사진</div>
 				<div class="box_sub2" id="box_sub2-3"></div>
 				<div class="box_sub3">
-					<div id="map3" style="width: 100%; height: 400px;"></div>
+					<div id="map3" style="width: 100%; height: 300px;"></div>
 				</div>
+			</div>
+
+			<div>
+				<button id="addressList_modal_btn" class="button" type="button" data-toggle="modal" data-target="#addressList-modal">다른 빨래방 찾아보기</button>
 			</div>
 			<input id="finalAddress" value=" " type="text" readonly="readonly"
 				hidden>
 		</div>
 	</div>
 	<div class="col">
-		<div class="title" style="text-align: center;">원하는 빨래방 검색</div>
 		<div class="title">
 			<input type="button" id="payPage" value="결제하기">
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+$(function() {
+	$("#addressList_modal_btn").click(function() {
+		$.ajax({
+			type : "GET",
+			url : "${appRoot}/subscribe/getStoreList",
+			success : function(list) {
+				let StoreListContainer = $("#storeList").empty();
+				
+				for (StoreAddress of list) {
+					let storeListHTML = `<div class="otherStoreList" style="border-style:solid; border-width:1px; border-color:black;border-radius:30px; margin:1.5%">
+										<div style="padding:10px">
+											<div> 가게이름 :\${StoreAddress.storename}</div>
+											<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+											<div> 평점:  </div>
+										</div>
+										</div>`
+					
+						StoreListContainer.append(storeListHTML);
+				}
+				
+				function clickModalAddress(elem3) {
+					let modal_finalAddress = $(elem3).find(".modal_store_name").text().substr(7);
+					$("#finalAddress").val(modal_finalAddress);
+					
+					$("#addressList-modal").modal('hide');
+					
+				}
+				
+				$(".otherStoreList").click(function() {
+					clickModalAddress(this)
+				}) 
+				
+			}
+			
+		})
+	})
+	
+})
+
+</script>
+<!-- 원하는 빨래방 검색 모달 -->
+	<div class="modal" id="addressList-modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">다른 빨래방 찾아보기</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div style="margin-left: 25px; margin-top: 10px;">
+					<select>
+						<option value="">--</option>
+						<option value="STORENAME">가게명검색</option>
+						<option value="ADDRESS">주소검색</option>
+					</select>
+					<input name="keyword" type="search" placeholder="Search">
+					<button class="" type="submit">Search</button>
+				</div>
+				<div class="modal-body">
+					<div id="storeList">
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -362,6 +453,7 @@ $(function() {
 		let storeAddress = $("#finalAddress").val();
 		let subsOption = $("#finalSubsOptions").val();
 		let subsAmount = $("#finalAmount").val();
+		
 	
 		
 		 var IMP = window.IMP; // 생략가능

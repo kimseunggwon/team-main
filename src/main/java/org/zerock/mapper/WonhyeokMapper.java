@@ -26,6 +26,8 @@ public interface WonhyeokMapper {
 
 	public void SaveSubscriberInfo(SubscriberInfoVO info);
 
+	public List<SubscribeViewVO> getStoreList();
+
 
 
 
