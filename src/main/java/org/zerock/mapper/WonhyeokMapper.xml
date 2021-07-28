@@ -67,7 +67,7 @@ WHERE id = #{id}
 
 
 <!-- 구독페이지 xml -->
-<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeVO">
+<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeViewVO">
 <![CDATA[
 
 SELECT
@@ -86,5 +86,12 @@ WHERE
 
  ]]>
 </select>
+
+<!-- 구독자 정보 저장 -->
+<insert id="SaveSubscriberInfo">
+INSERT INTO subscriber 
+(subsId, subsName, subsAddress, storeAddress,subsOptions, subsAmount)
+VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeAddress}, #{subsOptions}, #{subsAmount})
+</insert>
 
 </mapper>

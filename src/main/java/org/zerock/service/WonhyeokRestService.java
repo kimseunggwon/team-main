@@ -6,7 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.AddressVO;
 import org.zerock.domain.B2bIntroduceVO;
 import org.zerock.domain.MemberVO;
-import org.zerock.domain.SubscribeVO;
+import org.zerock.domain.SubscribeViewVO;
+import org.zerock.domain.SubscriberInfoVO;
 
 public interface WonhyeokRestService {
 
@@ -20,7 +21,9 @@ public interface WonhyeokRestService {
 
 	public void B2bIntroduceModify(B2bIntroduceVO introduce, MultipartFile file);
 
-	public List<SubscribeVO> getNearStireInfo(MemberVO vo);
+	public List<SubscribeViewVO> getNearStireInfo(MemberVO vo);
+
+	public void SaveSubscriberInfo(SubscriberInfoVO info);
 
 
 	

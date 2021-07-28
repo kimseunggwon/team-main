@@ -5,7 +5,8 @@ import java.util.List;
 import org.zerock.domain.AddressVO;
 import org.zerock.domain.B2bIntroduceVO;
 import org.zerock.domain.MemberVO;
-import org.zerock.domain.SubscribeVO;
+import org.zerock.domain.SubscribeViewVO;
+import org.zerock.domain.SubscriberInfoVO;
 
 public interface WonhyeokMapper {
 
@@ -21,7 +22,9 @@ public interface WonhyeokMapper {
 
 	public void deleteById(Integer id);
 
-	public List<SubscribeVO> getNearStoreInfo(MemberVO vo);
+	public List<SubscribeViewVO> getNearStoreInfo(MemberVO vo);
+
+	public void SaveSubscriberInfo(SubscriberInfoVO info);
 
 
 

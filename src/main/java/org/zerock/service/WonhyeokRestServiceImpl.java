@@ -11,7 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.AddressVO;
 import org.zerock.domain.B2bIntroduceVO;
 import org.zerock.domain.MemberVO;
-import org.zerock.domain.SubscribeVO;
+import org.zerock.domain.SubscribeViewVO;
+import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.UserReviewVO;
 import org.zerock.mapper.WonhyeokMapper;
 
@@ -131,9 +132,16 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 
 
 	@Override
-	public List<SubscribeVO> getNearStireInfo(MemberVO vo) {
+	public List<SubscribeViewVO> getNearStireInfo(MemberVO vo) {
 
 		return mapper.getNearStoreInfo(vo);
+	}
+
+
+	@Override
+	public void SaveSubscriberInfo(SubscriberInfoVO info) {
+		mapper.SaveSubscriberInfo(info);
+		
 	}
 
 

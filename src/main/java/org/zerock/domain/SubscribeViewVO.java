@@ -3,7 +3,7 @@ package org.zerock.domain;
 import lombok.Data;
 
 @Data
-public class SubscribeVO {
+public class SubscribeViewVO {
 
 	private Integer id;
 	private String storename;

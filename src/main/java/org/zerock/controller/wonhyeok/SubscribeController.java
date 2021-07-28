@@ -7,11 +7,13 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.zerock.domain.MemberVO;
-import org.zerock.domain.SubscribeVO;
+import org.zerock.domain.SubscribeViewVO;
+import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.smsDomain.Coolsms;
 import org.zerock.domain.smsDomain.smsVO;
 import org.zerock.service.WonhyeokRestService;
@@ -34,8 +36,8 @@ public class SubscribeController {
 	
 	@PostMapping("/getNearStoreInfo")
 	@ResponseBody
-	public List<SubscribeVO> getNearStoreInfo(MemberVO vo,Model model) {
-		List<SubscribeVO> subsvo =service.getNearStireInfo(vo);
+	public List<SubscribeViewVO> getNearStoreInfo(MemberVO vo,Model model) {
+		List<SubscribeViewVO> subsvo =service.getNearStireInfo(vo);
 
 		model.addAttribute("model",subsvo );
 
@@ -85,6 +87,11 @@ public class SubscribeController {
 
 	}
 	
-	
+	@PostMapping(value = "/saveSubsInfo", produces = { "application/json; charset=utf-8" })
+	@ResponseBody
+	public void subscriberInfo(@RequestBody SubscriberInfoVO info) {
+		log.info(info);
+		service.SaveSubscriberInfo(info);
+	}
 	
 }

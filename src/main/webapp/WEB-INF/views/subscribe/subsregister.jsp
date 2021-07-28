@@ -13,7 +13,7 @@
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5"></script>
-	<!-- jQuery -->
+<!-- jQuery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <!-- iamport.payment.js -->
@@ -64,9 +64,14 @@
 	height: 33.33%;
 	text-align: left;
 }
+
 .text3 {
 	font-size: 32px;
 	height: 33.33%;
+}
+
+.text4_sub {
+	font-size: 20px;
 }
 
 .box2 {
@@ -110,7 +115,12 @@
 			$(".box1").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 			$(elem1).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 			let finalAmount = $(elem1).find(".text3").text().substr(0,4);
+			let subsOptions = $(elem1).find(".text1").text();
+			console.log(finalAmount);
+			console.log(subsOptions);
+			
 			$("#finalAmount").val(finalAmount);
+			$("#finalSubsOptions").val(subsOptions);
 
 		}
 
@@ -231,24 +241,27 @@
 														laundrymarker);
 												
 											}
-												$("#box_sub2-1").append(` 가게 이름: \${data[0].storename} <br>
-																		가게 주소: \${data[0].storeaddress} <br>
-																		가게 번호: \${data[0].storePhonenum} <br>
-																		가게 평점:`); 
-												$("#box_sub2-2").append(` 가게 이름: \${data[1].storename} <br>
-																		가게 주소: \${data[1].storeaddress} <br>
-																		가게 번호: \${data[1].storePhonenum} <br>
-																		가게 평점:`); 
-												$("#box_sub2-3").append(` 가게 이름: \${data[2].storename} <br>
-																		가게 주소: \${data[2].storeaddress} <br>
-																		가게 번호: \${data[2].storePhonenum} <br>
-																		가게 평점:`); 
+												$("#box_sub2-1").append(` <div> 가게 이름: \${data[0].storename}</div>
+																			<div class="text4_sub">가게 주소: \${data[0].storeaddress}</div>
+																			<div>가게 번호: \${data[0].storePhonenum}</div>
+																			<div>가게 평점: </div>`); 
+												$("#box_sub2-2").append(` <div> 가게 이름: \${data[1].storename}</div>
+																			<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
+																			<div>가게 번호: \${data[1].storePhonenum}</div>
+																			<div>가게 평점: </div>`); 
+												$("#box_sub2-3").append(` <div> 가게 이름: \${data[2].storename}</div>
+																			<div class="text4_sub">가게 주소: \${data[2].storeaddress}</div>
+																			<div>가게 번호: \${data[2].storePhonenum}</div>
+																			<div>가게 평점: </div>`); 
 												
 												
 											/* 주소종류 클릭 모션 */
 											function clickAddressType(elem2) {
 												$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 												$(elem2).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
+												let finalAddress = $(elem2).find(".text4_sub").text().substr(6);
+												console.log(finalAddress);
+												$("#finalAddress").val(finalAddress);
 												
 											}
 											
@@ -290,8 +303,10 @@
 			<div class="box1" id="box1-3">
 				<div class="text1">4인 가구</div>
 				<div class="text2">설명</div>
-				<div class="text3">3000 $ </div>
+				<div class="text3">3000 $</div>
 			</div>
+			<input id="finalAmount" value="" type="text" readonly="readonly">
+			<input id="finalSubsOptions" value="" type="text" readonly="readonly">
 		</div>
 		<div class="col">
 			<div class="title" style="text-align: center;">빨래방 선택</div>
@@ -320,11 +335,15 @@
 					<div id="map3" style="width: 100%; height: 400px;"></div>
 				</div>
 			</div>
+			<input id="finalAddress" value=" " type="text" readonly="readonly"
+				hidden>
 		</div>
 	</div>
 	<div class="col">
 		<div class="title" style="text-align: center;">원하는 빨래방 검색</div>
-		<div class="title"><input type="button" id="payPage" value="결제하기"></div>
+		<div class="title">
+			<input type="button" id="payPage" value="결제하기">
+		</div>
 	</div>
 
 
@@ -335,7 +354,16 @@
 
 /*  결제 api */
 $(function() {
+	
 	$("#payPage").click(function() {
+		let subsId = "${pinfo.member.userid}";
+		let subsName = "${pinfo.member.userName}";
+		let subsAddress ="${pinfo.member.userAddress}";
+		let storeAddress = $("#finalAddress").val();
+		let subsOption = $("#finalSubsOptions").val();
+		let subsAmount = $("#finalAmount").val();
+	
+		
 		 var IMP = window.IMP; // 생략가능
 	        IMP.init('imp01897248'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	        var msg;
@@ -344,9 +372,9 @@ $(function() {
 	            pg : 'danal_tpay',
 	            pay_method : 'card',
 	            merchant_uid : 'merchant_' + new Date().getTime(),
-	            buyer_name :'홍길동' ,
-	            name : '결제테스트',
-	            amount : 1000
+	            buyer_name : subsName,
+	            name : subsOption,
+	            amount : subsAmount
 	          
 	            //m_redirect_url : 'http://www.naver.com'
 	        }, function(rsp) {
@@ -368,15 +396,35 @@ $(function() {
 	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 	                        msg += '\결제 금액 : ' + rsp.paid_amount;
 	                        msg += '카드 승인번호 : ' + rsp.apply_num;
-	                        
 	                        alert(msg);
+	                        
+	                     
+	                        
 	                    } else {
 	                        //[3] 아직 제대로 결제가 되지 않았습니다.
 	                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 	                    }
 	                });
+	                let subsdata = {
+	                  		subsId : subsId,
+	                  		subsName : subsName,
+	                  		subsAddress : subsAddress,
+	                  		storeAddress : storeAddress,
+	                  		subsOptions : subsOption,
+	                  		subsAmount : subsAmount
+	                  } 
+	                  
+	                  $.ajax({
+	                  	type: "POST",
+	                  	url : '${appRoot}/subscribe/saveSubsInfo',
+	                  	data: JSON.stringify(subsdata),
+	                  	contentType : "application/json",
+	                  	success : function() {
+	                  		console.log("DB저장 성공");
+	                  	}
+	                  })
 	                //성공시 이동할 페이지
-	                location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg;
+	                location.href='${appRoot}/member/main';
 	            } else {
 	                msg = '결제에 실패하였습니다.';
 	                msg += '에러내용 : ' + rsp.error_msg;
@@ -389,6 +437,7 @@ $(function() {
 	                alert(msg);
 	            }
 	        });
+	    
 	})
 })
 </script>
