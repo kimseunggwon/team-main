@@ -9,8 +9,27 @@
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Insert title here</title>
+
+<style type="text/css">
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ 
+ body {	
+   font-family: 'GongGothicMedium';
+}
+</style>
+
+
+
 </head> 
 <body>
+
+
+
 <script>
  $(function() {
 	 var oldPasswordModal =$("#old-password-modal");
@@ -39,8 +58,17 @@
  
 </script> 
 <div class="container">	 
-<h1>내 정보</h1>  
-<body>
+
+<div class="col align-self-center mt-3">
+					<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+				</div>  
+				<br>
+				<br>
+				<br>
+				<br>
+<h1>내 정보</h1>   
 
 <c:if test="${param.status == 'success' }">
 		<div id="alert1" class="alert alert-primary" role="alert">

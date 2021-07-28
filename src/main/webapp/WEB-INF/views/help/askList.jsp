@@ -42,7 +42,7 @@
 					</a>
 				</div>
 			
-				<!-- 간단한 검색을 할 수 있는 검색창 구현 -->
+				<!-- 간단한 검색을 할 수 있는 검색창 구현 --> 
 				<div class="col align-self-end">
 			
 					<form class="d-flex">

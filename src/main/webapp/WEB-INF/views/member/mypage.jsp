@@ -16,8 +16,27 @@
  
   background-color:#08d2ff;
 }
+@font-face { 
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {	
+   font-family: 'GongGothicMedium';
+}
 </style> 
+
+ 
+
 <div class="container">	
+
+<div class="col align-self-center mt-3">
+					<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+				</div> 
+
  
  <ul class="nav justify-content-end">
   
@@ -58,10 +77,10 @@
     <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
     <a class="dropdown-item" href="#">진행상황</a>
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
-    <a class="dropdown-item" href="${appRoot }/help/asklist">나의 1:1문의내역</a>
-    <a class="dropdown-item" href="#">사용자후기</a>
+    <a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a>
+    <a class="dropdown-item" href="${appRoot }/review/list">사용자후기</a>
   </div>
-</div>
+</div> 
 
  
   
@@ -100,9 +119,11 @@
 </div>
  
 <div class="row no-gutters bg-light position-relative">
-  <div class="col-md-6 mb-md-0 p-md-4">
-    <img src="너구리.jpg" class="w-100" alt="...">
+  <div class="col-md-6 mb-md-0 p-md-4"> 
+    
+    
   </div> 
+  
   <div class="col-md-6 position-static p-4 pl-md-0">
     <h5 class="mt-0">회사소개</h5>
     <p>우리 구독 회사는 
