@@ -79,6 +79,7 @@
 	
 	<include refid="ReviewCriteria"></include>
 	GROUP BY r.re_bno
+	HAVING r.re_writer != 'admin'
 	ORDER BY r.re_bno DESC
 	LIMIT #{from}, #{amount}
 </select>

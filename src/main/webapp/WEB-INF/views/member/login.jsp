@@ -8,7 +8,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>로그인</title>
 
 <style type="text/css">
 @font-face {

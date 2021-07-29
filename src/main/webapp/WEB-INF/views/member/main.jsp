@@ -118,7 +118,9 @@
 	
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<div class="row justify-content-center">
-			<button class="button1">고객센터 답변</button>
+			<form action="${appRoot }/member/usermanagement">
+				<button class="button1">고객관리</button>
+			</form>
 			<button class="button1"></button>
 			<button class="button1"></button>
 		</div>
