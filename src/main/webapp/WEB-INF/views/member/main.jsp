@@ -125,9 +125,14 @@
 	</sec:authorize>
 	
 	<div class="row justify-content-center">
+	<!-- 
 		<form action="${appRoot }/review/list">
 	  			<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
 	  		</form>
+	 -->
+	 <a href="${appRoot }/review/list?sort=200">
+		<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
+	 </a>
 	</div>
 	
 			<br>

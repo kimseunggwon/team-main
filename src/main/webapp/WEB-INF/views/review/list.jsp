@@ -130,7 +130,9 @@ img {
 	<c:if test="${reviewPageMaker.recri.sort eq 300 }">
 		<rev:viewcountlist></rev:viewcountlist>
 	</c:if>
-
+	
+	<%-- 수정해야 할 것 같은데 어떻게 해야할 지 ㅎㅎ --%>
+	<c:if test="${reviewPageMker.recri.sort eq 0 }">
 	<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
@@ -148,14 +150,6 @@ img {
 		 			<tr style="color: red;">
 		 				<td>공지</td>
 		 				<td>
-		 					<c:url value="/review/get" var="reviewGetUrl">
-		 						<c:param name="reBno" value="${review.reBno }" />
-		 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
-		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
-		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
-		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
-		 						<c:param name="sort" value="${reviewPageMaker.recri.sort}" />
-		 					</c:url>
 						<a style="color: red; text-decoration: none;"
 						id="review-record-link" href="${reviewGetUrl }">
 							${review.reTitle } </a>
@@ -179,7 +173,7 @@ img {
 		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
 		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
-		 						<c:param name="sort" value="${reviewPageMaker.recri.sort}" />
+		 						<c:param name="sort" value="0" />
 		 					</c:url>
 		 					<a id="review-record-link"  href="${reviewGetUrl }">
 		 						${review.reTitle }
@@ -195,6 +189,7 @@ img {
 		 		</c:forEach>
 		 	</tbody>
 		 </table>
+		 </c:if>
 		 
 		 <!-- 페이지네이션 -->
 		 <div>

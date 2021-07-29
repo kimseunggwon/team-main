@@ -80,6 +80,7 @@ public class UserReviewController {
 	@PreAuthorize("isAuthenticated()")
 	public String reviewWrite(UserReviewVO review,
 								@RequestParam("file") MultipartFile[] file,
+								ReviewCriteria recri,
 								RedirectAttributes rttr) {
 		
 		// log.info("userReviewWrite is working");
@@ -92,7 +93,7 @@ public class UserReviewController {
 		rttr.addFlashAttribute("messageTitle", "리뷰 등록 완료-!");
 		rttr.addFlashAttribute("messageBody", review.getReBno() + "번 리뷰가 등록되었습니다.");
 		
-		return "redirect:/review/list";
+		return "redirect:/review/list?" + recri.getSort();
 	}
 	
 	// 리뷰 작성하기 - 이미지 파일 없이
