@@ -129,12 +129,12 @@
 
 <!-- 리뷰 수정하기 -->
 <update id="updateReview">
-	UPDATE user_review
+	UPDATE user_review r
 	SET
-		re_title = #{reTitle},
-		re_content = #{reContent},
-		re_writer = #{reWriterName},
-		re_updatedate = NOW()
+		r.re_title = #{reTitle},
+		r.re_content = #{reContent},
+		r.re_writer = #{reWriterName},
+		r.re_updatedate = NOW()
 	WHERE
 		re_bno = #{reBno}
 </update>

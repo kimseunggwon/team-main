@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,22 +50,15 @@ public class UserReviewController {
 							Model model) {
 		log.info("userReviewList is working");
 		
+		// 총 게시물 개수 얻고,
 		int reviewTotal = service.getReviewTotal(recri);
 		
+		// 리뷰 전체목록 얻어오고
 		List<UserReviewVO> reList = service.getReviewList(recri);
 		
+		// 공지사항 얻어오기
 		List<UserReviewVO> announceList = service.getAnnounceList(recri);
 		
-		model.addAttribute("reList", reList);
-		model.addAttribute("reList2", announceList);
-		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
-		model.addAttribute("totalCount", reviewTotal);
-	}
-	
-	// 리뷰 정렬하기
-	@PostMapping("/list")
-	public void reviewOrderBy(@ModelAttribute("recri") ReviewCriteria recri,
-							  Model model) {
 		List<UserReviewVO> popularlist = service.getPopularList(recri);
 		List<UserReviewVO> latestlist = service.getLatestList(recri);
 		List<UserReviewVO> viewcountlist = service.getviewCountList(recri);
@@ -73,6 +67,10 @@ public class UserReviewController {
 		model.addAttribute("latestlist", latestlist);
 		model.addAttribute("viewcountlist", viewcountlist);
 		
+		model.addAttribute("reList2", announceList);
+		model.addAttribute("reList", reList);
+		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
+		model.addAttribute("totalCount", reviewTotal);
 	}
 	
 	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList + view
@@ -82,6 +80,7 @@ public class UserReviewController {
 	@PreAuthorize("isAuthenticated()")
 	public String reviewWrite(UserReviewVO review,
 								@RequestParam("file") MultipartFile[] file,
+								ReviewCriteria recri,
 								RedirectAttributes rttr) {
 		
 		// log.info("userReviewWrite is working");
@@ -94,7 +93,7 @@ public class UserReviewController {
 		rttr.addFlashAttribute("messageTitle", "리뷰 등록 완료-!");
 		rttr.addFlashAttribute("messageBody", review.getReBno() + "번 리뷰가 등록되었습니다.");
 		
-		return "redirect:/review/list";
+		return "redirect:/review/list?" + recri.getSort();
 	}
 	
 	// 리뷰 작성하기 - 이미지 파일 없이
@@ -140,7 +139,7 @@ public class UserReviewController {
 	@PreAuthorize("isAuthenticated()")
 	public String reviewModify(UserReviewVO review,
 							   ReviewCriteria recri,
-							   MultipartFile file,
+							   MultipartFile[] file,
 							   RedirectAttributes rttr) {
 		
 		log.info("userReviewModify is working");

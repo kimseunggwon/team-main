@@ -7,7 +7,7 @@ $(document).ready(function () {
     // reBno번 게시물의 likers(좋아요를 누른 사람들) 조회
 
     
-    $reviewLikeUp.click(function(list) {
+    $reviewLikeUp.click(function() {
         $.ajax ({
             type: "post",
             url: appRoot + "/review/get",

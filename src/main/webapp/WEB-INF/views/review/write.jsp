@@ -151,6 +151,11 @@ img {
 		 	</div>
 		 </div>
 	</div>
+	
+	<%-- 사용자가 이용한 세탁소 위치 정보 --%>
+	
+	
+	
 	<div class="container">
 		<div class="row justify-content-center">
 			<a href="${appRoot }/review/list"><button type="button"

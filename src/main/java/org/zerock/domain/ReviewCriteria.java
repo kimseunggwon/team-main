@@ -16,14 +16,17 @@ public class ReviewCriteria {
 	private String type;
 	private String keyword;
 	
+	private int sort;
+	
 	// Constructor
 	public ReviewCriteria() {
-		this(1, 10);
+		this(1, 10, 200);
 	}
 
-	public ReviewCriteria(int pageNum, int amount) {
+	public ReviewCriteria(int pageNum, int amount, int sort) {
 		this.pageNum = pageNum;
 		this.amount = amount;
+		this.sort = sort;
 	}
 	
 	// 

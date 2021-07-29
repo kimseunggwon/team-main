@@ -78,17 +78,62 @@ img {
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					정렬 방식</button>
 				<div class="dropdown-menu dropdown-menu-right">
-
 					<a class="dropdown-item" href="#">BEST 5</a>
-					<div class="dropdown-divider"></div>
-					<button id="order-popular" class="dropdown-item" type="button">인기도순</button>
-					<button id="order-latest" class="dropdown-item" type="button">최신순</button>
-					<button id="order-viewcount" class="dropdown-item" type="button">조회수순</button>
+					<div class="order-new dropdown-divider"></div>
+					
+						<c:url value="/review/list" var="popUrl">
+	 						<c:param name="reBno" value="${review.reBno }" />
+	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
+	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
+	 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
+	 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+	 						<c:param name="sort" value="100" />
+	 					</c:url>
+
+						<a id="order-popular" class="dropdown-item" 
+							href="${popUrl }" >인기도순</a>
+							
+						<c:url value="/review/list" var="latestUrl">
+	 						<c:param name="reBno" value="${review.reBno }" />
+	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
+	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
+	 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
+	 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+	 						<c:param name="sort" value="200" />
+	 					</c:url>
+						<a id="order-latest" class="dropdown-item" 
+							href="${latestUrl}" >최신순</a>
+							
+						<c:url value="/review/list" var="viewUrl">
+	 						<c:param name="reBno" value="${review.reBno }" />
+	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
+	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
+	 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
+	 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+	 						<c:param name="sort" value="300" />
+	 					</c:url>
+						<a id="order-viewcount" class="dropdown-item" 
+							href="${viewUrl }">조회수순</a>
+					
 				</div>
 			</div>
 		</div>
 		
-		<table id="review-list-table" class="table table-striped">
+	<c:if test="${reviewPageMaker.recri.sort eq 100 }">
+		<rev:popularlist></rev:popularlist>
+	</c:if>
+	
+	<c:if test="${reviewPageMaker.recri.sort eq 200 }">
+		<rev:latestlist></rev:latestlist>
+	</c:if>
+	
+	<c:if test="${reviewPageMaker.recri.sort eq 300 }">
+		<rev:viewcountlist></rev:viewcountlist>
+	</c:if>
+	
+	<%-- 수정해야 할 것 같은데 어떻게 해야할 지 ㅎㅎ --%>
+	<c:if test="${reviewPageMker.recri.sort eq 0 }">
+	<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
 		 			<th>#</th>
@@ -101,22 +146,14 @@ img {
 		 		</tr>
 		 	</thead>
 		 	<tbody>
-		 	
 		 		<c:forEach items="${reList2 }" var="review">
 		 			<tr style="color: red;">
 		 				<td>공지</td>
 		 				<td>
-		 					<c:url value="/review/get" var="reviewGetUrl">
-		 						<c:param name="reBno" value="${review.reBno }" />
-		 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
-		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
-		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
-		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
-		 					</c:url>
-		 					<a style="color: red; text-decoration: none;" id="review-record-link"  href="${reviewGetUrl }">
-		 						${review.reTitle }
-		 					</a>
-		 				</td>
+						<a style="color: red; text-decoration: none;"
+						id="review-record-link" href="${reviewGetUrl }">
+							${review.reTitle } </a>
+						</td>
 		 				
 		 				<td>${review.reWriterName }</td>
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
@@ -136,6 +173,7 @@ img {
 		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
 		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
+		 						<c:param name="sort" value="0" />
 		 					</c:url>
 		 					<a id="review-record-link"  href="${reviewGetUrl }">
 		 						${review.reTitle }
@@ -151,6 +189,7 @@ img {
 		 		</c:forEach>
 		 	</tbody>
 		 </table>
+		 </c:if>
 		 
 		 <!-- 페이지네이션 -->
 		 <div>
@@ -167,6 +206,7 @@ img {
 		 					<c:param name="amount" value="${recri.amount }"></c:param>
 		 					<c:param name="type" value="${recri.type }"></c:param>
 		 					<c:param name="keyword" value="${recri.keyword }"></c:param>
+	 						<c:param name="sort" value="${reviewPageMaker.recri.sort}" />
 		 				</c:url>
 		 				
 		 				<li class="page-item ${num == recri.pageNum ? 'active' : '' }">
@@ -180,16 +220,6 @@ img {
 		 			</c:if>
 		 		</ul>
 		 	</nav>
-		 	<%--
-			<div style="display: none">
-				<form id="actionForm" action="${appRoot }/review/list" method="get">
-					<input name="pageNum" value="${recri.pageNum }" /> 
-					<input name="amount" value="${recri.amount }" />
-					<input name="type" value="${recri.type }" />
-					<input name="keyword" value="${recri.keyword }" />
-				</form>
-			</div>
-		 	 --%>
 		 </div>
 
 		<!-- 구독작성/구독하기/로그인 Root Forwarding Buttons -->
