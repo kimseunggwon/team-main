@@ -73,7 +73,7 @@ body {
    메뉴보기 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="${appRoot }/member/myinfo">회원정보</a>
+    <a class="dropdown-item" href="${appRoot }/member/myget">회원정보</a>
     <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
     <a class="dropdown-item" href="#">진행상황</a>
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 

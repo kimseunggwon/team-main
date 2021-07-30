@@ -19,7 +19,7 @@ public interface MemberMapper {
 	
 	public int insertAuth(AuthVO vo);
 	
-	public MemberVO read(String userid);
+	public MemberVO read(String string);
 
 	public List<MemberVO> read2(MemberVO vo);
 	
