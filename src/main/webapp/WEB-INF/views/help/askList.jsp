@@ -81,37 +81,74 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list }" var="help">
+		 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER')">
+					<c:forEach items="${list }" var="help">
+				<c:if test="${pinfo.member.userid eq help.writer}">
+						<tr>
+							<td>${help.bno }</td>
+						<td>
+					
+						<c:url value="/help/askGetContent" var="getUrl">
+							<c:param name="bno" value="${help.bno }" />
+							<c:param name="pageNum" value="${pageMaker.pag.pageNum }" />
+							<c:param name="amount" value="${pageMaker.pag.amount }" />
+							<c:param name="type" value="${pageMaker.pag.type }" />
+							<c:param name="keyword" value="${pageMaker.pag.keyword }"/>
+						</c:url>
+					
+						<a href="${getUrl}"> 
+							${help.title }
+						<c:if test="${help.replyCnt  > 0}">
+							[${help.replyCnt }]
+						</c:if>
+						</a> 
+						</td>					
+		 				<td>${help.userNickName }</td>
+						<td>
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${help.regdate }"/>
+						</td>
+						<td>
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${help.updateDate }"/>
+						</td>
+						</tr>
+			   	</c:if>
+					</c:forEach>
+		</sec:authorize>
+			   	
+			   	
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			 <c:forEach items="${list }" var="help">
 				<tr>
 					<td>${help.bno }</td>
+					
 					<td>
+						<c:url value="/help/askGetContent" var="getUrl">
+							<c:param name="bno" value="${help.bno }" />
+							<c:param name="pageNum" value="${pageMaker.pag.pageNum }" />
+							<c:param name="amount" value="${pageMaker.pag.amount }" />
+							<c:param name="type" value="${pageMaker.pag.type }" />
+							<c:param name="keyword" value="${pageMaker.pag.keyword }"/>
+						</c:url>
 					
-					<c:url value="/help/askGetContent" var="getUrl">
-						<c:param name="bno" value="${help.bno }" />
-						<c:param name="pageNum" value="${pageMaker.pag.pageNum }" />
-						<c:param name="amount" value="${pageMaker.pag.amount }" />
-						<c:param name="type" value="${pageMaker.pag.type }" />
-						<c:param name="keyword" value="${pageMaker.pag.keyword }"/>
-					</c:url>
-					
-					<a href="${getUrl}"> 
-					${help.title }
-					<c:if test="${help.replyCnt  > 0}">
-						[${help.replyCnt }]
-					</c:if>
-					</a> 
+						<a href="${getUrl}"> 
+							${help.title }
+							<c:if test="${help.replyCnt  > 0}">
+								[${help.replyCnt }]
+							</c:if>
+						</a> 
 					</td>					
-					<td>${help.userNickName }</td>
+	 				<td>${help.userNickName }</td>
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${help.regdate }"/>
 					</td>
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${help.updateDate }"/>
 					</td>
-				</tr>
+					</tr>
 			</c:forEach>
-		</tbody>
-	</table>
+		</sec:authorize>
+	</tbody>
+</table>
 	
 	
 	
