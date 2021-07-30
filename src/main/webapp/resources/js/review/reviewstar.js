@@ -1,6 +1,31 @@
-// 나의 계획 - n번째 별을 누르면 n개의 별이 (차례대로) 모두 채워진 별로 바뀐다! 
-// 그래서 총 개수(cnt)는 옆에 value로 들어가게 된다. 
-// (ex) 내가 3번째 별을 누르면, 5개 별 중에 3개 별이 채워진 별로 바뀐다. 
+$(document).ready(function () {
 
-// 1. 별마다 unique한 id를 주기
-// 2. for...of 문을 적용? ajax 적용 + cnt 증가하는 코드 넣기
+    const $reviewResult = $('.review-result');
+
+    $('.review-star-child').click(function () {
+        console.log("star!");
+        $.ajax({
+            type: "get",
+            url: appRoot + "/review/write",
+            success: function (cnt) {
+                // cnt는 fas 클래스 개수
+                cnt = $('.fas').length;
+                
+                // 별을 클릭했을 때, 채워진 별로 바뀐다. (ex- 3번째 클릭 >> 왼쪽 별 부터 3개 모두 채워지기)
+                // $(this).parent().children('i').removeClass('far');
+                    $(this).children().parent().children('.review-star-icon').removeClass('fas').addClass('far');
+                    $(this).removeClass('far').addClass('fas').prevAll('.review-star-icon').removeClass('far').addClass('fas');
+
+                    // 근데 등록하기를 눌렀을 때만 DB에 정상적으로 등록되어야 한다.
+                    if ($reviewResult.click) {
+                        $("#reStars").text(cnt);
+                    }
+            },
+            error: function () {
+                console.log("error - reviewstar");
+
+            }
+        });
+    })
+});
+

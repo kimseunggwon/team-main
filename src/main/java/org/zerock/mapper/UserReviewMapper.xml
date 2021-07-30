@@ -167,4 +167,21 @@
 	 		r.re_bno = #{reBno}
  </update>
  
+<!-- 리뷰 평점 설정하기 -->
+ <update id="setReviewStar">
+ 	UPDATE user_review r
+ 		SET 
+ 			r.re_stars = #{reStars}
+ 		WHERE 
+ 			r.re_bno = #{reBno}
+ </update>
+ 
+<!-- 리뷰 평점 얻어오기 -->
+<select id="getReviewStar" resultType="int">
+	SELECT re_stars 
+	FROM user_review
+	WHERE 
+	 	re_bno = #{reBno}
+</select>
+ 
 </mapper>

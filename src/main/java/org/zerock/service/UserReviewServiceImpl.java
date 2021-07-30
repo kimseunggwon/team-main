@@ -1,4 +1,4 @@
-package org.zerock.service;
+  package org.zerock.service;
 
 import java.io.File;
 import java.io.InputStream;
@@ -151,6 +151,18 @@ public class UserReviewServiceImpl implements UserReviewService {
 			} catch (Exception e) {
 				throw new RuntimeException();
 			}
+	}
+	
+	// 리뷰 평점 설정하기
+	@Override
+	public int makeReviewStar(int reBno) {
+		return reviewMapper.setReviewStar(reBno);
+	}
+	
+	// 리뷰 평점 얻어오기
+	@Override
+	public int getReviewStar(int reBno) {
+		return reviewMapper.getReviewStar(reBno);
 	}
 	
 	// 리뷰 게시물 상세
