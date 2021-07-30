@@ -53,6 +53,7 @@
 </style>
 <body>
 <div class="wrapper">
+${id }${storeaddress }${storename }${storePhonenum }${storeinfo }${introduce }${fileName }
     <div class="storeName"></div>
     <div class="imgPage"></div>
     <div class="like"></div>

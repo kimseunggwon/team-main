@@ -151,6 +151,7 @@
 	width: 100%;
 }
 </style>
+<!-- 테스트용 -->
 <script type="text/javascript">
 	$(function() {
 		/* 구독종류 클릭 모션 */
@@ -181,11 +182,9 @@
 	})
 </script>
 
+<!-- 지도 추천 -->
 <script type="text/javascript">
 	$(function() {
-		
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */		
-	<!-- 지도 추천 -->
 		let userAddress = "${pinfo.member.address}";
 
 		naver.maps.Service
@@ -272,43 +271,31 @@
 												
 											}
 											
-												$("#box_sub2-1").append(` 	<div data-id="\${data[0].id}">
+												$("#box_sub2-1").append(` 	<div>
 																				<div> 가게 이름: \${data[0].storename}</div>
 																				<div class="text4_sub">가게 주소: \${data[0].storeaddress}</div>
 																				<div>가게 번호: \${data[0].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-												$("#box_sub2-2").append(`	<div data-id="\${data[1].id}">
+												$("#box_sub2-2").append(`	<div>
 																				<div> 가게 이름: \${data[1].storename}</div>
 																				<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
 																				<div>가게 번호: \${data[1].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-												$("#box_sub2-3").append(`	<div data-id="\${data[2].id}">
+												$("#box_sub2-3").append(`	<div>
 																				<div> 가게 이름: \${data[2].storename}</div>
 																				<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
 																				<div>가게 번호: \${data[2].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-											/* 가게정보 갖고오기(추천) */
-											$(".storeInfoBtn").click(function() {
-												storeInfoURL(this);
+												
+												$(".storeInfoBtn").click(function() {
+													console.log("되라고");
 												})
-											
-											function storeInfoURL(btn) {
-												var id = $(btn).parent('div').attr('data-id');
-												console.log(id);
-												
-												let url = "${appRoot}/searchstore/b2bIntroduce/" + id
-												let name = "빨래스타그램";
-												let option = "width = 620, height = 900, top = 100, left = 200, location = no"
-												
-												window.open(url, name, option);
-											}
-											
 												
 			
 											/* 주소종류 클릭 모션 */
@@ -339,9 +326,16 @@
 									})
 									
 						})
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */						
-		<!-- 모달 열기 -->				
-		$("#addressList_modal_btn").click(function() {
+	})
+	
+
+
+</script>
+
+<!-- 모달 열기 -->
+	<script type="text/javascript">
+$(function() {
+	$("#addressList_modal_btn").click(function() {
 		$.ajax({
 			type : "GET",
 			url : "${appRoot}/subscribe/getStoreList",
@@ -349,13 +343,13 @@
 				let StoreListContainer = $("#storeList").empty();
 				
 				for (StoreAddress of list) {
-					let storeListHTML = `<div class="otherStoreList" data-id="\${StoreAddress.id}">
-											<div class="ListBox">
-												<div id="\${StoreAddress.id}"></div>
-												<div> 가게이름 :\${StoreAddress.storename}</div>
-												<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-											</div>
-												<button class="storeInfoBtn">가게정보</button>
+					let storeListHTML = `<div class="otherStoreList">
+										<div class="ListBox">
+											<div id="\${StoreAddress.id}"></div>
+											<div> 가게이름 :\${StoreAddress.storename}</div>
+											<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+										</div>
+											<button class="storeInfoBtn">가게정보</button>
 										</div>`
 					
 						StoreListContainer.append(storeListHTML);
@@ -368,24 +362,7 @@
 					} 
 				}
 				
-				
-				/* 가게정보 갖고오기(모달 처음 리스트) */
-				$(".storeInfoBtn").click(function() {
-					storeInfoURL(this);
-					})
-				
-				function storeInfoURL(btn) {
-					var id = $(btn).parent('div').attr('data-id');
-					console.log(id);
-					
-					let url = "${appRoot}/searchstore/b2bIntroduce/" + id
-					let name = "빨래스타그램";
-					let option = "width = 620, height = 950, top = 100, left = 200, location = no"
-					
-					window.open(url, name, option);
-				}
 			
-					
 				/* 선택시 기능 */
 				function clickModalAddress(elem3) {
 					let modal_finalAddress = $(elem3).find(".modal_store_name").text().substr(7);
@@ -412,8 +389,13 @@
 		})
 	})
 	
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */	
-	<!-- 검색창 -->
+})
+
+</script>
+
+<!-- 검색창 -->
+<script type="text/javascript">
+$(function() {
 	$(".Searchbtn").click(function() {
 		let type = $("#select1 option:selected").val();
 		let keyword = $(".keyword1").val();
@@ -436,13 +418,13 @@
 				let StoreListContainer1 = $("#storeList").empty();
 						
 						for (StoreAddress of list1) {
-							let storeListHTML1 = `<div class="otherStoreList"  data-id="\${StoreAddress.id}">
-														<div class="ListBox">
-															<div id="\${StoreAddress.id}"></div>
-															<div> 가게이름 :\${StoreAddress.storename}</div>
-															<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-														</div>
-															<button class="storeInfoBtn">가게정보</button>
+							let storeListHTML1 = `<div class="otherStoreList">
+													<div class="ListBox">
+														<div id="\${StoreAddress.id}"></div>
+														<div> 가게이름 :\${StoreAddress.storename}</div>
+														<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+													</div>
+														<button class="storeInfoBtn">가게정보</button>
 													</div>`;
 								
 							StoreListContainer1.append(storeListHTML1);
@@ -453,22 +435,6 @@
 							} else if (StoreAddress.auth == "ROLE_EMPUSER"){
 								$("#"+`\${StoreAddress.id}`).text("★본사");
 							}
-						}
-						
-						/* 가게정보 갖고오기(모달 검색 리스트) */
-						$(".storeInfoBtn").click(function() {
-							storeInfoURL(this);
-							})
-						
-						function storeInfoURL(btn) {
-							var id = $(btn).parent('div').attr('data-id');
-							console.log(id);
-							
-							let url = "${appRoot}/searchstore/b2bIntroduce/" + id
-							let name = "빨래스타그램";
-							let option = "width = 620, height = 950, top = 100, left = 200, location = no"
-							
-							window.open(url, name, option);
 						}
 						
 						function SeachClickModalAddress(elem4) {
@@ -495,12 +461,9 @@
 			}
 		})	
 	})
-	
-	})
-	
-
-
+})
 </script>
+
 <body>
 		<div style="text-align: center;margin-top:50px;">
 						<a href="${appRoot }/member/main">

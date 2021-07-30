@@ -60,7 +60,32 @@ public class WonhyeokController {
 	@RequestMapping("/b2bIntroduce/{id}")
 	public String b2bIntroducepage(@PathVariable("id") Long id,RedirectAttributes rttr) {
 		
-		return  "redirect:/searchstore/b2bIntroduce";
+		B2bIntroduceVO vo = service.getStoreInroducePageInfo(id);
+		log.info(vo);
+		
+		if ( vo.getFileName() == null) {
+			rttr.addFlashAttribute("id", vo.getId());
+			rttr.addFlashAttribute("storeaddress", vo.getStoreaddress());
+			rttr.addFlashAttribute("storename", vo.getStorename());
+			rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());
+			rttr.addFlashAttribute("storeinfo", "준비중");
+			rttr.addFlashAttribute("introduce", "준비중");
+			rttr.addFlashAttribute("fileName", "readyimg");
+			
+			return  "redirect:/searchstore/b2bIntroduce";
+			
+		} else {
+					
+		rttr.addFlashAttribute("id", vo.getId());
+		rttr.addFlashAttribute("storeaddress", vo.getStoreaddress());
+		rttr.addFlashAttribute("storename", vo.getStorename());
+		rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());
+		rttr.addFlashAttribute("storeinfo", vo.getStoreinfo());
+		rttr.addFlashAttribute("introduce", vo.getIntroduce());
+		rttr.addFlashAttribute("fileName", vo.getFileName());
+	
+			return  "redirect:/searchstore/b2bIntroduce";
+		}
 
 	}
 

@@ -30,6 +30,8 @@ public interface WonhyeokMapper {
 
 	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo);
 
+	public B2bIntroduceVO getStoreInroducePageInfo(Long id);
+
 
 
 

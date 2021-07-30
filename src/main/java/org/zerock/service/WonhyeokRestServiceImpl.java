@@ -92,7 +92,7 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 								.bucket(bucketName)
 								// 번호별 폴더 안에 파일을 저장시켜서 중복되는걸 막음 : file의 key값에 board.Bno 값을 넣어 key를 바꿔줌 
 								// key: 파일이 저장될 위치
-								.key("storeIntroduceImg" + "/" + introduce.getId() + "/" + file.getOriginalFilename())
+								.key("storeIntroduceImg" + "/" +introduce.getId() + "/" + file.getOriginalFilename())
 								.contentType(file.getContentType())
 								.acl(ObjectCannedACL.PUBLIC_READ)
 								.build();
@@ -156,6 +156,14 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo) {
 		
 		return mapper.getStoreListBySearch(vo);
+	}
+
+
+	@Override
+	public B2bIntroduceVO getStoreInroducePageInfo(Long id) {
+		
+		return mapper.getStoreInroducePageInfo(id);
+		
 	}
 
 

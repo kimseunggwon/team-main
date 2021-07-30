@@ -29,6 +29,8 @@ public interface WonhyeokRestService {
 
 	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo);
 
+	public B2bIntroduceVO getStoreInroducePageInfo(Long id);
+
 
 	
 }

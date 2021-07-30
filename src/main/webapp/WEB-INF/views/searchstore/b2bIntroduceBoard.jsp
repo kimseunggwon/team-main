@@ -15,10 +15,10 @@
 .box {
 	width: 500px;
 	height: 800px;
-	display: inline-block;
+	display: block;
 	text-align: center;
-	margin-left: 33.3%;
-	margin-right: 33.3%;
+	 margin: 0 auto;
+
 }
 
 .box_1 {
@@ -100,10 +100,14 @@
 	})
 </script>
 </head>
-
 <body style="display: block; width: 100%; margin-top: 20px">
+				<div style="text-align: center;">
+					<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+				</div>
 	<div class="box">
-		<div class="box_1">사장님 가게 홍보</div>
+		<div class="box_1">사장님 가게 홍보  <img onclick="" alt="" src="${appRoot }/resources/image/den.jpg"> </div>
 		<div class="box_2">
 			<label for="introduceImage">홍보배너이미지</label> <br> 
 			<input type="file" class="form-control" accept="image/*" id="introduceImage">
@@ -144,6 +148,13 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		
+		<div style="display: none">
+		본 계시판은 구독시 고객님에게 보여지는 정보를 등록하는 곳입니다.
+		*사진이 없으면 등록되지 않습니다.
+		*사진 기분 규격은 (600 x 450) 을 권장합니다.
+		*허위 및 과장 광고 시 벌금이 부과됩니다.
 		</div>
 
 </body>
