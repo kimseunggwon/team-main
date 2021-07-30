@@ -98,16 +98,16 @@ img {
 	
 		<rev:search></rev:search>
 
-<!-- <script>
-$(function () {
+<script>
+/* $(function () {
 	$(".review-star-child").click(function() {
 		console.log("!!!!!!!")
 		$(".review-star-child").find("[data-fa-i2svg]").removeClass("fas").addClass("far");
 		$(this).prevAll().find("[data-fa-i2svg]").removeClass("far").addClass("fas");
 		$(this).find("[data-fa-i2svg]").removeClass("far").addClass("fas");
 	});
-});
-</script> -->
+}); */
+</script>
 
 	<!-- Review Grading (stars) Start -->
 	<div id="review-star-parent" style="display: inline;" class="container">

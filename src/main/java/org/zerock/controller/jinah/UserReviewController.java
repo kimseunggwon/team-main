@@ -97,6 +97,7 @@ public class UserReviewController {
 		
 		// 평점 설정하고
 		service.makeReviewStar(review.getReBno());
+		log.info(review + "에러!!!!!!!!!!!!!!!!!!!!!");
 		
 		// 평점 얻어오기
 		int stars = service.getReviewStar(review.getReBno());
@@ -113,8 +114,7 @@ public class UserReviewController {
 	@GetMapping("/write")
 	@PreAuthorize("isAuthenticated()")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
-		// 여기에도 평점 설정 내용 써야 함 *******************
-		
+	
 		// + 위치 정보
 		
 		// Forwarding to /WEB-INF/views/review/write.jsp
