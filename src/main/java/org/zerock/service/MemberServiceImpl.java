@@ -142,7 +142,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mapper.read3(vo);
 	}
-	
+	 
 	@Override
 	public boolean modify(MemberVO vo, String oldPassword) {
 		MemberVO old = mapper.read(vo.getUserid());
