@@ -15,6 +15,8 @@ public interface MemberService {
 	
 	MemberVO read(String name);
 
+	List<MemberVO> read4(String userid);
+	
 	List<MemberVO> read2(MemberVO vo);
 	
 	List<MemberVO> read3(MemberVO vo);
@@ -27,5 +29,5 @@ public interface MemberService {
 
 	boolean modify(MemberVO vo, String oldPassword);
 
-
+	boolean updateauth(String id);
 }

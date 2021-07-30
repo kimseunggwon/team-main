@@ -118,7 +118,9 @@
 	
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<div class="row justify-content-center">
-			<button class="button1">고객센터 답변</button>
+			<form action="${appRoot }/member/usermanagement">
+				<button class="button1">고객관리</button>
+			</form>
 			<button class="button1"></button>
 			<button class="button1"></button>
 		</div>
@@ -163,14 +165,14 @@
 		 	
 		 	<div class="row">
 		 		<span >
-		 			<a href="#">
+		 			<a style="text-decoration: none;" href="#">
 		 			 	<img src="${appRoot }/resources/image/blog.jpg">
 		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			<a style="text-decoration: none;" href="#">
+		 				<img src="${appRoot }/resources/image/facebook.gif">
 		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			<a style="text-decoration: none;" href="#">
+		 				<img src="${appRoot }/resources/image/twitter.gif">
 		 			</a>
 		 		</span>
 		 	</div>
