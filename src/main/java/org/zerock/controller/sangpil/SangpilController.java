@@ -222,6 +222,8 @@ public class SangpilController {
 	@GetMapping("/usermanagement")
 	public void usermanagement(Model model, String userid) {
 		
+		
+		
 		List<MemberVO> UserList = service.read4(userid);
 		
 		model.addAttribute("reList2", UserList);
