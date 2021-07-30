@@ -9,31 +9,50 @@
 <head>
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 <title>b2b사장님 가게홍보 게시판</title>
-<style type="text/css">
-/*  .container {
-	float:left;
-}
-  */
-.form-group {
-	width:100%;
-}
- .preview {
- 	float:left;
- 	margin: 0 auto;
-	
-	
-} 
+<head>
 
+<style>
+.box {
+	width: 500px;
+	height: 800px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 33.3%;
+	margin-right: 33.3%;
+}
+
+.box_1 {
+	height: 10%;
+	padding-top: 20px;
+	font-size: 32px;
+}
+
+.box_2 {
+	height: 10%;
+}
+
+.box_3 {
+	height: 30%;
+}
+
+.box_4 {
+	height: 30%;
+}
+
+.box_5 {
+	margin-top: 100px;
+	height: 100px;
+	display: inline-block;
+}
 </style>
-
-	<!-- 미리보기 -->
+<!-- 미리보기 -->
 <script type="text/javascript">
 	$(function() {
 		$("#introduceImage").on('change', function() {
 			readURL(this);
 		})
 	})
-	
+
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -43,81 +62,87 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	
-$(function() {
-	$("#preview-btn").click(function() {
-		var comment = $("#introduce").val();
-		$("#introduce_comment").val(comment);
-		$("#prePage").show();
-			})
-	})
-	
-</script>
 
+/* 	$(function() {
+		$("#preview-modal-btn").click(function() {
+			var comment = $("#introduce").val();
+			$("#introduce_comment").val(comment);
+			$("#prePage").show();
+		})
+	}) */
+</script>
 <script type="text/javascript">
-$(function() {
-	$("#register").click(function() {
-		var form = new FormData();
-		form.append("file",$("#introduceImage")[0].files[0]);
-		form.append("id",$("#b2bid").val());
-		form.append("introduce",$("#introduce").val());
-		
-		$.ajax({
-			type : "POST",
-			url : "${appRoot}/searchstore/b2bIntroduceBoard",
-			data : form,
-			enctype : "multipart/form-data",
-			processData : false,
-			contentType : false,
-			cache: false,
-			success : function() {
-				alert("등록성공 !! " + "이쁘게 홍보해드릴게여^*^");
-			},
-			error : function() {
-				console.log("등록실패");
-			}
+	$(function() {
+		$("#register").click(function() {
+			var id = "${pinfo.member.id}"
+			var form = new FormData();
+			form.append("file", $("#introduceImage")[0].files[0]);
+			form.append("id", id);
+			form.append("storeinfo",$("#storeinfo").val());
+			form.append("introduce", $("#introduce").val());
+
+			$.ajax({
+				type : "POST",
+				url : "${appRoot}/searchstore/b2bIntroduceBoard",
+				data : form,
+				enctype : "multipart/form-data",
+				processData : false,
+				contentType : false,
+				cache : false,
+				success : function() {
+					alert("등록성공 !! " + "이쁘게 홍보해드릴게여^*^");
+				},
+				error : function() {
+					console.log("등록실패");
+				}
+			})
 		})
 	})
-})
-
 </script>
 </head>
-<body>
-	<div class="container">
-			<div style="float:left">
-				<div class="form-group ">
-					<label for="b2bid">b2bid (*회원정보에서 확인해주세요)</label>
-					 <input type="text" class="form-control" id="b2bid" value="${pinfo.member.id }">
-				</div>
-				<div class="form-group">
-					<label for="introduceImage">홍보배너이미지</label>
-					<input type="file" accept="image/*" class="form-control" id="introduceImage">
-				</div>
-				<div class="form-group">
-					<label for="introduce">가게 홍보 멘트</label>
-					<textarea class="form-control" id="introduce" style=" height: 400px"></textarea>
-				</div>
-				<button id="preview-btn">미리보기</button>
-				<button id="register">등록</button>
-			</div>
 
-			<div id="prePage" style="display: none" class="preview">
-					<div>
-					<h1>미리보기</h1>
+<body style="display: block; width: 100%; margin-top: 20px">
+	<div class="box">
+		<div class="box_1">사장님 가게 홍보</div>
+		<div class="box_2">
+			<label for="introduceImage">홍보배너이미지</label> <br> 
+			<input type="file" class="form-control" accept="image/*" id="introduceImage">
+		</div>
+		<div class="box_3">
+			<label for="storeinfo">가게 정보:</label> <br>
+			<textarea id="storeinfo" class="form-control" style="height: 230px;"
+				placeholder="운영시간/휴무일/상호명 등"></textarea>
+		</div>
+		<div class="box_4">
+			<label for="introduce">가게 홍보 멘트</label> <br>
+			<textarea id="introduce" class="form-control" style="height: 300px"
+				placeholder="가게 소개 멘트/수상내역/세탁기스펙/경력 등"></textarea>
+		</div>
+		<div class="box_5">
+			<button id="preview-modal-btn" class="button" type="button"
+					data-toggle="modal" data-target="#preview-modal">미리보기</button>
+			<button id="register">등록</button>
+		</div>
+	</div>
+
+
+		<!-- 미리보기 모달 -->
+		<div class="modal" id="preview-modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">미리보기</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<div style="float:left">
-						<img id="preImage" src="#"/>
+					<div class="modal-body">
+						<div>
+						 <img id="preImage" src="#"/>
+						</div>
 					</div>
-					<div style="float:left">
-						<ul>
-							
-							<li>가게 이름<input type="text" value="#" readonly></li>
-							<li>주소<input type="text" value="#" readonly></li>
-							<l1>(홍보글)<textarea id="introduce_comment" value="#" readonly></textarea></l1>
-							<li>평점:</li>
-							<li><a href="https://www.naver.com/">리뷰보기</a></li>
-						</ul>
-					</div>
+				</div>
 			</div>
 		</div>
 

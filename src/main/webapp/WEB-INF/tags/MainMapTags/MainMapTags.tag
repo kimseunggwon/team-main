@@ -17,24 +17,42 @@
 	<div id="map" style="width: 50%; height: 400px;"></div>
 <script type="text/javascript">
 $(function() {
-	var loadUserLat = $("#userlat").val();
-	var loadUserLag = $("#userlag").val();
+	let userAddress = "${pinfo.member.address}";
+	
+	naver.maps.Service
+	.geocode({ query : userAddress
+			// String 타입의 주소값
+			},
+			function(status, response) {
+				if (status !== naver.maps.Service.Status.OK) {
+					// 실행이 되지 않을 경우 
+					return alert('Something wrong!');
+
+				}
+
+				var result = response.v2, items = result.addresses;
+				let lat = parseFloat(items[0].x);
+				let lag = parseFloat(items[0].y);
+
+				console.log(lat);
+				console.log(lag);
+				
 	
 	/* 지도 */
 	var map = new naver.maps.Map('map', {
-		center : new naver.maps.LatLng(loadUserLag, loadUserLat),
+		center : new naver.maps.LatLng(lag, lat),
 		zoom : 16
 	});
 	/* 유저 마커 */
 	var markerOptions = {
-			position: new naver.maps.LatLng(loadUserLag, loadUserLat),
+			position: new naver.maps.LatLng(lag, lat),
 		    map: map,
 		    icon: {		    	
 		        content: [	
 			        		`<div onmouseover="$('#ad1').show();" onmouseout="$('#ad1').hide();" >` +
-				        		`<div><img src="${imgRoot}icon/blue_re-pict-house-base.png_32.png"></div>`+
-				        		`<div id="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
-				        		background-color:#88C9F2; color:white; text-align:center; border:1px;
+				        		`<div><img src="${appRoot}/resources/image/home_button.png"></div>`+
+				        		`<div id="ad1" style="font-size:8px;padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
+				        		background-color:#88C9F2; color:black; text-align:center; border:1px;
 				        		border-radius:14px; opacity:75%; display:none;">평점:4.0 <br> 주소:${pinfo.member.userAddress}</div>`+
 			        		`</div>`	        	
 		        	].join(''),
@@ -43,8 +61,8 @@ $(function() {
 		var marker = new naver.maps.Marker(markerOptions);
 		
 		var data = {
-				storelat : loadUserLat,
-				storelag : loadUserLag
+				storelat : lat,
+				storelag : lag
 		}
 		
 		$.ajax({
@@ -58,15 +76,15 @@ $(function() {
 				for(let address of list ){
 					
 				let laundrymarker = {
-						position: new naver.maps.LatLng(address.lag, address.lat),
+						position: new naver.maps.LatLng(address.storelag, address.storelat),
 					    map: map,
 					    icon: {
 					        content: [	
 						        		`<div onmouseover="$(this).find('.ad2').show();" onmouseout="$(this).find('.ad2').hide();">` +
-							        		`<div><img src="${imgRoot}icon/blue_re-pict-house-base.png_32.png"></div>`+
-							        		`<div class="ad2"  style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
-													        		  background-color:#88C9F2; color:white; text-align:center; border:1px;
-													        	  	  border-radius:14px; opacity:75%; display:none">평점:4.0<br> 주소: \${address.address} </div>`+                   
+							        		`<div><img src="${appRoot}/resources/image/home_button.png"></div>`+
+							        		`<div class="ad2"  style="font-size:8px; padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
+													        		  background-color:#88C9F2; color:black; text-align:center; border:1px;
+													        	  	  border-radius:14px; opacity:75%; display:none">평점:4.0<br> 주소: \${address.storeaddress} </div>`+                   
 						        		`</div>`
 									 ].join('')
 					        	
@@ -81,13 +99,10 @@ $(function() {
 				error : function() {
 					console.log("실패");
 				}
+				})
 			})
-			
 		})
 
 </script>
-
-<input type="text" id="userlat" value="${pinfo.member.lat }">
-<input type="text" id="userlag" value="${pinfo.member.lag }">
 </nav>
 

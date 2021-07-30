@@ -30,8 +30,8 @@ SELECT
 FROM storeinfo 
 
 WHERE
-	  storelat > #{storelat} - 0.01 AND storelat < #{storelat} + 0.01 AND
-	  storelag > #{storelag} - 0.01 AND storelag < #{storelag} + 0.01
+	  storelat > #{storelat} - 0.06 AND storelat < #{storelat} + 0.06 AND
+	  storelag > #{storelag} - 0.06 AND storelag < #{storelag} + 0.06
 
  ]]>
 </select>
@@ -56,8 +56,8 @@ WHERE id= #{id}
 
 
 <insert id="B2bIntroduceRegister">
-INSERT INTO b2bIntroduce (id, introduce, fileName)
-VALUES (#{id}, #{introduce}, #{fileName})
+INSERT INTO b2bIntroduce (id, introduce, fileName, storeinfo)
+VALUES (#{id}, #{introduce}, #{storeinfo}, #{fileName})
 </insert>
 
 <delete id="deleteById">
@@ -67,25 +67,71 @@ WHERE id = #{id}
 
 
 <!-- 구독페이지 xml -->
-<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeViewVO">
-<![CDATA[
+	<!-- 가게추천정보 -->
+	<select id="getNearStoreInfo" resultType="org.zerock.domain.SubscribeViewVO">
+	<![CDATA[
+	
+	SELECT
+		s.id id,
+		s.storename storename,
+		s.storeaddress storeaddress,
+		s.storePhonenum storePhonenum, 
+		s.storelat storelat,
+		s.storelag storelag,
+		b.fileName fileName,
+		au.auth auth
+	FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
+							JOIN user AS u ON s.userid = u.userid
+							JOIN user_auth AS au ON s.userid= au.userid
+	
+	WHERE
+		  storelat > #{lat} - 0.06 AND storelat < #{lat} + 0.06 AND
+		  storelag > #{lag} - 0.06 AND storelag < #{lag} + 0.06
+	
+	 ]]>
+	</select>
+	<!-- 가게추천리스트 Modal -->
+	<select id="getStoreList" resultType="org.zerock.domain.SubscribeViewVO">
+	SELECT
+		s.id id,
+		s.storename storename,
+		s.storeaddress storeaddress,
+		s.storePhonenum storePhonenum,
+		au.auth auth
+	FROM storeinfo AS s JOIN user AS u ON s.userid = u.userid
+						JOIN user_auth AS au ON s.userid= au.userid
+	</select>
+	
+	<!-- Search 가게 리스트 -->
+	
+	<sql id="Search">
+     <where>
+	     <foreach item="type" collection="typeArr">
+	     	<choose>
+	     		<when test='type == "S"'>
+	     			s.storename LIKE CONCAT('%', #{keyword}, '%');
+	     		</when>
+	     		<when test='type == "A"'>
+	     			s.storeaddress LIKE CONCAT('%', #{keyword}, '%');
+	     		</when>
+	     	</choose>
+	     </foreach>
+     </where>	
+	</sql>
 
-SELECT
-	s.id id,
-	s.storename storename,
-	s.storeaddress storeaddress,
-	s.storePhonenum storePhonenum, 
-	s.storelat storelat,
-	s.storelag storelag,
-	b.fileName fileName
-FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
-
-WHERE
-	  storelat > #{lat} - 0.01 AND storelat < #{lat} + 0.01 AND
-	  storelag > #{lag} - 0.01 AND storelag < #{lag} + 0.01
-
- ]]>
+<select id="getStoreListBySearch" resultType="org.zerock.domain.SubscribeViewVO">
+	SELECT
+		s.id id,
+		s.storename storename,
+		s.storeaddress storeaddress,
+		s.storePhonenum storePhonenum,
+		au.auth auth
+	FROM storeinfo AS s JOIN user AS u ON s.userid = u.userid
+						JOIN user_auth AS au ON s.userid= au.userid
+	<include refid="Search"></include>
+	
 </select>
+
 
 <!-- 구독자 정보 저장 -->
 <insert id="SaveSubscriberInfo">
