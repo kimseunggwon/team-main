@@ -41,14 +41,12 @@
 		(#{userid}, #{auth})
 	</insert>
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	<update id="updateauth">
+		UPDATE user_auth
+		SET auth = 'ROLE_BLACK'
+		WHERE
+			userid = #{id}
+	</update>
 	
 	
 	
@@ -72,6 +70,23 @@
 		WHERE
 			userid = #{userid}
 	</update>
+	
+	<select id="read4" resultMap="memberMap">
+		SELECT
+			m.userid userid,
+			m.userName userName,
+			m.birthDate birthDate,
+			m.userPhonenum userPhonenum,
+			m.userEmail userEmail,
+			m.userNickname userNickname,
+			a.auth auth
+		FROM
+			user m LEFT JOIN user_auth a ON m.userid = a.userid
+		where
+		m.userid LIKE CONCAT('%', #{userid}, '%')
+		HAVING a.auth != 'ROLE_ADMIN'
+	
+	</select>
 
 	<select id="read" resultMap="memberMap"> <!-- resultMap에 이 쿼리의 결과가 담기게 된다. -->
 		SELECT

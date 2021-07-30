@@ -8,7 +8,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>회원가입</title>
 
 
 <style type="text/css">
@@ -376,13 +376,13 @@ $(function() {
        var address = $("#sample6_address").val();
        var detailAddress = $("#sample6_detailAddress").val();
        var extraAddress = $("#sample6_extraAddress").val();
-       var fullAddress = postcode.concat(address,detailAddress,detailAddress);
+       var fullAddress = postcode.concat(address,detailAddress,extraAddress);
        
        var storepostcode = $("#store-postcode").val();
        var storeaddress = $("#store-address").val();
        var storedetailAddress = $("#store-detailAddress").val();
        var storeextraAddress = $("#store-extraAddress").val();
-       var storefullAddress = storepostcode.concat(storeaddress,storedetailAddress,storedetailAddress);
+       var storefullAddress = storepostcode.concat(storeaddress,storedetailAddress,storeextraAddress);
            
        
        var a = $("#sang-signup-form").attr("action");
