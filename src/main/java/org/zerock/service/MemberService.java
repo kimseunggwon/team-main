@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import java.util.List;
 
+
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
 

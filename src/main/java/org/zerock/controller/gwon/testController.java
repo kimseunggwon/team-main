@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.MemberVO;
 import org.zerock.security.domain.CustomUser;
@@ -41,7 +42,9 @@ public class testController {
 	
 	@RequestMapping("/myinfo")
 	public void info( Model model, Principal principal) {
+		
 		log.info("내정보 확인 : " + principal.getName());
+		
 		MemberVO member = service.read(principal.getName());
 		
 		model.addAttribute("member", member);
@@ -74,7 +77,30 @@ public class testController {
 		
 		return "redirect:/member/myinfo";
 	}
+
+ 
 	
+	/*
+	 * @RequestMapping("/myget") 
+	 * public void myget( Model model, Principal
+	 * principal) {
+	 * 
+	 * log.info("get : " + principal.getName());
+	 * 
+	 * MemberVO member = service.read(principal.getName());
+	 * 
+	 * model.addAttribute("member", member); }
+	 */
+	
+
+	@RequestMapping("/myget")
+	public void myget(Model model, Principal principal) {
+		log.info("get");
+		
+		MemberVO member =service.read(principal.getName());
+		
+		model.addAttribute("member", member);
+	}
 	
 }
 
