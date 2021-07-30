@@ -21,6 +21,8 @@ public interface MemberMapper {
 	
 	public MemberVO read(String string);
 
+	public List<MemberVO> read4(String userid);
+	
 	public List<MemberVO> read2(MemberVO vo);
 	
 	public List<MemberVO> read3(MemberVO vo);
@@ -30,4 +32,6 @@ public interface MemberMapper {
 	public int remove(MemberVO vo);
 	
 	public int removeAuth(MemberVO vo);
+
+	public int updateauth(String id);
 }

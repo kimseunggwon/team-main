@@ -125,6 +125,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public List<MemberVO> read4(String userid) {
+		
+		return mapper.read4(userid);
+	}
+	
+	
+	@Override
 	public List<MemberVO> read2(MemberVO vo) {
 		
 		return mapper.read2(vo);
@@ -190,7 +197,13 @@ public class MemberServiceImpl implements MemberService {
 		return cnt == 1;
 	}
 
-
+	@Override
+	public boolean updateauth(String id) {
+		
+		int cnt = mapper.updateauth(id);
+		
+		return cnt == 1;
+	}
 }
 
 

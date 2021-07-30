@@ -124,10 +124,15 @@ var userid = "${pinfo.member.userid}";
 					<c:param name="keyword" value="${pag.keyword }" />
 				</c:url>
 				
-				<c:if test="${pinfo.member.userid eq help.writer }">
+				 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER')">
+					<c:if test="${pinfo.member.userid eq help.writer }">
+						<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
+					</c:if>	
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
-				</c:if>	
-			
+				</sec:authorize>
 			
 			</form>
 		</div>
@@ -138,8 +143,8 @@ var userid = "${pinfo.member.userid}";
 	<div class="row">
 		<div class="col-12">
 			<h3>댓글 </h3>
-			<sec:authorize access="isAuthenticated()">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
 			</sec:authorize>
 			<ul class="list-unstyled" id="reply-list-container">
 			</ul>

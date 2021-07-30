@@ -19,6 +19,7 @@ import org.zerock.service.AskReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+
 @RestController
 @RequestMapping("/askReplies")
 @Log4j
@@ -28,7 +29,7 @@ public class HelpReplyController {
 	private AskReplyService service;
 	
 	@PostMapping("/new")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> create(@RequestBody AskReplyVO vo) {
 		
 		int cnt = service.register(vo);
@@ -41,12 +42,14 @@ public class HelpReplyController {
 	}
 	
 	@GetMapping("/pages/{bno}")
+	@PreAuthorize("isAuthenticated()")
 	public List<AskReplyVO> getList(@PathVariable("bno") Long bno) {
 		
 		return service.getList(bno);
 	}
 	
 	@GetMapping("/{rno}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public AskReplyVO get(@PathVariable("rno") Long rno) {
 		
 		return service.get(rno);

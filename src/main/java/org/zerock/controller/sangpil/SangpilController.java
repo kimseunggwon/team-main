@@ -15,6 +15,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,6 +30,8 @@ import org.zerock.SendEmail;
 import org.zerock.SendSms;
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.UserReviewVO;
+import org.zerock.security.domain.CustomUser;
 import org.zerock.service.MemberService;
 
 import lombok.Setter;
@@ -213,6 +216,29 @@ public class SangpilController {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<> ("exist", HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("/usermanagement")
+	public void usermanagement(Model model, String userid) {
+		
+		
+		
+		List<MemberVO> UserList = service.read4(userid);
+		
+		model.addAttribute("reList2", UserList);
+	}
+	
+	@GetMapping("/modify2")
+	public ResponseEntity<String> modify(String id) {
+		
+		boolean ok = service.updateauth(id);
+		log.info(id);
+		
+		if (ok) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<> ("error", HttpStatus.OK);
 		}
 	}
 	
