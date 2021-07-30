@@ -27,6 +27,8 @@ public interface WonhyeokRestService {
 
 	public List<SubscribeViewVO> getStoreList();
 
+	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo);
+
 
 	
 }

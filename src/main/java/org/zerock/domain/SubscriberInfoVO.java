@@ -2,6 +2,8 @@ package org.zerock.domain;
 
 import lombok.Data;
 
+
+
 @Data
 public class SubscriberInfoVO {
 
@@ -11,4 +13,6 @@ public class SubscriberInfoVO {
 	private String storeAddress;
 	private String subsOptions;
 	private String subsAmount;
+	
+	
 }

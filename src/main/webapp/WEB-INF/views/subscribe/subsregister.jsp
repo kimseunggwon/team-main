@@ -30,6 +30,20 @@
 		5. 구독 완료	
 		 --%>
 <style>
+.otherStoreList {
+	display: block;
+	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
+	border-radius:30px;
+	margin:25px;
+}
+
+.ListBox {
+	display: block;
+	padding: 20px;
+}
+.storeInfoBTN {
+	
+}
 .col {
 	width: 100%;
 	margin-bottom: 30px;
@@ -91,21 +105,20 @@
 
 .button {
 	width: 25%;
-    display: inline-block;
-    border: 1px solid #bbb;
-    height: 90px;
-    color: black;
-    background: #B4DDF5;
-    margin: 2.5%;
-    box-shadow: 0px 0px 6px 10px rgb(32 33 36 / 28%);
-    border-color: rgba(223, 225, 229, 0);
-    text-align: center;
+	display: inline-block;
+	border: 1px solid #bbb;
+	height: 90px;
+	color: black;
+	background: #B4DDF5;
+	margin: 2.5%;
+	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
+	border-color: rgba(223, 225, 229, 0);
+	text-align: center;
 }
 
 .button:hover {
 	box-shadow: 0px 0px 6px 10px #B4DDF5;
 }
-
 
 .box_sub1 {
 	display: block;
@@ -155,29 +168,10 @@
 			clickSubsType(this);
 		})
 		
-		/* 주소종류 클릭 모션 */
-		/* function clickAddressType(elem2) {
-			$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
-			$(elem2).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
-			let finalStoreAddress = $(elem2).
-		}
-		
-		$("#box2-1").click(function() {
-			clickAddressType(this);
-		})
-		
-		$("#box2-2").click(function() {
-			clickAddressType(this);
-		})
-		
-		$("#box2-3").click(function() {
-			clickAddressType(this);
-		}) */
-		
 	})
 </script>
 
-
+<!-- 지도 추천 -->
 <script type="text/javascript">
 	$(function() {
 		let userAddress = "${pinfo.member.address}";
@@ -211,12 +205,19 @@
 										url : "${appRoot}/subscribe/getNearStoreInfo",
 										data : data,
 										success : function(data) {
+											console.log(data);
+											
 
+											if (data[0].id == null) {
+												
+												
+											} else {
+												
 											let map = [];
-											let mapn = [ 'map1', 'map2', 'map3' ];
+											let mapn = [ 'map1', 'map2','map3' ];
 
 											for (let i = 0; i < 3; i++) {
-												console.log(data[i].storename);
+
 												map[i] = new naver.maps.Map(
 														mapn[i],
 														{
@@ -258,20 +259,20 @@
 														laundrymarker);
 												
 											}
-												$("#box_sub2-1").append(` <div> 가게 이름: \${data[0].storename}</div>
+											
+												$("#box_sub2-1").append(` 	<div> 가게 이름: \${data[0].storename}</div>
 																			<div class="text4_sub">가게 주소: \${data[0].storeaddress}</div>
 																			<div>가게 번호: \${data[0].storePhonenum}</div>
-																			<div>가게 평점: </div>`); 
-												$("#box_sub2-2").append(` <div> 가게 이름: \${data[1].storename}</div>
+																			<div class="storeInfoBTN">가게 정보 : </div>`); 
+												$("#box_sub2-2").append(`	<div> 가게 이름: \${data[1].storename}</div>
 																			<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
 																			<div>가게 번호: \${data[1].storePhonenum}</div>
-																			<div>가게 평점: </div>`); 
-												$("#box_sub2-3").append(` <div> 가게 이름: \${data[2].storename}</div>
-																			<div class="text4_sub">가게 주소: \${data[2].storeaddress}</div>
+																			<div>가게 정보 : </div>`); 
+												$("#box_sub2-3").append(`	<div> 가게 이름: \${data[2].storename}</div>
+																			<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
 																			<div>가게 번호: \${data[2].storePhonenum}</div>
-																			<div>가게 평점: </div>`); 
-												
-												
+																			<div>가게 정보 : </div>`); 
+			
 											/* 주소종류 클릭 모션 */
 											function clickAddressType(elem2) {
 												$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
@@ -294,11 +295,11 @@
 												clickAddressType(this);
 											})
 
-										},
-										erroe : function() {
-											console.log("실팽");
+											}
 										}
+										
 									})
+									
 						})
 	})
 </script>
@@ -355,10 +356,11 @@
 			</div>
 
 			<div>
-				<button id="addressList_modal_btn" class="button" type="button" data-toggle="modal" data-target="#addressList-modal">다른 빨래방 찾아보기</button>
+				<button id="addressList_modal_btn" class="button" type="button"
+					data-toggle="modal" data-target="#addressList-modal">다른
+					빨래방 찾아보기</button>
 			</div>
-			<input id="finalAddress" value=" " type="text" readonly="readonly"
-				hidden>
+			<input id="finalAddress" type="text" readonly="readonly" hidden>
 		</div>
 	</div>
 	<div class="col">
@@ -368,7 +370,8 @@
 	</div>
 
 
-<script type="text/javascript">
+<!-- 모달 열기 -->
+	<script type="text/javascript">
 $(function() {
 	$("#addressList_modal_btn").click(function() {
 		$.ajax({
@@ -378,29 +381,47 @@ $(function() {
 				let StoreListContainer = $("#storeList").empty();
 				
 				for (StoreAddress of list) {
-					let storeListHTML = `<div class="otherStoreList" style="border-style:solid; border-width:1px; border-color:black;border-radius:30px; margin:1.5%">
-										<div style="padding:10px">
+					let storeListHTML = `<div class="otherStoreList">
+										<div class="ListBox">
+											<div id="\${StoreAddress.id}"></div>
 											<div> 가게이름 :\${StoreAddress.storename}</div>
 											<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-											<div> 평점:  </div>
+											<div><a href="">가게 정보보기</a></div>
 										</div>
 										</div>`
 					
 						StoreListContainer.append(storeListHTML);
+
+ 					if (StoreAddress.auth == "ROLE_B2BUSER"){
+						$("#"+`\${StoreAddress.id}`).text("♥개인");
+
+					} else if (StoreAddress.auth == "ROLE_EMPUSER"){
+						$("#"+`\${StoreAddress.id}`).text("★본사");
+					} 
 				}
 				
+			
+				/* 선택시 기능 */
 				function clickModalAddress(elem3) {
 					let modal_finalAddress = $(elem3).find(".modal_store_name").text().substr(7);
-					$("#finalAddress").val(modal_finalAddress);
-					
-					$("#addressList-modal").modal('hide');
-					
+					$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
+					$(elem3).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
+					$("#finalAddress").val(modal_finalAddress);		
 				}
 				
 				$(".otherStoreList").click(function() {
 					clickModalAddress(this)
 				}) 
 				
+				/* 선택완료 기능 */
+				$("#selectBTN").click(function() {
+					let aaa = $("#finalAddress").val();
+					if(aaa == "") {
+						alert("주소를 선택해주세요");
+					} else if (aaa != "") {
+					$("#addressList-modal").modal('hide');	
+					}
+				})
 			}
 			
 		})
@@ -409,7 +430,78 @@ $(function() {
 })
 
 </script>
-<!-- 원하는 빨래방 검색 모달 -->
+
+<!-- 검색창 -->
+<script type="text/javascript">
+$(function() {
+	$(".Searchbtn").click(function() {
+		let type = $("#select1 option:selected").val();
+		let keyword = $(".keyword1").val();
+		
+		console.log(type);
+		console.log(keyword);
+	
+	let data = {
+			type : type,
+			keyword : keyword
+	}
+	
+	$.ajax({
+			type : "POST",
+			data : data,
+			url : "${appRoot}/subscribe/getStoreListBySearch",
+			success : function(list1) {
+				console.log(list1);
+				
+				let StoreListContainer1 = $("#storeList").empty();
+						
+						for (StoreAddress of list1) {
+							let storeListHTML1 = `<div class="otherStoreList">
+								<div class="ListBox">
+									<div id="\${StoreAddress.id}"></div>
+									<div> 가게이름 :\${StoreAddress.storename}</div>
+									<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+									<div><a href="">가게 정보보기</a></div>
+								</div>
+								</div>`;
+								
+							StoreListContainer1.append(storeListHTML1);
+							
+							if (StoreAddress.auth == "ROLE_B2BUSER"){
+								$("#"+`\${StoreAddress.id}`).text("♥개인");
+
+							} else if (StoreAddress.auth == "ROLE_EMPUSER"){
+								$("#"+`\${StoreAddress.id}`).text("★본사");
+							}
+						}
+						
+						function SeachClickModalAddress(elem4) {
+							let modal_finalAddress = $(elem4).find(".modal_store_name").text().substr(7);
+							$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
+							$(elem4).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
+							$("#finalAddress").val(modal_finalAddress);
+							
+						}
+						
+						$(".otherStoreList").click(function() {
+							SeachClickModalAddress(this)
+						}) 
+						
+						/* 선택완료 기능 */
+					$("#selectBTN").click(function() {
+						let aaa = $("#finalAddress").val();
+						if(aaa == "") {
+							alert("주소를 선택해주세요");
+						} else if (aaa != "") {
+						$("#addressList-modal").modal('hide');	
+						}
+					})
+			}
+		})	
+	})
+})
+</script>
+	<!-- 원하는 빨래방 검색 모달 -->
 	<div class="modal" id="addressList-modal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -421,22 +513,21 @@ $(function() {
 					</button>
 				</div>
 				<div style="margin-left: 25px; margin-top: 10px;">
-					<select>
+					<select id="select1">
 						<option value="">--</option>
-						<option value="STORENAME">가게명검색</option>
-						<option value="ADDRESS">주소검색</option>
+						<option value="S">가게명검색</option>
+						<option value="A">주소검색</option>
 					</select>
-					<input name="keyword" type="search" placeholder="Search">
-					<button class="" type="submit">Search</button>
+					<input class="keyword1" type="text" placeholder="Search">
+					<button class="Searchbtn" type="submit">Search</button>
+					<button id="selectBTN">선택완료</button>
 				</div>
 				<div class="modal-body">
-					<div id="storeList">
-					</div>
+					<div id="storeList"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 
 
@@ -445,7 +536,6 @@ $(function() {
 
 /*  결제 api */
 $(function() {
-	
 	$("#payPage").click(function() {
 		let subsId = "${pinfo.member.userid}";
 		let subsName = "${pinfo.member.userName}";
@@ -453,9 +543,16 @@ $(function() {
 		let storeAddress = $("#finalAddress").val();
 		let subsOption = $("#finalSubsOptions").val();
 		let subsAmount = $("#finalAmount").val();
+
+		var checkMsg;
+		checkMsg = "이름 : " + subsName;
+		checkMsg += "\n구독자 주소: " + subsAddress;
+		checkMsg += "\n선택한 빨래방 주소: " + storeAddress;	
+		checkMsg += "\n구독종류 : " + subsOption ;
+		checkMsg += "\n결제금액 : " + subsAmount;
+		var check = confirm(checkMsg);
 		
-	
-		
+		if(check) {
 		 var IMP = window.IMP; // 생략가능
 	        IMP.init('imp01897248'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	        var msg;
@@ -530,7 +627,11 @@ $(function() {
 	            }
 	        });
 	    
-	})
+			} else {
+				alert("결제 승인 취소")
+			}
+		})
+	
 })
 </script>
 </html>

@@ -98,8 +98,18 @@ public class SubscribeController {
 	@ResponseBody
 	public List<SubscribeViewVO> getStoreList() {
 		List<SubscribeViewVO> list = service.getStoreList();
+
 		return list;
 		
+	}
+	
+	@PostMapping("/getStoreListBySearch")
+	@ResponseBody
+	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo) {
+		log.info(vo);
+		List<SubscribeViewVO> list = service.getStoreListBySearch(vo);
+		log.info(list);
+		return list;
 	}
 	
 }
