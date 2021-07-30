@@ -41,6 +41,10 @@ public interface UserReviewService {
 	List<UserReviewVO> getLatestList(ReviewCriteria recri);
 
 	List<UserReviewVO> getviewCountList(ReviewCriteria recri);
+
+	int makeReviewStar(int reBno);
+
+	int getReviewStar(int reBno);
 	
 
 }

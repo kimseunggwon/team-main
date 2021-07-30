@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -59,6 +60,7 @@ public class UserReviewController {
 		// 공지사항 얻어오기
 		List<UserReviewVO> announceList = service.getAnnounceList(recri);
 		
+		// 정렬 방식 구분
 		List<UserReviewVO> popularlist = service.getPopularList(recri);
 		List<UserReviewVO> latestlist = service.getLatestList(recri);
 		List<UserReviewVO> viewcountlist = service.getviewCountList(recri);
@@ -78,28 +80,43 @@ public class UserReviewController {
 	// 리뷰 작성하기 (이미지 파일 포함) - userReviewWrite
 	@PostMapping("/write")
 	@PreAuthorize("isAuthenticated()")
+//	@Transactional
+	@ResponseBody
 	public String reviewWrite(UserReviewVO review,
 								@RequestParam("file") MultipartFile[] file,
 								ReviewCriteria recri,
 								RedirectAttributes rttr) {
 		
-		// log.info("userReviewWrite is working");
-		
 		// review.setFileName(file.length); // getOriginalFileName()
 		
+		// 리뷰 글 작성하고
 		service.reviewWrite(review, file);
+		
+		// 빨래방 위치 정보 얻어오고
+		//service.getSubscribeStore()
+		
+		// 평점 설정하고
+		service.makeReviewStar(review.getReBno());
+		
+		// 평점 얻어오기
+		int stars = service.getReviewStar(review.getReBno());
+		rttr.addFlashAttribute("reviewStars", stars);
 		
 		rttr.addFlashAttribute("result", review.getReBno());
 		rttr.addFlashAttribute("messageTitle", "리뷰 등록 완료-!");
 		rttr.addFlashAttribute("messageBody", review.getReBno() + "번 리뷰가 등록되었습니다.");
 		
-		return "redirect:/review/list?" + recri.getSort();
+		 return "redirect:/review/list?" + recri.getSort();
 	}
 	
 	// 리뷰 작성하기 - 이미지 파일 없이
 	@GetMapping("/write")
 	@PreAuthorize("isAuthenticated()")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
+		// 여기에도 평점 설정 내용 써야 함 *******************
+		
+		// + 위치 정보
+		
 		// Forwarding to /WEB-INF/views/review/write.jsp
 	}
 	

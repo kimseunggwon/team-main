@@ -32,6 +32,12 @@
 	outline: none;
 }
 
+#jinah-star {
+	width: 50px;
+	height: 50px;
+	color: #ffe62e;
+}
+
 #review-like-btn {
 	padding: 5px;
 	background-color: white;
@@ -39,11 +45,6 @@
 	outline: none;
 }
 
-#jinah-star {
-	width: 50px;
-	height: 50px;
-	color: #ffe62e;
-}
 
 #re-write-content {
 	display: flex;

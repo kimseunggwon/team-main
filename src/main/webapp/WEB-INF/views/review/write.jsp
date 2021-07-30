@@ -24,14 +24,14 @@
 	font-family: 'GongGothicMedium';
 }
 
-#re-starItem {
+.review-star-child {
 	padding: 5px;
 	background-color: white;
 	border: none;
 	outline: none;
 }
 
-#jinah-star {
+#jinah-star1, #jinah-star2, #jinah-star3, #jinah-star4, #jinah-star5 {
 	width: 50px;
 	height: 50px;
 	color: #ffe62e;
@@ -62,6 +62,7 @@ img {
 	justify-content: space-around;
 	align-content: center;
 }
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="${appRoot }/resources/css/uploadajax.css">
@@ -71,6 +72,7 @@ img {
 </script>
 
 <script src="${appRoot }/resources/js/review/uploadajax.js"></script>
+<script src="${appRoot }/resources/js/review/reviewstar.js"></script>
 
 </head>
 <body style="overflow-x:hidden;">
@@ -96,20 +98,50 @@ img {
 	
 		<rev:search></rev:search>
 
+<!-- <script>
+$(function () {
+	$(".review-star-child").click(function() {
+		console.log("!!!!!!!")
+		$(".review-star-child").find("[data-fa-i2svg]").removeClass("fas").addClass("far");
+		$(this).prevAll().find("[data-fa-i2svg]").removeClass("far").addClass("fas");
+		$(this).find("[data-fa-i2svg]").removeClass("far").addClass("fas");
+	});
+});
+</script> -->
+
 	<!-- Review Grading (stars) Start -->
-	<div id="re-star" style="display:inline;" class="container">
-		<div class="row justify-content-center d-flex align-items-center">
-			<button type="button" class="item" id="re-starItem"><i id="jinah-star" class="far fa-star"></i></button>
-			<button type="button" class="item" id="re-starItem"><i id="jinah-star" class="far fa-star"></i></button>
-			<button type="button" class="item" id="re-starItem"><i id="jinah-star" class="far fa-star"></i></button>
-			<button type="button" class="item" id="re-starItem"><i id="jinah-star" class="far fa-star"></i></button>
-			<button type="button" class="item" id="re-starItem"><i id="jinah-star" class="far fa-star"></i></button>
+	<div id="review-star-parent" style="display: inline;" class="container">
+		<div class="review-star-parent row justify-content-center d-flex align-items-center">
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star1"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star2"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star3"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star4"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star5"></i>
+			</button>
 			<div>
-				<label for="jinah-restars">평점</label>
-				<input type="hidden" name="reStars"  value="${re.reStars }"/>
+			
+			<input class="review-result btn btn-warning" type="submit" value="등록하기">
+			
+				<%-- 여기에 별 개수를 계산한 값을 넣어주기 --%>
+				<label for="jinah-restars">평점</label><span id="reStars"
+					name="reStars">${review.reStars }</span> 
+					
+				<%-- controller에서 attribute로 넣어준 value (service, dao가 일한 결과 = ) --%>
+				<span>${reviewStars }</span>
+				
+			
 			</div>
 		</div>
-	</div>
+	</div> 
 	<!-- Review Grading (stars) End -->
 
 	<!-- Main Writing Content -->
@@ -145,6 +177,11 @@ img {
 			 			</div>
 			 			<input type="hidden" name="reWriterName" value="${pinfo.member.userid }" readonly>
 			 			
+			 			<!-- 이용한 세탁소 위치 정보 -->
+			 			<div class="item form-group">
+			 				<label for="re-input4">나의 구독 세탁소 정보</label>
+			 				<input id="re-input4" class="form-control" value="${review.storeName }" readonly>
+			 			</div>
 						<input class="btn btn-primary" type="submit" value="리뷰 등록하기">
 			 			
 			 	</form>
@@ -152,7 +189,6 @@ img {
 		 </div>
 	</div>
 	
-	<%-- 사용자가 이용한 세탁소 위치 정보 --%>
 	
 	
 	
