@@ -220,6 +220,7 @@ public class SangpilController {
 	}
 	
 	@GetMapping("/usermanagement")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void usermanagement(Model model, String userid) {
 		
 		
