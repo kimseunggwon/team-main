@@ -49,6 +49,32 @@
 }
 </style>
 
+<script type="text/javascript">
+$(function(){
+	let loginID = "${pinfo.member.userid}";
+	$.ajax({
+		type: "POST",
+		url: "${appRoot}/member/getLoginInfo",
+		data: {
+			userid : loginID
+		},
+		success: function(data) {
+			
+			let confirmID = data.id;
+			if(data.id == "") {
+				$("#main-subscribe").show();
+				$("#main-subscribe").click(function() {
+				location.href("${appRoot}/subscribe/subsregister");
+				})
+			} 		
+		},
+		error : function() {
+			console.log("실패")
+		}
+	})
+})
+</script>
+
 </head>
 <body>
 	<main:navbar></main:navbar>
@@ -107,6 +133,15 @@
 	
 			<br>
 		
+		<div class="row justify-content-center fixed-bottom">
+			<sec:authorize access="isAuthenticated()">
+						<a class="btn btn-secondary"  id="main-subscribe" style="display:none;">구독 신청!</a>
+			</sec:authorize>
+			
+			<sec:authorize access="isAnonymous()">
+				<a class="btn btn-secondary" href="${appRoot}/member/login">구독 신청!</a>
+			</sec:authorize>
+		</div>
 
 	<bot:botnav></bot:botnav>
 

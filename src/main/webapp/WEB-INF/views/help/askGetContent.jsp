@@ -112,10 +112,10 @@ var userid = "${pinfo.member.userid}";
 					<c:param name="keyword" value="${pag.keyword }" />
 				</c:url>
 				
-				 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER')">
-					<c:if test="${pinfo.member.userid eq help.writer }">
+				 <sec:authorize access="principal.username == #help.writer">
+					
 						<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
-					</c:if>	
+						
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
