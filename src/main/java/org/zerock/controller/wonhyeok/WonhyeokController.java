@@ -70,7 +70,7 @@ public class WonhyeokController {
 			rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());
 			rttr.addFlashAttribute("storeinfo", "준비중");
 			rttr.addFlashAttribute("introduce", "준비중");
-			rttr.addFlashAttribute("fileName", "readyimg");
+			rttr.addFlashAttribute("fileName", "readyimg.jpg");
 			
 			return  "redirect:/searchstore/b2bIntroduce";
 			

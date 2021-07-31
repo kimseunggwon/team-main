@@ -8,59 +8,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
+<%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 <title>우리가게는요~</title>
 </head>
 <style>
- body {
-     width: 600px;
-     height: 950px;
- }
-.wrapper {
-    display: inline-block;
-    box-shadow: 0px 0px 6px 2px black;
-    width: 100%;
-    height: 100%;
-}
-.storeName {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 50px;
-}
-.imgPage {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 450px;
-}
-.like {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 50px;
-}
-.storeInfo {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 200px;
-}
-.introduce {
-    height: 200px;
+body {
+	width: 600px;
+	height: 950px;
 }
 
+.wrapper {
+	display: inline-block;
+	box-shadow: 0px 0px 6px 2px black;
+	width: 100%;
+	height: 100%;
+}
+
+.storeName {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 50px;
+}
+
+.imgPage {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 450px;
+}
+
+.like {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 50px;
+}
+
+.storeInfo {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 200px;
+}
+
+.introduce {
+	height: 200px;
+}
 </style>
 <body>
-<div class="wrapper">
-${id }${storeaddress }${storename }${storePhonenum }${storeinfo }${introduce }${fileName }
-    <div class="storeName"></div>
-    <div class="imgPage"></div>
-    <div class="like"></div>
-    <div class="storeInfo"></div>
-    <div class="introduce"></div>
+	<div class="wrapper">
+		<div class="storeName"><div>${storename }</div></div>
+		<div class="imgPage">
+			<img src="${imgIntroRoot }${id}/${fileName}"
+				alt="${imgIntroRoot }readyimg/${fileName}" />
+		</div>
+		<div class="like"></div>
+		<div class="storeInfo">
+			<div>${storeaddress }</div>
+			<div>${storePhonenum }</div>
+			<div>${storeinfo }</div>
+		</div>
+		<div class="introduce">${introduce }</div>
 
-</div>
+	</div>
 
 
 </body>

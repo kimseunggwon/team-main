@@ -53,7 +53,6 @@ public class SubscribeController {
 	@PostMapping(value = "/sms.do", produces = { "application/json; charset=utf-8" })
 	@ResponseBody
 	public String sendSms(smsVO vo) throws Exception {
-		log.info(vo);
 		String api_key = "NCSMBWEGADMZITWJ";
 		String api_secret = "9MDPLWJRA5UJBHFOKDR9HJB022B35Z5Q";
 
@@ -106,9 +105,7 @@ public class SubscribeController {
 	@PostMapping("/getStoreListBySearch")
 	@ResponseBody
 	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo) {
-		log.info(vo);
 		List<SubscribeViewVO> list = service.getStoreListBySearch(vo);
-		log.info(list);
 		return list;
 	}
 	

@@ -30,6 +30,15 @@
 		5. 구독 완료	
 		 --%>
 <style>
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+	font-family: 'GongGothicMedium';
+}
 .otherStoreList {
 	display: block;
 	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
@@ -114,19 +123,6 @@
 	box-shadow: 0px 0px 6px 10px #B4DDF5;
 }
 
-.button {
-	width: 25%;
-	display: inline-block;
-	border: 1px solid #bbb;
-	height: 90px;
-	color: black;
-	background: #B4DDF5;
-	margin: 2.5%;
-	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
-	border-color: rgba(223, 225, 229, 0);
-	text-align: center;
-}
-
 .button:hover {
 	box-shadow: 0px 0px 6px 10px #B4DDF5;
 }
@@ -142,13 +138,45 @@
 	height: 200px;
 	width: 100%;
 	text-align: left;
-	font-size: 120%
+	font-size: 120%;
+	padding: 10px;
 }
 
 .box_sub3 {
 	display: block;
 	height: 300px;
 	width: 100%;
+}
+
+.storeInfoBtn {
+	font-size: 12px;
+	border: solid 1px #dadada;
+	background-color:white; 
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	}
+.button_sang {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:200px;
+    font-family: 'GongGothicMedium';
+}
+.button_sang:hover {
+	background: #0583F2;
 }
 </style>
 <script type="text/javascript">
@@ -236,7 +264,7 @@
 															center : new naver.maps.LatLng(
 																	data[i].storelag,
 																	data[i].storelat),
-															zoom : 14
+															zoom : 12
 														});
 
 												/* 유저 집 마크 */
@@ -304,7 +332,7 @@
 												
 												let url = "${appRoot}/searchstore/b2bIntroduce/" + id
 												let name = "빨래스타그램";
-												let option = "width = 620, height = 900, top = 100, left = 200, location = no"
+												let option = "width = 620, height = 900, top = 100, left = 200, location = no, resizable = yes, toolbars=no, menubar=no"
 												
 												window.open(url, name, option);
 											}
@@ -558,16 +586,16 @@
 			</div>
 
 			<div>
-				<button id="addressList_modal_btn" class="button" type="button"
+				<button id="addressList_modal_btn" class="button_sang" type="button"
 					data-toggle="modal" data-target="#addressList-modal">다른
-					빨래방 찾아보기</button>
+					빨래방 <br>찾아보기</button>
 			</div>
 			<input id="finalAddress" type="text" readonly="readonly" hidden>
 		</div>
 	</div>
 	<div class="col">
 		<div class="title">
-			<input type="button" id="payPage" value="결제하기">
+			<input class="button_sang" type="button" id="payPage" value="결제하기">
 		</div>
 	</div>
 

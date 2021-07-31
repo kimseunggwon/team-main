@@ -150,8 +150,8 @@ WHERE s.id = #{id}
 <!-- 구독자 정보 저장 -->
 <insert id="SaveSubscriberInfo">
 INSERT INTO subscriber 
-(subsId, subsName, subsAddress, storeAddress,subsOptions, subsAmount)
-VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeAddress}, #{subsOptions}, #{subsAmount})
+(subsId, subsName, subsAddress, storeid, subsOptions, subsAmount)
+VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount})
 </insert>
 
 </mapper>

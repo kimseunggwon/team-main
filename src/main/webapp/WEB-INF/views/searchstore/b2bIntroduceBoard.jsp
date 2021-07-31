@@ -12,17 +12,26 @@
 <head>
 
 <style>
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+	font-family: 'GongGothicMedium'
+}
 .box {
 	width: 500px;
-	height: 800px;
+	height: 950px;
 	display: block;
 	text-align: center;
-	 margin: 0 auto;
-
+	margin: 0 auto;
 }
 
 .box_1 {
-	height: 10%;
+	height: 90px;
 	padding-top: 20px;
 	font-size: 32px;
 }
@@ -44,6 +53,83 @@
 	height: 100px;
 	display: inline-block;
 }
+
+.hhhHTML {
+	font-style: normal;
+	font-size: 8px;
+	font-weight: 1000;
+}
+
+.modal-content {
+	width: 600px;
+	height: auto;
+}
+
+.wrapper-modal {
+	display: inline-block;
+	box-shadow: 0px 0px 6px 2px black;
+	width: 100%;
+	height: 100%;
+}
+
+.storeName {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 50px;
+}
+
+.imgPage {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 450px;
+}
+
+.like {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 50px;
+}
+
+.storeInfo {
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 200px;
+}
+
+.introduce {
+	height: 200px;
+}
+ body {	
+   font-family: 'GongGothicMedium';
+}
+
+.button_sang {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	width:200px;
+    font-family: 'GongGothicMedium';
+}
+.button_sang:hover {
+	background: #0583F2;
+}
+
 </style>
 <!-- 미리보기 -->
 <script type="text/javascript">
@@ -63,13 +149,13 @@
 		}
 	}
 
-/* 	$(function() {
-		$("#preview-modal-btn").click(function() {
-			var comment = $("#introduce").val();
-			$("#introduce_comment").val(comment);
-			$("#prePage").show();
-		})
-	}) */
+	/* 	$(function() {
+	 $("#preview-modal-btn").click(function() {
+	 var comment = $("#introduce").val();
+	 $("#introduce_comment").val(comment);
+	 $("#prePage").show();
+	 })
+	 }) */
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -78,7 +164,7 @@
 			var form = new FormData();
 			form.append("file", $("#introduceImage")[0].files[0]);
 			form.append("id", id);
-			form.append("storeinfo",$("#storeinfo").val());
+			form.append("storeinfo", $("#storeinfo").val());
 			form.append("introduce", $("#introduce").val());
 
 			$.ajax({
@@ -99,18 +185,29 @@
 		})
 	})
 </script>
+
 </head>
 <body style="display: block; width: 100%; margin-top: 20px">
-				<div style="text-align: center;">
-					<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
-					</a>
-				</div>
+	<div style="text-align: center;">
+		<a href="${appRoot }/member/main"> <img
+			src="${appRoot }/resources/image/others/brand_logo_300px.png"
+			alt="...">
+		</a>
+	</div>
 	<div class="box">
-		<div class="box_1">사장님 가게 홍보  <img onclick="" alt="" src="${appRoot }/resources/image/den.jpg"> </div>
+		<div class="box_1">
+			사장님 가게 홍보 <img onmouseover="$('.hhhHTML').show();"
+				onmouseout="$('.hhhHTML').hide();" alt=""
+				src="${appRoot }/resources/image/den.jpg">
+		</div>
+		<div class="hhhHTML" style="display: none">
+			본 계시판은 구독시 고객님에게 보여지는 정보를 등록하는 곳입니다.<br> *사진이 없으면 등록되지 않습니다.<br>
+			*사진 기분 규격은 (600 x 450) 을 권장합니다.<br> *허위 및 과장 광고 시 벌금이 부과됩니다.
+		</div>
 		<div class="box_2">
-			<label for="introduceImage">홍보배너이미지</label> <br> 
-			<input type="file" class="form-control" accept="image/*" id="introduceImage">
+			<label for="introduceImage">홍보배너이미지</label> <br> <input
+				type="file" class="form-control" accept="image/*"
+				id="introduceImage">
 		</div>
 		<div class="box_3">
 			<label for="storeinfo">가게 정보:</label> <br>
@@ -123,39 +220,43 @@
 				placeholder="가게 소개 멘트/수상내역/세탁기스펙/경력 등"></textarea>
 		</div>
 		<div class="box_5">
-			<button id="preview-modal-btn" class="button" type="button"
-					data-toggle="modal" data-target="#preview-modal">미리보기</button>
-			<button id="register">등록</button>
+			<button id="preview-modal-btn" class="button_sang" type="button"
+				data-toggle="modal" data-target="#preview-modal" >미리보기</button>
+			<button id="register" class="button_sang">등록</button>
 		</div>
 	</div>
 
 
-		<!-- 미리보기 모달 -->
-		<div class="modal" id="preview-modal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">미리보기</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div>
-						 <img id="preImage" src="#"/>
+	<!-- 미리보기 모달 -->
+	<div class="modal" id="preview-modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">미리보기</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="wrapper-modal">
+						<div class="storeName">등록된 가게 이름</div>
+						<div class="imgPage">
+							<img id="preImage" src="#" />
 						</div>
+						<div class="like"></div>
+						<div class="storeInfo">
+							<div>등록된 가게 주소</div>
+							<div>등록된 가게 번호</div>
+							<div>${storeinfo }</div>
+						</div>
+						<div class="introduce"></div>
 					</div>
+
 				</div>
 			</div>
 		</div>
-		
-		<div style="display: none">
-		본 계시판은 구독시 고객님에게 보여지는 정보를 등록하는 곳입니다.
-		*사진이 없으면 등록되지 않습니다.
-		*사진 기분 규격은 (600 x 450) 을 권장합니다.
-		*허위 및 과장 광고 시 벌금이 부과됩니다.
-		</div>
+	</div>
 
 </body>
 </html>
