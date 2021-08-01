@@ -153,12 +153,6 @@ public class UserReviewServiceImpl implements UserReviewService {
 			}
 	}
 	
-	// 리뷰 평점 설정하기
-	@Override
-	public int makeReviewStar(int reBno) {
-		return reviewMapper.setReviewStar(reBno);
-	}
-	
 	// 리뷰 평점 얻어오기
 	@Override
 	public int getReviewStar(int reBno) {
@@ -212,26 +206,31 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public boolean reviewModify(UserReviewVO review, MultipartFile[] mfile) {
 		
+		// 이전 파일 (S3) 삭제
 		UserReviewVO oldReview = reviewMapper.readReview(review.getReBno());
 		removeReviewFile(oldReview);
 		
 		fileMapper.deleteReviewByBno(review.getReBno());
 		
-		for (MultipartFile file : mfile) {
-			
-			if (file != null && file.getSize() > 0) {
+		// 새로운 평점 등록
+		
+		// 새로운 파일 업로드
+		
+			for (MultipartFile file : mfile) {
 				
-				upload(review, file);
-
-				UserReviewFileVO rfvo = new UserReviewFileVO();
-
-				rfvo.setBno(review.getReBno());
-				rfvo.setFileName(file.getOriginalFilename());
-
-				fileMapper.reviewFileInsert(rfvo);
+				if (file != null && file.getSize() > 0) {
+					
+					upload(review, file);
+					
+					UserReviewFileVO rfvo = new UserReviewFileVO();
+					
+					rfvo.setBno(review.getReBno());
+					rfvo.setFileName(file.getOriginalFilename());
+					
+					fileMapper.reviewFileInsert(rfvo);
+				}
 			}
-		}
-
+			
 		return reviewModify(review);
 	}
 

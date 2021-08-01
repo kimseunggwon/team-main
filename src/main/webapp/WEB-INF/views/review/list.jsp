@@ -50,7 +50,7 @@ img {
 </script>
 
 </head>
-<body>
+<body style="overflow-x: hidden;">
 
 	<rev:navbar></rev:navbar>
 

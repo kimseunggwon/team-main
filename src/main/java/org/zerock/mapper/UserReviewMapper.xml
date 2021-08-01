@@ -86,8 +86,8 @@
 
 <!-- 리뷰 작성 및 레코드 삽입(insert)  -->
 <insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
-	INSERT INTO user_review (re_title, re_content, re_writer)
-	VALUES (#{reTitle}, #{reContent}, #{reWriterName})
+	INSERT INTO user_review (re_title, re_content, re_writer, re_stars)
+	VALUES (#{reTitle}, #{reContent}, #{reWriterName}, #{reStars})
 </insert>
 
 <!-- 리뷰 상세 읽기 -->
@@ -101,6 +101,7 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		f.fileName fileName,
 		u.userNickname reWriterName 
 		
@@ -120,6 +121,7 @@
 <result property="reUpdatedate" column="reUpdatedate" />
 <result property="likeCount" column="likeCount" />
 <result property="viewCount" column="viewCount" />
+<result property="reStars" column="reStars" />
 <result property="reWriterName" column="reWriterName" />
 <collection property="fileName" resultMap="fileNameMap"></collection>
 </resultMap>
@@ -135,6 +137,7 @@
 		r.re_title = #{reTitle},
 		r.re_content = #{reContent},
 		r.re_writer = #{reWriterName},
+		r.re_stars = #{newReStars},
 		r.re_updatedate = NOW()
 	WHERE
 		re_bno = #{reBno}
@@ -144,12 +147,6 @@
 <delete id="deleteReview">
 	DELETE FROM user_review
 	WHERE re_bno = #{reBno}
-</delete>
-
-<!-- 해당 사용자의 리뷰 삭제하기 -->
-<delete id="removeReviewByUserid">
-	DELETE FROM user_review
-	WHERE re_writer = #{userid}
 </delete>
 
 <!-- 총 리뷰 게시물 수 -->
@@ -166,15 +163,6 @@
 	 		r.viewcount = r.viewcount + 1
 	 	WHERE
 	 		r.re_bno = #{reBno}
- </update>
- 
-<!-- 리뷰 평점 설정하기 -->
- <update id="setReviewStar">
- 	UPDATE user_review r
- 		SET 
- 			r.re_stars = #{review.reStars}
- 		WHERE 
- 			r.re_bno = #{review.reBno}
  </update>
  
 <!-- 리뷰 평점 얻어오기 -->
