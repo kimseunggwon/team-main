@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.AddressVO;
 import org.zerock.domain.B2bIntroduceVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.StoreVO;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.UserReviewVO;
@@ -164,6 +165,13 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 		
 		return mapper.getStoreInroducePageInfo(id);
 		
+	}
+
+
+	@Override
+	public StoreVO getStoreInfo(String id) {
+
+		return mapper.getStoreInfo(id);
 	}
 
 

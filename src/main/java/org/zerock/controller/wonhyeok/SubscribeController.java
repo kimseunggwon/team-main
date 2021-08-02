@@ -37,10 +37,9 @@ public class SubscribeController {
 	
 	@PostMapping("/getNearStoreInfo")
 	@ResponseBody
-	public List<SubscribeViewVO> getNearStoreInfo(MemberVO vo,Model model) {
+	public List<SubscribeViewVO> getNearStoreInfo(MemberVO vo) {
 		List<SubscribeViewVO> subsvo =service.getNearStireInfo(vo);
 
-		model.addAttribute("model",subsvo );
 
 		return subsvo;
 	}

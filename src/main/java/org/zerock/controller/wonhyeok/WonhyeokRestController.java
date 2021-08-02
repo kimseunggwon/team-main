@@ -24,10 +24,9 @@ public class WonhyeokRestController {
 	private WonhyeokRestService service;
 	
 	@PostMapping("/searchstore")
-	public List<AddressVO> find(String storename, Model model) {
-		log.info(storename);
+	public List<AddressVO> find(String storename) {
+
 		List<AddressVO> vo = service.getsearchbystorename(storename);
-		model.addAttribute("store", vo);
 		
 
 		return vo;

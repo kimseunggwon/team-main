@@ -138,7 +138,6 @@ body {
 	height: 200px;
 	width: 100%;
 	text-align: left;
-	font-size: 120%;
 	padding: 10px;
 }
 
@@ -193,6 +192,7 @@ body {
 			$("#finalSubsOptions").val(subsOptions);
 
 		}
+	
 
 		$("#box1-1").click(function() {
 			clickSubsType(this);
@@ -205,6 +205,7 @@ body {
 		$("#box1-3").click(function() {
 			clickSubsType(this);
 		})
+		
 		
 	})
 </script>
@@ -299,27 +300,44 @@ body {
 														laundrymarker);
 												
 											}
+											/* 매장 사진  */ 
+											$("#fileNameId1").attr("src",(data[0].fileName != null ? '${imgIntroRoot}' + `\${data[0].id}` + '/' + `\${data[0].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
+											$("#fileNameId2").attr("src",(data[1].fileName != null ? '${imgIntroRoot}' + `\${data[1].id}` + '/' + `\${data[1].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
+											$("#fileNameId3").attr("src",(data[2].fileName != null ? '${imgIntroRoot}' + `\${data[2].id}` + '/' + `\${data[2].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
 											
-												$("#box_sub2-1").append(` 	<div data-id="\${data[0].id}">
-																				<div> 가게 이름: \${data[0].storename}</div>
-																				<div class="text4_sub">가게 주소: \${data[0].storeaddress}</div>
-																				<div>가게 번호: \${data[0].storePhonenum}</div>
+											
+												$("#box_sub2-1").append(` 	<div class="forStoreId" data-id="\${data[0].id}">
+																				<div class="checkAUTH" data-auth="\${data[0].auth}" style="color:#169EF2"></div>
+																				<div style="font-size:22px;color:#9E3D00"> 가게 이름: \${data[0].storename}</div>
+																				<div class="text4_sub" style="color:#787878">가게 주소: \${data[0].storeaddress}</div>
+																				<div style="color:#787878">가게 번호: \${data[0].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-												$("#box_sub2-2").append(`	<div data-id="\${data[1].id}">
-																				<div> 가게 이름: \${data[1].storename}</div>
-																				<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
-																				<div>가게 번호: \${data[1].storePhonenum}</div>
+												$("#box_sub2-2").append(`	<div class="forStoreId" data-id="\${data[1].id}">
+																				<div class="checkAUTH" data-auth="\${data[0].auth}" style="color:#169EF2"></div>
+																				<div style="font-size:22px;color:#9E3D00"> 가게 이름: \${data[1].storename}</div>
+																				<div class="text4_sub" style="color:#787878">가게 주소: \${data[1].storeaddress}</div>
+																				<div style="color:#787878">가게 번호: \${data[1].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-												$("#box_sub2-3").append(`	<div data-id="\${data[2].id}">
-																				<div> 가게 이름: \${data[2].storename}</div>
-																				<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
-																				<div>가게 번호: \${data[2].storePhonenum}</div>
+												$("#box_sub2-3").append(`	<div class="forStoreId" data-id="\${data[2].id}">
+																				<div class="checkAUTH" data-auth="\${data[0].auth}" style="color:#169EF2"></div>
+																				<div style="font-size:22px;color:#9E3D00"> 가게 이름: \${data[2].storename}</div>
+																				<div class="text4_sub" style="color:#787878">가게 주소: \${data[1].storeaddress}</div>
+																				<div style="color:#787878">가게 번호: \${data[2].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
+												
+											/* auth별 본사/개인 표시 */
+											var checkAUTH = $(".checkAUTH").attr('data-auth');
+												if (checkAUTH == "ROLE_B2BUSER"){
+													$('.checkAUTH').text("♥개인");
+
+												} else if (checkAUTH == "ROLE_EMPUSER"){
+													$('.checkAUTH').text("★본사");
+												}
 												
 											/* 가게정보 갖고오기(추천) */
 											$(".storeInfoBtn").click(function() {
@@ -344,9 +362,11 @@ body {
 												$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 												$(elem2).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 												let finalAddress = $(elem2).find(".text4_sub").text().substr(6);
-
+												let finalStoreId = $(elem2).find('.forStoreId').attr('data-id');
+												/* 주소 값 넣기 */
 												$("#finalAddress").val(finalAddress);
-												
+												/* 주소id넣기 */
+												$("#finalStoreId").val(finalStoreId);
 											}
 											
 											$("#box2-1").click(function() {
@@ -358,6 +378,10 @@ body {
 											})
 											
 											$("#box2-3").click(function() {
+												clickAddressType(this);
+											})
+											
+											$("#addressList_modal_btn").click(function() {
 												clickAddressType(this);
 											})
 
@@ -377,23 +401,23 @@ body {
 				let StoreListContainer = $("#storeList").empty();
 				
 				for (StoreAddress of list) {
-					let storeListHTML = `<div class="otherStoreList" data-id="\${StoreAddress.id}">
+					let storeListHTML = `<div class="otherStoreList">
 											<div class="ListBox">
-												<div id="\${StoreAddress.id}"></div>
-												<div> 가게이름 :\${StoreAddress.storename}</div>
-												<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+												<div id="\${StoreAddress.id}" style="color:#169EF2"></div>
+												<div style="font-size:22px;color:#9E3D00"> 가게이름 :\${StoreAddress.storename}</div>
+												<div class="modal_store_name" style="color:#787878"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+												<div data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
 											</div>
-												<button class="storeInfoBtn">가게정보</button>
 										</div>`
 					
 						StoreListContainer.append(storeListHTML);
 
- 					if (StoreAddress.auth == "ROLE_B2BUSER"){
+					if (StoreAddress.auth == "ROLE_B2BUSER"){
 						$("#"+`\${StoreAddress.id}`).text("♥개인");
 
 					} else if (StoreAddress.auth == "ROLE_EMPUSER"){
 						$("#"+`\${StoreAddress.id}`).text("★본사");
-					} 
+					}
 				}
 				
 				
@@ -417,9 +441,13 @@ body {
 				/* 선택시 기능 */
 				function clickModalAddress(elem3) {
 					let modal_finalAddress = $(elem3).find(".modal_store_name").text().substr(7);
+					let modal_finalStoreId = $(elem3).attr('data-id');
 					$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 					$(elem3).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
+					/* 주소 넣기 */
 					$("#finalAddress").val(modal_finalAddress);		
+					/* 가게id넣기 */
+					$("#finalStoreId").val(modal_finalStoreId);	
 				}
 				
 				$(".otherStoreList").click(function() {
@@ -446,8 +474,7 @@ body {
 		let type = $("#select1 option:selected").val();
 		let keyword = $(".keyword1").val();
 		
-		console.log(type);
-		console.log(keyword);
+		
 	
 	let data = {
 			type : type,
@@ -459,18 +486,18 @@ body {
 			data : data,
 			url : "${appRoot}/subscribe/getStoreListBySearch",
 			success : function(list1) {
-				console.log(list1);
+				
 				
 				let StoreListContainer1 = $("#storeList").empty();
 						
 						for (StoreAddress of list1) {
-							let storeListHTML1 = `<div class="otherStoreList"  data-id="\${StoreAddress.id}">
+							let storeListHTML1 = `<div class="otherStoreList">
 														<div class="ListBox">
-															<div id="\${StoreAddress.id}"></div>
-															<div> 가게이름 :\${StoreAddress.storename}</div>
-															<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+															<div id="\${StoreAddress.id}" style="color:#169EF2"></div>
+															<div style="font-size:22px;color:#9E3D00"> 가게이름 :\${StoreAddress.storename}</div>
+															<div class="modal_store_name" style="color:#787878"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+															<div data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
 														</div>
-															<button class="storeInfoBtn">가게정보</button>
 													</div>`;
 								
 							StoreListContainer1.append(storeListHTML1);
@@ -490,7 +517,7 @@ body {
 						
 						function storeInfoURL(btn) {
 							var id = $(btn).parent('div').attr('data-id');
-							console.log(id);
+							
 							
 							let url = "${appRoot}/searchstore/b2bIntroduce/" + id
 							let name = "빨래스타그램";
@@ -501,9 +528,13 @@ body {
 						
 						function SeachClickModalAddress(elem4) {
 							let modal_finalAddress = $(elem4).find(".modal_store_name").text().substr(7);
+							let modal_finalStoreId = $(elem4).attr('data-id');
 							$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 							$(elem4).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
+							/* 주소넣기 */
 							$("#finalAddress").val(modal_finalAddress);
+							/* 가게id 넣기 */
+							$("#finalStoreId").val(modal_finalStoreId);
 							
 						}
 						
@@ -556,29 +587,25 @@ body {
 			<input id="finalAmount" value="" type="text" readonly="readonly"
 				hidden> <input id="finalSubsOptions" value="" type="text"
 				readonly="readonly" hidden>
-		</div>
+
 		<div class="col">
 			<div class="title" style="text-align: center;">빨래방 선택</div>
-		</div>
-
-
-		<div class="col">
 			<div class="box2" id="box2-1">
-				<div class="box_sub1">사진</div>
+				<div class="box_sub1"><img id="fileNameId1"  style="max-width: 100%; height: auto;" src="" ></div>
 				<div class="box_sub2" id="box_sub2-1"></div>
 				<div class="box_sub3">
 					<div id="map1" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-2">
-				<div class="box_sub1">사진</div>
+				<div class="box_sub1"><img id="fileNameId2" style="max-width: 100%; height: auto;" src="" ></div>
 				<div class="box_sub2" id="box_sub2-2"></div>
 				<div class="box_sub3">
 					<div id="map2" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-3">
-				<div class="box_sub1">사진</div>
+				<div class="box_sub1"><img id="fileNameId3" style="max-width: 100%; height: auto;" src="" ></div>
 				<div class="box_sub2" id="box_sub2-3"></div>
 				<div class="box_sub3">
 					<div id="map3" style="width: 100%; height: 300px;"></div>
@@ -591,11 +618,13 @@ body {
 					빨래방 <br>찾아보기</button>
 			</div>
 			<input id="finalAddress" type="text" readonly="readonly" hidden>
+			<input id="finalStoreId" type="text" readonly="readonly" hidden>
 		</div>
 	</div>
 	<div class="col">
 		<div class="title">
 			<input class="button_sang" type="button" id="payPage" value="결제하기">
+<%-- 			<img src="${imgIntroRoot}6/washline.jpg"> --%>
 		</div>
 	</div>
 
@@ -644,7 +673,8 @@ $(function() {
 		let storeAddress = $("#finalAddress").val();
 		let subsOption = $("#finalSubsOptions").val();
 		let subsAmount = $("#finalAmount").val();
-
+		let storeid = $("#finalStoreId").val();
+		
 		var checkMsg;
 		checkMsg = "이름 : " + subsName;
 		checkMsg += "\n구독자 주소: " + subsAddress;
@@ -699,7 +729,7 @@ $(function() {
 	                  		subsId : subsId,
 	                  		subsName : subsName,
 	                  		subsAddress : subsAddress,
-	                  		storeAddress : storeAddress,
+	                  		storeid : storeid,
 	                  		subsOptions : subsOption,
 	                  		subsAmount : subsAmount
 	                  } 

@@ -56,8 +56,8 @@ html {
 
 .hhhHTML {
 	font-style: normal;
-	font-size: 8px;
 	font-weight: 1000;
+	font-size: 16px;
 }
 
 .modal-content {
@@ -77,6 +77,8 @@ html {
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
 	height: 50px;
+	padding-left: 8px;
+    padding-top: 3px;
 }
 
 .imgPage {
@@ -133,7 +135,26 @@ html {
 </style>
 <!-- 미리보기 -->
 <script type="text/javascript">
+
 	$(function() {
+		let id = "${pinfo.member.id}";
+		$.ajax({
+			type : "GET",
+			url : "${appRoot}/searchstore/getStoreInfo" ,
+			data : { id : id },
+			success : function(data) {
+				var storeNameVal = data.storeName;
+				var test = storeNameVal.includes("빨래방");
+				$("#storeName").text(test ? storeNameVal : storeNameVal + "빨래방");
+				$("#storeAddress").text("가게주소 :" +data.storeUserAddress);
+				$("#storePhoneNum").text("가게번호 :" +data.storePhonenum);
+			},
+			error : function() {
+				console.log("실패");
+			}
+		})
+		
+		
 		$("#introduceImage").on('change', function() {
 			readURL(this);
 		})
@@ -149,18 +170,20 @@ html {
 		}
 	}
 
-	/* 	$(function() {
-	 $("#preview-modal-btn").click(function() {
-	 var comment = $("#introduce").val();
-	 $("#introduce_comment").val(comment);
-	 $("#prePage").show();
-	 })
-	 }) */
 </script>
 <script type="text/javascript">
 	$(function() {
+		 $("#preview-modal-btn").click(function() {
+			let storeinfo = $("#storeinfo").val();
+			let introduce = $("#introduce").val();
+			/* 가게소개/가게정보 넣기 */
+			$("#storeinfo-modal").text(storeinfo);
+			$("#introduce-modal").text(introduce);
+		}) 
+		
 		$("#register").click(function() {
-			var id = "${pinfo.member.id}"
+			let id = "${pinfo.member.id}"
+			
 			var form = new FormData();
 			form.append("file", $("#introduceImage")[0].files[0]);
 			form.append("id", id);
@@ -200,8 +223,10 @@ html {
 				onmouseout="$('.hhhHTML').hide();" alt=""
 				src="${appRoot }/resources/image/den.jpg">
 		</div>
-		<div class="hhhHTML" style="display: none">
-			본 계시판은 구독시 고객님에게 보여지는 정보를 등록하는 곳입니다.<br> *사진이 없으면 등록되지 않습니다.<br>
+		<div class="hhhHTML" style="display: none; ">
+			본 계시판은 구독시 고객님에게 보여지는 정보를 등록하는 곳입니다.<br>
+			* 사진과 내용을 입력 후, 미리보기를 눌러 확인 후 등록해주세요 <br>
+			 *사진이 없으면 등록되지 않습니다.<br>
 			*사진 기분 규격은 (600 x 450) 을 권장합니다.<br> *허위 및 과장 광고 시 벌금이 부과됩니다.
 		</div>
 		<div class="box_2">
@@ -210,7 +235,7 @@ html {
 				id="introduceImage">
 		</div>
 		<div class="box_3">
-			<label for="storeinfo">가게 정보:</label> <br>
+			<label for="storeinfo">가게 정보</label> <br>
 			<textarea id="storeinfo" class="form-control" style="height: 230px;"
 				placeholder="운영시간/휴무일/상호명 등"></textarea>
 		</div>
@@ -240,17 +265,17 @@ html {
 				</div>
 				<div class="modal-body">
 					<div class="wrapper-modal">
-						<div class="storeName">등록된 가게 이름</div>
 						<div class="imgPage">
-							<img id="preImage" src="#" />
+							<img style="max-width: 100%; height: auto;" id="preImage" src="#" />
 						</div>
-						<div class="like"></div>
+						<!-- <div class="like"></div>  -->
 						<div class="storeInfo">
-							<div>등록된 가게 주소</div>
-							<div>등록된 가게 번호</div>
-							<div>${storeinfo }</div>
+							<div id="storeName" class="storeName" style="font-size: 30px; color: #9E3D00">등록된 가게 이름</div>
+							<div id="storeAddress" style="color: #787878; padding-left: 8px; padding-top: 3px;">등록된 가게 주소</div>
+							<div id="storePhoneNum" style="color: #787878;padding-left: 8px;padding-top: 3px;">등록된 가게 번호</div>
+							<div id="storeinfo-modal"style="padding-left: 8px;padding-top: 3px;"></div>
 						</div>
-						<div class="introduce"></div>
+						<div id="introduce-modal" class="introduce"style="padding-left: 8px;padding-top: 3px;"></div>
 					</div>
 
 				</div>

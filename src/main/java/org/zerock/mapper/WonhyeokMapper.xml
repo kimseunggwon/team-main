@@ -7,6 +7,7 @@
 
 <select id="getsearchbystorename" resultType="org.zerock.domain.AddressVO">
 SELECT 
+	id id,
 	storename storename, 
 	storeaddress storeaddress,
 	storePhonenum storePhonenum, 
@@ -22,6 +23,7 @@ WHERE storename like CONCAT('%', #{storename}, '%')
 <![CDATA[
 
 SELECT
+	id id,
 	storename storename,
 	storeaddress storeaddress,
 	storePhonenum storePhonenum, 
@@ -96,11 +98,9 @@ WHERE s.id = #{id}
 		au.auth auth
 	FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
 							JOIN user AS u ON s.userid = u.userid
-							JOIN user_auth AS au ON s.userid= au.userid
-	
-	WHERE
-		  storelat > #{lat} - 0.06 AND storelat < #{lat} + 0.06 AND
-		  storelag > #{lag} - 0.06 AND storelag < #{lag} + 0.06
+							JOIN user_auth AS au ON s.userid= au.userid 
+	ORDER BY SQRT(pow(#{lat} - s.storelat, 2) + pow(#{lag} - s.storelag,2))
+	LIMIT 3
 	
 	 ]]>
 	</select>
@@ -154,4 +154,10 @@ INSERT INTO subscriber
 VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount})
 </insert>
 
+<!-- b2buser의 id로 가게정보 갖고오기 -->
+<select id="getStoreInfo" resultType="org.zerock.domain.StoreVO">
+SELECT  storename storeName, storeaddress storeUserAddress, storePhonenum storePhonenum
+FROM storeinfo
+WHERE id = #{id}
+</select>
 </mapper>
