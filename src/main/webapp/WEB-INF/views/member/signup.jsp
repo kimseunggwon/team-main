@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="rev" tagdir="/WEB-INF/tags/member"%>
 
 <!DOCTYPE html>
 <html>
@@ -100,10 +103,13 @@
 	-moz-border-radius: 40px;
 	border-radius: 40px;
 	width:420px;
-    font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
+	font-family: GongGothicMedium;
 	}
 	.signbutton:hover {
 		background: #0583F2;
+	}
+	body{
+	font-family: GongGothicMedium;
 	}
 </style>
 
@@ -210,7 +216,7 @@ $(function() {
 		var idE = $("#sang-email").val();
 		/* var idP = $("#sang-pnum").val(); */
 		
-		$re=/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;			
+		$re=/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;	
 		if(!$re.test(idE)){
 			alert("정확한 형식의 Email을 입력해 주세요");
 			$("#sang-email").focus();
@@ -620,6 +626,7 @@ $(function() {
 
 </head>
 <body>
+<rev:navbar></rev:navbar>
 <div class="container">
 	<div style="text-align: center;" class="row">
 		<div class="col-12 ">
