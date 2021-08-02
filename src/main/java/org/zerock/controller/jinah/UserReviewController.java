@@ -48,6 +48,7 @@ public class UserReviewController {
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
 	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, 
+							UserReviewVO review,
 							Model model) {
 		log.info("userReviewList is working");
 		
@@ -73,6 +74,7 @@ public class UserReviewController {
 		model.addAttribute("reList", reList);
 		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
 		model.addAttribute("totalCount", reviewTotal);
+		
 	}
 	
 	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList + view
@@ -157,7 +159,6 @@ public class UserReviewController {
 	// 리뷰 파일 수정하기 (이미지 파일 포함) - userReviewModify
 	@PostMapping("/modify")
 	@PreAuthorize("isAuthenticated()")
-//	@ResponseBody
 	public String reviewModify(UserReviewVO review,
 							   ReviewCriteria recri,
 							   MultipartFile[] file,

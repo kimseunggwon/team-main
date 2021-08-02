@@ -1,14 +1,5 @@
 $(document).ready(function () {
-    
-    // const $reviewStarModifyBtn = $("#review-star-modify-btn");
-    // 평점 값
-    // const $reviewStarResult = $("#review-star-result").val(reBno);
-    const $reviewStarResult = $("#review-star-result").val();
-
-
-    // n번째 별 아이콘
-
-    $(function () {
+        const $reviewStarResult = $("#review-star-result").val();
         if ($reviewStarResult >= 1) {
             $("#jinah-star1").removeClass("far").addClass("fas");
         }
@@ -24,6 +15,6 @@ $(document).ready(function () {
         if ($reviewStarResult >= 5) {
             $("#jinah-star5").removeClass("far").addClass("fas");
         }
-    })
+
 
 });

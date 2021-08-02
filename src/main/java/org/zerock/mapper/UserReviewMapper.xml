@@ -52,6 +52,7 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = 'admin'
@@ -73,6 +74,7 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
@@ -167,7 +169,7 @@
  
 <!-- 리뷰 평점 얻어오기 -->
 <select id="getReviewStar" resultType="int">
-	SELECT re_stars 
+	SELECT IFNULL(re_stars, 0) re_stars 
 	FROM user_review
 	WHERE 
 	 	re_bno = #{reBno}

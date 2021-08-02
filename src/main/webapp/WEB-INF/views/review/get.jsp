@@ -99,19 +99,19 @@ img {
 	<div id="review-star-parent" style="display: inline;" class="container">
 		<div class="review-star-parent row justify-content-center d-flex align-items-center">
 			<button data-operation="like" type="button" class="item review-star-child">
-				<i class="review-star-icon far fa-star" id="jinah-star1"></i>
+				<i class="review-star-icon ${reviewStars >= 1 ? 'fas' : 'far' } fa-star" id="jinah-star1"></i>
 			</button>
 			<button data-operation="like" type="button" class="item review-star-child">
-				<i class="review-star-icon far fa-star" id="jinah-star2"></i>
+				<i class="review-star-icon ${reviewStars >= 2 ? 'fas' : 'far' } fa-star" id="jinah-star2"></i>
 			</button>
 			<button data-operation="like" type="button" class="item review-star-child">
-				<i class="review-star-icon far fa-star" id="jinah-star3"></i>
+				<i class="review-star-icon ${reviewStars >= 3 ? 'fas' : 'far' } fa-star" id="jinah-star3"></i>
 			</button>
 			<button data-operation="like" type="button" class="item review-star-child">
-				<i class="review-star-icon far fa-star" id="jinah-star4"></i>
+				<i class="review-star-icon ${reviewStars >= 4 ? 'fas' : 'far' } fa-star" id="jinah-star4"></i>
 			</button>
 			<button data-operation="like" type="button" class="item review-star-child">
-				<i class="review-star-icon far fa-star" id="jinah-star5"></i>
+				<i class="review-star-icon ${reviewStars >= 5 ? 'fas' : 'far' } fa-star" id="jinah-star5"></i>
 			</button>
 				<div>
 			</div>

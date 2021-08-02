@@ -15,6 +15,7 @@
 		 			<th>수정 날짜</th>
 		 			<th>좋아요</th>
 		 			<th>조회수</th>
+		 			<th>평점</th>
 		 		</tr>
 		 	</thead>
 		 	<tbody>
@@ -40,6 +41,7 @@
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
 		 				<td>${review.likeCount }</td>
 		 				<td><c:out value="${review.viewCount }"></c:out></td>
+		 				<td><c:out value="${review.reStars }"></c:out></td>
 		 			</tr>
 		 		</c:forEach>
 		 		
@@ -65,6 +67,7 @@
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
 		 				<td>${review.likeCount }</td>
 		 				<td><c:out value="${review.viewCount }"></c:out></td>
+		 				<td><c:out value="${review.reStars }"></c:out></td>
 		 			</tr>
 		 		</c:forEach>
 		 	</tbody>

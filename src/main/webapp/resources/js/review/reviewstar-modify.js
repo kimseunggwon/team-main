@@ -12,7 +12,7 @@ $(document).ready(function () {
     $reviewModifyBtn.click(function () {
         console.log("star!");
         $.ajax({
-            type: "post",
+            type: "get",
             url: appRoot + "/review/modify",
             data: {
               reBno: reBno  

@@ -82,7 +82,6 @@ img {
 					<div class="order-new dropdown-divider"></div>
 					
 						<c:url value="/review/list" var="popUrl">
-	 						<c:param name="reBno" value="${review.reBno }" />
 	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
 	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 	 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
@@ -94,7 +93,6 @@ img {
 							href="${popUrl }" >인기도순</a>
 							
 						<c:url value="/review/list" var="latestUrl">
-	 						<c:param name="reBno" value="${review.reBno }" />
 	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
 	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 	 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
@@ -105,7 +103,6 @@ img {
 							href="${latestUrl}" >최신순</a>
 							
 						<c:url value="/review/list" var="viewUrl">
-	 						<c:param name="reBno" value="${review.reBno }" />
 	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
 	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
 	 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
@@ -131,65 +128,6 @@ img {
 		<rev:viewcountlist></rev:viewcountlist>
 	</c:if>
 	
-	<%-- 수정해야 할 것 같은데 어떻게 해야할 지 ㅎㅎ --%>
-	<c:if test="${reviewPageMker.recri.sort eq 0 }">
-	<table id="review-list-table" class="table table-striped">
-		 	<thead>
-		 		<tr>
-		 			<th>#</th>
-		 			<th>제목</th>
-		 			<th>글쓴이</th>
-		 			<th>작성 날짜</th>
-		 			<th>수정 날짜</th>
-		 			<th>좋아요</th>
-		 			<th>조회수</th>
-		 		</tr>
-		 	</thead>
-		 	<tbody>
-		 		<c:forEach items="${reList2 }" var="review">
-		 			<tr style="color: red;">
-		 				<td>공지</td>
-		 				<td>
-						<a style="color: red; text-decoration: none;"
-						id="review-record-link" href="${reviewGetUrl }">
-							${review.reTitle } </a>
-						</td>
-		 				
-		 				<td>${review.reWriterName }</td>
-		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
-		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
-		 				<td>${review.likeCount }</td>
-		 				<td><c:out value="${review.viewCount }"></c:out></td>
-		 			</tr>
-		 		</c:forEach>
-		 		
-		 		<c:forEach items="${reList }" var="review">
-		 			<tr>
-		 				<td>${review.reBno }</td>
-		 				<td>
-		 					<c:url value="/review/get" var="reviewGetUrl">
-		 						<c:param name="reBno" value="${review.reBno }" />
-		 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
-		 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
-		 						<c:param name="type" value="${reviewPageMaker.recri.type}" />
-		 						<c:param name="keyword" value="${reviewPageMaker.recri.keyword}" />
-		 						<c:param name="sort" value="0" />
-		 					</c:url>
-		 					<a id="review-record-link"  href="${reviewGetUrl }">
-		 						${review.reTitle }
-		 					</a>
-		 				</td>
-		 				
-		 				<td>${review.reWriterName }</td>
-		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reRegdate }"/></td>
-		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
-		 				<td>${review.likeCount }</td>
-		 				<td><c:out value="${review.viewCount }"></c:out></td>
-		 			</tr>
-		 		</c:forEach>
-		 	</tbody>
-		 </table>
-		 </c:if>
 		 
 		 <!-- 페이지네이션 -->
 		 <div>

@@ -93,16 +93,19 @@ public class UserReviewServiceImpl implements UserReviewService {
 	// 리뷰 정렬 방식 
 	@Override
 	public List<UserReviewVO> getPopularList(ReviewCriteria recri) {
+		log.info("###########################poppular list#####################################");
 		return orderMapper.getPopularReviewList(recri);
 	}
 	
 	@Override
 	public List<UserReviewVO> getLatestList(ReviewCriteria recri) {
+		log.info("###########################latest list#####################################");
 		return orderMapper.getLatestReviewList(recri);
 	}
 	
 	@Override
 	public List<UserReviewVO> getviewCountList(ReviewCriteria recri) {
+		log.info("###########################viewcount list#####################################");
 		return orderMapper.getViewCountReviewList(recri);
 	}
 
@@ -215,7 +218,8 @@ public class UserReviewServiceImpl implements UserReviewService {
 		// 새로운 평점 등록
 		
 		// 새로운 파일 업로드
-		
+		if (mfile != null) {
+			
 			for (MultipartFile file : mfile) {
 				
 				if (file != null && file.getSize() > 0) {
@@ -230,6 +234,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 					fileMapper.reviewFileInsert(rfvo);
 				}
 			}
+		}
 			
 		return reviewModify(review);
 	}
