@@ -8,7 +8,7 @@
 	<select id="subscribe" resultType="String">
 		SELECT s.subsId
 			FROM user AS u JOIN subscriber AS s ON u.userid = s.subsId
-		WHERE subsId = #{loginID};
+		WHERE subsId = #{userid};
 	</select>
 	
 	

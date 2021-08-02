@@ -60,12 +60,12 @@ $(function(){
 		},
 		success: function(data) {
 			
-			let confirmID = data.userid;
+			let confirmID = data;
 			console.log(confirmID);
 			if(confirmID == "") {
 				$("#main-subscribe").show();
 				$("#main-subscribe").click(function() {
-				location.href("${appRoot}/subscribe/subsregister");
+				location.href = "${appRoot}/subscribe/subsregister";
 				})
 			} 		
 		},
@@ -136,11 +136,11 @@ $(function(){
 		
 		<div class="row justify-content-center fixed-bottom">
 			<sec:authorize access="isAuthenticated()">
-						<a class="btn btn-secondary"  id="main-subscribe" style="display:none;">구독 신청!</a>
+						<a class="btn btn-secondary mb-5"  id="main-subscribe" style="display:none;">구독 신청!</a>
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
-				<a class="btn btn-secondary" href="${appRoot}/member/login">구독 신청!</a>
+				<a class="btn btn-secondary mb-5" href="${appRoot}/member/login">구독 신청!</a>
 			</sec:authorize>
 		</div>
 
