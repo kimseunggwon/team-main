@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
+<%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,10 @@
 
 </head>
 <body>
-	<div class="container">
+	
+	<hel:navbar></hel:navbar>
+
+	<div class="container mt-5">
 		
 			
 			<div class="row">
@@ -56,20 +59,6 @@
 		<div >
 			<h1 class="text-center mt-5">고객 센터</h1>
 			
-			
-			<!-- 로그인 -->
-			<div class="row justify-content-end">
-			
-			<form action="${appRoot }/member/main" class="mr-2 mb-2">
-				<input class="btn btn-warning" type="submit" value="메인">
-			</form>
-    		<form action="${appRoot }/logout" class="mr-2 mb-2">
-			 	<input class="btn btn-warning" type="submit" value="로그아웃">
-			 </form>
-    		<form action="${appRoot }/member/mypage" class="mr-2 mb-2">
-			 	<input class="btn btn-warning" type="submit" value="Mypage">
-			 </form>
-  		</div>
 
 		</div>
 
@@ -274,61 +263,9 @@
 			 </form>
 		</div>
 		
-		<div class="row justify-content-center">
-			
-			<h1>
-				1588 - 0000
-			</h1>
-			
-		</div>
+
+		 <bot:botnav></bot:botnav>	
 		
-		<div class="row justify-content-center">
-			고객 센터 운영 시간
-			 평일(월~금) 09:00 ~ 18:30
-			 / 주말(토) 09:00 ~ 13:00
-		</div>
-		
-		<br>
-		
-		<hr>
-		
-		 <div class="row justify-content-around mb-3">
-		 	<div class="row">
-		 
-		 		<div class="mr-10">
-		 			<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
-					</a>
-		 		</div>
-		 	
-		 	</div>
-		 	
-		 	<div class="row">
-		 		<div>
-		 			서울시 강남구 삼성동 1234 우 : 123-1234
-		 			<br>
-					TEL:02-123-1234 Email:email@domain.com
-					<br>
-					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
-					<br>
-				</div>
-		 	</div>
-		 	
-		 	<div class="row">
-		 		<span >
-		 			<a href="#">
-		 			 	<img src="${appRoot }/resources/image/blog.jpg">
-		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/facebook.gif">
-		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/twitter.gif">
-		 			</a>
-		 		</span>
-		 	</div>
-		 		
-		 </div>
 		
 	</div>
 </body>
