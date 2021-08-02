@@ -15,9 +15,9 @@ public class MainServiceImpl implements MainService{
 	private MainMapper mapper;
 	
 	@Override
-	public String subscribe(String loginID) {
+	public String subscribe(String userid) {
 	
-		return mapper.subscribe(loginID);
+		return mapper.subscribe(userid);
 	}
 	
 }

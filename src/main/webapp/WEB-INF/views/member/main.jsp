@@ -60,8 +60,9 @@ $(function(){
 		},
 		success: function(data) {
 			
-			let confirmID = data.id;
-			if(data.id == "") {
+			let confirmID = data.userid;
+			console.log(confirmID);
+			if(confirmID == "") {
 				$("#main-subscribe").show();
 				$("#main-subscribe").click(function() {
 				location.href("${appRoot}/subscribe/subsregister");
