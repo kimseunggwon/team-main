@@ -93,16 +93,19 @@ public class UserReviewServiceImpl implements UserReviewService {
 	// 리뷰 정렬 방식 
 	@Override
 	public List<UserReviewVO> getPopularList(ReviewCriteria recri) {
+		log.info("###########################poppular list#####################################");
 		return orderMapper.getPopularReviewList(recri);
 	}
 	
 	@Override
 	public List<UserReviewVO> getLatestList(ReviewCriteria recri) {
+		log.info("###########################latest list#####################################");
 		return orderMapper.getLatestReviewList(recri);
 	}
 	
 	@Override
 	public List<UserReviewVO> getviewCountList(ReviewCriteria recri) {
+		log.info("###########################viewcount list#####################################");
 		return orderMapper.getViewCountReviewList(recri);
 	}
 
@@ -151,12 +154,6 @@ public class UserReviewServiceImpl implements UserReviewService {
 			} catch (Exception e) {
 				throw new RuntimeException();
 			}
-	}
-	
-	// 리뷰 평점 설정하기
-	@Override
-	public int makeReviewStar(int reBno) {
-		return reviewMapper.setReviewStar(reBno);
 	}
 	
 	// 리뷰 평점 얻어오기
@@ -212,26 +209,33 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public boolean reviewModify(UserReviewVO review, MultipartFile[] mfile) {
 		
+		// 이전 파일 (S3) 삭제
 		UserReviewVO oldReview = reviewMapper.readReview(review.getReBno());
 		removeReviewFile(oldReview);
 		
 		fileMapper.deleteReviewByBno(review.getReBno());
 		
-		for (MultipartFile file : mfile) {
+		// 새로운 평점 등록
+		
+		// 새로운 파일 업로드
+		if (mfile != null) {
 			
-			if (file != null && file.getSize() > 0) {
+			for (MultipartFile file : mfile) {
 				
-				upload(review, file);
-
-				UserReviewFileVO rfvo = new UserReviewFileVO();
-
-				rfvo.setBno(review.getReBno());
-				rfvo.setFileName(file.getOriginalFilename());
-
-				fileMapper.reviewFileInsert(rfvo);
+				if (file != null && file.getSize() > 0) {
+					
+					upload(review, file);
+					
+					UserReviewFileVO rfvo = new UserReviewFileVO();
+					
+					rfvo.setBno(review.getReBno());
+					rfvo.setFileName(file.getOriginalFilename());
+					
+					fileMapper.reviewFileInsert(rfvo);
+				}
 			}
 		}
-
+			
 		return reviewModify(review);
 	}
 

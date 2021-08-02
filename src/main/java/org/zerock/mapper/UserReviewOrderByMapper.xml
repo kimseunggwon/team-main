@@ -35,6 +35,7 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
@@ -57,6 +58,7 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
@@ -79,6 +81,7 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
