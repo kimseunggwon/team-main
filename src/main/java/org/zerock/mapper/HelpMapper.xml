@@ -38,7 +38,7 @@
 			writer writer,
 			regdate regdate,
 			updatedate updatedate
-		FROM ask_board
+		FROM ask_board WHERE writer = #{writer}
 		
 	</select>
 	
@@ -55,6 +55,7 @@
   		count(r.rno) replyCnt  		
   	FROM ask_board A LEFT JOIN ask_reply r ON A.bno = r.bno
   				   INNER JOIN user u ON A.writer = u.userid
+  	WHERE writer = #{writer}
   	<include refid="pagenation"></include>
   	GROUP BY A.bno
   	ORDER BY A.bno DESC

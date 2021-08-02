@@ -7,8 +7,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
+<script type="text/javascript">
+	
+	$(function() {
+		$("#ask-submit-btn").click(function(e) {
+			e.preventDefault();
+			askCheck = document.forms.ask;
+			if(askCheck.title.value == "" and askCheck.content.value == "") {
+				alert("문의 제목과 내용을 입력해주세요!")
+				return false; 
+			} else if(askCheck.title.value == "") {
+				alert("문의 제목을 입력해주세요!")
+				return false;
+			} else if (askCheck.content.value == "") {
+				alert("문의 내용을 입력해주세요!")
+				return false;
+				}
+			else {
+				$(askCheck).submit();
+				//return true;
+			}
+		});
+	});
+</script>
+
+
 
 <title>Insert title here</title>
 
@@ -61,7 +85,7 @@
 		</div>
 
 		<div>
-			<form action="${appRoot }/help/register" method="post" enctype="multipart/form-data">
+			<form id="ask-form" name="ask" action="${appRoot }/help/register" method="post" enctype="multipart/form-data">
 
 				<div class="form-group">
 					<label for="input1">제목</label> 
@@ -84,7 +108,7 @@
 					<input value="${pinfo.member.userName }" readonly class="form-control" >
 				</div>
 				
-				<input class="btn btn-primary" type="submit" value="작성" /> 
+				<input class="btn btn-primary" type="submit" id="ask-submit-btn" value="작성"/> 
 				
 				<input hidden name="pageNum" value="${pag.pageNum }" />	
 				<input hidden name = "amount" value="${pag.amount }" />			
