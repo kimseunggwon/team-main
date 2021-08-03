@@ -193,12 +193,23 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 	@Override
-	public List<HelpVO> getList(Pagenation pag) {
-		return mapper.getListWithPaging(pag);
+	public List<HelpVO> getListUser(Pagenation pag) {
+		return mapper.getListWithPagingUser(pag);
+	}
+	
+@Override
+	public List<HelpVO> getListAdmin(Pagenation pag) {
+		
+		return mapper.getListWithPagingAdmin(pag);
 	}
 	
 	@Override
-	public int getTotal(Pagenation pag) {
-		return mapper.getTotalCount(pag);
+	public int getTotalUser(Pagenation pag) {
+		return mapper.getTotalCountUser(pag);
+	}
+	
+	@Override
+	public int getTotalAdmin(Pagenation pag) {
+		return mapper.getTotalCountAdmin(pag);
 	}
 }

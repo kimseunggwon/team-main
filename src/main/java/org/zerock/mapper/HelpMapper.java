@@ -10,7 +10,9 @@ public interface HelpMapper {
 	
 	public List<HelpVO> getList();
 	
-	public List<HelpVO> getListWithPaging(Pagenation pag);
+	public List<HelpVO> getListWithPagingUser(Pagenation pag);
+	
+	public List<HelpVO> getListWithPagingAdmin(Pagenation pag);
 	
 	public int insert(HelpVO help);
 	
@@ -22,7 +24,9 @@ public interface HelpMapper {
 	
 	public int update(HelpVO help);
 	
-	public int getTotalCount(Pagenation pag);
+	public int getTotalCountUser(Pagenation pag);
+	
+	public int getTotalCountAdmin(Pagenation pag);
 	
 	public void removeByUserId(MemberVO vo);
 }
