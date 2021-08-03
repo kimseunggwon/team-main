@@ -16,9 +16,13 @@ public interface HelpService {
 	
 	public boolean remove(Long help);
 	
-	public List<HelpVO> getList(Pagenation pag);
+	public List<HelpVO> getListUser(Pagenation pag);
 	
-	public int getTotal(Pagenation pag);
+	public List<HelpVO> getListAdmin(Pagenation pag);
+	
+	public int getTotalUser(Pagenation pag);
+	
+	public int getTotalAdmin(Pagenation pag);
 	
 	public void register(HelpVO help, MultipartFile[] file);
 	

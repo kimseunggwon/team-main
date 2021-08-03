@@ -11,6 +11,8 @@ public class Pagenation {
 	
 	private int pageNum;
 	private int amount;
+	private String writer;
+	
 	
 	private String type;
 	private String keyword;

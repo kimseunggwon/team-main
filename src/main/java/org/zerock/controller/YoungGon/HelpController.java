@@ -1,5 +1,6 @@
 package org.zerock.controller.YoungGon;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,16 +67,32 @@ public class HelpController {
 	
 	@GetMapping("/askList")
 	@PreAuthorize("isAuthenticated()")
-	public void list(@ModelAttribute("pag") Pagenation pag, Model model) {
+	public void userList(@ModelAttribute("pag") Pagenation pag, Model model, Principal principal) {
 		
-		int total = service.getTotal(pag);
+		pag.setWriter(principal.getName());
 		
-		List<HelpVO> list = service.getList(pag);
+		int total = service.getTotalUser(pag);
+		
+		List<HelpVO> list = service.getListUser(pag);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(pag, total));
 
-	}
+		}
+	
+	@GetMapping("/askListAdmin")
+	@PreAuthorize("isAuthenticated()")
+	public void adminList(@ModelAttribute("pag") Pagenation pag, Model model) {
+		
+		int total = service.getTotalAdmin(pag);
+		
+		List<HelpVO> list = service.getListAdmin(pag);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", new PageDTO(pag, total));
+
+		}
+	
 	
 	@GetMapping({"/askGetContent", "/askModifyContent"})
 	@PreAuthorize("isAuthenticated()")
