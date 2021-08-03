@@ -1,10 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="mem" tagdir="/WEB-INF/tags/member"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+<mem:mybar></mem:mybar>
+<br>
+<br>
+<br> 
  
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
@@ -21,12 +28,19 @@
  body {	
    font-family: 'GongGothicMedium';
 }
+.control-label {
+  color:#6464CD;
+}
+
+
 </style>
 
 
 
 </head> 
 <body>
+	
+
 
 
 
@@ -34,10 +48,64 @@
  $(function() {
 	 var oldPasswordModal =$("#old-password-modal");
 	
-	
 	// 수정
 	$("#btn-modify").click(function(e) {
-		var ans = confirm("수정 완료")
+		var pw1 = $("#member-info-input2").val();
+		var pw2 = $("#member-info-input4").val();
+		
+		if (pw1 != pw2) {
+			alert("암호와 암호 확인이 일치하지 않습니다.");
+			console.log("암호일치x");
+			return false;
+			
+		} 
+		
+		
+	
+		// 이메일 조건 비밀번호 조건
+        var idE = $("#userEmail").val();
+		var idR = $("#member-info-input2").val();
+		var idR = $("#member-info-input4").val();
+		console.log(idE);
+		
+		var $re=/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var $regex =/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+		if (!$re.test(idE)){
+			alert("정확한 형식의 Email을 입력해 주세요");
+			$("#email").focus();
+			return false;
+			 
+		} else if(!$regex.test(idR)){ 
+		     alert("특수문자/숫자/문자 포함 형태의 8~15자리 이내의 암호 형태를 입력해 주세요.");
+			return false;
+			 
+		} else  {  
+			
+			var ans = confirm("변경 완료")
+			
+		}   
+	});
+	
+	
+	// 패스워드 확인
+	$("#member-info-input2, #member-info-input4").keyup(function() {
+		var pw1 = $("#member-info-input2").val();
+		var pw2 = $("#member-info-input4").val();
+		var modifyBtn = $("#member-info-modify-btn1");
+		 
+		if ((pw1 != pw2)) {
+			modifyBtn.attr("disabled", "disabled");
+			$("#member-info-password-message").text("패스워드가 일치하지 않습니다.");
+		} else {
+			if (pw1 == "") {
+				modifyBtn.attr("disabled", "disabled");	
+				$("#member-info-password-message").text("패스워드를 입력해주세요.");
+			} else {
+				modifyBtn.removeAttr("disabled");
+				$("#member-info-password-message").empty();
+			}
+		}
 	});
 		
 	//탈퇴
@@ -52,11 +120,18 @@
 			.attr("action","${appRoot}/member/remove")
 			.submit();
 	})
- })
+});
 	
+ 
+
+
+	
+
  
 </script> 
 <div class="container">	 
+
+
 
 <div class="col align-self-center mt-3">
 					<a href="${appRoot }/member/main">
@@ -84,20 +159,34 @@
 		<section id="container"> 
 			<form id="member-form" action="${appRoot }/member/modify" method="post">
 			    <div class="form-group has-feedback">
-					<label class="control-label" for="userName">이름</label>
+					<label   class="control-label" for="userName">이름</label>
 					<input   value="${member.userName }" class="form-control"  type="text" id="userName" name="userName"/>
-				</div>  
+				</div>   
 				<div class="form-group has-feedback">  
-					<label class="control-label" for="userId">아이디</label>
-					<input  class="form-control"  value="${member.userid}" readonly type="text" id="userId" name="userid"/>
+					<label  class="control-label" for="userId">아이디</label>
+				    <input hidden class="form-control"  value="${pinfo.member.userid}" readonly type="text" id="userId" name="userid"/>
+				    <input value="${pinfo.member.userid}"  readonly  class="form-control" >
 				</div>
+				
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userEmail">이메일주소</label>
 					<input class="form-control" type="text" id="userEmail" name="userEmail" />
 				</div> 
-				<div class="form-group has-feedback">
-					<label class="control-label" for="userPass">비밀번호</label>
-					<input class="form-control" type="password" id="userPass" name="userpw" />
+				
+				<div class="form-group">
+					<label class="control-label" for="member-info-input2">새 패스워드</label>
+					
+					<div class="input-group">
+						<input type="password" class="form-control" id="member-info-input2" name="userpw">
+						<div class="input-group-append">
+					     
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="member-info-input4">새 패스워드 확인</label>
+					<input type="password" class="form-control" id="member-info-input4" name="userpw">
+					<small id="member-info-password-message" class="form-text text-danger"></small>
 				</div>
 				
 				 
