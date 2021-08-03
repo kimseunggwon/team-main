@@ -34,7 +34,7 @@ public class HelpController {
 	@RequestMapping("/helpdesk")
 	@PreAuthorize("isAuthenticated()")
 	public String go() {
-		log.info("고객센터 접속");
+
 		
 		return "help/helpdesk";
 	}
@@ -43,7 +43,7 @@ public class HelpController {
 	@RequestMapping("/ask")
 	@PreAuthorize("isAuthenticated()")
 	public String goAsk() {
-		log.info("1:1 문의 글 작성창");
+
 		
 		return "help/ask";
 	}
@@ -97,7 +97,7 @@ public class HelpController {
 	@GetMapping({"/askGetContent", "/askModifyContent"})
 	@PreAuthorize("isAuthenticated()")
 	public void askGetContent(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
-		log.info("1:1 문의글 들어감");
+
 		
 		askGet(bno, pag, model);
 	}

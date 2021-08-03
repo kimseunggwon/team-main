@@ -33,12 +33,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
-		<a class="navbar-brand" href="#">구독하기</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarScroll" aria-controls="navbarScroll"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+		
 		<div class="collapse flex-grow-0  navbar-collapse justify-content-end"
 			id="navbarScroll">
 			<ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll"
@@ -60,7 +55,7 @@
 						</ul></li>
 				</sec:authorize>
 				<li class="nav-item active"><a class="nav-link"
-					href="${appRoot }/help/helpdesk">1:1 문의 <span class="sr-only">(current)</span></a>
+					href="${appRoot }/help/askListAdmin">1:1 문의 글 확인 <span class="sr-only">(current)</span></a>
 				</li>
 				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item active"><a class="nav-link"
