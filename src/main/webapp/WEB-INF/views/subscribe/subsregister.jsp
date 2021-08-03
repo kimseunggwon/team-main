@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
 
 <!DOCTYPE html>
@@ -31,19 +31,23 @@
 		 --%>
 <style>
 @font-face {
-    font-family: 'GongGothicMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'GongGothicMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
+
 body {
 	font-family: 'GongGothicMedium';
 }
+
 .otherStoreList {
 	display: block;
 	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
-	border-radius:30px;
-	margin:25px;
+	border-radius: 30px;
+	margin: 25px;
 	height: 160px;
 }
 
@@ -63,7 +67,6 @@ body {
     margin: 0 auto;
     border-radius: 0px 0px 30px 30px;
 } */
-
 .col {
 	width: 100%;
 	margin-bottom: 30px;
@@ -150,11 +153,12 @@ body {
 .storeInfoBtn {
 	font-size: 12px;
 	border: solid 1px #dadada;
-	background-color:white; 
+	background-color: white;
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 	border-radius: 40px;
-	}
+}
+
 .button_sang {
 	background-color: #169EF2;
 	border: none;
@@ -171,11 +175,32 @@ body {
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 	border-radius: 40px;
-	width:200px;
-    font-family: 'GongGothicMedium';
+	width: 200px;
+	font-family: 'GongGothicMedium';
 }
+
 .button_sang:hover {
 	background: #0583F2;
+}
+
+
+.dateBlock {
+	display: inline-flex;
+    text-align: left;
+    margin-left: 33.33%;
+	margin-top: 3%;
+    margin-bottom: 3%;    
+}
+.dateStamp {
+	width: 300px;
+    height: auto;
+} 
+.Qlqlr {
+	width: 500px;
+	display: flex;
+}
+.QlqlrShort {
+	padding: 3%;
 }
 </style>
 <script type="text/javascript">
@@ -205,7 +230,6 @@ body {
 		$("#box1-3").click(function() {
 			clickSubsType(this);
 		})
-		
 		
 	})
 </script>
@@ -356,7 +380,7 @@ body {
 											}
 											
 												
-			
+			 
 											/* 주소종류 클릭 모션 */
 											function clickAddressType(elem2) {
 												$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
@@ -555,19 +579,87 @@ body {
 		})	
 	})
 	
+	
+	
 	})
 	
 
 
 </script>
+
+<script type="text/javascript">
+$(function() {
+		let date = new Date();
+		let dateWeek = date.getDay();
+		let dateString = date.toLocaleString();
+		
+		if(dateWeek == 0) {
+			date.setDate(date.getDate() + 8);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} else if (dateWeek == 1) {
+			date.setDate(date.getDate() + 7);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} else if (dateWeek == 2) {
+			date.setDate(date.getDate() + 6);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} else if (dateWeek == 3) {
+			date.setDate(date.getDate() + 5);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} else if (dateWeek == 4) {
+			date.setDate(date.getDate() + 4);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} else if (dateWeek == 5) {
+			date.setDate(date.getDate() + 3);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} else if (dateWeek == 6) {
+			date.setDate(date.getDate() + 2);
+			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
+			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+		} 
+		
+		date.setDate(date.getDate() + 15);
+		$("#serviceEndDay").text(date.toLocaleString().substr(0,11)+ "까지 입니다 !!");
+
+})
+
+</script>
 <body>
-		<div style="text-align: center;margin-top:50px;">
-						<a href="${appRoot }/member/main">
-							<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
-						</a>
-					</div>
-		<div class="wrapper">
+	<div style="text-align: center; margin-top: 50px;">
+		<a href="${appRoot }/member/main"> <img
+			src="${appRoot }/resources/image/others/brand_logo_300px.png"
+			alt="...">
+		</a>
+			<div style="font-size: 16px">구독결제하기</div>
+	</div>
+	<div class="wrapper">
+	
 		<div class="col">
+				<div>구독 계약 기간</div>
+		<div class="dateBlock">
+			<div class="dateStamp">
+				<div style="font-size: 32px">오늘 구독하시면</div>
+				<div id="userid"><b style="font-size: 25px;color: #AD480E">${pinfo.member.userName}</b>님의 구독기간은</div>
+				<div style="font-size: 25px; color:#787878; padding: 1.5% " id="serviceStartDay"></div>
+				<div style="font-size: 25px; color:#787878; padding: 1.5% " id="serviceEndDay"></div>
+				<input id="serviceEndDay_final" type="text" readonly="readonly" hidden>
+			</div>
+			<div class="Qlqlr">
+			<div><img src="${appRoot }/resources/image/den.jpg" onmouseover="$('.QlqlrShort').show();"
+				onmouseout="$('.QlqlrShort').hide();"></div>
+					<div class="QlqlrShort" style="display: none">
+						<div>*구독 계약기간은 15일입니다</div>
+						<div>*구독 계약기간은 결제일의 다음주 월요일부터<br>  15일동안 지속됩니다.</div>
+						<div>*일요일 결제 시 , 8일후 월요일부터 계약기간이 시작됩니다.</div>
+					</div>
+				</div>
+		</div>
+		
 			<div class="title" style="text-align: center;">구독 종류 선택</div>
 			<div class="box1" id="box1-1">
 				<div class="text1">1인 가구</div>
@@ -587,25 +679,32 @@ body {
 			<input id="finalAmount" value="" type="text" readonly="readonly"
 				hidden> <input id="finalSubsOptions" value="" type="text"
 				readonly="readonly" hidden>
+		</div>
 
 		<div class="col">
 			<div class="title" style="text-align: center;">빨래방 선택</div>
 			<div class="box2" id="box2-1">
-				<div class="box_sub1"><img id="fileNameId1"  style="max-width: 100%; height: auto;" src="" ></div>
+				<div class="box_sub1">
+					<img id="fileNameId1" style="max-width: 100%; height: auto;" src="">
+				</div>
 				<div class="box_sub2" id="box_sub2-1"></div>
 				<div class="box_sub3">
 					<div id="map1" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-2">
-				<div class="box_sub1"><img id="fileNameId2" style="max-width: 100%; height: auto;" src="" ></div>
+				<div class="box_sub1">
+					<img id="fileNameId2" style="max-width: 100%; height: auto;" src="">
+				</div>
 				<div class="box_sub2" id="box_sub2-2"></div>
 				<div class="box_sub3">
 					<div id="map2" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-3">
-				<div class="box_sub1"><img id="fileNameId3" style="max-width: 100%; height: auto;" src="" ></div>
+				<div class="box_sub1">
+					<img id="fileNameId3" style="max-width: 100%; height: auto;" src="">
+				</div>
 				<div class="box_sub2" id="box_sub2-3"></div>
 				<div class="box_sub3">
 					<div id="map3" style="width: 100%; height: 300px;"></div>
@@ -614,8 +713,9 @@ body {
 
 			<div>
 				<button id="addressList_modal_btn" class="button_sang" type="button"
-					data-toggle="modal" data-target="#addressList-modal">다른
-					빨래방 <br>찾아보기</button>
+					data-toggle="modal" data-target="#addressList-modal">
+					다른 빨래방 <br>찾아보기
+				</button>
 			</div>
 			<input id="finalAddress" type="text" readonly="readonly" hidden>
 			<input id="finalStoreId" type="text" readonly="readonly" hidden>
@@ -624,7 +724,7 @@ body {
 	<div class="col">
 		<div class="title">
 			<input class="button_sang" type="button" id="payPage" value="결제하기">
-<%-- 			<img src="${imgIntroRoot}6/washline.jpg"> --%>
+			<%-- 			<img src="${imgIntroRoot}6/washline.jpg"> --%>
 		</div>
 	</div>
 
@@ -646,8 +746,7 @@ body {
 						<option value="">--</option>
 						<option value="S">가게명검색</option>
 						<option value="A">주소검색</option>
-					</select>
-					<input class="keyword1" type="text" placeholder="Search">
+					</select> <input class="keyword1" type="text" placeholder="Search">
 					<button class="Searchbtn" type="submit">Search</button>
 					<button id="selectBTN">선택완료</button>
 				</div>
@@ -657,7 +756,7 @@ body {
 			</div>
 		</div>
 	</div>
-
+<bot:botnav></bot:botnav>
 
 
 </body>
@@ -674,9 +773,11 @@ $(function() {
 		let subsOption = $("#finalSubsOptions").val();
 		let subsAmount = $("#finalAmount").val();
 		let storeid = $("#finalStoreId").val();
+		let serviceStartDate = $("#serviceEndDay_final").val();
 		
 		var checkMsg;
 		checkMsg = "이름 : " + subsName;
+		checkMsg = "구독 시작일 :" + serviceStartDate;
 		checkMsg += "\n구독자 주소: " + subsAddress;
 		checkMsg += "\n선택한 빨래방 주소: " + storeAddress;	
 		checkMsg += "\n구독종류 : " + subsOption ;
@@ -731,7 +832,8 @@ $(function() {
 	                  		subsAddress : subsAddress,
 	                  		storeid : storeid,
 	                  		subsOptions : subsOption,
-	                  		subsAmount : subsAmount
+	                  		subsAmount : subsAmount,
+	                  		serviceStartDate : serviceStartDate
 	                  } 
 	                  
 	                  $.ajax({

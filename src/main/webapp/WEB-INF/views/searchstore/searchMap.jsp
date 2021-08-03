@@ -2,6 +2,7 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -37,6 +38,7 @@
 	$(function() {
 		$("#searchName-btn").click(function() {
 
+			
 			var storename = $("#name-store").val()
 			
 			var data = {
@@ -48,16 +50,17 @@
 				url : "${appRoot}/won/searchstore",
 				data : data,
 				success : function(data) {
-					console.log(data);
-				for(var store of data) {
-					let markerHTML = `<div style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
-										<div><img src="${appRoot}/resources/image/home_button.png"></div>
+						$(".markerid").remove();
+				for(var store of data) { 
+					let markerHTML = `							
+										<div class="markerid" style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
+										<div><img src="${appRoot}/resources/image/laundry_home.png"></div>
 										<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
 						        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
-										<div>\${store.storename}</div>
-										<div>\${store.storeaddress}</div>
-										<div>\${store.storePhonenum}</div>
-										<div data-id="\${store.id}">가게정보 보기</div>
+										<div style="font-size:22px;color:#9E3D00">\${store.storename}</div>
+										<div>가게 주소: \${store.storeaddress}</div>
+										<div>가게 번호: \${store.storePhonenum}</div>
+										<div><button class="storeInfoBtn" data-id="\${store.id}">가게정보</button></div>
 										</div>
 										</div>` ;
 							
@@ -72,6 +75,22 @@
 						    }
 						};
 						 var marker = new naver.maps.Marker(laundrymarker);
+						 
+						 $(".storeInfoBtn").click(function() {
+								console.log("되냐?")
+								storeInfoURL(this);
+								})
+							
+							function storeInfoURL(btn) {
+								var id = $(btn).attr('data-id');
+								console.log(id);
+								
+								let url = "${appRoot}/searchstore/b2bIntroduce/" + id
+								let name = "빨래스타그램";
+								let option = "width = 620, height = 900, top = 100, left = 200, location = no, resizable = yes, toolbars=no, menubar=no"
+								
+								window.open(url, name, option);
+							}
 					}
 				}
 			})
@@ -137,7 +156,7 @@
 						document.getElementById("detailAddress")
 								.focus();
 						
-						console.log(addr);
+						$("#myaddress").val(addr);
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */						
 						/* 주소 위경도 전환 코드 */
 						naver.maps.Service.geocode({
@@ -202,17 +221,17 @@
 									data : JSON.stringify(data),
 									contentType : "application/json",
 									success : function(list) {
-										console.log("성공");
+										$(".markerid").remove();
 										
 										for(let address of list) {
-											let markerHTML = `<div style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
-												<div><img src="${appRoot}/resources/image/home_button.png"></div>
+											let markerHTML = `<div class="markerid" style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
+												<div><img src="${appRoot}/resources/image/laundry_home.png"></div>
 												<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
 								        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
 												<div>\${address.storename}</div>
 												<div>\${address.storeaddress}</div>
 												<div>\${address.storePhonenum}</div>
-												<div data-id="\${address.id}">가게정보 보기</div>
+												<div><button class="storeInfoBtn" data-id="\${address.id}">가게정보</button></div>
 												</div>
 												</div>` ;
 											
@@ -226,10 +245,23 @@
 												    animation: naver.maps.Animation.BOUNCE
 												};
 												 let marker = new naver.maps.Marker(laundrymarker);
+												 
+												 $(".storeInfoBtn").click(function() {
+														console.log("되냐?")
+														storeInfoURL(this);
+														})
+													
+													function storeInfoURL(btn) {
+														var id = $(btn).attr('data-id');
+														console.log(id);
+														
+														let url = "${appRoot}/searchstore/b2bIntroduce/" + id
+														let name = "빨래스타그램";
+														let option = "width = 620, height = 900, top = 100, left = 200, location = no, resizable = yes, toolbars=no, menubar=no"
+														
+														window.open(url, name, option);
+													}
 										}
-									},
-									error: function() {
-										console.log("실패");
 									}
 							})
 					})
@@ -259,6 +291,56 @@ body {
 	display: inline-block;
 	text-align: center;
 }
+
+.button_sang {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	font-family: 'GongGothicMedium';
+}
+
+.button_sang:hover {
+	background: #0583F2;
+}
+.button_sang1 {
+	background-color: #169EF2;
+	border: none;
+	color: white;
+	text-align: center;
+	font-size: 18px;
+	margin: 4px 2px;
+	padding: 5px 10px;
+	opacity: 1;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	font-family: 'GongGothicMedium';
+}
+
+.storeInfoBtn {
+	font-size: 12px;
+	border: solid 1px #dadada;
+	background-color: white;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+}
 </style>
 </head>
 <body>
@@ -267,13 +349,14 @@ body {
 			src="${appRoot }/resources/image/others/brand_logo_300px.png"
 			alt="...">
 		</a>
-		<h1>가게 제목으로 빨래방 찾기</h1>
+		<div>매장찾기</div>
+		
 		<div class="item item2">
 			<!-- 가게 제목으로 찾기 -->
-			<button id="storeName" onclick="showhidebtn1()">●가게제목</button>
+			<button id="storeName" class="button_sang"   onclick="showhidebtn1()">가게제목으로 매장찾기</button>
 
 			<!-- 내집 주소로 주변 찾기 -->
-			<button id="myAddress" onclick="showhidebtn2()">●우리집 주소로 찾기</button>
+			<button id="myAddress" class="button_sang" onclick="showhidebtn2()">우리집 주변 매장찾기</button>
 		</div>
 
 		<!-- 가게 제목으로 검색할때 -->
@@ -281,10 +364,10 @@ body {
 			<div class="item item3">
 				<div>
 					<input id="name-store" type="text" placeholder="가게 이름">
-					<button id="searchName-btn" type="submit">찾기</button>
+					<button id="searchName-btn" class="button_sang1" type="submit">찾기</button>
 				</div>
 				<div>
-					<div id="map1" style="width: 1000px; height: 600px;"></div>
+					<div id="map1reset"><div id="map1" style="width: 1000px; height: 600px;"></div></div>
 					<!-- 가게정보 -->
 					<div id="storeinfo1" style="display: none"></div>
 				</div>
@@ -295,12 +378,11 @@ body {
 		<div id="searchAddress" style="display: none;">
 			<div class="item item4">
 				<div>
-					<input type="button" onclick="sample6_execDaumPostcode()"
-						value="우편번호 찾기"><br> <input type="text" id="postcode"
-						placeholder="우편번호"> <input type="text" id="address"
-						placeholder="주소"><br> <input type="text"
-						id="detailAddress" placeholder="상세주소"> <input type="text"
-						id="extraAddress" placeholder="참고항목">
+					<input type="text" id="myaddress" placeholder="주소를 검색해주세여" readonly><input class="button_sang1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호로 찾기"><br>
+					<input type="text" id="postcode" placeholder="우편번호" hidden>
+					<input type="text" id="address" placeholder="주소" hidden><br>
+					<input type="text" id="detailAddress" placeholder="상세주소" hidden>
+					<input type="text" id="extraAddress" placeholder="참고항목" hidden>
 				</div>
 				<div style="display: inline-block;">
 					<div id="map2" style="width: 1000px; height: 600px;"></div>
@@ -308,7 +390,7 @@ body {
 			</div>
 		</div>
 	</div>
-
+<bot:botnav></bot:botnav>
 </body>
 
 
@@ -317,10 +399,11 @@ body {
 	/* 1번 지도 */
 	var mapOptions1 = {
 		center : new naver.maps.LatLng(37.3595704, 127.105399),
-		zoom : 13
+		zoom : 10
 	};
 
 	var map1 = new naver.maps.Map('map1', mapOptions1);
+	
 
 	/* 2번 지도 */
 	var mapOptions2 = {
