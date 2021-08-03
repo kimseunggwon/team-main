@@ -70,8 +70,6 @@ img {
 	// const reBno = "${review.reBno}"
 	const userid = "${pinfo.member.userid}";
 	const likersid = "${likers.userid}";
-	const $reviewLikeUp = $("#review-like-up");
-    const reBno = $reviewLikeUp.attr("data-reBno");
 </script>
 
 <script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
@@ -158,12 +156,6 @@ img {
 							<input type="hidden" id="re-input3" class="form-control"
 								name="reWriterName" value="${review.reWriterName }" readonly>
 							<input readonly="readonly" class="form-control" value="${review.reWriterName }">
-						
-						<!-- 좋아요 누르기 
-						<button type="button" class="item" id="review-like-btn">
-							<img alt="likebtn" src="${appRoot }/resources/image/review/like.png">
-						</button>
-						-->
 							
 						<!-- 리뷰 수정/삭제 버튼 -->
 						<c:url value="/review/modify" var="reModifyUrl">
