@@ -10,7 +10,7 @@ public class SubscriberInfoVO {
 	private String subsId;
 	private String subsName;
 	private String subsAddress;
-	private String storeAddress;
+	private Integer storeid;
 	private String subsOptions;
 	private String subsAmount;
 	

@@ -25,14 +25,14 @@
 	font-family: 'GongGothicMedium';
 }
 
-#re-starItem {
+.review-star-child {
 	padding: 5px;
 	background-color: white;
 	border: none;
 	outline: none;
 }
 
-#jinah-star {
+#jinah-star1, #jinah-star2, #jinah-star3, #jinah-star4, #jinah-star5 {
 	width: 50px;
 	height: 50px;
 	color: #ffe62e;
@@ -70,9 +70,12 @@ img {
 	// const reBno = "${review.reBno}"
 	const userid = "${pinfo.member.userid}";
 	const likersid = "${likers.userid}";
+	const $reviewLikeUp = $("#review-like-up");
+    const reBno = $reviewLikeUp.attr("data-reBno");
 </script>
 
 <script src="${appRoot }/resources/js/review/reviewlikecount.js"></script>
+<script src="${appRoot }/resources/js/review/get-modify-reviewstar.js"></script>
 
 </head>
 <body>
@@ -82,10 +85,6 @@ img {
 	<div class="container">
 		<%--
 		여기는 리뷰를 얻어오는 [리뷰 상세] JSP 파일입니다 :) 
-		1. 좋아요, 평점 얻어오기
-		2. 
-		3. 
-		4. 
 		 --%>
 		<div class="container">
 			<div class="row justify-content-center">
@@ -96,40 +95,37 @@ img {
 
 		<rev:search></rev:search>
 
-		<!-- Review Grading (stars) Start -->
-		<div id="re-stare" style="display: inline;" class="container">
-			<div class="row justify-content-center d-flex align-items-center">
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
+	<!-- Review Grading (stars) Start -->
+	<div id="review-star-parent" style="display: inline;" class="container">
+		<div class="review-star-parent row justify-content-center d-flex align-items-center">
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon ${reviewStars >= 1 ? 'fas' : 'far' } fa-star" id="jinah-star1"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon ${reviewStars >= 2 ? 'fas' : 'far' } fa-star" id="jinah-star2"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon ${reviewStars >= 3 ? 'fas' : 'far' } fa-star" id="jinah-star3"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon ${reviewStars >= 4 ? 'fas' : 'far' } fa-star" id="jinah-star4"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon ${reviewStars >= 5 ? 'fas' : 'far' } fa-star" id="jinah-star5"></i>
+			</button>
 				<div>
-					<label for="jinah-restars">평점</label> <input type="hidden"
-						name="reStars" value="${re.reStars }" />
-				</div>
 			</div>
 		</div>
-		<!-- Review Grading (stars) End -->
+	</div> 
+	<!-- Review Grading (stars) End -->
 
 		<!-- Main Writing Content -->
 		<div id="re-write-content" class="container">
-			<div class="row justify-content-center"">
+			<div class="row justify-content-center">
 				<div class="col-8">
 						<!-- 평점 -->
-						<%--
-						 ${review.reStars }
-						 --%>
+						<input hidden id="review-star-result" name="reviewStars" value="${reviewStars }" >
+						<span>평점은 : ${reviewStars }</span>
 
 						<!-- 이미지 파일 -->
 						<c:if test="${not empty review.fileName }">
@@ -161,7 +157,7 @@ img {
 							<!-- input id="re-input3" class="form-control" value="" type="hidden" name="jinah-writer"-->
 							<input type="hidden" id="re-input3" class="form-control"
 								name="reWriterName" value="${review.reWriterName }" readonly>
-							<input readonly="readonly" value="${review.reWriterName }">
+							<input readonly="readonly" class="form-control" value="${review.reWriterName }">
 						
 						<!-- 좋아요 누르기 
 						<button type="button" class="item" id="review-like-btn">

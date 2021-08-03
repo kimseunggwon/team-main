@@ -7,6 +7,7 @@
 
 <select id="getsearchbystorename" resultType="org.zerock.domain.AddressVO">
 SELECT 
+	id id,
 	storename storename, 
 	storeaddress storeaddress,
 	storePhonenum storePhonenum, 
@@ -22,6 +23,7 @@ WHERE storename like CONCAT('%', #{storename}, '%')
 <![CDATA[
 
 SELECT
+	id id,
 	storename storename,
 	storeaddress storeaddress,
 	storePhonenum storePhonenum, 
@@ -45,6 +47,7 @@ FROM b2bIntroduce
 WHERE id = #{id}
 </select>
 
+
 <select id="read" resultType="org.zerock.domain.B2bIntroduceVO">
 SELECT
 	id id,
@@ -56,7 +59,7 @@ WHERE id= #{id}
 
 
 <insert id="B2bIntroduceRegister">
-INSERT INTO b2bIntroduce (id, introduce, fileName, storeinfo)
+INSERT INTO b2bIntroduce (id, introduce, storeinfo, fileName)
 VALUES (#{id}, #{introduce}, #{storeinfo}, #{fileName})
 </insert>
 
@@ -64,6 +67,19 @@ VALUES (#{id}, #{introduce}, #{storeinfo}, #{fileName})
 DELETE FROM b2bIntroduce
 WHERE id = #{id}
 </delete>
+<!-- b2bIntroduce -->
+<select id="getStoreInroducePageInfo" resultType="org.zerock.domain.B2bIntroduceVO">
+SELECT
+	s.id id,
+	s.storeaddress storeaddress,
+	s.storename storename,
+	s.storePhonenum storePhonenum,
+	b.storeinfo storeinfo,
+	b.introduce introduce,
+	b.fileName fileName
+FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON b.id = #{id}
+WHERE s.id = #{id}
+</select>
 
 
 <!-- 구독페이지 xml -->
@@ -82,11 +98,9 @@ WHERE id = #{id}
 		au.auth auth
 	FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON s.id = b.id 
 							JOIN user AS u ON s.userid = u.userid
-							JOIN user_auth AS au ON s.userid= au.userid
-	
-	WHERE
-		  storelat > #{lat} - 0.06 AND storelat < #{lat} + 0.06 AND
-		  storelag > #{lag} - 0.06 AND storelag < #{lag} + 0.06
+							JOIN user_auth AS au ON s.userid= au.userid 
+	ORDER BY SQRT(pow(#{lat} - s.storelat, 2) + pow(#{lag} - s.storelag,2))
+	LIMIT 3
 	
 	 ]]>
 	</select>
@@ -136,8 +150,14 @@ WHERE id = #{id}
 <!-- 구독자 정보 저장 -->
 <insert id="SaveSubscriberInfo">
 INSERT INTO subscriber 
-(subsId, subsName, subsAddress, storeAddress,subsOptions, subsAmount)
-VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeAddress}, #{subsOptions}, #{subsAmount})
+(subsId, subsName, subsAddress, storeid, subsOptions, subsAmount)
+VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount})
 </insert>
 
+<!-- b2buser의 id로 가게정보 갖고오기 -->
+<select id="getStoreInfo" resultType="org.zerock.domain.StoreVO">
+SELECT  storename storeName, storeaddress storeUserAddress, storePhonenum storePhonenum
+FROM storeinfo
+WHERE id = #{id}
+</select>
 </mapper>

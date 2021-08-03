@@ -8,58 +8,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
+<%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 <title>우리가게는요~</title>
 </head>
 <style>
- body {
-     width: 600px;
-     height: 950px;
- }
+@font-face {
+	font-family: 'GongGothicMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	width: 600px;
+	height: 950px;
+	font-family: 'GongGothicMedium';
+}
+
 .wrapper {
-    display: inline-block;
-    box-shadow: 0px 0px 6px 2px black;
-    width: 100%;
-    height: 100%;
+	display: inline-block;
+	box-shadow: 0px 0px 6px 2px black;
+	width: 100%;
+	height: 100%;
 }
+
 .storeName {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 50px;
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 50px;
 }
+
 .imgPage {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 450px;
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 450px;
 }
+
 .like {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 50px;
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 50px;
 }
+
 .storeInfo {
-    border-bottom-color: gray;
-    border-bottom-width: 2px ;
-    border-bottom-style: solid ;
-    height: 200px;
+	border-bottom-color: gray;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	height: 200px;
 }
+
 .introduce {
-    height: 200px;
+	height: 200px;
 }
 
+.info {
+	padding-left: 8px;
+    padding-top: 3px;
+	color: #787878;
+}
+.img {
+	width: auto;
+    height: 50px;
+    margin: 1.5%;
+}
+#info1 {
+	padding-left: 8px;
+    padding-top: 3px;
+}
 </style>
-<body>
-<div class="wrapper">
-    <div class="storeName"></div>
-    <div class="imgPage"></div>
-    <div class="like"></div>
-    <div class="storeInfo"></div>
-    <div class="introduce"></div>
+<script type="text/javascript">
+	$(function() {
+		var storename = "${storename}";
+		var test = storename.includes("빨래방");
+		$('.storeName').text(test ? storename : storename + " 빨래방");
+	})
+</script>
 
-</div>
+<body>
+	<div class="wrapper">
+		<div>
+			<img class="img" src="${appRoot }/resources/image/others/brand_logo_300px.png"
+				alt="...">
+
+		</div>
+		<div class="imgPage">
+			<img style="max-width: 100%; height: auto;"
+				src="${imgIntroRoot}${fileName }" />
+		</div>
+<!-- 		<div class="like"></div> -->
+		<div class="storeInfo">
+			<div class="storeName" style="font-size: 30px; color: #9E3D00;padding: 3px;"></div>
+			<div class="info">주소: ${storeaddress }</div>
+			<div class="info">번호: ${storePhonenum }</div>
+			<div id="info1">${storeinfo }</div>
+		</div>
+		<div id="info1" class="introduce">${introduce }</div>
+
+	</div>
 
 
 </body>

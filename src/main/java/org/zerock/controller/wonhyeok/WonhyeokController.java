@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.B2bIntroduceVO;
+import org.zerock.domain.StoreVO;
 import org.zerock.service.WonhyeokRestService;
 
 import lombok.AllArgsConstructor;
@@ -24,17 +26,15 @@ public class WonhyeokController {
 	private WonhyeokRestService service;
 
 	@RequestMapping("/searchMap")
-	@PreAuthorize("isAuthenticated()")
 	public void searchstore() {
 
 	}
 //	사장님 홍보 게시판 컨트롤러
-
 	@RequestMapping("/b2bIntroduceBoard")
 	public void b2bIntroduce() {
 
 	}
-
+	// 등록 서버URL
 	@PostMapping("/b2bIntroduceBoard")
 	public void b2bIntroduce(B2bIntroduceVO Introduce, @RequestParam("file") MultipartFile file) {
 
@@ -52,6 +52,13 @@ public class WonhyeokController {
 
 	}
 
+	@GetMapping("/getStoreInfo")
+	@ResponseBody
+	public StoreVO getStoreInfo(String id) {
+		
+		return service.getStoreInfo(id);
+		
+	}
 	@GetMapping("/b2bIntroduce")
 	public void b2bIntroducepage() {
 
@@ -60,7 +67,32 @@ public class WonhyeokController {
 	@RequestMapping("/b2bIntroduce/{id}")
 	public String b2bIntroducepage(@PathVariable("id") Long id,RedirectAttributes rttr) {
 		
-		return  "redirect:/searchstore/b2bIntroduce";
+		B2bIntroduceVO vo = service.getStoreInroducePageInfo(id);
+
+		
+		if ( vo.getFileName() == null) {
+			rttr.addFlashAttribute("id", vo.getId());
+			rttr.addFlashAttribute("storeaddress", vo.getStoreaddress());
+			rttr.addFlashAttribute("storename", vo.getStorename());
+			rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());
+			rttr.addFlashAttribute("storeinfo", "준비중");
+			rttr.addFlashAttribute("introduce", "준비중");
+			rttr.addFlashAttribute("fileName","readyimg/readyimg.jpg");
+			
+			return  "redirect:/searchstore/b2bIntroduce";
+			
+		} else {
+					
+		rttr.addFlashAttribute("id", vo.getId());
+		rttr.addFlashAttribute("storeaddress", vo.getStoreaddress());
+		rttr.addFlashAttribute("storename", vo.getStorename());
+		rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());
+		rttr.addFlashAttribute("storeinfo", vo.getStoreinfo());
+		rttr.addFlashAttribute("introduce", vo.getIntroduce());
+		rttr.addFlashAttribute("fileName",  vo.getId() + "/" + vo.getFileName());
+	
+			return  "redirect:/searchstore/b2bIntroduce";
+		}
 
 	}
 

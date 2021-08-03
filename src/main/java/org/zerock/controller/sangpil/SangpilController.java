@@ -110,13 +110,13 @@ public class SangpilController {
 	
 	@GetMapping("/signup")
 	public void signUp() {
-		log.info("Get 회원가입 들어왔습니당.");
+//		log.info("Get 회원가입 들어왔습니당.");
 	}
 	
 	@PostMapping("/signup")
 	public String signUpPost(MemberVO vo, RedirectAttributes rttr) {
-		log.info("Post 회원가입 들어왔습니당.");
-		log.info(vo);
+//		log.info("Post 회원가입 들어왔습니당.");
+//		log.info(vo);
 		
 		boolean ok = service.insert(vo);
 		
@@ -130,8 +130,8 @@ public class SangpilController {
 	
 	@PostMapping("/b2bsignup")
 	public String B2BsignUp(B2BmemberVO vo, RedirectAttributes rttr) {
-		log.info("Post b2b회원가입 들어왔습니당.");
-		log.info(vo);
+//		log.info("Post b2b회원가입 들어왔습니당.");
+//		log.info(vo);
 		
 		boolean ok = service.b2binsert(vo);
 		
@@ -144,8 +144,8 @@ public class SangpilController {
 	
 	@PostMapping("/empsignup")
 	public String EmpsignUp(B2BmemberVO vo, RedirectAttributes rttr) {
-		log.info("Post emp회원가입 들어왔습니당.");
-		log.info(vo);
+//		log.info("Post emp회원가입 들어왔습니당.");
+//		log.info(vo);
 		
 		boolean ok = service.empinsert(vo);
 		
@@ -159,8 +159,8 @@ public class SangpilController {
 	@GetMapping("/dup")
 	@ResponseBody
 	public ResponseEntity<String> duplicate(String id) {
-		log.info("duplicate method");
-		log.info(id);
+//		log.info("duplicate method");
+//		log.info(id);
 		
 		// 서비스 일 시키고
 		MemberVO vo = service.read(id);
@@ -175,13 +175,13 @@ public class SangpilController {
 	
 	@PostMapping("/findid")
 	public ResponseEntity<List<String>> findid(@RequestBody MemberVO vo, Model model) {
-		log.info("아이디 찾는중....");
-		log.info(vo);
+//		log.info("아이디 찾는중....");
+//		log.info(vo);
 		List<String> userid = new ArrayList<String>();
 		
 		// 서비스 일 시키고
 		List<MemberVO> vo2 = service.read2(vo);
-		log.info(vo2);
+//		log.info(vo2);
 		
 		/*
 		if (email.equals(useremail)) {
@@ -207,7 +207,7 @@ public class SangpilController {
 	@PostMapping("/findpw")
 	public ResponseEntity<String> findpw(@RequestBody MemberVO vo) {
 		
-		log.info(vo);
+//		log.info(vo);
 		
 		// 서비스 일 시키고
 		List<MemberVO> vo2 = service.read3(vo);
@@ -220,6 +220,7 @@ public class SangpilController {
 	}
 	
 	@GetMapping("/usermanagement")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void usermanagement(Model model, String userid) {
 		
 		
@@ -233,7 +234,7 @@ public class SangpilController {
 	public ResponseEntity<String> modify(String id) {
 		
 		boolean ok = service.updateauth(id);
-		log.info(id);
+//		log.info(id);
 		
 		if (ok) {
 			return new ResponseEntity<>("success", HttpStatus.OK);

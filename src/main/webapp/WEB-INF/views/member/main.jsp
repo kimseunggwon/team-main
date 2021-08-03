@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/MainMapTags"%>
-
+<%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
+<%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +49,7 @@
 }
 </style>
 
+
 <!--Tawk.to 실시간 채팅 -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -62,14 +65,43 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 
+
+<script type="text/javascript">
+$(function(){
+	let loginID = "${pinfo.member.userid}";
+	$.ajax({
+		type: "POST",
+		url: "${appRoot}/member/getLoginInfo",
+		data: {
+			userid : loginID
+		},
+		success: function(data) {
+			
+			let confirmID = data;
+			console.log(confirmID);
+			if(confirmID == "") {
+				$("#main-subscribe").show();
+				$("#main-subscribe").click(function() {
+				location.href = "${appRoot}/subscribe/subsregister";
+				})
+			} 		
+		},
+		error : function() {
+			console.log("실패")
+		}
+	})
+})
+</script>
+
 </head>
 <body>
+	<main:navbar></main:navbar>
 <div class = "container">
 	
 	
 	
 	
-	 <div class="row">
+	 <div class="row mt-5">
 				
 				 <div class="col align-self-start">
 				 
@@ -92,41 +124,6 @@ s0.parentNode.insertBefore(s1,s0);
 				</div>
 			</div>
 	  
-	  <div class="row justify-content-end mt-3">
-	  	<div class="row justify-content-around">
-	  		
-	  		<sec:authorize access="isAnonymous()">
-		  		<form action="${appRoot }/member/login">
-		  			<input class="btn btn-primary mr-1" type="submit" value="로그인"> 
-	  			</form>
-	  		
-		  		<form action="${appRoot }/member/signup">
-		  			<input class="btn btn-primary mr-1" type="submit" value="회원가입"> 
-	  			</form>
-	  		</sec:authorize>
-	  		
-	  
-	  		
-	  		<!-- 
-	  			(1) 로그아웃 버튼에 경로 수정.
-	  			(2) Mypage 버튼에 경로 수정.
-	  		       -->
-	  		<sec:authorize access="isAuthenticated()">       
-	  			<form action="${appRoot }/logout" method="post">
-	  					<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
-	  			</form>
-	  		
-	  			<form action="${appRoot }/member/mypage">
-	  					<input class="btn btn-primary mr-1" type="submit" value="MyPage"> 
-	  			</form>
-	  		
-	  			<form action="${appRoot }/help/helpdesk">	
-	  					<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
-	  			</form>
-	  		</sec:authorize>
-	  		
-	  	</div>
-	  </div>
 	
 	
 	<hr>
@@ -154,46 +151,17 @@ s0.parentNode.insertBefore(s1,s0);
 	
 			<br>
 		
-		<hr>
-		
-		 <div class="row justify-content-around mb-3">
-		 	<div class="row">
-		 
-		 		<div class="mr-10">
-		 			<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
-					</a>
-		 		</div>
-		 	
-		 	</div>
-		 	
-		 	<div class="row">
-		 		<div>
-		 			서울시 강남구 삼성동 1234 우 : 123-1234
-		 			<br>
-					TEL:02-123-1234 Email:email@domain.com
-					<br>
-					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
-					<br>
-				</div>
-		 	</div>
-		 	
-		 	<div class="row">
-		 		<span >
-		 			<a style="text-decoration: none;" href="#">
-		 			 	<img src="${appRoot }/resources/image/blog.jpg">
-		 			</a>
-		 			<a style="text-decoration: none;" href="#">
-		 				<img src="${appRoot }/resources/image/facebook.gif">
-		 			</a>
-		 			<a style="text-decoration: none;" href="#">
-		 				<img src="${appRoot }/resources/image/twitter.gif">
-		 			</a>
-		 		</span>
-		 	</div>
-		 		
-		 </div>
+		<div class="row justify-content-center fixed-bottom">
+			<sec:authorize access="isAuthenticated()">
+						<a class="btn btn-secondary mb-5"  id="main-subscribe" style="display:none;">구독 신청!</a>
+			</sec:authorize>
+			
+			<sec:authorize access="isAnonymous()">
+				<a class="btn btn-secondary mb-5" href="${appRoot}/member/login">구독 신청!</a>
+			</sec:authorize>
+		</div>
 
+	<bot:botnav></bot:botnav>
 
 <tags:MainMapTags>
 </tags:MainMapTags>

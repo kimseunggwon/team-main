@@ -44,5 +44,4 @@ public interface UserReviewMapper {
 	public int getReviewStar(int reBno);
 
 
-
 }
