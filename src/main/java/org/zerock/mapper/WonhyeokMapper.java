@@ -5,6 +5,7 @@ import java.util.List;
 import org.zerock.domain.AddressVO;
 import org.zerock.domain.B2bIntroduceVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.StoreVO;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
 
@@ -29,6 +30,10 @@ public interface WonhyeokMapper {
 	public List<SubscribeViewVO> getStoreList();
 
 	public List<SubscribeViewVO> getStoreListBySearch(SubscribeViewVO vo);
+
+	public B2bIntroduceVO getStoreInroducePageInfo(Long id);
+
+	public StoreVO getStoreInfo(String id);
 
 
 

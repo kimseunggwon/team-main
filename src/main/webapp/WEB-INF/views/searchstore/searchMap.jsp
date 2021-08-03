@@ -14,6 +14,7 @@
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 
 <title>매장 찾기</title>
+
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5"></script>
 <script type="text/javascript"
@@ -27,58 +28,6 @@
 	function showhidebtn2() {
 		$("#searchAddress").show();
 		$("#searchName").hide();
-	}
-	
-	function storeinfo1(store) {
-		var name = $(store).attr("data-name");
-		var address = $(store).attr("data-address");
-		
-		console.log(name);
-		console.log(address);
-		
-		var infoHTML =
-			`<div>
-				<div>
-					<img src="">
-				</div>
-				<div>
-					<ul>
-						<li>가게 이름:\${name }</li>
-						<li>주소:\${address }</li>
-						<li>평점:</li>
-						<li><a href="https://www.naver.com/">리뷰보기</a></li>
-					</ul>
-				</div>
-			</div> `;
-		
-		$("#storeinfo1").empty().append(infoHTML).show();
-
-	}
-	
-	function storeinfo2(store) {
-		var name = $(store).attr("data-name");
-		var address = $(store).attr("data-address");
-		
-		console.log(name);
-		console.log(address);
-		
-		var infoHTML =
-			`<div>
-				<div>
-					<img src="">
-				</div>
-				<div>
-					<ul>
-						<li>가게 이름:\${name }</li>
-						<li>주소:\${address }</li>
-						<li>평점:</li>
-						<li><a href="https://www.naver.com/">리뷰보기</a></li>
-					</ul>
-				</div>
-			</div> `;
-		
-		$("#storeinfo2").empty().append(infoHTML).show();
-
 	}
 </script>
 
@@ -98,34 +47,32 @@
 				type : "post",
 				url : "${appRoot}/won/searchstore",
 				data : data,
-				// contentType : "application/json",
 				success : function(data) {
 					console.log(data);
 				for(var store of data) {
+					let markerHTML = `<div style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
+										<div><img src="${appRoot}/resources/image/home_button.png"></div>
+										<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
+						        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
+										<div>\${store.storename}</div>
+										<div>\${store.storeaddress}</div>
+										<div>\${store.storePhonenum}</div>
+										<div data-id="\${store.id}">가게정보 보기</div>
+										</div>
+										</div>` ;
+							
 					
 					var laundrymarker = {
 							position: new naver.maps.LatLng(store.storelag, store.storelat),
 						    map: map1,
 						    icon: {
-						    	content: [	
-						    	`<div data-name='\${store.storename}' data-address='\${store.storeaddress}' onclick="storeinfo1(this)" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">` +						    	 
-				        		`<div><img src="${appRoot}/resources/image/home_button.png"></div>` +        		
-				        		`<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
-				        		background-color:#88C9F2; color:white; text-align:center; border:1px;
-				        		border-radius:14px; opacity:75%; display:none">주소: \${store.storeaddress} </div>`+	
-				        		`</div>`
-				        		
+						    	content: [ markerHTML
 			        		].join('')
-						        	
-						       /*  size: new naver.maps.Size(22, 35),
-						        anchor: new naver.maps.Point(15, 35)  */
+
 						    }
 						};
 						 var marker = new naver.maps.Marker(laundrymarker);
 					}
-				},
-				error : function() {
-					console.log("실패")
 				}
 			})
 		})
@@ -194,9 +141,9 @@
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */						
 						/* 주소 위경도 전환 코드 */
 						naver.maps.Service.geocode({
-					        query: addr // String 타입의 주소값
+					        query: addr // /* String 타입의 주소값 */
 					   		 }, function(status, response) {
-						        if (status !== naver.maps.Service.Status.OK) {
+						       if (status !== naver.maps.Service.Status.OK) {
 						            // 실행이 되지 않을 경우 
 				                    return alert('Something wrong!');
 			                    
@@ -221,12 +168,13 @@
 					    	var map2 = new naver.maps.Map('map2', mapOptions2);  
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 					        /* 검색한(우리집) 주소 마커 */
+					        
 							var markerOptions = {
 								position: new naver.maps.LatLng(lag, lat),
 							    map: map2,
 							    icon: {
 						        content: [	
-							        		`<div onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">` +
+							        		`<div style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">` +
 								        		`<div><img src="${appRoot}/resources/image/home_button.png"></div>`+
 								        		`<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
 								        		background-color:#88C9F2; color:white; text-align:center; border:1px;
@@ -257,18 +205,22 @@
 										console.log("성공");
 										
 										for(let address of list) {
+											let markerHTML = `<div style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
+												<div><img src="${appRoot}/resources/image/home_button.png"></div>
+												<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
+								        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
+												<div>\${address.storename}</div>
+												<div>\${address.storeaddress}</div>
+												<div>\${address.storePhonenum}</div>
+												<div data-id="\${address.id}">가게정보 보기</div>
+												</div>
+												</div>` ;
+											
 											let laundrymarker = {
 													position: new naver.maps.LatLng(address.storelag, address.storelat),
 												    map: map2,
 												    icon: {
-												        content: [	
-													        		`<div data-name='\${address.storename}' data-address='\${address.storeaddress}'
-													        		onclick="storeinfo2(this)" onmouseover="$(this).find('.ad2').show();" onmouseout="$(this).find('.ad2').hide();">` +
-														        		`<div><img src="${appRoot}/resources/image/home_button.png"></div>`+
-														        		`<div class="ad2"  style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
-																				        		  background-color:#88C9F2; color:white; text-align:center; border:1px;
-																				        	  	  border-radius:14px; opacity:75%; display:none">주소: \${address.storeaddress} </div>`+                   
-													        		`</div>`
+												        content: [	markerHTML
 																 ].join('')
 												    },
 												    animation: naver.maps.Animation.BOUNCE
@@ -287,75 +239,75 @@
 </script>
 
 <style type="text/css">
-	body, html {
-		height:100%
-	}
-	.container {
-		position:relative;
-		top: 10%;
-		left:center;
-		margin: 0 auto;
+@font-face {
+	font-family: 'GongGothicMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
-	}
-	
-	.item2 {
-	position:relative;
-	margin: 0 auto;
-	}
-	
+body {
+	font-family: 'GongGothicMedium';
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
 
-	
-	
-
+.item3 {
+	display: inline-block;
+	text-align: center;
+}
 </style>
 </head>
 <body>
-	<div class="container">
-			<h1>가게 제목으로 빨래방 찾기</h1>
-				<div class="item item2">
-					<!-- 가게 제목으로 찾기 -->
-					<button id="storeName" onclick="showhidebtn1()">●가게제목</button>
-		
-					<!-- 내집 주소로 주변 찾기 -->
-					<button id="myAddress" onclick="showhidebtn2()">●우리집 주소로 찾기</button>
+	<div>
+		<a href="${appRoot }/member/main"> <img
+			src="${appRoot }/resources/image/others/brand_logo_300px.png"
+			alt="...">
+		</a>
+		<h1>가게 제목으로 빨래방 찾기</h1>
+		<div class="item item2">
+			<!-- 가게 제목으로 찾기 -->
+			<button id="storeName" onclick="showhidebtn1()">●가게제목</button>
+
+			<!-- 내집 주소로 주변 찾기 -->
+			<button id="myAddress" onclick="showhidebtn2()">●우리집 주소로 찾기</button>
+		</div>
+
+		<!-- 가게 제목으로 검색할때 -->
+		<div id="searchName">
+			<div class="item item3">
+				<div>
+					<input id="name-store" type="text" placeholder="가게 이름">
+					<button id="searchName-btn" type="submit">찾기</button>
 				</div>
-			
-				<!-- 가게 제목으로 검색할때 -->
-				<div id="searchName" >
-					<div class="item item3">
-						<div>
-							<input id="name-store" type="text" placeholder="가게 이름">
-							<button id="searchName-btn" type="submit">찾기</button>
-						</div>
-						<div>
-							<div id="map1" style="width: 900px; height: 400px;"></div>
-							<!-- 가게정보 -->
-							<div id="storeinfo1" style="display: none"></div>
-						</div>
-					</div>
-				</div>
-			
-				<!-- 우리집 주소로 검색할때 -->
-				<div id="searchAddress" style="display: none;">
-					<div class="item item4">
-						<div>
-							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> 
-							<input type="text" id="postcode" placeholder="우편번호"> 
-							<input type="text" id="address" placeholder="주소"><br> 
-							<input type="text" id="detailAddress" placeholder="상세주소"> 
-							<input type="text" id="extraAddress" placeholder="참고항목">
-						</div>
-						<div>
-							<div id="map2" style="width: 900px; height: 400px;"></div>
-							<!-- 가게정보 -->
-							<div id="storeinfo2" style="display: none"></div>
-						</div>
-					</div>
+				<div>
+					<div id="map1" style="width: 1000px; height: 600px;"></div>
+					<!-- 가게정보 -->
+					<div id="storeinfo1" style="display: none"></div>
 				</div>
 			</div>
+		</div>
 
-
-<h1>${pinfo.member.userid }</h1>
+		<!-- 우리집 주소로 검색할때 -->
+		<div id="searchAddress" style="display: none;">
+			<div class="item item4">
+				<div>
+					<input type="button" onclick="sample6_execDaumPostcode()"
+						value="우편번호 찾기"><br> <input type="text" id="postcode"
+						placeholder="우편번호"> <input type="text" id="address"
+						placeholder="주소"><br> <input type="text"
+						id="detailAddress" placeholder="상세주소"> <input type="text"
+						id="extraAddress" placeholder="참고항목">
+				</div>
+				<div style="display: inline-block;">
+					<div id="map2" style="width: 1000px; height: 600px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 
@@ -365,7 +317,7 @@
 	/* 1번 지도 */
 	var mapOptions1 = {
 		center : new naver.maps.LatLng(37.3595704, 127.105399),
-		zoom : 10
+		zoom : 13
 	};
 
 	var map1 = new naver.maps.Map('map1', mapOptions1);
@@ -373,7 +325,7 @@
 	/* 2번 지도 */
 	var mapOptions2 = {
 			center : new naver.maps.LatLng(37.3595704, 127.105399),
-			zoom : 15
+			zoom : 13
 		};
 	var map2 = new naver.maps.Map('map2', mapOptions2);
 </script>
