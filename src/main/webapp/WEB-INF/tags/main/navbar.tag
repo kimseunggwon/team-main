@@ -19,12 +19,6 @@
 			<ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll"
 				style="max-height: 1000px;">
 				
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li class="nav-item active"><a class="nav-link"
-					href="${appRoot }/help/askListAdmin">1:1 문의 글 확인 <span class="sr-only">(current)</span></a>
-				</li>
-				</sec:authorize>
-				
 				<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER', 'ROLE_BLACK')">
 				<li class="nav-item active"><a class="nav-link"
 					href="${appRoot }/help/helpdesk">고객센터 <span class="sr-only">(current)</span></a>

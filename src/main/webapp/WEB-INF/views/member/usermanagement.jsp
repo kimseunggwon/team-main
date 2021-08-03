@@ -115,7 +115,7 @@ $(function(){
 		
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
-		 		<tr style="text-align: center;">
+		 		<tr style="text-align: left;">
 		 			<th>#</th>
 		 			<th>아이디</th>
 		 			<th>이름</th>

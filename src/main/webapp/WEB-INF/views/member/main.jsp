@@ -97,43 +97,35 @@ $(function(){
 <body>
 	<main:navbar></main:navbar>
 <div class = "container">
-	
-	
-	
-	
-	 <div class="row mt-5">
-				
-				 <div class="col align-self-start">
-				 
-				 </div>
-			
-				<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
-				<div class="col align-self-center mt-3">
-					<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
-					</a>
-				</div>
-			
-				<!-- 간단한 검색을 할 수 있는 검색창 구현 -->
-				<div class="col align-self-end">
-			
-					<form class="d-flex">
-     	 				<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-      					<button class="btn btn-outline-success" type="submit">Search</button>
-    				</form>
-				</div>
+
+
+
+
+		<div class="row justify-content-center  mt-5">
+
+
+			<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
+			<div class="row justify-content-center">
+				<a href="${appRoot }/member/main"> <img
+					src="${appRoot }/resources/image/others/brand_logo_300px.png"
+					alt="...">
+				</a>
 			</div>
-	  
-	
-	
-	<hr>
+
+		</div>
+
+
+
+		<hr>
 	
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<div class="row justify-content-center">
 			<form action="${appRoot }/member/usermanagement">
 				<button class="button1">고객관리</button>
 			</form>
-			<button class="button1"></button>
+			<form action="${appRoot }/help/askListAdmin"">
+				<button class="button1">1:1 문의 글 확인</button>
+			</form>
 			<button class="button1"></button>
 		</div>
 	</sec:authorize>
