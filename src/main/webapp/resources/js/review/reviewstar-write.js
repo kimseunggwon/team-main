@@ -5,6 +5,15 @@ $(document).ready(function () {
     // cnt는 채워진 별 개수
     // let cnt = $('[data-fa-i2svg].fas').length;
 
+
+    $(function () {
+        let $userid = $("#stars-admin").val();
+        console.log($userid);
+        if ($userid == "admin") {
+            $("#stars-submit").val(5);
+        }
+    });
+
         $(".review-star-child").click(function() {
             console.log("!!!!!!!")
             $(".review-star-child").find("[data-fa-i2svg]").removeClass("fas").addClass("far");

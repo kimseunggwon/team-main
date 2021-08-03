@@ -41,7 +41,7 @@
 		 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${review.reUpdatedate }"/></td>
 		 				<td>${review.likeCount }</td>
 		 				<td><c:out value="${review.viewCount }"></c:out></td>
-		 				<td><c:out value="${review.reStars }"></c:out></td>
+		 				<td><c:out value="공지"></c:out></td>
 		 			</tr>
 		 		</c:forEach>
 		 		
