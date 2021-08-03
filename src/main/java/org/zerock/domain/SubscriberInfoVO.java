@@ -13,6 +13,7 @@ public class SubscriberInfoVO {
 	private Integer storeid;
 	private String subsOptions;
 	private String subsAmount;
+	private String serviceStartDate;
 	
 	
 }
