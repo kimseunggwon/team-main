@@ -21,6 +21,9 @@
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="nav-item active"><a class="nav-link"
+					href="${appRoot }/member/usermanagement">고객관리 <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active"><a class="nav-link"
 					href="${appRoot }/help/askListAdmin">1:1 문의 글 확인 <span class="sr-only">(current)</span></a>
 				</li>
 				</sec:authorize>

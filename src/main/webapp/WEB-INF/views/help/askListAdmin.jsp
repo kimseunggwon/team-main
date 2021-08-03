@@ -28,7 +28,7 @@
 </head>
 <body>
 
-	<hel:navbar></hel:navbar>
+	<hel:adminnav></hel:adminnav>
 
 <div class = "container">
 	
@@ -58,7 +58,7 @@
 	
 	<div>
 	
-		<h1 class="text-center mt-5">나의 1:1 문의 작성 목록</h1>
+		<h1 class="text-center mt-5">1:1 문의글 리스트 </h1>
 	</div>
 	
 	<table class="table table-striped">

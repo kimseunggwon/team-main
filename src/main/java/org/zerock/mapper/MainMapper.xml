@@ -11,5 +11,12 @@
 		WHERE subsId = #{userid};
 	</select>
 	
+	<select id="getAuthByuserid" resultType="String">
+	SELECT au.auth
+	FROM user AS u JOIN user_auth AS au ON u.userid = au.userid
+	WHERE u.userid = #{userid}
+	
+	</select>
+	
 	
 </mapper>

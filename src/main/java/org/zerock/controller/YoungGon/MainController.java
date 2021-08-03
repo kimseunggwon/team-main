@@ -1,6 +1,8 @@
 package org.zerock.controller.YoungGon;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +21,7 @@ public class MainController {
 	
 	@RequestMapping("/main")
 	public String main() {
-		log.info("메인 페이지 접속");
+
 		
 		return "member/main";
 	}
@@ -27,14 +29,14 @@ public class MainController {
 	
 	@RequestMapping("mainLogin")
 	public String login() {
-		log.info("로그인 페이지 접속");
+
 		
 		return "member/login";
 	}
 	
 	@RequestMapping("mainLogout")
 	public String logout() {
-		log.info("로그아웃 후 메인화면으로 이동");
+
 		
 		return "member/main";
 	}
@@ -42,21 +44,19 @@ public class MainController {
 	
 	@RequestMapping("mainMypage")
 	public String myPage() {
-		log.info("마이페이지 접속");
+
 		
 		return "member/mypage";
 	}
 	
 	@RequestMapping("mainSignup")
 	public String signUp() {
-		log.info("회원가입 페이지로 이동");
 		
 		return "member/signup";
 	}
 	
 	@RequestMapping("mainHelpdesk")
 	public String helpdesk() {
-		log.info("고객센터 페이지로 이동");
 		
 		return "help/helpdesk";
 	}
@@ -66,11 +66,18 @@ public class MainController {
 	public String getLoginInfo(String userid) {
 		
 		String loginID = service.subscribe(userid);
-		log.info(loginID);
 		return loginID;
 		
 	}
 	
+	@GetMapping("/getMemberAuth")
+	@ResponseBody
+	public String getMemberAuth(String userid) {
+		String auth = service.getAuthByuserid(userid);
+		return auth;
+		
+		
+	}
 
 	
 }
