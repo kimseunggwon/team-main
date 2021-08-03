@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -61,21 +63,19 @@ body {
 	  					<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
 	  			</form>
 	  		</sec:authorize>
-  
-   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="검색" >
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-  </form> 
 </ul>   
 
-  <div class="dropdown">  
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+ 
+
+  <div class="btn-group dropleft">  
+  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    메뉴보기 
-  </button>
+  </button> 
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="${appRoot }/member/myget">회원정보</a>
+    <a class="dropdown-item" href="${appRoot }/member/myget">내 정보확인</a>
     <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
-    <a class="dropdown-item" href="#">진행상황</a>
+   
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
     <a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a>
     <a class="dropdown-item" href="${appRoot }/review/list">사용자후기</a>
@@ -83,9 +83,10 @@ body {
 </div> 
 
  
+ 
   
   <div class="jumbotron"> 
-  <h1 class="display-4">안녕하세요 박진아 구독자님!</h1>
+  <h1 class="display-4">안녕하세요 <sec:authentication property="principal.username"/> 회원님</h1>
   <p class="lead">고객님이 이용중인 서비스는 '1인 가구 이용 서비스 입니다'.<br>
    혹시 아직 서비스를 이용하지 않고 계신가요~? <br>
    서둘러 밑에 구독하기 버튼을 눌러주세요.! 
@@ -118,20 +119,72 @@ body {
   
 </div>
  
-<div class="row no-gutters bg-light position-relative">
-  <div class="col-md-6 mb-md-0 p-md-4"> 
-    
-    
-  </div> 
-  
-  <div class="col-md-6 position-static p-4 pl-md-0">
-    <h5 class="mt-0">회사소개</h5>
-    <p>우리 구독 회사는 
-       이렇고 저렇고 이렇고
-       저렇고 합니다.</p>
-    <a href="#" class="stretched-link">Go somewhere</a>
-  </div>
-</div>
+
+	
+		<div class="row justify-content-center">
+			<form action="${appRoot }/help/ask">
+			 	
+			 </form>
+		</div>
+		
+		<div class="row justify-content-center">
+			
+			<h1>
+				1588 - 0000
+			</h1>
+			
+		</div>
+		
+		<div class="row justify-content-center">
+			고객 센터 운영 시간
+			 평일(월~금) 09:00 ~ 18:30
+			 / 주말(토) 09:00 ~ 13:00
+		</div>
+		
+		<br>
+		
+		<hr>
+		
+		 <div class="row justify-content-around mb-3">
+		 	<div class="row">
+		 
+		 		<div class="mr-10">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+		 		</div>
+		 	
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<div>
+		 			서울시 강남구 삼성동 1234 우 : 123-1234
+		 			<br>
+					TEL:02-123-1234 Email:email@domain.com
+					<br>
+					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
+					<br>
+				</div>
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<span >
+		 			<a href="#">
+		 			 	<img src="${appRoot }/resources/image/blog.jpg">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			</a>
+		 		</span>
+		 	</div>
+		 		
+		 </div>
+		
+	</div>
+
 
 </body>
 </html>

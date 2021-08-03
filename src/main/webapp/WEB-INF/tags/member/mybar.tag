@@ -4,11 +4,12 @@
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 
 
-<%-- Navigation Bar 적용--%>
+
 <div class="container">
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
+		<a class="navbar-brand" href="#">구독하기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarScroll" aria-controls="navbarScroll"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -18,17 +19,10 @@
 			id="navbarScroll">
 			<ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll"
 				style="max-height: 1000px;">
-				
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="nav-item active"><a class="nav-link"
-					href="${appRoot }/help/askListAdmin">1:1 문의 글 확인 <span class="sr-only">(current)</span></a>
+					href="${appRoot }/member/main">Main <span class="sr-only">(current)</span></a>
 				</li>
-				</sec:authorize>
-				
-				<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER', 'ROLE_BLACK')">
-				<li class="nav-item active"><a class="nav-link"
-					href="${appRoot }/help/helpdesk">고객센터 <span class="sr-only">(current)</span></a>
-				</li>
+				<sec:authorize access="hasRole('ROLE_USER')">
 					<li class="nav-item dropdown active"><a
 						class="nav-link dropdown-toggle" href="${appRoot }/member/mypage"
 						id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
@@ -41,6 +35,9 @@
 							<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
 						</ul></li>
 				</sec:authorize>
+				<li class="nav-item active"><a class="nav-link"
+					href="${appRoot }/help/helpdesk">1:1 문의 <span class="sr-only">(current)</span></a>
+				</li>
 				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item active"><a class="nav-link"
 						href="${appRoot }/logout">Logout<span class="sr-only">(current)</span></a>
@@ -49,11 +46,6 @@
 				<sec:authorize access="!isAuthenticated()">
 					<li class="nav-item active"><a class="nav-link"
 						href="${appRoot }/member/login">Login<span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="${appRoot }/member/signup">
-							회원가입
-						</a> 
 					</li>
 				</sec:authorize>
 			</ul>

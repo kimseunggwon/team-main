@@ -74,7 +74,7 @@ img {
 			<div class="row justify-content-left">총 게시물 수 : ${totalCount }</div>
 			<!-- 정렬 방식 -->
 			<div class="btn-group">
-				<button type="button" class="btn btn-secondary dropdown-toggle"
+				<button type="button" class="btn btn-warning dropdown-toggle"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					정렬 방식</button>
 				<div class="dropdown-menu dropdown-menu-right">

@@ -23,8 +23,13 @@
 		</where>
 	</sql>
 
-  <select id="getTotalCount" resultType="int">
+  <select id="getTotalCountAdmin" resultType="int">
   	SELECT COUNT(*) FROM ask_board A
+  	<include refid="pagenation"></include>
+  </select>
+
+	<select id="getTotalCountUser" resultType="int">
+  	SELECT COUNT(*) FROM ask_board WHERE writer = #{writer}
   	<include refid="pagenation"></include>
   </select>
 
@@ -38,11 +43,32 @@
 			writer writer,
 			regdate regdate,
 			updatedate updatedate
-		FROM ask_board
+		FROM ask_board WHERE writer = #{writer}
 		
 	</select>
 	
-  <select id="getListWithPaging" resultType="org.zerock.domain.HelpVO">
+  <select id="getListWithPagingUser" resultType="org.zerock.domain.HelpVO">
+  	
+  	SELECT
+  		A.bno bno,
+  		A.title title,
+  		A.content content,
+  		A.writer writer,
+  		A.regdate regdate,
+  		A.updatedate updatedate,
+  		u.username userNickName,
+  		count(r.rno) replyCnt  		
+  	FROM ask_board A LEFT JOIN ask_reply r ON A.bno = r.bno
+  				   INNER JOIN user u ON A.writer = u.userid
+  	WHERE writer = #{writer}
+  	<include refid="pagenation"></include>
+  	GROUP BY A.bno
+  	ORDER BY A.bno DESC
+  	LIMIT #{from}, #{amount}			   
+  				   
+  </select>
+
+	<select id="getListWithPagingAdmin" resultType="org.zerock.domain.HelpVO">
   	
   	SELECT
   		A.bno bno,

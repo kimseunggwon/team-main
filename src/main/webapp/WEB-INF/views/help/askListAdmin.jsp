@@ -1,7 +1,6 @@
 <%@ page  contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
@@ -13,7 +12,6 @@
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Insert title here</title>
-
 <style type="text/css">
 @font-face {
     font-family: 'GongGothicMedium';
@@ -74,40 +72,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER', 'ROLE_BLACK')">
-					<c:forEach items="${list }" var="help">
-				<c:if test="${pinfo.member.userid eq help.writer}">
-						<tr>
-							<td>${help.bno }</td>
-						<td>
-					
-						<c:url value="/help/askGetContent" var="getUrl">
-							<c:param name="bno" value="${help.bno }" />
-							<c:param name="pageNum" value="${pageMaker.pag.pageNum }" />
-							<c:param name="amount" value="${pageMaker.pag.amount }" />
-							<c:param name="type" value="${pageMaker.pag.type }" />
-							<c:param name="keyword" value="${pageMaker.pag.keyword }"/>
-						</c:url>
-					
-						<a href="${getUrl}"> 
-							${help.title }
-						<c:if test="${help.replyCnt  > 0}">
-							[${help.replyCnt }]
-						</c:if>
-						</a> 
-						</td>					
-		 				<td>${help.userNickName }</td>
-						<td>
-							<fmt:formatDate pattern="yyyy-MM-dd" value="${help.regdate }"/>
-						</td>
-						<td>
-							<fmt:formatDate pattern="yyyy-MM-dd" value="${help.updateDate }"/>
-						</td>
-						</tr>
-			   	</c:if>
-					</c:forEach>
-		</sec:authorize>
-			   	
 			   	
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			 <c:forEach items="${list }" var="help">
@@ -158,7 +122,7 @@
                    </li>
                 </c:if>
                 <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
-                   <c:url value="/help/askList" var="pageLink">
+                   <c:url value="/help/askListAdmin" var="pageLink">
                       <c:param name="pageNum" value="${num }"></c:param>
                       <c:param name="amount" value="${pag.amount }"></c:param>
                       <c:param name="type" value="${pag.type }"></c:param>

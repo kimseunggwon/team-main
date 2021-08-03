@@ -79,10 +79,8 @@ img {
 
 		<rev:navbar></rev:navbar>
 
-		<%-- 선택자 우선순위 구글링 --%>
-		
-		<%-- 여기는 [글쓰기] JSP 파일입니다 :) 
-		5. 서버 실행을 위해 잠시 작성자 reWriterName - NULL값 가능하게.? 만들기 + mapper.xml도 잠시 변경함
+		<%-- 
+			여기는 [글쓰기] JSP 파일입니다 :) 
 		--%>
 		
 	<div class="container">
@@ -93,17 +91,6 @@ img {
 	</div>
 	
 		<rev:search></rev:search>
-
-<script>
-/* $(function () {
-	$(".review-star-child").click(function() {
-		console.log("!!!!!!!")
-		$(".review-star-child").find("[data-fa-i2svg]").removeClass("fas").addClass("far");
-		$(this).prevAll().find("[data-fa-i2svg]").removeClass("far").addClass("fas");
-		$(this).find("[data-fa-i2svg]").removeClass("far").addClass("fas");
-	});
-}); */
-</script>
 
 	<!-- Review Grading (stars) Start -->
 	<div id="review-star-parent" style="display: inline;" class="container">
@@ -140,12 +127,12 @@ img {
 	<div id="re-write-content" class="container">
 		 <div class="row justify-content-center">
 		 		<div class="col-8">
-			 		<form action="${appRoot }/review/write" method="post" enctype="multipart/form-data"> 
+			 		<form id="review-write-form1" action="${appRoot }/review/write" method="post" enctype="multipart/form-data"> 
 			 			<!-- 제목 -->
 			 			<div class="item form-group">
 				 			<label for="re-input1">리뷰 제목</label>
 				 			<input id="re-input1" class="form-control" 
-				 			name="reTitle" type="text" minlength="5" placeholder="제목을 입력해주세요." required> 
+				 			name="reTitle" type="text" minlength="3" placeholder="제목을 입력해주세요." required> 
 			 			</div>
 			 			<!-- 내용 -->
 			 			<div class="item form-group">
@@ -178,9 +165,23 @@ img {
 			 				<label for="re-input5">나의 구독 세탁소 주소</label>
 			 				<input id="re-input5" class="form-control" value="${review.storeAddress }" readonly>
 			 			</div>
-						<input class="btn btn-primary" type="submit" value="리뷰 등록하기">
-			 			
-			 			<!-- 평점 -->
+						<input class="btn btn-primary" id="write-submit" type="submit" value="리뷰 등록하기">
+
+					<script>
+						$(function() {
+							$("#write-submit").click(function(e) {
+								console.log("write working");
+								if ($("#stars-submit").val() == 0) {
+									e.preventDefault();
+									alert("리뷰 평점 평가는 필수 항목입니다.");
+								} else {
+									$("#review-write-form1").submit();
+								}
+							})
+						})
+					</script>
+
+					<!-- 평점 -->
 			 			<input hidden id="stars-submit" value="" name="reStars">
 			 			
 			 	</form>
