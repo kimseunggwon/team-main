@@ -122,9 +122,12 @@ img {
 			<div class="row justify-content-center">
 				<div class="col-8">
 						<!-- 평점 -->
-						<input hidden id="review-star-result" name="reviewStars" value="${reviewStars }" >
-						<span>평점은 : ${reviewStars }</span>
-
+						<sec:authorize access="hasRole('ROLE_USER')">
+							<input hidden id="review-star-result" name="reviewStars" value="${reviewStars }" >
+							<span>평점은 : ${reviewStars }</span>
+						</sec:authorize>
+						
+						
 						<!-- 이미지 파일 -->
 						<c:if test="${not empty review.fileName }">
 							<c:forEach items="${review.fileName }" var="rfile">

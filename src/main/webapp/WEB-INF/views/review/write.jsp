@@ -91,8 +91,9 @@ img {
 	</div>
 	
 		<rev:search></rev:search>
-
+		
 	<!-- Review Grading (stars) Start -->
+	<sec:authorize access="hasRole('ROLE_USER')">
 	<div id="review-star-parent" style="display: inline;" class="container">
 		<div class="review-star-parent row justify-content-center d-flex align-items-center">
 			<button data-operation="like" type="button" class="item review-star-child">
@@ -121,8 +122,12 @@ img {
 			</div>
 		</div>
 	</div> 
+	</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<input hidden id="review-star-result" name="reviewStars" value="5">
+	</sec:authorize>
 	<!-- Review Grading (stars) End -->
-
+	
 	<!-- Main Writing Content -->
 	<div id="re-write-content" class="container">
 		 <div class="row justify-content-center">
@@ -183,7 +188,7 @@ img {
 
 					<!-- 평점 -->
 			 			<input hidden id="stars-submit" value="" name="reStars">
-			 			
+			 			<input hidden id="stars-admin" value="${pinfo.member.userid }" >
 			 	</form>
 		 	</div>
 		 </div>
