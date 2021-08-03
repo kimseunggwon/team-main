@@ -1,5 +1,7 @@
 package org.zerock.domain;
 
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 
@@ -13,6 +15,7 @@ public class SubscriberInfoVO {
 	private Integer storeid;
 	private String subsOptions;
 	private String subsAmount;
+	private Timestamp subsStartDate;
 	
 	
 }
