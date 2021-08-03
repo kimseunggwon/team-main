@@ -170,8 +170,11 @@ public class SubscribeController {
 		model.addAttribute("today_info", today_info);
 		
 		// 구독 날짜 데이터 배열 (ex- 3일에 결제, 9일(월), 11일(수), 13일(금), 16일(월), 18일(수), 20일(금))
-		
+		// 오늘 기준으로 다음주 / 다다음주 월수금 날짜 계산하기 / list에 넣기
+		// model에 넣어주고 / for문 돌릴 때 
 		
 		return "/subscribe/finalinfo";
 	}
+	
+	
 }
