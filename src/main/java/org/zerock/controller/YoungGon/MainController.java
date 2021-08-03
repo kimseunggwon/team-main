@@ -1,7 +1,10 @@
 package org.zerock.controller.YoungGon;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerock.service.MainService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -11,6 +14,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Log4j
 public class MainController {
+	
+	private MainService service;
 	
 	@RequestMapping("/main")
 	public String main() {
@@ -55,4 +60,17 @@ public class MainController {
 		
 		return "help/helpdesk";
 	}
+	
+	@PostMapping("/getLoginInfo")
+	@ResponseBody
+	public String getLoginInfo(String userid) {
+		
+		String loginID = service.subscribe(userid);
+		log.info(loginID);
+		return loginID;
+		
+	}
+	
+
+	
 }

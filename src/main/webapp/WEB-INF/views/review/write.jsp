@@ -72,7 +72,7 @@ img {
 </script>
 
 <script src="${appRoot }/resources/js/review/uploadajax.js"></script>
-<script src="${appRoot }/resources/js/review/reviewstar.js"></script>
+<script src="${appRoot }/resources/js/review/reviewstar-write.js"></script>
 
 </head>
 <body style="overflow-x:hidden;">
@@ -82,10 +82,6 @@ img {
 		<%-- 선택자 우선순위 구글링 --%>
 		
 		<%-- 여기는 [글쓰기] JSP 파일입니다 :) 
-		1. 검색 기능이 완전하지 않아요.
-		2. 도대체 왜 item 수평 정렬이 안되는지 화가 나요. (해결 완)
-		3. 리뷰 작성자는 user table이 정리된 이후에 다시 할 수 있어요. 
-		4. authentication 설정 이후 test가 필요해요.. (MyPage랑 연결시켜야 해요)
 		5. 서버 실행을 위해 잠시 작성자 reWriterName - NULL값 가능하게.? 만들기 + mapper.xml도 잠시 변경함
 		--%>
 		
@@ -98,16 +94,16 @@ img {
 	
 		<rev:search></rev:search>
 
-<!-- <script>
-$(function () {
+<script>
+/* $(function () {
 	$(".review-star-child").click(function() {
 		console.log("!!!!!!!")
 		$(".review-star-child").find("[data-fa-i2svg]").removeClass("fas").addClass("far");
 		$(this).prevAll().find("[data-fa-i2svg]").removeClass("far").addClass("fas");
 		$(this).find("[data-fa-i2svg]").removeClass("far").addClass("fas");
 	});
-});
-</script> -->
+}); */
+</script>
 
 	<!-- Review Grading (stars) Start -->
 	<div id="review-star-parent" style="display: inline;" class="container">
@@ -134,11 +130,7 @@ $(function () {
 				<%-- 여기에 별 개수를 계산한 값을 넣어주기 --%>
 				<label for="jinah-restars">평점</label><span id="reStars"
 					name="reStars">${review.reStars }</span> 
-					
-				<%-- controller에서 attribute로 넣어준 value (service, dao가 일한 결과 = ) --%>
-				<span>${reviewStars }</span>
 				
-			
 			</div>
 		</div>
 	</div> 
@@ -179,10 +171,17 @@ $(function () {
 			 			
 			 			<!-- 이용한 세탁소 위치 정보 -->
 			 			<div class="item form-group">
-			 				<label for="re-input4">나의 구독 세탁소 정보</label>
+			 				<label for="re-input4">나의 구독 세탁소 이름</label>
 			 				<input id="re-input4" class="form-control" value="${review.storeName }" readonly>
 			 			</div>
+			 			<div class="item form-group">
+			 				<label for="re-input5">나의 구독 세탁소 주소</label>
+			 				<input id="re-input5" class="form-control" value="${review.storeAddress }" readonly>
+			 			</div>
 						<input class="btn btn-primary" type="submit" value="리뷰 등록하기">
+			 			
+			 			<!-- 평점 -->
+			 			<input hidden id="stars-submit" value="" name="reStars">
 			 			
 			 	</form>
 		 	</div>

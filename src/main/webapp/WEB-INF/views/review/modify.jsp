@@ -26,24 +26,24 @@
 	font-family: 'GongGothicMedium';
 }
 
-#re-starItem {
+.review-star-child {
 	padding: 5px;
 	background-color: white;
 	border: none;
 	outline: none;
 }
 
+#jinah-star1, #jinah-star2, #jinah-star3, #jinah-star4, #jinah-star5 {
+	width: 50px;
+	height: 50px;
+	color: #ffe62e;
+}
 #review-modify-btn1, #review-remove-btn1 {
 	margin: 5px;
 	padding: 5px;
 	background-color: white;
 	border: none;
 	outline: none;
-}
-#jinah-star {
-	width: 50px;
-	height: 50px;
-	color: #ffe62e;
 }
 
 #re-write-content {
@@ -77,9 +77,13 @@ img {
 <script>
 	const appRoot = "${appRoot}";
 	const userid = "${pinfo.member.userid}";
+	const reBno = "${review.reBno}";
+
 </script>
 <script src="${appRoot }/resources/js/review/modifyandremove.js"></script>
 <script src="${appRoot }/resources/js/review/uploadajax.js"></script>
+<script src="${appRoot }/resources/js/review/reviewstar-modify.js"></script>
+
 
 
 <body>
@@ -95,32 +99,34 @@ img {
 	</div> 
 	
 	<rev:search></rev:search>
-	
 	<!-- Review Grading (stars) Start -->
-		<div id="re-stare" style="display: inline;" class="container">
-			<div class="row justify-content-center d-flex align-items-center">
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<button type="button" class="item" id="re-starItem">
-					<i id="jinah-star" class="fas fa-star"></i>
-				</button>
-				<div>
-					<label for="jinah-restars">평점</label> <input type="hidden"
-						name="reStars" value="${re.reStars }" />
-				</div>
+	<div id="review-star-parent" style="display: inline;" class="container">
+		<div class="review-star-parent row justify-content-center d-flex align-items-center">
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star1"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star2"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star3"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star4"></i>
+			</button>
+			<button data-operation="like" type="button" class="item review-star-child">
+				<i class="review-star-icon far fa-star" id="jinah-star5"></i>
+			</button>
+			<div>
+			
+			<input id="review-star-modify-btn" class="btn btn-warning" type="submit" value="평점 수정하기">
+			
+			<%-- 여기에 별 개수를 계산한 값을 넣어주기 --%>
+				<label for="new-restars">평점</label><span name="newReStars" id="new-restars"></span> 
 			</div>
 		</div>
-		<!-- Review Grading (stars) End -->
+	</div> 
+	<!-- Review Grading (stars) End -->
 
 	<div class="container">
 		 <div class="row justify-content-center">
@@ -161,12 +167,16 @@ img {
 			 			<input type="hidden" name="reWriterName" value="${pinfo.member.userid }" readonly>
 			 			
 			 			<input type="hidden" name="reBno" value="${review.reBno }" readonly>
+
+						<!-- 평점 -->			 			
+			 			<input hidden id="stars-submit" value="" name="newReStars">
 			 			
 			 			<!-- 페이지네이션 참조 -->
 			 			<input hidden name="pageNum" value="${recri.pageNum }" />
 						<input hidden name="amount" value="${recri.amount }"	/>
 						<input hidden name="type" value="${recri.type }"	/>
 						<input hidden name="keyword" value="${recri.keyword }"	/>
+						<input hidden name="sort" value="${recri.sort }"	/>
 						
 				 		
 				 		<!-- 추천해요 취소 (추천 YES >> 추천 취소 / 추천 NO >> 추천하기 -->

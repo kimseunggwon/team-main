@@ -18,7 +18,11 @@ public class UserReviewVO {
 	private int viewCount;
 	private int likeCount;
 	private int reStars;
-	
+	private int newReStars;
+	private String storeName;
+	private String storeAddress;
+	private Long storelat;
+	private Long storelag;
 	// file
 	// private String fileName;
 	private List<String> fileName;

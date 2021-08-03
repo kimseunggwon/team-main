@@ -1,8 +1,8 @@
 <%@ page  contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-
+<%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
 <!DOCTYPE html>
 <html>
@@ -36,9 +36,12 @@ var userid = "${pinfo.member.userid}";
 
 </head>
 <body>
+
+<hel:navbar></hel:navbar>
+
 <div class = "container">
 
-			<div class="row">
+			<div class="row mt-5">
 				
 				 <div class="col align-self-start">
 				 
@@ -61,32 +64,17 @@ var userid = "${pinfo.member.userid}";
 				</div>
 			</div>
 
-			<div class="row justify-content-end mt-3">
-				
-				<form action="${appRoot }/member/main" class="mr-2 mb-2">
-						<input class="btn btn-warning" type="submit" value="메인">
-					</form>
-				
-    			<form action="${appRoot }/logout" class="mr-2">
-			 		<input class="btn btn-warning" type="submit" value="로그아웃">
-			 	</form>
-    			<form action="${appRoot }/member/mypage">
-				 	<input class="btn btn-warning" type="submit" value="Mypage">
-				 </form>
-	  		</div>
 			
 		
 		
 		<div>
-			
-		<hr>
 
 			<div id="alert1" class="alert alert-primary fade" role="alert">
 			</div>
 	
 		
 	
-	<h1 class="text-center mt-5">1:1 문의 글 확인</h1>
+	<h1 class="text-center mt-1">1:1 문의 글 확인</h1>
 	
 	<div class="row">
 		<div class="col-12">
@@ -124,10 +112,10 @@ var userid = "${pinfo.member.userid}";
 					<c:param name="keyword" value="${pag.keyword }" />
 				</c:url>
 				
-				 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER')">
-					<c:if test="${pinfo.member.userid eq help.writer }">
+				 <sec:authorize access="principal.username == #help.writer">
+					
 						<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
-					</c:if>	
+						
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -142,9 +130,9 @@ var userid = "${pinfo.member.userid}";
 <div class="container">
 	<div class="row">
 		<div class="col-12">
-			<h3>댓글 </h3>
+			<h3>답변 </h3>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">답변 작성</button>
 			</sec:authorize>
 			<ul class="list-unstyled" id="reply-list-container">
 			</ul>
@@ -154,46 +142,8 @@ var userid = "${pinfo.member.userid}";
 
 <br>
 		
-		<hr>
 		
-		 <div class="row justify-content-around mb-3">
-		 	<div class="row">
-		 
-		 		<div class="mr-10">
-		 			<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
-					</a>
-		 		</div>
-		 	
-		 	</div>
-		 	
-		 	<div class="row">
-		 		<div>
-		 			서울시 강남구 삼성동 1234 우 : 123-1234
-		 			<br>
-					TEL:02-123-1234 Email:email@domain.com
-					<br>
-					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
-					<br>
-				</div>
-		 	</div>
-		 	
-		 	<div class="row">
-		 		<span >
-		 			<a href="#">
-		 			 	<img src="${appRoot }/resources/image/blog.jpg">
-		 			</a>
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/facebook.gif">
-		 			</a>
-		 			
-		 			<a href="#">
-		 				<img  src="${appRoot }/resources/image/twitter.gif">
-		 			</a>
-		 		</span>
-		 	</div>
-		 		
-		 </div>
+	<bot:botnav></bot:botnav>
 		
 	</div>
 
@@ -269,6 +219,6 @@ var userid = "${pinfo.member.userid}";
   </div>
 	
 </div>
-</div>
+
 </body>
 </html>

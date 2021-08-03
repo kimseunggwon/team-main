@@ -48,6 +48,7 @@ public class UserReviewController {
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
 	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, 
+							UserReviewVO review,
 							Model model) {
 		log.info("userReviewList is working");
 		
@@ -73,6 +74,7 @@ public class UserReviewController {
 		model.addAttribute("reList", reList);
 		model.addAttribute("reviewPageMaker", new ReviewPageDTO(recri, reviewTotal));
 		model.addAttribute("totalCount", reviewTotal);
+		
 	}
 	
 	// ************ 나의 리뷰 목록 얻어오기 - getMyReviewList + view
@@ -80,8 +82,6 @@ public class UserReviewController {
 	// 리뷰 작성하기 (이미지 파일 포함) - userReviewWrite
 	@PostMapping("/write")
 	@PreAuthorize("isAuthenticated()")
-//	@Transactional
-	@ResponseBody
 	public String reviewWrite(UserReviewVO review,
 								@RequestParam("file") MultipartFile[] file,
 								ReviewCriteria recri,
@@ -95,8 +95,7 @@ public class UserReviewController {
 		// 빨래방 위치 정보 얻어오고
 		//service.getSubscribeStore()
 		
-		// 평점 설정하고
-		service.makeReviewStar(review.getReBno());
+		log.info(review);
 		
 		// 평점 얻어오기
 		int stars = service.getReviewStar(review.getReBno());
@@ -106,15 +105,14 @@ public class UserReviewController {
 		rttr.addFlashAttribute("messageTitle", "리뷰 등록 완료-!");
 		rttr.addFlashAttribute("messageBody", review.getReBno() + "번 리뷰가 등록되었습니다.");
 		
-		 return "redirect:/review/list?" + recri.getSort();
+		 return "redirect:/review/list";
 	}
 	
 	// 리뷰 작성하기 - 이미지 파일 없이
 	@GetMapping("/write")
 	@PreAuthorize("isAuthenticated()")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
-		// 여기에도 평점 설정 내용 써야 함 *******************
-		
+	
 		// + 위치 정보
 		
 		// Forwarding to /WEB-INF/views/review/write.jsp
@@ -124,6 +122,7 @@ public class UserReviewController {
 	@GetMapping("/get")
 	public void reviewGet(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
+						  UserReviewVO review,
 						  @ModelAttribute("likers") UserReviewLikersVO likers,
 						  Model model) {
 		
@@ -131,6 +130,10 @@ public class UserReviewController {
 		
 		UserReviewVO revo = service.reviewGet(reBno);
 		
+		// 평점 얻어오기
+		int stars = service.getReviewStar(review.getReBno());
+		
+		model.addAttribute("reviewStars", stars);
 		model.addAttribute("review", revo);
 		model.addAttribute("likers", likers);
 		
@@ -143,10 +146,12 @@ public class UserReviewController {
 	@PreAuthorize("isAuthenticated()")
 	public void reviewModify(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
+						  UserReviewVO review,
 						  UserReviewLikersVO likers,
 						  Model model) {
 		
-		reviewGet(reBno, recri, likers, model);
+		reviewGet(reBno, recri, review, likers, model);
+		
 		
 
 	}
@@ -163,7 +168,13 @@ public class UserReviewController {
 		
 		boolean success = service.reviewModify(review, file);
 		
+		// 평점 얻어오기
+		
 		if (success) {
+			
+			int stars = service.getReviewStar(review.getReBno());
+			rttr.addFlashAttribute("reviewStars", stars);
+			
 			rttr.addFlashAttribute("result", success);
 			rttr.addFlashAttribute("messageTitle", "수정 완료-!");
 			rttr.addFlashAttribute("messageBody", "리뷰가 정상적으로 수정되었습니다.");
@@ -173,6 +184,7 @@ public class UserReviewController {
 		rttr.addAttribute("amount", recri.getAmount());
 		rttr.addAttribute("type", recri.getType());
 		rttr.addAttribute("keyword", recri.getKeyword());
+		rttr.addAttribute("sort", recri.getSort());
 		
 		return "redirect:/review/list";
 	}
@@ -201,6 +213,8 @@ public class UserReviewController {
 		rttr.addAttribute("amount", recri.getAmount());
 		rttr.addAttribute("type", recri.getType());
 		rttr.addAttribute("keyword", recri.getKeyword());
+		rttr.addAttribute("sort", recri.getSort());
+
 		
 		return "redirect:/review/list";
 	}

@@ -35,12 +35,14 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
 	
 	<include refid="ReviewCriteria"></include>
 	GROUP BY r.re_bno
+	HAVING r.re_writer != 'admin'
 	ORDER BY r.likecount DESC
 	LIMIT #{from}, #{amount}
 </select>
@@ -56,12 +58,14 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
 	
 	<include refid="ReviewCriteria"></include>
 	GROUP BY r.re_bno
+	HAVING r.re_writer != 'admin'
 	ORDER BY r.re_regdate DESC
 	LIMIT #{from}, #{amount}
 </select>
@@ -77,12 +81,14 @@
 		r.re_updatedate reUpdatedate,
 		r.likecount likeCount,
 		r.viewcount viewCount,
+		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
 	ON r.re_writer = u.userid
 	
 	<include refid="ReviewCriteria"></include>
 	GROUP BY r.re_bno
+	HAVING r.re_writer != 'admin'
 	ORDER BY r.viewcount DESC
 	LIMIT #{from}, #{amount}
 </select>
