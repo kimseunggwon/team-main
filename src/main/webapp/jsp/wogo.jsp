@@ -30,15 +30,6 @@
 		5. 구독 완료	
 		 --%>
 <style>
-@font-face {
-    font-family: 'GongGothicMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-body {
-	font-family: 'GongGothicMedium';
-}
 .otherStoreList {
 	display: block;
 	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
@@ -123,6 +114,19 @@ body {
 	box-shadow: 0px 0px 6px 10px #B4DDF5;
 }
 
+.button {
+	width: 25%;
+	display: inline-block;
+	border: 1px solid #bbb;
+	height: 90px;
+	color: black;
+	background: #B4DDF5;
+	margin: 2.5%;
+	box-shadow: 0px 0px 6px 10px rgb(32 33 36/ 28%);
+	border-color: rgba(223, 225, 229, 0);
+	text-align: center;
+}
+
 .button:hover {
 	box-shadow: 0px 0px 6px 10px #B4DDF5;
 }
@@ -138,7 +142,7 @@ body {
 	height: 200px;
 	width: 100%;
 	text-align: left;
-	padding: 10px;
+	font-size: 120%
 }
 
 .box_sub3 {
@@ -146,38 +150,8 @@ body {
 	height: 300px;
 	width: 100%;
 }
-
-.storeInfoBtn {
-	font-size: 12px;
-	border: solid 1px #dadada;
-	background-color:white; 
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 40px;
-	}
-.button_sang {
-	background-color: #169EF2;
-	border: none;
-	color: white;
-	padding: 16px 32px;
-	text-align: center;
-	font-size: 18px;
-	margin: 4px 2px;
-	opacity: 1;
-	transition: 0.3s;
-	display: inline-block;
-	text-decoration: none;
-	cursor: pointer;
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 40px;
-	width:200px;
-    font-family: 'GongGothicMedium';
-}
-.button_sang:hover {
-	background: #0583F2;
-}
 </style>
+<!-- 테스트용 -->
 <script type="text/javascript">
 	$(function() {
 		/* 구독종류 클릭 모션 */
@@ -192,7 +166,6 @@ body {
 			$("#finalSubsOptions").val(subsOptions);
 
 		}
-	
 
 		$("#box1-1").click(function() {
 			clickSubsType(this);
@@ -206,15 +179,12 @@ body {
 			clickSubsType(this);
 		})
 		
-		
 	})
 </script>
 
+<!-- 지도 추천 -->
 <script type="text/javascript">
 	$(function() {
-		
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */		
-	<!-- 지도 추천 -->
 		let userAddress = "${pinfo.member.address}";
 
 		naver.maps.Service
@@ -265,7 +235,7 @@ body {
 															center : new naver.maps.LatLng(
 																	data[i].storelag,
 																	data[i].storelat),
-															zoom : 12
+															zoom : 14
 														});
 
 												/* 유저 집 마크 */
@@ -300,61 +270,32 @@ body {
 														laundrymarker);
 												
 											}
-											/* 매장 사진  */ 
-											$("#fileNameId1").attr("src",(data[0].fileName != null ? '${imgIntroRoot}' + `\${data[0].id}` + '/' + `\${data[0].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
-											$("#fileNameId2").attr("src",(data[1].fileName != null ? '${imgIntroRoot}' + `\${data[1].id}` + '/' + `\${data[1].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
-											$("#fileNameId3").attr("src",(data[2].fileName != null ? '${imgIntroRoot}' + `\${data[2].id}` + '/' + `\${data[2].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
 											
-											
-												$("#box_sub2-1").append(` 	<div class="forStoreId" data-id="\${data[0].id}">
-																				<div class="checkAUTH" data-auth="\${data[0].auth}" style="color:#169EF2"></div>
-																				<div style="font-size:22px;color:#9E3D00"> 가게 이름: \${data[0].storename}</div>
-																				<div class="text4_sub" style="color:#787878">가게 주소: \${data[0].storeaddress}</div>
-																				<div style="color:#787878">가게 번호: \${data[0].storePhonenum}</div>
+												$("#box_sub2-1").append(` 	<div>
+																				<div> 가게 이름: \${data[0].storename}</div>
+																				<div class="text4_sub">가게 주소: \${data[0].storeaddress}</div>
+																				<div>가게 번호: \${data[0].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-												$("#box_sub2-2").append(`	<div class="forStoreId" data-id="\${data[1].id}">
-																				<div class="checkAUTH" data-auth="\${data[0].auth}" style="color:#169EF2"></div>
-																				<div style="font-size:22px;color:#9E3D00"> 가게 이름: \${data[1].storename}</div>
-																				<div class="text4_sub" style="color:#787878">가게 주소: \${data[1].storeaddress}</div>
-																				<div style="color:#787878">가게 번호: \${data[1].storePhonenum}</div>
+												$("#box_sub2-2").append(`	<div>
+																				<div> 가게 이름: \${data[1].storename}</div>
+																				<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
+																				<div>가게 번호: \${data[1].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-												$("#box_sub2-3").append(`	<div class="forStoreId" data-id="\${data[2].id}">
-																				<div class="checkAUTH" data-auth="\${data[0].auth}" style="color:#169EF2"></div>
-																				<div style="font-size:22px;color:#9E3D00"> 가게 이름: \${data[2].storename}</div>
-																				<div class="text4_sub" style="color:#787878">가게 주소: \${data[1].storeaddress}</div>
-																				<div style="color:#787878">가게 번호: \${data[2].storePhonenum}</div>
+												$("#box_sub2-3").append(`	<div>
+																				<div> 가게 이름: \${data[2].storename}</div>
+																				<div class="text4_sub">가게 주소: \${data[1].storeaddress}</div>
+																				<div>가게 번호: \${data[2].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
 												
-											/* auth별 본사/개인 표시 */
-											var checkAUTH = $(".checkAUTH").attr('data-auth');
-												if (checkAUTH == "ROLE_B2BUSER"){
-													$('.checkAUTH').text("♥개인");
-
-												} else if (checkAUTH == "ROLE_EMPUSER"){
-													$('.checkAUTH').text("★본사");
-												}
 												
-											/* 가게정보 갖고오기(추천) */
-											$(".storeInfoBtn").click(function() {
-												storeInfoURL(this);
+												$(".storeInfoBtn").click(function() {
+													console.log("되라고");
 												})
-											
-											function storeInfoURL(btn) {
-												var id = $(btn).parent('div').attr('data-id');
-												console.log(id);
-												
-												let url = "${appRoot}/searchstore/b2bIntroduce/" + id
-												let name = "빨래스타그램";
-												let option = "width = 620, height = 900, top = 100, left = 200, location = no, resizable = yes, toolbars=no, menubar=no"
-												
-												window.open(url, name, option);
-											}
-											
 												
 			
 											/* 주소종류 클릭 모션 */
@@ -362,11 +303,9 @@ body {
 												$(".box2").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 												$(elem2).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 												let finalAddress = $(elem2).find(".text4_sub").text().substr(6);
-												let finalStoreId = $(elem2).find('.forStoreId').attr('data-id');
-												/* 주소 값 넣기 */
+
 												$("#finalAddress").val(finalAddress);
-												/* 주소id넣기 */
-												$("#finalStoreId").val(finalStoreId);
+												
 											}
 											
 											$("#box2-1").click(function() {
@@ -380,10 +319,6 @@ body {
 											$("#box2-3").click(function() {
 												clickAddressType(this);
 											})
-											
-											$("#addressList_modal_btn").click(function() {
-												clickAddressType(this);
-											})
 
 											}
 										}
@@ -391,9 +326,16 @@ body {
 									})
 									
 						})
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */						
-		<!-- 모달 열기 -->				
-		$("#addressList_modal_btn").click(function() {
+	})
+	
+
+
+</script>
+
+<!-- 모달 열기 -->
+	<script type="text/javascript">
+$(function() {
+	$("#addressList_modal_btn").click(function() {
 		$.ajax({
 			type : "GET",
 			url : "${appRoot}/subscribe/getStoreList",
@@ -402,52 +344,31 @@ body {
 				
 				for (StoreAddress of list) {
 					let storeListHTML = `<div class="otherStoreList">
-											<div class="ListBox">
-												<div id="\${StoreAddress.id}" style="color:#169EF2"></div>
-												<div style="font-size:22px;color:#9E3D00"> 가게이름 :\${StoreAddress.storename}</div>
-												<div class="modal_store_name" style="color:#787878"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-												<div data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
-											</div>
+										<div class="ListBox">
+											<div id="\${StoreAddress.id}"></div>
+											<div> 가게이름 :\${StoreAddress.storename}</div>
+											<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+										</div>
+											<button class="storeInfoBtn">가게정보</button>
 										</div>`
 					
 						StoreListContainer.append(storeListHTML);
 
-					if (StoreAddress.auth == "ROLE_B2BUSER"){
+ 					if (StoreAddress.auth == "ROLE_B2BUSER"){
 						$("#"+`\${StoreAddress.id}`).text("♥개인");
 
 					} else if (StoreAddress.auth == "ROLE_EMPUSER"){
 						$("#"+`\${StoreAddress.id}`).text("★본사");
-					}
+					} 
 				}
 				
-				
-				/* 가게정보 갖고오기(모달 처음 리스트) */
-				$(".storeInfoBtn").click(function() {
-					storeInfoURL(this);
-					})
-				
-				function storeInfoURL(btn) {
-					var id = $(btn).parent('div').attr('data-id');
-					console.log(id);
-					
-					let url = "${appRoot}/searchstore/b2bIntroduce/" + id
-					let name = "빨래스타그램";
-					let option = "width = 620, height = 950, top = 100, left = 200, location = no"
-					
-					window.open(url, name, option);
-				}
 			
-					
 				/* 선택시 기능 */
 				function clickModalAddress(elem3) {
 					let modal_finalAddress = $(elem3).find(".modal_store_name").text().substr(7);
-					let modal_finalStoreId = $(elem3).attr('data-id');
 					$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 					$(elem3).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
-					/* 주소 넣기 */
 					$("#finalAddress").val(modal_finalAddress);		
-					/* 가게id넣기 */
-					$("#finalStoreId").val(modal_finalStoreId);	
 				}
 				
 				$(".otherStoreList").click(function() {
@@ -468,13 +389,19 @@ body {
 		})
 	})
 	
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ */	
-	<!-- 검색창 -->
+})
+
+</script>
+
+<!-- 검색창 -->
+<script type="text/javascript">
+$(function() {
 	$(".Searchbtn").click(function() {
 		let type = $("#select1 option:selected").val();
 		let keyword = $(".keyword1").val();
 		
-		
+		console.log(type);
+		console.log(keyword);
 	
 	let data = {
 			type : type,
@@ -486,18 +413,18 @@ body {
 			data : data,
 			url : "${appRoot}/subscribe/getStoreListBySearch",
 			success : function(list1) {
-				
+				console.log(list1);
 				
 				let StoreListContainer1 = $("#storeList").empty();
 						
 						for (StoreAddress of list1) {
 							let storeListHTML1 = `<div class="otherStoreList">
-														<div class="ListBox">
-															<div id="\${StoreAddress.id}" style="color:#169EF2"></div>
-															<div style="font-size:22px;color:#9E3D00"> 가게이름 :\${StoreAddress.storename}</div>
-															<div class="modal_store_name" style="color:#787878"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-															<div data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
-														</div>
+													<div class="ListBox">
+														<div id="\${StoreAddress.id}"></div>
+														<div> 가게이름 :\${StoreAddress.storename}</div>
+														<div class="modal_store_name"> 가게주소 : \${StoreAddress.storeaddress}</div>  
+													</div>
+														<button class="storeInfoBtn">가게정보</button>
 													</div>`;
 								
 							StoreListContainer1.append(storeListHTML1);
@@ -510,31 +437,11 @@ body {
 							}
 						}
 						
-						/* 가게정보 갖고오기(모달 검색 리스트) */
-						$(".storeInfoBtn").click(function() {
-							storeInfoURL(this);
-							})
-						
-						function storeInfoURL(btn) {
-							var id = $(btn).parent('div').attr('data-id');
-							
-							
-							let url = "${appRoot}/searchstore/b2bIntroduce/" + id
-							let name = "빨래스타그램";
-							let option = "width = 620, height = 950, top = 100, left = 200, location = no"
-							
-							window.open(url, name, option);
-						}
-						
 						function SeachClickModalAddress(elem4) {
 							let modal_finalAddress = $(elem4).find(".modal_store_name").text().substr(7);
-							let modal_finalStoreId = $(elem4).attr('data-id');
 							$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 							$(elem4).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
-							/* 주소넣기 */
 							$("#finalAddress").val(modal_finalAddress);
-							/* 가게id 넣기 */
-							$("#finalStoreId").val(modal_finalStoreId);
 							
 						}
 						
@@ -554,12 +461,9 @@ body {
 			}
 		})	
 	})
-	
-	})
-	
-
-
+})
 </script>
+
 <body>
 		<div style="text-align: center;margin-top:50px;">
 						<a href="${appRoot }/member/main">
@@ -587,25 +491,29 @@ body {
 			<input id="finalAmount" value="" type="text" readonly="readonly"
 				hidden> <input id="finalSubsOptions" value="" type="text"
 				readonly="readonly" hidden>
-
+		</div>
 		<div class="col">
 			<div class="title" style="text-align: center;">빨래방 선택</div>
+		</div>
+
+
+		<div class="col">
 			<div class="box2" id="box2-1">
-				<div class="box_sub1"><img id="fileNameId1"  style="max-width: 100%; height: auto;" src="" ></div>
+				<div class="box_sub1">사진</div>
 				<div class="box_sub2" id="box_sub2-1"></div>
 				<div class="box_sub3">
 					<div id="map1" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-2">
-				<div class="box_sub1"><img id="fileNameId2" style="max-width: 100%; height: auto;" src="" ></div>
+				<div class="box_sub1">사진</div>
 				<div class="box_sub2" id="box_sub2-2"></div>
 				<div class="box_sub3">
 					<div id="map2" style="width: 100%; height: 300px;"></div>
 				</div>
 			</div>
 			<div class="box2" id="box2-3">
-				<div class="box_sub1"><img id="fileNameId3" style="max-width: 100%; height: auto;" src="" ></div>
+				<div class="box_sub1">사진</div>
 				<div class="box_sub2" id="box_sub2-3"></div>
 				<div class="box_sub3">
 					<div id="map3" style="width: 100%; height: 300px;"></div>
@@ -613,18 +521,16 @@ body {
 			</div>
 
 			<div>
-				<button id="addressList_modal_btn" class="button_sang" type="button"
+				<button id="addressList_modal_btn" class="button" type="button"
 					data-toggle="modal" data-target="#addressList-modal">다른
-					빨래방 <br>찾아보기</button>
+					빨래방 찾아보기</button>
 			</div>
 			<input id="finalAddress" type="text" readonly="readonly" hidden>
-			<input id="finalStoreId" type="text" readonly="readonly" hidden>
 		</div>
 	</div>
 	<div class="col">
 		<div class="title">
-			<input class="button_sang" type="button" id="payPage" value="결제하기">
-<%-- 			<img src="${imgIntroRoot}6/washline.jpg"> --%>
+			<input type="button" id="payPage" value="결제하기">
 		</div>
 	</div>
 
@@ -673,8 +579,7 @@ $(function() {
 		let storeAddress = $("#finalAddress").val();
 		let subsOption = $("#finalSubsOptions").val();
 		let subsAmount = $("#finalAmount").val();
-		let storeid = $("#finalStoreId").val();
-		
+
 		var checkMsg;
 		checkMsg = "이름 : " + subsName;
 		checkMsg += "\n구독자 주소: " + subsAddress;
@@ -729,7 +634,7 @@ $(function() {
 	                  		subsId : subsId,
 	                  		subsName : subsName,
 	                  		subsAddress : subsAddress,
-	                  		storeid : storeid,
+	                  		storeAddress : storeAddress,
 	                  		subsOptions : subsOption,
 	                  		subsAmount : subsAmount
 	                  } 
