@@ -82,15 +82,16 @@ img {
 		<%-- 
 			여기는 [글쓰기] JSP 파일입니다 :) 
 		--%>
-		
+
 	<div class="container">
 		<div class="row justify-content-center">
-			<img alt="jinah-logo"
+			<a href="${appRoot }/member/main"> <img alt="jinah-logo"
 				src="${appRoot }/resources/image/others/brand_logo_400px.png">
+			</a>
 		</div>
 	</div>
-	
-		<rev:search></rev:search>
+
+	<rev:search></rev:search>
 		
 	<!-- Review Grading (stars) Start -->
 	<sec:authorize access="hasRole('ROLE_USER')">

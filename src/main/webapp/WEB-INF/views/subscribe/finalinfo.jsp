@@ -287,7 +287,7 @@ A:hover {
 										</td>
 									</c:otherwise>
 								</c:choose>
-								<c:if test="${date_status.index%7==6}">
+								<c:if test="${date_status.index% 7 == 6}">
 									<%-- 토요일에 tr 끝 --%>
 									</tr><tr>
 								</c:if>

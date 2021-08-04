@@ -14,7 +14,6 @@ public class SubscribeDate {
 	//		1. 변수 추가
 	//		2. getter/setter 추가
 	//		3. 생성자 추가
-	//				하여 사용하면 보다 편리하고 깨끗하게 코드를 만들 수 있다.
 	String schedule = "";
 	String schedule_detail = "";
 

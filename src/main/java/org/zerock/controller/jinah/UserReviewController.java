@@ -110,7 +110,7 @@ public class UserReviewController {
 	
 	// 리뷰 작성하기 - 이미지 파일 없이
 	@GetMapping("/write")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and hasRole('ROLE_ADMIN') and hasRole('ROLE_USER')")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
 	
 		// + 위치 정보

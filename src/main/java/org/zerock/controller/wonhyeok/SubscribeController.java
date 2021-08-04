@@ -128,7 +128,7 @@ public class SubscribeController {
 		Calendar cal = Calendar.getInstance();
 		SubscribeDate calendarData;
 		//검색 날짜
-		if(dateData.getDate().equals("")&&dateData.getMonth().equals("")){
+		if(dateData.getDate().equals("") && dateData.getMonth().equals("")){
 			dateData = new SubscribeDate(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
 		}
 		//검색 날짜 end
@@ -139,13 +139,13 @@ public class SubscribeController {
 		// 실질적인 달력 데이터 리스트에 데이터 삽입 시작.
 		// 일단 시작 인덱스까지 아무것도 없는 데이터 삽입
 		for(int i = 1; i < today_info.get("start"); i++){
-			calendarData= new SubscribeDate(null, null, null, null);
+			calendarData = new SubscribeDate(null, null, null, null);
 			dateList.add(calendarData);
 		}
 		
 		// 날짜 삽입
 		for (int i = today_info.get("startDay"); i <= today_info.get("endDay"); i++) {
-			if(i==today_info.get("today")){
+			if(i == today_info.get("today")){
 				calendarData= new SubscribeDate(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "today");
 			}else{
 				calendarData= new SubscribeDate(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "normal_date");
@@ -172,6 +172,11 @@ public class SubscribeController {
 		// 구독 날짜 데이터 배열 (ex- 3일에 결제, 9일(월), 11일(수), 13일(금), 16일(월), 18일(수), 20일(금))
 		// 오늘 기준으로 다음주 / 다다음주 월수금 날짜 계산하기 / list에 넣기
 		// model에 넣어주고 / for문 돌릴 때 
+		
+		// controller : 구독하는 날짜 12개를 return해 준다
+		// >> 달이 넘어가면, 넘어서도 계산을 해야 한다 (endDay)
+		
+		// view : 해당 구독 날짜에 해당하는 날짜가 있으면 -> 해당날짜의 배경 스타일을 바꾼다
 		
 		return "/subscribe/finalinfo";
 	}
