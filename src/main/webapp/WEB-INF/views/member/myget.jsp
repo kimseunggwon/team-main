@@ -46,15 +46,9 @@
 
 
 <script>
-		$(function() {
-			// 수정
-			$("#member-info-modify-btn1").click(function(e) {
-				$('#myModal').modal("show");
-			});
-  
-			
-		})
-	</script>
+
+
+</script>
 	
   
 
@@ -65,16 +59,16 @@
 						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
 					</a>
 				</div>  
-				<br>
 				<br> 
-				<br>
-<h1><span class="badge badge-info">실버</span><sec:authentication property="principal.username"/>님 안녕하세요!</h1> 
+				<br> 
+				<br> 
+<h1><span class="badge badge-info">실버</span> ${member.userName }님 안녕하세요!</h1> 
         <div class="jumbotron jumbotron-fluid">
-		<section id="container">  
+		<section id="container">   
 			<form id="member-form" action="${appRoot }/member/modify" method="post">
 			    <div class="form-group has-feedback">
 					<label class="control-label" for="userName">나의 이름</label>
-					<input   value="${member.userName }" class="form-control" readonly type="text" id="userName" name="userName"/>
+					<input  value="${member.userName }" class="form-control" readonly type="text" id="userName" name="userName"/>
 				</div>  
 				<br>
 				<div class="form-group has-feedback">  
@@ -126,7 +120,7 @@
         <p>수정하시겠습니까?</p>
       </div> 
       <div class="modal-footer">
-        <a><button href="myinfo"  type="submit" class="btn btn-primary" data-dismiss="modal">수정하기</button></a>
+        <a><button href="myinfo" id="btn-modify1" type="submit" class="btn btn-primary" data-dismiss="modal">수정하기</button></a>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>

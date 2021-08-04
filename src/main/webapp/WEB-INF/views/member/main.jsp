@@ -6,15 +6,21 @@
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 <%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
 
-<!DOCTYPE html>
+
+
+<!DOCTYPE html>  
 <html>
 <head>
+
+<mem:mybar></mem:mybar>
+ 
+
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Insert title here</title>
 
-<style type="text/css">
+<style type="text/css">  
 @font-face {
     font-family: 'GongGothicMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
@@ -50,7 +56,7 @@
 </style>
 
 
-<!--Tawk.to 실시간 채팅 -->
+<!-- Tawk.to 실시간 채팅 -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
