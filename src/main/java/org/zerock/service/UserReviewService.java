@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
+import org.zerock.domain.StoreInfoVO;
 import org.zerock.domain.UserReviewLikersVO;
 import org.zerock.domain.UserReviewVO;
 
@@ -43,6 +44,9 @@ public interface UserReviewService {
 	List<UserReviewVO> getviewCountList(ReviewCriteria recri);
 
 	int getReviewStar(int reBno);
+
+	// 가게 주소 불러오기
+	StoreInfoVO readsubs(MemberVO vo);
 	
 
 }

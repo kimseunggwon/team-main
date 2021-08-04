@@ -1,10 +1,10 @@
 package org.zerock.controller.jinah;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.ReviewPageDTO;
+import org.zerock.domain.StoreInfoVO;
 import org.zerock.domain.UserReviewLikersVO;
 import org.zerock.domain.UserReviewVO;
 import org.zerock.service.UserReviewService;
@@ -233,5 +234,21 @@ public class UserReviewController {
 		return likecnt;
 	}
 	
-	// 리뷰 평점 - userReviewStars
+	// 세탁소 이름 주소 불러오기
+	@GetMapping("/getaddress2")
+	@PreAuthorize("isAuthenticated()")
+	public StoreInfoVO getaddress2(@RequestBody MemberVO vo) {
+		log.info("주소 불러오는중");
+		log.info(vo);
+		
+		StoreInfoVO vo2 = service.readsubs(vo);
+		log.info(vo2);
+		
+		if (vo2 == null) {
+			return null;
+		} else {
+			return vo2;
+		}
+		
+	}
 }
