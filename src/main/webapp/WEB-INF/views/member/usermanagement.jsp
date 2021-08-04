@@ -53,6 +53,7 @@ $(function(){
 		$("#black-list-modal").modal('show');
 	})
 	
+	// 블랙 버튼 클릭시
 	$("#black-user").click(function(){
 		var data = {id : idVal};
 		$.ajax({
