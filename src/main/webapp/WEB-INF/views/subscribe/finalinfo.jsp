@@ -258,20 +258,20 @@ A:hover {
 							<c:forEach var="dateList" items="${dateList}"
 								varStatus="date_status">
 								<c:choose>
-									<c:when test="${dateList.value=='today'}">
+									<c:when test="${dateList.value =='today'}">
 										<td class="today">
 											<div id="today" value="${dateList.date }" class="date">${dateList.date}</div>
 											<div></div>
 										</td>
 									</c:when>
-									<c:when test="${date_status.index%7==6}">
+									<c:when test="${date_status.index % 7 == 6}">
 										<td class="sat_day">
 											<div class="sat datelist-date">${dateList.date}</div>
 											<input hidden class="date-index" value="${date_status.index % 7 }">
 											<div></div>
 										</td>
 									</c:when>
-									<c:when test="${date_status.index%7==0}">
+									<c:when test="${date_status.index % 7 == 0}">
 										<td class="sun_day">
 											<div class="sun datelist-date">${dateList.date}</div>
 											<input hidden class="date-index" value="${date_status.index % 7 }">

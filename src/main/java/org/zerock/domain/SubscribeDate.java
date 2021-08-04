@@ -65,18 +65,24 @@ public class SubscribeDate {
 		this.schedule_detail = schedule_detail;
 	}
 
-	// 날짜에 관련된 달력정보를 가지는 메서드
+	// 날짜에 관련된 달력 정보를 가지는 메서드
 	public Map<String, Integer> today_info(SubscribeDate sdata) {
+		
 		// 날짜 캘린더 함수에 삽입.
 		Map<String, Integer> today_Data = new HashMap<String, Integer>();
+		
 		Calendar cal = Calendar.getInstance();
-		cal.set(Integer.parseInt(sdata.getYear()), Integer.parseInt(sdata.getMonth()), 1);
+		
+		cal.set(Integer.parseInt(sdata.getYear()), 
+				Integer.parseInt(sdata.getMonth()), 
+				1);
 
 		int startDay = cal.getMinimum(java.util.Calendar.DATE);
 		int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
 		int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
 		
 		Calendar todayCal = Calendar.getInstance();
+		
 		SimpleDateFormat ysdf = new SimpleDateFormat("yyyy");
 		SimpleDateFormat msdf = new SimpleDateFormat("M");
 
@@ -87,17 +93,28 @@ public class SubscribeDate {
 		int search_month = Integer.parseInt(sdata.getMonth()) + 1;
 
 		int today = -1;
+		
 		if (today_year == search_year && today_month == search_month) {
+			
 			SimpleDateFormat dsdf = new SimpleDateFormat("dd");
+			
 			today = Integer.parseInt(dsdf.format(todayCal.getTime()));
 		}
+		System.out.println("*** 여기는 SubscribeDate ***");
+		System.out.println("startDay : " + startDay);
+		System.out.println("endDay : " + endDay);
+		System.out.println("start : " + start);
+		System.out.println("today_year : " + today_year);
+		System.out.println("today_month : " + today_month);
+		System.out.println("today : " + today);
 		
-		search_month = search_month-1; 
+		search_month = search_month - 1; 
 		
 		Map<String, Integer> before_after_calendar = before_after_calendar(search_year,search_month);
 		
-		//날짜 관련
+		// 날짜 관련
 		System.out.println("search_month : " + search_month);
+		
 		// 캘린더 함수 end
 		today_Data.put("start", start);
 		today_Data.put("startDay", startDay);
@@ -109,25 +126,38 @@ public class SubscribeDate {
 		today_Data.put("before_month", before_after_calendar.get("before_month"));
 		today_Data.put("after_year", before_after_calendar.get("after_year"));
 		today_Data.put("after_month", before_after_calendar.get("after_month"));
+		
+		System.out.println("start : " + start);
+		System.out.println("startDay : " + startDay);
+		System.out.println("endDay : " + endDay);
+		System.out.println("today : " + today);
+		System.out.println("today_Data" + today_Data);
+		
 		return today_Data;
+		
 	}
+		
 	
-	//이전달 다음달 및 이전년도 다음년도
-	private Map<String, Integer> before_after_calendar(int search_year, int search_month){
+	// 이전달 다음달 및 이전년도 다음년도
+	private Map<String, Integer> before_after_calendar(int search_year, int search_month) {
+		
 		Map<String, Integer> before_after_data = new HashMap<String, Integer>();
+		
 		int before_year = search_year;
-		int before_month = search_month-1;
+		int before_month = search_month - 1;
 		int after_year = search_year;
-		int after_month = search_month+1;
+		int after_month = search_month + 1;
 
-		if(before_month<0){
-			before_month=11;
-			before_year=search_year-1;
+		if (before_month < 0) {
+			
+			before_month = 11;
+			before_year = search_year - 1;
 		}
 		
-		if(after_month>11){
-			after_month=0;
-			after_year=search_year+1;
+		if (after_month > 11) {
+			
+			after_month = 0;
+			after_year = search_year + 1;
 		}
 		
 		before_after_data.put("before_year", before_year);
@@ -167,4 +197,5 @@ public class SubscribeDate {
 	public String toString() {
 		return "SubscribeDate [year=" + year + ", month=" + month + ", date=" + date + ", value=" + value + "]";
 	}
+	
 }
