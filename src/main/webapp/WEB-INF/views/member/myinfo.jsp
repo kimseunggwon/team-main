@@ -31,6 +31,9 @@
 .control-label {
   color:#6464CD;
 }
+.label12{
+ color:#6464CD;
+}
 
 
 </style>
@@ -47,11 +50,32 @@
 <script>
  $(function() {
 	 var oldPasswordModal =$("#old-password-modal");
+	 var whichButton = "";
+		// 모달의 확인 버튼 클릭시 
+		$("#old-password-modal-btn").click(function() {
+			switch (whichButton) {
+				case "modify-button" :
+					$("#member-form")
+					 .attr("action", "${appRoot}/member/modify")
+					 .submit();
+					alert("수정 완료");
+				break;
+				
+				case "remove-button" :
+					$("#member-form")
+					 .attr("action", "${appRoot}/member/remove")
+					 .submit();
+					alert("탈퇴 완료");
+				break;
+			}
+		});
+	  
 	
 	// 수정
 	$("#btn-modify").click(function(e) {
 		var pw1 = $("#member-info-input2").val();
 		var pw2 = $("#member-info-input4").val();
+		
 		
 		if (pw1 != pw2) {
 			alert("암호와 암호 확인이 일치하지 않습니다.");
@@ -81,9 +105,9 @@
 			return false;
 			 
 		} else  {  
-			
-			var ans = confirm("변경 완료")
-			
+			e.preventDefault();
+			whichButton = "modify-button";
+			oldPasswordModal.modal('show');
 		}   
 	});
 	
@@ -111,14 +135,16 @@
 	//탈퇴
 	$("#btn-remove").click(function() {
 		var ans = confirm("탈퇴 하시겠습니까?");
+		whichButton = "remove-button";
 		
 		if(ans) {
 			oldPasswordModal.modal('show');
 		}
-		
+		/*
 		$("#member-form")
 			.attr("action","${appRoot}/member/remove")
 			.submit();
+		*/
 	})
 });
 	
@@ -141,7 +167,7 @@
 				<br>
 				<br>
 				<br>
-				<br>
+				<br> 
 <h1>내 정보수정</h1>    
 
 <c:if test="${param.status == 'success' }">
@@ -170,7 +196,7 @@
 				
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userEmail">이메일주소</label>
-					<input class="form-control" type="text" id="userEmail" name="userEmail" />
+					<input value="${member.userEmail}" class="form-control" type="text" id="userEmail" name="userEmail" />
 				</div> 
 				
 				<div class="form-group">
@@ -185,7 +211,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label" for="member-info-input4">새 패스워드 확인</label>
-					<input type="password" class="form-control" id="member-info-input4" name="userpw">
+					<input type="password" class="form-control" id="member-info-input4" >
 					<small id="member-info-password-message" class="form-text text-danger"></small>
 				</div>
 				
@@ -198,28 +224,40 @@
 		</section>
 		
 	</body>
-
 </div>
 
-<div id="myModal" class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">알림창</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>수정하시겠습니까?</p>
-      </div> 
-      <div class="modal-footer">
-        <a><button href="myinfo"  type="submit" class="btn btn-primary" data-dismiss="modal">수정하기</button></a>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
+
+
+<%-- 기존 패스워드 입력 모달 --%>
+<div class="modal fade" id="old-password-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"> 
+				<i class="fas fa-key"></i>	
+				</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>		
+			
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="label12" for="old-password-input">기존 패스워드를 입력해주세요.</label>
+					<input form="member-info-form1" name="oldPassword" type="password" class="form-control" id="old-password-input">
+				</div> 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">
+					닫기
+				</button>
+				<button type="button" id="old-password-modal-btn" class="btn btn-warning">확인</button>
+			</div>
+		</div>
+	</div>
 </div>
+
+
 
 
 </body>
