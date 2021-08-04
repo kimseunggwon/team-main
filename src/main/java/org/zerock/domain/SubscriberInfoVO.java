@@ -15,7 +15,10 @@ public class SubscriberInfoVO {
 	private Integer storeid;
 	private String subsOptions;
 	private String subsAmount;
-	private Timestamp subsStartDate;
+
+	// 구독 날짜 관련
+	private Timestamp subsStartDate; // 구독 시작 날짜
+	private String serviceStartDate;
 	
 	
 }

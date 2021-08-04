@@ -14,7 +14,7 @@
 		$("#ask-submit-btn").click(function(e) {
 			e.preventDefault();
 			askCheck = document.forms.ask;
-			if(askCheck.title.value == "" and askCheck.content.value == "") {
+			if(askCheck.title.value == "" && askCheck.content.value == "") {
 				alert("문의 제목과 내용을 입력해주세요!")
 				return false; 
 			} else if(askCheck.title.value == "") {

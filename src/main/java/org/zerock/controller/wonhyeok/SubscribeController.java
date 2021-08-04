@@ -1,7 +1,12 @@
 package org.zerock.controller.wonhyeok;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -10,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.zerock.domain.DateData;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.SubscribeDate;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.smsDomain.Coolsms;
@@ -107,5 +114,67 @@ public class SubscribeController {
 		List<SubscribeViewVO> list = service.getStoreListBySearch(vo);
 		return list;
 	}
+	
+	// 구독 최종 결과 확인
+	@PostMapping("/finalinfo")
+	public void getFinalinfo() {
+		
+	}
+	
+	// 구독 캘린더
+	@GetMapping("/finalinfo")
+	public String calendar(Model model, HttpServletRequest request, SubscribeDate dateData){
+		
+		Calendar cal = Calendar.getInstance();
+		SubscribeDate calendarData;
+		//검색 날짜
+		if(dateData.getDate().equals("")&&dateData.getMonth().equals("")){
+			dateData = new SubscribeDate(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
+		}
+		//검색 날짜 end
+
+		Map<String, Integer> today_info =  dateData.today_info(dateData);
+		List<SubscribeDate> dateList = new ArrayList<SubscribeDate>();
+		
+		// 실질적인 달력 데이터 리스트에 데이터 삽입 시작.
+		// 일단 시작 인덱스까지 아무것도 없는 데이터 삽입
+		for(int i = 1; i < today_info.get("start"); i++){
+			calendarData= new SubscribeDate(null, null, null, null);
+			dateList.add(calendarData);
+		}
+		
+		// 날짜 삽입
+		for (int i = today_info.get("startDay"); i <= today_info.get("endDay"); i++) {
+			if(i==today_info.get("today")){
+				calendarData= new SubscribeDate(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "today");
+			}else{
+				calendarData= new SubscribeDate(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "normal_date");
+			}
+			dateList.add(calendarData);
+		}
+
+		// 달력 빈 곳 빈 데이터로 삽입
+		int index = 7 - dateList.size() % 7;
+		
+		if(dateList.size() % 7 != 0){
+			
+			for (int i = 0; i < index; i++) {
+				calendarData= new SubscribeDate(null, null, null, null);
+				dateList.add(calendarData);
+			}
+		}
+		System.out.println(dateList);
+		
+		// 배열에 담음
+		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
+		model.addAttribute("today_info", today_info);
+		
+		// 구독 날짜 데이터 배열 (ex- 3일에 결제, 9일(월), 11일(수), 13일(금), 16일(월), 18일(수), 20일(금))
+		// 오늘 기준으로 다음주 / 다다음주 월수금 날짜 계산하기 / list에 넣기
+		// model에 넣어주고 / for문 돌릴 때 
+		
+		return "/subscribe/finalinfo";
+	}
+	
 	
 }

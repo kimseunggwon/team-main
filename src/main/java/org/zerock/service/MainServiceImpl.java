@@ -19,5 +19,13 @@ public class MainServiceImpl implements MainService{
 	
 		return mapper.subscribe(userid);
 	}
+
+	@Override
+	public String getAuthByuserid(String userid) {
+		
+		return mapper.getAuthByuserid(userid);
+	}
+
+
 	
 }

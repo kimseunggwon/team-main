@@ -65,7 +65,7 @@ s0.parentNode.insertBefore(s1,s0);
 
 
 
-
+<!-- 구독 신청 버튼 권한 부여 -->
 <script type="text/javascript">
 $(function(){
 	let loginID = "${pinfo.member.userid}";
@@ -93,6 +93,30 @@ $(function(){
 })
 </script>
 
+<script type="text/javascript">
+	$(function() {
+		let loginid = "${pinfo.member.userid}";
+		$.ajax({
+			type: "GET",
+			url: "${appRoot}/member/getMemberAuth",
+			data: {
+				userid : loginid
+			},
+			success: function(data) {
+				
+				let blackAuth = data;
+				console.log(blackAuth);
+				if(blackAuth == "ROLE_BLACK") {
+					$("#alert1").text("당신은 블랙리스트로 지정되었습니다. 이의가 있을 경우 1:1 문의를 통해 접수해주세요.").addClass("show");
+				} else {
+					console.log("일반유저")
+				}
+			}
+		});
+	});
+</script>
+
+
 </head>
 <body>
 	<main:navbar></main:navbar>
@@ -118,33 +142,21 @@ $(function(){
 
 		<hr>
 	
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<div id="alert1" class="alert alert-danger fade" role="alert"> </div>
+	
+	<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_EMPUSER', 'ROLE_ADMIN')">
 		<div class="row justify-content-center">
-			<form action="${appRoot }/member/usermanagement">
-				<button class="button1">고객관리</button>
-			</form>
-			<form action="${appRoot }/help/askListAdmin"">
-				<button class="button1">1:1 문의 글 확인</button>
-			</form>
-			<button class="button1"></button>
+		
+	 	<a href="${appRoot }/review/list?sort=200">
+			<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
+		 </a>
 		</div>
 	</sec:authorize>
-	
-	<div class="row justify-content-center">
-	<!-- 
-		<form action="${appRoot }/review/list">
-	  			<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
-	  		</form>
-	 -->
-	 <a href="${appRoot }/review/list?sort=200">
-		<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
-	 </a>
-	</div>
 	
 			<br>
 		
 		<div class="row justify-content-center fixed-bottom">
-			<sec:authorize access="isAuthenticated()">
+			<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_BLACK')">
 						<a class="btn btn-secondary mb-5"  id="main-subscribe" style="display:none;">구독 신청!</a>
 			</sec:authorize>
 			
@@ -154,9 +166,6 @@ $(function(){
 		</div>
 
 	<bot:botnav></bot:botnav>
-
-<tags:MainMapTags>
-</tags:MainMapTags>
 
 </div>
 </body>

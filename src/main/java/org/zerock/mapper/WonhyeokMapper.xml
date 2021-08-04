@@ -150,8 +150,8 @@ WHERE s.id = #{id}
 <!-- 구독자 정보 저장 -->
 <insert id="SaveSubscriberInfo">
 INSERT INTO subscriber 
-(subsId, subsName, subsAddress, storeid, subsOptions, subsAmount)
-VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount})
+(subsId, subsName, subsAddress, storeid, subsOptions, subsAmount , serviceStartDate)
+VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount}, #{serviceStartDate})
 </insert>
 
 <!-- b2buser의 id로 가게정보 갖고오기 -->
