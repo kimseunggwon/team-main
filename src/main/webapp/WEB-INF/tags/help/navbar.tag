@@ -3,13 +3,39 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 
+<script type="text/javascript">
+$(function(){
+	let loginID = "${pinfo.member.userid}";
+	$.ajax({
+		type: "POST",
+		url: "${appRoot}/member/getLoginInfo",
+		data: {
+			userid : loginID
+		},
+		success: function(data) {
+			
+			let confirmID = data;
+			console.log(confirmID);
+			if(confirmID == "") {
+				$("#nav-subs").show();
+				$("#nav-subs").click(function() {
+				location.href = "${appRoot}/subscribe/subsregister";
+				})
+			} 		
+		},
+		error : function() {
+			console.log("실패")
+		}
+	})
+})
+</script>
 
 <%-- Navigation Bar 적용--%>
 <div class="container">
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
-		<a class="navbar-brand" href="#">구독하기</a>
+		<a class="navbar-brand" id="nav-subs" style="display: none;">구독하기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarScroll" aria-controls="navbarScroll"
 			aria-expanded="false" aria-label="Toggle navigation">
