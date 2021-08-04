@@ -53,6 +53,7 @@ $(function(){
 		$("#black-list-modal").modal('show');
 	})
 	
+	// 블랙 버튼 클릭시
 	$("#black-user").click(function(){
 		var data = {id : idVal};
 		$.ajax({
@@ -115,7 +116,7 @@ $(function(){
 		
 		<table id="review-list-table" class="table table-striped">
 		 	<thead>
-		 		<tr style="text-align: center;">
+		 		<tr style="text-align: left;">
 		 			<th>#</th>
 		 			<th>아이디</th>
 		 			<th>이름</th>
