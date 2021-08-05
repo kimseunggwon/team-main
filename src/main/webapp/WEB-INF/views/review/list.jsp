@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav" %>
+
 
 
 <!DOCTYPE html>
@@ -222,5 +224,7 @@ img {
 			</div>
 		</div>
 		</c:if>
+		
+		<bot:botnav></bot:botnav>
 </body>
 </html>

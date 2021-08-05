@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -310,5 +312,7 @@ img {
 					class="btn btn-info">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
+	
+	<bot:botnav></bot:botnav>
 </body>
 </html>

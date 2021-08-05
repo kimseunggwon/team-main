@@ -10,6 +10,7 @@ public class SubscribeDate {
 	String month = "";
 	String date = "";
 	String value = "";
+	String fullDate = "";
 	//스케쥴 추가시 아래처럼 
 	//		1. 변수 추가
 	//		2. getter/setter 추가
@@ -17,6 +18,14 @@ public class SubscribeDate {
 	String schedule = "";
 	String schedule_detail = "";
 
+	public String getFullDate() {
+		return fullDate;
+	}
+	
+	public void setFullDate(String fullDate) {
+		this.fullDate = fullDate;
+	}
+	
 	public String getYear() {
 		return year;
 	}
@@ -174,6 +183,9 @@ public class SubscribeDate {
 		this.year = year;
 		this.month = month;
 		this.date = date;
+		this.fullDate = year + "-" 
+					+ String.format("%02d" ,(Integer.parseInt(month) + 1)) 
+					+ "-" + String.format("%02d" , Integer.parseInt(date));
 		this.value = value;
 		this.schedule = schedule;
 		this.schedule_detail = schedule_detail;
@@ -186,6 +198,9 @@ public class SubscribeDate {
 			this.year = year;
 			this.month = month;
 			this.date = date;
+			this.fullDate = year + "-" 
+					+ String.format("%02d" ,(Integer.parseInt(month) + 1)) 
+					+ "-" + String.format("%02d" , Integer.parseInt(date));
 			this.value = value;
 		}
 	}

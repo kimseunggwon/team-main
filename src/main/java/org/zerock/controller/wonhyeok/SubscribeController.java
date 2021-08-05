@@ -1,6 +1,5 @@
 package org.zerock.controller.wonhyeok;
 
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,16 +12,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
-import org.springframework.format.datetime.joda.LocalDateParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.zerock.domain.DateData;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.SubscribeDate;
 import org.zerock.domain.SubscribeViewVO;
@@ -198,6 +194,8 @@ public class SubscribeController {
 		// 배열에 담음
 		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today_info", today_info);
+		
+		System.out.println("*** dateList *** : " + dateList);
 
 		// ********************구독 날짜 데이터 *************************
 		List<Integer> subDateList = new ArrayList<Integer>();
@@ -218,72 +216,54 @@ public class SubscribeController {
 		String formatedToday = today.format(formatter);
 		int realToday = Integer.parseInt(formatedToday);
 
-		System.out.println("**** 여기는 service **** ");
+		System.out.println("**** 여기는 controller **** ");
 		System.out.println("startDay : " + startDay); // 1
- 		System.out.println("endDay : " + endDay); // 31
+		System.out.println("endDay : " + endDay); // 31
 		System.out.println("start : " + start); // 1
 		System.out.println("today : " + formatedToday); // 04
 		System.out.println("realToday : " + realToday); // 오늘 날짜 4 
-		
-		
+
+
 		// 요일 구하기
-		LocalDate date = LocalDate.now();
-		DayOfWeek dayOfWeek = date.getDayOfWeek();
-		int dayOfWeek2 = date.getDayOfMonth();
-		int thisMonth = date.getMonthValue();
-		
+		LocalDate subToday = LocalDate.now();
+		DayOfWeek dayOfWeek = subToday.getDayOfWeek();
+		int dayOfWeek2 = subToday.getDayOfMonth();
+		int thisMonth = subToday.getMonthValue();
+
 		int dayOfWeekNumber = dayOfWeek.getValue();
-		
-		System.out.println("date : " + date); // 2021-08-04
+
+		System.out.println("date : " + subToday); // 2021-08-04
 		System.out.println("dayOfWeek : " + dayOfWeek); // WEDNESDAY
 		System.out.println("dayOfWeekNumber : " + dayOfWeekNumber); // 3 (수요일)
 		System.out.println("dayOfWeekMonth : " + dayOfWeek2); // 4 (4주)
 		System.out.println("thisMonth : " + thisMonth);  // 8(월)
-		
+
 		// list에 구독 날짜 넣기
-		int x = realToday - dayOfWeekNumber + 8;
+		LocalDate first = subToday.minusDays(subToday.getDayOfWeek().getValue()).plusDays(8);
 		
-		// 일단 다 더해서 넣고
-		subDateList.add(x);
-		subDateList.add(x + 2);
-		subDateList.add(x + 4);
-
-		subDateList.add(x + 7);
-		subDateList.add(x + 9);
-		subDateList.add(x + 11);
-
-		subDateList.add(x + 14);
-		subDateList.add(x + 16);
-		subDateList.add(x + 18);
-
-		subDateList.add(x + 21);
-		subDateList.add(x + 23);
-		subDateList.add(x + 25);
+		List<String> realSubDateList = new ArrayList<String>();
 		
-		subDateList.add(x + 28);
-		subDateList.add(x + 30);
+		realSubDateList.add(first.toString());
+		realSubDateList.add(first.plusDays(2).toString());
+		realSubDateList.add(first.plusDays(4).toString());
 		
-		// 진짜 구독 날짜 모음
-		int[] realSubDateList = new int[12];
+		realSubDateList.add(first.plusDays(7).toString());
+		realSubDateList.add(first.plusDays(9).toString());
+		realSubDateList.add(first.plusDays(11).toString());
 		
-		// 더한 날짜들을 '진짜 구독 날짜 모음'에 넣자
-		for (Integer subdates : subDateList) {
-			// 값이 31일을 넘지 않는다면 
-			if (subdates <= endDay) {
-				// 넣자
-			} else {
-				// 근데 넘으면 
-				x = 1; // x를 바꿔야 할 것 같은데
-			}
-		}
+		realSubDateList.add(first.plusDays(14).toString());
+		realSubDateList.add(first.plusDays(16).toString());
+		realSubDateList.add(first.plusDays(18).toString());
 		
+		realSubDateList.add(first.plusDays(21).toString());
+		realSubDateList.add(first.plusDays(23).toString());
+		realSubDateList.add(first.plusDays(25).toString());
 		
-		System.out.println(subDateList);
+		System.out.println(realSubDateList);
+		
 
 		// model에 저장!
 		model.addAttribute("subDateList", realSubDateList);
-		
-		// x일 - 요일 값 + 8 = 다음주 월요일
 
 		return "/subscribe/finalinfo";
 	}
