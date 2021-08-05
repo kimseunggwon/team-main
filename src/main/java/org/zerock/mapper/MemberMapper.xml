@@ -156,7 +156,7 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
-	<select id="readsubs" resultMap="memberMap">
+	<select id="readsubs" resultType="org.zerock.domain.StoreInfoVO">
 		SELECT 
 			st.storeaddress storeaddress, 
 	        st.storename storename

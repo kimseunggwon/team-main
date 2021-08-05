@@ -48,5 +48,10 @@ public interface UserReviewService {
 	// 가게 주소 불러오기
 	StoreInfoVO readsubs(MemberVO vo);
 	
-
+	
 }
+
+
+
+
+

@@ -237,7 +237,8 @@ public class UserReviewController {
 	// 세탁소 이름 주소 불러오기
 	@GetMapping("/getaddress2")
 	@PreAuthorize("isAuthenticated()")
-	public StoreInfoVO getaddress2(@RequestBody MemberVO vo) {
+	@ResponseBody
+	public StoreInfoVO getaddress2(MemberVO vo) {
 		log.info("주소 불러오는중");
 		log.info(vo);
 		

@@ -89,11 +89,12 @@ img {
 			url : "${appRoot}/review/getaddress2",
 			data : data,
 			success : function(data) {
+				console.log(data);
 				if (data != "") {
 					console.log(data);
 					console.log("구독중");
-					$("#re-input4").val(data.storeaddress);
-					$("#re-input5").val(data.storename);
+					$("#re-input4").val(data.storename);
+					$("#re-input5").val(data.storeaddress);
 
 				} else if (data == "") {
 					console.log("구독중 아님");
