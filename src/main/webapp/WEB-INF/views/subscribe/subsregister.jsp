@@ -283,7 +283,7 @@ body {
 
 											for (let i = 0; i < 3; i++) {
 
-												map[i] = new naver.maps.Map(
+												map[i] = new naver.maps.Map( 
 														mapn[i],
 														{
 															center : new naver.maps.LatLng(
@@ -313,7 +313,7 @@ body {
 															data[i].storelat),
 													map : map[i],
 													icon : {
-														content : [ `<div><img src="${appRoot}/resources/image/laundry_home.png"></div>`
+														content : [ `<div><img src="${appRoot}/resources/image/laundry-icon1.png"></div>`
 
 														].join('')
 
@@ -353,7 +353,7 @@ body {
 																				<div style="color:#787878">가게 번호: \${data[2].storePhonenum}</div>
 																				<button class="storeInfoBtn">가게정보</button>
 																			</div>`); 
-												
+												 
 											/* auth별 본사/개인 표시 */
 											var checkAUTH = $(".checkAUTH").attr('data-auth');
 												if (checkAUTH == "ROLE_B2BUSER"){
@@ -430,7 +430,7 @@ body {
 												<div id="\${StoreAddress.id}" style="color:#169EF2"></div>
 												<div style="font-size:22px;color:#9E3D00"> 가게이름 :\${StoreAddress.storename}</div>
 												<div class="modal_store_name" style="color:#787878"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-												<div data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
+												<div class="modal_storeId" data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
 											</div>
 										</div>`
 					
@@ -465,7 +465,8 @@ body {
 				/* 선택시 기능 */
 				function clickModalAddress(elem3) {
 					let modal_finalAddress = $(elem3).find(".modal_store_name").text().substr(7);
-					let modal_finalStoreId = $(elem3).attr('data-id');
+					let modal_finalStoreId = $(elem3).find('.modal_storeId').attr('data-id');
+					console.log(modal_finalStoreId);
 					$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 					$(elem3).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 					/* 주소 넣기 */
@@ -520,7 +521,7 @@ body {
 															<div id="\${StoreAddress.id}" style="color:#169EF2"></div>
 															<div style="font-size:22px;color:#9E3D00"> 가게이름 :\${StoreAddress.storename}</div>
 															<div class="modal_store_name" style="color:#787878"> 가게주소 : \${StoreAddress.storeaddress}</div>  
-															<div data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
+															<div class="modal_storeId" data-id="\${StoreAddress.id}"><button class="storeInfoBtn">가게정보</button></div>
 														</div>
 													</div>`;
 								
@@ -552,7 +553,8 @@ body {
 						
 						function SeachClickModalAddress(elem4) {
 							let modal_finalAddress = $(elem4).find(".modal_store_name").text().substr(7);
-							let modal_finalStoreId = $(elem4).attr('data-id');
+							let modal_finalStoreId = $(elem4).find('.modal_storeId').attr('data-id');
+							console.log(modal_finalStoreId);
 							$(".otherStoreList").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
 							$(elem4).css("box-shadow", "0px 0px 6px 10px #B4DDF5");
 							/* 주소넣기 */
@@ -591,40 +593,41 @@ body {
 $(function() {
 		let date = new Date();
 		let dateWeek = date.getDay();
-		let dateString = date.toLocaleString();
-		
+		console.log(date);
+		let dateString = date.toISOString();
+		console.log(dateString);
 		if(dateWeek == 0) {
 			date.setDate(date.getDate() + 8);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} else if (dateWeek == 1) {
 			date.setDate(date.getDate() + 7);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} else if (dateWeek == 2) {
 			date.setDate(date.getDate() + 6);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} else if (dateWeek == 3) {
 			date.setDate(date.getDate() + 5);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} else if (dateWeek == 4) {
 			date.setDate(date.getDate() + 4);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} else if (dateWeek == 5) {
 			date.setDate(date.getDate() + 3);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} else if (dateWeek == 6) {
 			date.setDate(date.getDate() + 2);
-			$("#serviceStartDay").text(date.toLocaleString().substr(0,11) + "부터");
-			$("#serviceEndDay_final").val(date.toLocaleString().substr(0,11));
+			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");
+			$("#serviceEndDay_final").val(date.toISOString().substr(0,10));
 		} 
 		
 		date.setDate(date.getDate() + 15);
-		$("#serviceEndDay").text(date.toLocaleString().substr(0,11)+ "까지 입니다 !!");
+		$("#serviceEndDay").text(date.toISOString().substr(0,10)+ "까지 입니다 !!");
 
 })
 
@@ -653,7 +656,9 @@ $(function() {
 			<div><img src="${appRoot }/resources/image/den.jpg" onmouseover="$('.QlqlrShort').show();"
 				onmouseout="$('.QlqlrShort').hide();"></div>
 					<div class="QlqlrShort" style="display: none">
-						<div>*구독 계약기간은 15일입니다</div>
+						<div>*구독 계약기간은 14일입니다</div>
+						<div>*15일 째 되는날 해당 금액으로 정기결제가 진행됩니다</div>
+						<div>*정기결제를 취소하고싶으시면 <a href="">구독취소게시판</a>에 <br> 양식을 작성해주시기 바랍니다. </div>
 						<div>*구독 계약기간은 결제일의 다음주 월요일부터<br>  15일동안 지속됩니다.</div>
 						<div>*일요일 결제 시 , 8일후 월요일부터 계약기간이 시작됩니다.</div>
 					</div>

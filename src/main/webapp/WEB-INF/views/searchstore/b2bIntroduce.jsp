@@ -86,6 +86,10 @@ body {
 		var storename = "${storename}";
 		var test = storename.includes("빨래방");
 		$('.storeName').text(test ? storename : storename + " 빨래방");
+		
+		var likeAVG = "${avg}";
+		console.log(likeAVG);
+		$('.like').text(likeAVG == "" ? "0.00" : likeAVG);
 	})
 </script>
 
@@ -100,7 +104,7 @@ body {
 			<img style="max-width: 100%; height: auto;"
 				src="${imgIntroRoot}${fileName }" />
 		</div>
-<!-- 		<div class="like"></div> -->
+		<div class="like"></div>
 		<div class="storeInfo">
 			<div class="storeName" style="font-size: 30px; color: #9E3D00;padding: 3px;"></div>
 			<div class="info">주소: ${storeaddress }</div>

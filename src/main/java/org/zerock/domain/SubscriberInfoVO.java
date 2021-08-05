@@ -1,6 +1,7 @@
 package org.zerock.domain;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -17,8 +18,7 @@ public class SubscriberInfoVO {
 	private String subsAmount;
 
 	// 구독 날짜 관련
-	private Timestamp subsStartDate; // 구독 시작 날짜
-	private String serviceStartDate;
+	private Date serviceStartDate;
 	
 	
 }
