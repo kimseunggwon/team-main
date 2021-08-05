@@ -28,26 +28,36 @@ public class testController {
     private MemberService service;
 
 
-	@RequestMapping("/mypage")
-	public void info() {
-		log.info("메인페이지");
+	@RequestMapping("/mypage")  
+	@PreAuthorize("isAuthenticated() and (!hasRole('ROLE_ADMIN'))")
+	public void mypage(Model model, Principal principal) {
+		log.info("메인페이지"); 
+		
+		MemberVO member = service.read(principal.getName());
+		
+		model.addAttribute("member", member);
 	}
 	
 	@RequestMapping("/subinfo")
+	@PreAuthorize("isAuthenticated()")
 	public void subinfo() {
 		log.info("구독정보 확인");
 	} 
-	 
+	  
 	
 	
 	@RequestMapping("/myinfo")
+	@PreAuthorize("isAuthenticated()")
 	public void info( Model model, Principal principal) {
 		
 		log.info("내정보 확인 : " + principal.getName());
 		
 		MemberVO member = service.read(principal.getName());
 		
+		
+		
 		model.addAttribute("member", member);
+		
 	} 
 	
 	@GetMapping("/exp")
@@ -61,12 +71,11 @@ public class testController {
 	
 	@PostMapping("/modify")
 	public String modify(MemberVO vo,RedirectAttributes rttr) {
-		log.info(vo);
-		log.info("아이디:" + vo.getUserpw() + "비번:"+ vo.getUserpw());
+		log.info ("비밀번호:"+vo.getUserpw());  
 
 		 service.modify(vo);
 		
-		return "redirect:/member/myinfo";
+		return "redirect:/logout";
 	} 
 	 
 	@PostMapping("/remove")
@@ -75,7 +84,7 @@ public class testController {
 		
 		service.remove(vo);
 		
-		return "redirect:/member/myinfo";
+		return "redirect:/logout";
 	}
 
  
@@ -94,6 +103,7 @@ public class testController {
 	
 
 	@RequestMapping("/myget")
+	@PreAuthorize("isAuthenticated()")
 	public void myget(Model model, Principal principal) {
 		log.info("get");
 		

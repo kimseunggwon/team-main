@@ -9,7 +9,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
-		<a class="navbar-brand" href="#">구독하기</a>
+		<a class="navbar-brand" href="${appRoot }/subscribe/subsregister"">구독하기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarScroll" aria-controls="navbarScroll"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -38,11 +38,13 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="${appRoot }/help/helpdesk">1:1 문의 <span class="sr-only">(current)</span></a>
 				</li>
+				
 				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item active"><a class="nav-link"
 						href="${appRoot }/logout">Logout<span class="sr-only">(current)</span></a>
 					</li>
 				</sec:authorize>
+				
 				<sec:authorize access="!isAuthenticated()">
 					<li class="nav-item active"><a class="nav-link"
 						href="${appRoot }/member/login">Login<span class="sr-only">(current)</span></a>
@@ -52,3 +54,10 @@
 		</div>
 	</nav>
 </div>
+
+<form  id="logout12"  action="${appRoot }/logout"></form>
+
+
+
+
+

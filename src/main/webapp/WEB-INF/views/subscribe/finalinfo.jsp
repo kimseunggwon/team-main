@@ -11,15 +11,18 @@
 <title>Subscription Information File</title>
 <style TYPE="text/css">
 @font-face {
-    font-family: 'GongGothicMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'GongGothicMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 * {
 	font-family: 'GongGothicMedium';
 }
+
 body {
 	scrollbar-face-color: #F6F6F6;
 	scrollbar-highlight-color: #bbbbbb;
@@ -199,6 +202,11 @@ A:hover {
 .this_month {
 	margin: 10px;
 }
+
+.subdate {
+	text-decoration: underline;
+	color: yellow;
+}
 </style>
 <!-- script src="${appRoot }/resources/js/subscribe/subscribe-calendar.js" -->
 </head>
@@ -206,13 +214,6 @@ A:hover {
 	<div class="container">
 		<%-- 진아가 
 		여기는 [구독 최종 확인] 페이지입니다.
-		1. 구독자ID = subsId
-		2. 구독자 주소 = subAddress
-		3. 구독자가 선택한 구독 옵션 = subsOptions
-		4. 구독 시작 날짜 ~ 빨래 받는 날짜 = 구독 기간 = subsStartDate
-		5. 결제 금액 방식 = subsAmount
-		6. 이전으로 / 구독 취소하기(메인 GO)
-		7. 추후 논의 (리뷰 보기 + 마이페이지 등등)
 		--%>
 		<form name="calendarFrm" id="calendarFrm" action="" method="GET">
 
@@ -221,18 +222,18 @@ A:hover {
 				<!--날짜 네비게이션  -->
 				<div class="navigation">
 					<a class="before_after_year"
-						href="${appRoot }/subscribe/finalinfo?year=${today_info.search_year-1}&month=${today_info.search_month-1}">
+						href="${appRoot }/subscribe/finalinfo?year=${today_info.search_year - 1}&month=${today_info.search_month - 1}">
 						&lt;&lt; <!-- 이전해 -->
 					</a> <a class="before_after_month"
 						href="${appRoot }/subscribe/finalinfo?year=${today_info.before_year}&month=${today_info.before_month}">
 						&lt; <!-- 이전달 -->
 					</a> <span class="this_month"> &nbsp;${today_info.search_year}.
-						<c:if test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
+						<c:if test="${today_info.search_month < 10}">0</c:if>${today_info.search_month}
 					</span> <a class="before_after_month"
 						href="${appRoot }/subscribe/finalinfo?year=${today_info.after_year}&month=${today_info.after_month}">
 						<!-- 다음달 --> &gt;
 					</a> <a class="before_after_year"
-						href="${appRoot }/subscribe/finalinfo?year=${today_info.search_year+1}&month=${today_info.search_month-1}">
+						href="${appRoot }/subscribe/finalinfo?year=${today_info.search_year + 1}&month=${today_info.search_month - 1}">
 						<!-- 다음해 --> &gt;&gt;
 					</a>
 				</div>
@@ -258,42 +259,50 @@ A:hover {
 							<c:forEach var="dateList" items="${dateList}"
 								varStatus="date_status">
 								<c:choose>
-									<c:when test="${dateList.value=='today'}">
+									<c:when test="${dateList.value =='today'}">
 										<td class="today">
 											<div id="today" value="${dateList.date }" class="date">${dateList.date}</div>
 											<div></div>
 										</td>
 									</c:when>
-									<c:when test="${date_status.index%7==6}">
+									<c:when test="${date_status.index % 7 == 6}">
 										<td class="sat_day">
 											<div class="sat datelist-date">${dateList.date}</div>
-											<input hidden class="date-index" value="${date_status.index % 7 }">
 											<div></div>
 										</td>
 									</c:when>
-									<c:when test="${date_status.index%7==0}">
+									<c:when test="${date_status.index % 7 == 0}">
 										<td class="sun_day">
 											<div class="sun datelist-date">${dateList.date}</div>
-											<input hidden class="date-index" value="${date_status.index % 7 }">
 											<div></div>
 										</td>
 									</c:when>
 									<c:otherwise>
 										<td id="normal-day" class="normal_day">
-											<div class="date">${dateList.date}</div>
+											<div
+												class="date
+												<c:if test='${subDateList.contains(dateList.fullDate)}'>
+												  subdate
+												</c:if>
+											
+											">${dateList.date}</div>
 											<input hidden class="datelist-date" value="${dateList.date }">
-											<input hidden class="date-index" value="${date_status.index % 7 }"> 
-											<div></div>
-										</td>
 									</c:otherwise>
 								</c:choose>
-								<c:if test="${date_status.index%7==6}">
-									<%-- 토요일에 tr 끝 --%>
-									</tr><tr>
-								</c:if>
+								<c:if test="${date_status.index% 7 == 6}">
+								<%-- 토요일에 tr 끝 --%>
+						</tr>
+						<tr>
+							</c:if>
 							</c:forEach>
 						</tr>
 				</table>
+
+				<c:forEach var="subDateList" items="${subDateList }">
+					<ul>
+						<li>${subDateList }</li>
+					</ul>
+				</c:forEach>
 			</div>
 		</form>
 	</div>

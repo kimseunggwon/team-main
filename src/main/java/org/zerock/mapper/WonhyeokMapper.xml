@@ -30,10 +30,9 @@ SELECT
 	storelat storelat,
 	storelag storelag
 FROM storeinfo 
-
-WHERE
-	  storelat > #{storelat} - 0.06 AND storelat < #{storelat} + 0.06 AND
-	  storelag > #{storelag} - 0.06 AND storelag < #{storelag} + 0.06
+	  
+ORDER BY SQRT(pow(#{storelat} - storelat, 2) + pow(#{storelag} - storelag,2))
+LIMIT 6
 
  ]]>
 </select>
@@ -70,15 +69,20 @@ WHERE id = #{id}
 <!-- b2bIntroduce -->
 <select id="getStoreInroducePageInfo" resultType="org.zerock.domain.B2bIntroduceVO">
 SELECT
-	s.id id,
-	s.storeaddress storeaddress,
-	s.storename storename,
-	s.storePhonenum storePhonenum,
-	b.storeinfo storeinfo,
-	b.introduce introduce,
-	b.fileName fileName
-FROM storeinfo AS s LEFT JOIN b2bIntroduce AS b ON b.id = #{id}
-WHERE s.id = #{id}
+		st.id,
+        TRUNCATE(AVG(ur.re_stars), 2) avg,
+		st.storeaddress storeaddress,
+		st.storename storename,
+		st.storePhonenum storePhonenum,
+        b.storeinfo storeinfo,
+		b.introduce introduce,
+		b.fileName fileName
+		
+FROM user AS u JOIN subscriber AS sub ON u.userid = sub.subsId
+				JOIN user_review AS ur ON sub.subsId = ur.re_writer
+                JOIN storeinfo AS st ON st.id = sub.storeid
+                LEFT JOIN  b2bIntroduce AS b ON b.id = st.id
+WHERE st.id =#{id}
 </select>
 
 

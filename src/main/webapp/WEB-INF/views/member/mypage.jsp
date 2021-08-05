@@ -3,10 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="mem" tagdir="/WEB-INF/tags/member"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+
+<mem:mainpage></mem:mainpage>
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
@@ -31,15 +34,20 @@ body {
 
  
 
+ 
 <div class="container">	
 
-<div class="col align-self-center mt-3">
+<br>
+<br>
+ <div class="col align-self-center mt-3">
 					<a href="${appRoot }/member/main">
 						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
 					</a>
 				</div> 
+<br>
+<br>				 
 
- 
+ <!-- 12
  <ul class="nav justify-content-end">
   
   <sec:authorize access="isAnonymous()">
@@ -50,9 +58,10 @@ body {
 		  		<form action="${appRoot }/help/helpdesk">
 		  			<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
 	  			</form>
-	  		</sec:authorize>
+	  		</sec:authorize> -->
 	  		
 	  		<!--  로그인 했을때 -->
+	  		<!--   12
 	  		<sec:authorize access="isAuthenticated()">       
 	  			<form action="${appRoot }/logout" method="post">
 	  					<input class="btn btn-primary mr-1" type="submit" value="로그아웃"> 
@@ -63,8 +72,8 @@ body {
 	  					<input class="btn btn-primary mr-1" type="submit" value="고객센터"> 
 	  			</form>
 	  		</sec:authorize>
-</ul>   
-
+</ul>  
+ -->
 
  
 
@@ -75,18 +84,18 @@ body {
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="${appRoot }/member/myget">내 정보확인</a>
     <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
-   
+  
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
     <a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a>
     <a class="dropdown-item" href="${appRoot }/review/list">사용자후기</a>
   </div>
 </div> 
-
- 
  
   
+    
+   
   <div class="jumbotron"> 
-  <h1 class="display-4">안녕하세요 <sec:authentication property="principal.username"/> 회원님</h1>
+  <h1 class="display-4">안녕하세요  ${member.userName } 회원님</h1>
   <p class="lead">고객님이 이용중인 서비스는 '1인 가구 이용 서비스 입니다'.<br>
    혹시 아직 서비스를 이용하지 않고 계신가요~? <br>
    서둘러 밑에 구독하기 버튼을 눌러주세요.! 
@@ -99,7 +108,7 @@ body {
       <div class="card-body">
         <h5 class="card-title">싱글 구독</h5>
         <p class="card-text">혼자 사는 싱글들을 위한 맞춤형 구독</p>
-        <a href="#" class="btn btn-info">1인 가구 구독</a>
+        <a href="${appRoot }/subscribe/subsregister" class="btn btn-info">1인 가구 구독</a>
       </div>
     </div> 
   </div>
@@ -108,7 +117,7 @@ body {
       <div class="card-body"> 
         <h5 class="card-title">대형 구독</h5>
         <p class="card-text">가족 구성원들과 함께 이용하는 구독 서비스</p>
-        <a href="#" class="btn btn-info">다세대 가구 구독</a>
+        <a href="${appRoot }/subscribe/subsregister" class="btn btn-info">다세대 가구 구독</a>
       </div>
     </div>
   </div>
