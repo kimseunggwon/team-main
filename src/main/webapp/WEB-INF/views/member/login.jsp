@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/member"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
 <!DOCTYPE html>
 <html>
@@ -151,7 +152,7 @@ $(function(){
 </script>
 
 </head>
-<body style="overflow: hidden;" class="row justify-content-center mt-5">
+<body style="overflow-x: hidden;" class="row justify-content-center mt-5">
 <rev:navbar></rev:navbar>
 <div class="container">
 	<div class="row">
@@ -234,7 +235,9 @@ $(function(){
 			</div>
 			
 		</div>
-	</div>	
+	</div>
+	<div style="margin-top: 50px"></div>
+	<bot:botnav></bot:botnav>
 </div>
 </body>
 </html>
