@@ -24,22 +24,23 @@ import lombok.extern.log4j.Log4j;
 public class WonhyeokController {
 
 	private WonhyeokRestService service;
-
+	
 	@RequestMapping("/searchMap")
 	public void searchstore() {
 
 	}
 //	사장님 홍보 게시판 컨트롤러
 	@RequestMapping("/b2bIntroduceBoard")
+	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_ADMIN')")
 	public void b2bIntroduce() {
 
 	}
 	// 등록 서버URL
 	@PostMapping("/b2bIntroduceBoard")
+	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_ADMIN')")
 	public void b2bIntroduce(B2bIntroduceVO Introduce, @RequestParam("file") MultipartFile file) {
 
 		Integer id = service.getid(Introduce);
-		log.info(id);
 		if (id == null) {
 
 			Introduce.setFileName((file).getOriginalFilename());
@@ -53,6 +54,7 @@ public class WonhyeokController {
 	}
 
 	@GetMapping("/getStoreInfo")
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	public StoreVO getStoreInfo(String id) {
 		
@@ -60,18 +62,21 @@ public class WonhyeokController {
 		
 	}
 	@GetMapping("/b2bIntroduce")
+	@PreAuthorize("isAuthenticated()")
 	public void b2bIntroducepage() {
 
 	}
 	
 	@RequestMapping("/b2bIntroduce/{id}")
+	@PreAuthorize("isAuthenticated()")
 	public String b2bIntroducepage(@PathVariable("id") Long id,RedirectAttributes rttr) {
 		
 		B2bIntroduceVO vo = service.getStoreInroducePageInfo(id);
-
+		log.info(vo);
 		
 		if ( vo.getFileName() == null) {
 			rttr.addFlashAttribute("id", vo.getId());
+			rttr.addFlashAttribute("avg", vo.getAvg());
 			rttr.addFlashAttribute("storeaddress", vo.getStoreaddress());
 			rttr.addFlashAttribute("storename", vo.getStorename());
 			rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());
@@ -84,6 +89,7 @@ public class WonhyeokController {
 		} else {
 					
 		rttr.addFlashAttribute("id", vo.getId());
+		rttr.addFlashAttribute("avg", vo.getAvg());
 		rttr.addFlashAttribute("storeaddress", vo.getStoreaddress());
 		rttr.addFlashAttribute("storename", vo.getStorename());
 		rttr.addFlashAttribute("storePhonenum", vo.getStorePhonenum());

@@ -50,19 +50,31 @@
 				url : "${appRoot}/won/searchstore",
 				data : data,
 				success : function(data) {
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */			
+					/* 1번 지도 */
+			    	  var mapOptions1 = {
+			    		center : new naver.maps.LatLng(data[0].storelag, data[0].storelat),
+			    		zoom : 15
+			    	};
+
+			    	var map1 = new naver.maps.Map('map1', mapOptions1);  
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */			    	
+						/* 마크리셋 */
 						$(".markerid").remove();
+						
 				for(var store of data) { 
-					let markerHTML = `							
+					let markerHTML = `	 						
 										<div class="markerid" style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
-										<div><img src="${appRoot}/resources/image/laundry_home.png"></div>
+											<div><img src="${appRoot}/resources/image/laundry-icon1.png"></div>
 										<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
-						        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
-										<div style="font-size:22px;color:#9E3D00">\${store.storename}</div>
-										<div>가게 주소: \${store.storeaddress}</div>
-										<div>가게 번호: \${store.storePhonenum}</div>
-										<div><button class="storeInfoBtn" data-id="\${store.id}">가게정보</button></div>
+						        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%;width:auto;height:auto; display:none"> 
+											<div style="font-size:22px;color:#000000"><b>\${store.storename}</b></div>
+											<div style="color:black;font-size:13px">가게 주소: \${store.storeaddress}</div>
+											<div style="color:black;font-size:13px">가게 번호: \${store.storePhonenum}</div>
+											<div><button class="storeInfoBtn" data-id="\${store.id}">가게정보</button></div>
 										</div>
-										</div>` ;
+										</div>` ; 
 							
 					
 					var laundrymarker = {
@@ -72,18 +84,19 @@
 						    	content: [ markerHTML
 			        		].join('')
 
-						    }
+						    } ,
+						    animation: naver.maps.Animation.BOUNCE
 						};
 						 var marker = new naver.maps.Marker(laundrymarker);
 						 
 						 $(".storeInfoBtn").click(function() {
-								console.log("되냐?")
+
 								storeInfoURL(this);
 								})
 							
 							function storeInfoURL(btn) {
 								var id = $(btn).attr('data-id');
-								console.log(id);
+
 								
 								let url = "${appRoot}/searchstore/b2bIntroduce/" + id
 								let name = "빨래스타그램";
@@ -174,8 +187,7 @@
 					        var lat = parseFloat(items[0].x);
 					        var lag = parseFloat(items[0].y);
 					        
-					        console.log(lat);
-					        console.log(lag);
+
 					        
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 					         /* 2번 지도 */
@@ -197,7 +209,7 @@
 								        		`<div><img src="${appRoot}/resources/image/home_button.png"></div>`+
 								        		`<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
 								        		background-color:#88C9F2; color:white; text-align:center; border:1px;
-								        		border-radius:14px; opacity:75%; display:none">우리집><주소: \${addr}</div>`+
+								        		border-radius:14px; opacity:75%; display:none">주소: \${addr}</div>`+
 							        		`</div>`
 						        	
 						        	].join(''),
@@ -221,16 +233,17 @@
 									data : JSON.stringify(data),
 									contentType : "application/json",
 									success : function(list) {
+										/* 마크리셋 */
 										$(".markerid").remove();
 										
 										for(let address of list) {
 											let markerHTML = `<div class="markerid" style="text-align: left;" onmouseover="$(this).find('.ad1').show();" onmouseout="$(this).find('.ad1').hide();">
-												<div><img src="${appRoot}/resources/image/laundry_home.png"></div>
+												<div><img src="${appRoot}/resources/image/laundry-icon1.png"></div>
 												<div class="ad1" style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px;
-								        		background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
-												<div>\${address.storename}</div>
-												<div>\${address.storeaddress}</div>
-												<div>\${address.storePhonenum}</div>
+												background-color:#88C9F2; color:black; border:1px; border-radius:14px; opacity:75%; display:none"> 
+												<div style="font-size:22px;color:#000000"><b>\${address.storename}</b></div>
+												<div style="color:black;font-size:13px">가게 주소: \${address.storeaddress}</div>
+												<div style="color:black;font-size:13px">가게 번호: \${address.storePhonenum}</div>								        		
 												<div><button class="storeInfoBtn" data-id="\${address.id}">가게정보</button></div>
 												</div>
 												</div>` ;
@@ -363,7 +376,7 @@ body {
 		<div id="searchName">
 			<div class="item item3">
 				<div>
-					<input id="name-store" type="text" placeholder="가게 이름">
+					<input id="name-store" type="text" placeholder="가게 이름을 적어주세요">
 					<button id="searchName-btn" class="button_sang1" type="submit">찾기</button>
 				</div>
 				<div>
@@ -378,7 +391,7 @@ body {
 		<div id="searchAddress" style="display: none;">
 			<div class="item item4">
 				<div>
-					<input type="text" id="myaddress" placeholder="주소를 검색해주세여" readonly><input class="button_sang1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호로 찾기"><br>
+					<input type="text" id="myaddress" placeholder="주소를 검색해주세요" readonly><input class="button_sang1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호로 찾기"><br>
 					<input type="text" id="postcode" placeholder="우편번호" hidden>
 					<input type="text" id="address" placeholder="주소" hidden><br>
 					<input type="text" id="detailAddress" placeholder="상세주소" hidden>

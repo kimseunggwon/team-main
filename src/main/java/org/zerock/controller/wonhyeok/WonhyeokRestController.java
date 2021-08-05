@@ -2,6 +2,7 @@ package org.zerock.controller.wonhyeok;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class WonhyeokRestController {
 	private WonhyeokRestService service;
 	
 	@PostMapping("/searchstore")
+	@PreAuthorize("isAuthenticated()")
 	public List<AddressVO> find(String storename) {
 
 		List<AddressVO> vo = service.getsearchbystorename(storename);
@@ -34,6 +36,7 @@ public class WonhyeokRestController {
 	}
 	
 	@PostMapping(value = "/searchaddress", produces = {"application/json; charset=utf-8"})
+	@PreAuthorize("isAuthenticated()")
 	public List<AddressVO> findarround(@RequestBody AddressVO vo) {
 		List<AddressVO> list = service.getlatlag(vo);
 		
@@ -42,6 +45,7 @@ public class WonhyeokRestController {
 	}
 
 	@PostMapping(value = "/tagGetB2bStoreInfo", produces = {"application/json; charset=utf-8"})
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	public List<AddressVO> tagGetB2bStoreInfo(@RequestBody AddressVO vo) {
 		List<AddressVO> list = service.getlatlag(vo);

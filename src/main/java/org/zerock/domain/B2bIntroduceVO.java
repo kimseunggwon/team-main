@@ -6,6 +6,7 @@ import lombok.Data;
 public class B2bIntroduceVO {
 
 	private Integer id;
+	private Double avg;
 	private String storeaddress;
 	private String storename;
 	private String storePhonenum;
