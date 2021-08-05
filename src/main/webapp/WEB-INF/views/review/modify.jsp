@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -93,11 +95,13 @@ img {
 		<%-- 여기는 [글 수정 및 삭제하기] JSP 파일입니다 :) --%>
 	<div class="container">
 		<div class="row justify-content-center">
-			<img alt="jinah-logo"
+			<a href="${appRoot }/member/main"> <img alt="jinah-logo"
 				src="${appRoot }/resources/image/others/brand_logo_400px.png">
+			</a>
 		</div>
-	</div> 
-	
+	</div>
+
+
 	<rev:search></rev:search>
 	<!-- Review Grading (stars) Start -->
 	<div id="review-star-parent" style="display: inline;" class="container">
@@ -308,5 +312,7 @@ img {
 					class="btn btn-info">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
+	
+	<bot:botnav></bot:botnav>
 </body>
 </html>
