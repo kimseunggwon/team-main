@@ -47,7 +47,7 @@
 	align-content: center;
 }
 
-img {
+#logo {
 	padding: 50px;
 }
 
@@ -125,7 +125,7 @@ img {
 
 	<div class="container">
 		<div class="row justify-content-center">
-			<a href="${appRoot }/member/main"> <img alt="jinah-logo"
+			<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
 				src="${appRoot }/resources/image/others/brand_logo_400px.png">
 			</a>
 		</div>
@@ -259,6 +259,8 @@ img {
 		</div>
 	</div>
 	
-	<bot:botnav></bot:botnav>
+	<div class="container">
+		<bot:botnav></bot:botnav>
+	</div>
 </body>
 </html>
