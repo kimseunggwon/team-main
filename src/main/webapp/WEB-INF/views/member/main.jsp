@@ -53,6 +53,27 @@
 .button1:hover {
 	background: #0583F2;
 }
+/*사용자 리뷰 관련 박스 */
+#reviewbox {
+	border: 3px solid #0583F2;
+	border-radius: 10%;
+}
+
+/*구독 관련 정보 박스 */
+#subsinfo_box {
+	border: 3px solid #0583F2;
+	border-radius: 10%;
+}
+/* 서비스 관련 정보 박스 */
+#service_box {
+	border: 3px solid #0583F2;
+	border-radius: 10%;
+}
+/* 세탁방 위치 관련 정보 박스 */
+#location {
+	border: 3px solid #0583F2;
+	border-radius: 10%;
+}
 </style>
 
 
@@ -131,14 +152,13 @@ $(function(){
 
 
 
-		<div class="row justify-content-center  mt-5">
+		<div class="row justify-content-center  mt-5 mb-5">
 
 
 			<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
 			<div class="row justify-content-center">
-				<a href="${appRoot }/member/main"> <img
-					src="${appRoot }/resources/image/others/brand_logo_300px.png"
-					alt="...">
+				<a href="${appRoot }/member/main"> 
+					<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
 				</a>
 			</div>
 
@@ -150,24 +170,87 @@ $(function(){
 	
 	<div id="alert1" class="alert alert-danger fade" role="alert"> </div>
 	
-	<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_EMPUSER', 'ROLE_ADMIN')">
-		<div class="row justify-content-center">
-		
-	 	<a href="${appRoot }/review/list?sort=200">
-			<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
-		 </a>
-		</div>
-	</sec:authorize>
 	
-			<br>
+	<br>
+	
+	<div id="reviewbox">
+		
+		<h1 class="text-center mt-4">빨래널자의 사용후기! 확인해볼까요?</h1>
+		
+		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  				<div class="carousel-inner">
+    				<div class="carousel-item active">
+      					<img src="..." class="d-block w-100" alt="...">
+    				</div>
+    				<div class="carousel-item">
+     					<img src="..." class="d-block w-100" alt="...">
+    				</div>
+    				<div class="carousel-item">
+      					<img src="..." class="d-block w-100" alt="...">
+    				</div>
+  				</div>
+  				
+  			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+   		 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    	 		<span class="sr-only">Previous</span>
+ 	 		</a>
+ 	 		
+ 			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    			<span class="sr-only">Next</span>
+  			</a>
+		</div>
+		
+		<div class="card-group">
+ 			<div class="card ml-3 mr-3" style="border-radius: 10%; border : 3px solid #0583F2">
+    			<div class="card-body">
+      				<h5 class="card-title">12개월 연속 구독중인 "빨래싫어!" 님의 리뷰</h5>
+      				<p class="card-text">빨래를 귀찮아하고 싫어하지만 옷은 많은 저한테는 딱인 서비스였어요. 처음에는 1달만 써봐야지! 하고...</p>
+      				<p class="card-text"><small class="text-muted"><a href="#"><더보기></a></small></p>
+    			</div>
+  			</div>
+ 			<div class="card ml-3 mr-3" style="border-radius: 10%; border : 3px solid #0583F2">
+    			<div class="card-body">
+      				<h5 class="card-title">가장 많은 추천을 받은 "리뷰왕" 님의 리뷰</h5>
+      				<p class="card-text">빨래널자의 서비스가 제 워라밸을 보장해줬어요. 아무래도 자취하는 입장에서는 제일 하기 싫은게 빨래인데..</p>
+      				<p class="card-text"><small class="text-muted"><a href="#"><더보기></a></small></p>
+    			</div>
+  			</div>
+		</div>
+		
+		
+		<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_EMPUSER', 'ROLE_ADMIN') or isAnonymous()">
+			<div class="row justify-content-center mt-3 mb-3">
+		
+	 		<a href="${appRoot }/review/list?sort=200">
+				<input class="btn btn-danger" type="submit" value="사용자 후기!"> 
+			 </a>
+			</div>
+		</sec:authorize>
+	</div>
+	
+	<div class="row mt-5" id="subsinfo_box">
+	
+	</div>
+	
+	
+	<div class="row mt-5" id="service_box">
+	
+	</div>
+	
+	<div class = "row mt-5" id="location">
+	
+	</div>
+	
+	<br>
 		
 		<div class="row justify-content-center fixed-bottom">
 			<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_BLACK')">
-						<a class="btn btn-secondary mb-5"  id="main-subscribe" style="display:none;">구독 신청!</a>
+						<a class="btn btn-secondary mb-3"  id="main-subscribe" style="display:none;">구독 신청!</a>
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
-				<a class="btn btn-secondary mb-5" href="${appRoot}/member/login">구독 신청!</a>
+				<a class="btn btn-secondary mb-3" href="${appRoot}/member/login">구독 신청!</a>
 			</sec:authorize>
 		</div>
 
