@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
+import org.zerock.domain.StoreInfoVO;
 import org.zerock.domain.UserReviewFileVO;
 import org.zerock.domain.UserReviewLikersVO;
 import org.zerock.domain.UserReviewVO;
+import org.zerock.mapper.MemberMapper;
 import org.zerock.mapper.UserReviewFileMapper;
 import org.zerock.mapper.UserReviewLikeMapper;
 import org.zerock.mapper.UserReviewMapper;
@@ -36,6 +38,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Log4j
 public class UserReviewServiceImpl implements UserReviewService {
 	 
+	@Setter(onMethod_ = @Autowired)
+	private MemberMapper mapper;
+	
 	// AWS related
 	private String bucketName2;
 	private String profileName;
@@ -273,6 +278,12 @@ public class UserReviewServiceImpl implements UserReviewService {
 			
 		}
 		
+	}
+	
+	@Override
+	public StoreInfoVO readsubs(MemberVO vo) {
+		
+		return mapper.readsubs(vo);
 	}
 	
 	

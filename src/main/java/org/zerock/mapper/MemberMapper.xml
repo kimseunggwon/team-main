@@ -155,5 +155,15 @@
 		<result property="userid" column="userid"/>
 		<result property="auth" column="auth"/>
 	</resultMap>
+	
+	<select id="readsubs" resultType="org.zerock.domain.StoreInfoVO">
+		SELECT 
+			st.storeaddress storeaddress, 
+	        st.storename storename
+	    FROM user AS u JOIN subscriber AS sub ON u.userid = sub.subsId 
+					   JOIN user_review AS ur ON sub.subsId = ur.re_writer 
+	                   JOIN storeinfo AS st ON st.id = sub.storeid 
+		WHERE ur.re_writer = #{userid}
+	</select>
 
 </mapper>

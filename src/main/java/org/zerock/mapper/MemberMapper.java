@@ -5,6 +5,7 @@ import java.util.List;
 import org.zerock.domain.AuthVO;
 import org.zerock.domain.B2BmemberVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.domain.StoreInfoVO;
 import org.zerock.domain.StoreVO;
 
 public interface MemberMapper {
@@ -34,4 +35,6 @@ public interface MemberMapper {
 	public int removeAuth(MemberVO vo);
 
 	public int updateauth(String id);
+
+	public StoreInfoVO readsubs(MemberVO vo);
 }
