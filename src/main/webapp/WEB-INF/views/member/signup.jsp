@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/member"%>
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 
 <!DOCTYPE html>
 <html>
@@ -906,6 +907,7 @@ $(function() {
 			</form>
 		</div>
 	</div>
+	<bot:botnav></bot:botnav>
 </div>
 </body>
 </html>
