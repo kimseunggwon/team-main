@@ -54,7 +54,7 @@
 	align-content: center;
 }
 
-img {
+#logo {
 	padding: 50px;
 }
 
@@ -95,7 +95,7 @@ img {
 		<%-- 여기는 [글 수정 및 삭제하기] JSP 파일입니다 :) --%>
 	<div class="container">
 		<div class="row justify-content-center">
-			<a href="${appRoot }/member/main"> <img alt="jinah-logo"
+			<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
 				src="${appRoot }/resources/image/others/brand_logo_400px.png">
 			</a>
 		</div>
@@ -313,6 +313,7 @@ img {
 		</div>
 	</div>
 	
-	<bot:botnav></bot:botnav>
-</body>
+	<div class="container">
+		<bot:botnav></bot:botnav>
+	</div>
 </html>

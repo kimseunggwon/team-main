@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="rev" tagdir="/WEB-INF/tags/review"%>
 
+
 	<table id="review-list-table" class="table table-striped">
 		 	<thead>
 		 		<tr>
@@ -72,3 +73,5 @@
 		 		</c:forEach>
 		 	</tbody>
 		 </table>
+		 
+		 

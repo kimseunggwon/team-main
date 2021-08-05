@@ -53,7 +53,7 @@
 	align-content: center;
 }
 
-img {
+#logo {
 	padding: 50px;
 }
 
@@ -87,7 +87,7 @@ img {
 		 --%>
 		<div class="container">
 			<div class="row justify-content-center">
-				<a href="${appRoot }/member/main"> <img alt="jinah-logo"
+				<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
 					src="${appRoot }/resources/image/others/brand_logo_400px.png">
 				</a>
 			</div>
@@ -161,7 +161,17 @@ img {
 							<input type="hidden" id="re-input3" class="form-control"
 								name="reWriterName" value="${review.reWriterName }" readonly>
 							<input readonly="readonly" class="form-control" value="${review.reWriterName }">
-							
+						<br><br>
+						<!-- 이용한 세탁소 위치 정보 -->
+						<div class="item form-group">
+							<label for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
+								class="form-control" value="${review.storeName }" readonly>
+						</div>
+						<div class="item form-group">
+							<label for="re-input5"><span>${review.reWriterName }</span>님의 구독 세탁소 주소</label> <input id="re-input5"
+								class="form-control" value="${review.storeAddress }" readonly>
+						</div>
+
 						<!-- 리뷰 수정/삭제 버튼 -->
 						<c:url value="/review/modify" var="reModifyUrl">
 							<c:param name="reBno" value="${review.reBno }" />
@@ -266,7 +276,8 @@ img {
 					class="btn btn-info">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
-	
-	<bot:botnav></bot:botnav>
+	<div class="container">
+		<bot:botnav></bot:botnav>
+	</div>
 </body>
 </html>
