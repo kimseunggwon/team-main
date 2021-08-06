@@ -23,6 +23,10 @@
 	font-family: 'GongGothicMedium';
 }
 
+#logo {
+	padding: 50px;
+}
+
 body {
 	scrollbar-face-color: #F6F6F6;
 	scrollbar-highlight-color: #bbbbbb;
@@ -203,9 +207,13 @@ A:hover {
 	margin: 10px;
 }
 
-.subdate {
+.subdate, .normal_day.subdate {
 	text-decoration: underline;
-	color: yellow;
+	background-color: #FFC0D5;
+}
+
+.shadow-container {
+	box-shadow: 5px 3px 20px gray;
 }
 </style>
 <!-- script src="${appRoot }/resources/js/subscribe/subscribe-calendar.js" -->
@@ -215,6 +223,20 @@ A:hover {
 		<%-- 진아가 
 		여기는 [구독 최종 확인] 페이지입니다.
 		--%>
+		
+		<div class="container">
+			<div class="row justify-content-center">
+				<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
+					src="${appRoot }/resources/image/others/brand_logo_400px.png">
+				</a>
+			</div>
+			<br><br>
+			<div class="row justify-content-center">
+				<span><h2>스케줄 설계 완료</h2></span>
+			</div>
+		</div>
+
+		
 		<form name="calendarFrm" id="calendarFrm" action="" method="GET">
 
 			<div class="calendar">
@@ -241,6 +263,7 @@ A:hover {
 				<!-- <div class="today_button_div"> -->
 				<!-- <input type="button" class="today_button" onclick="javascript:location.href='/calendar.do'" value="go today"/> -->
 				<!-- </div> -->
+				<div class="shadow-container">
 				<table class="calendar_body">
 
 					<thead>
@@ -278,7 +301,13 @@ A:hover {
 										</td>
 									</c:when>
 									<c:otherwise>
-										<td id="normal-day" class="normal_day">
+										<td
+											id="normal-day"
+											class="normal_day 
+												<c:if test='${subDateList.contains(dateList.fullDate)}'>
+												  subdate
+												</c:if>		
+											">
 											<div
 												class="date
 												<c:if test='${subDateList.contains(dateList.fullDate)}'>
@@ -297,18 +326,73 @@ A:hover {
 							</c:forEach>
 						</tr>
 				</table>
+				</div>
 
-				<c:forEach var="subDateList" items="${subDateList }">
+				<div class="row">
+					
+					<div class="col">
 					<ul>
-						<li>${subDateList }</li>
+						<c:forEach var="subDate" items="${subDateList }" varStatus="status">
+								<li>${subDate }</li>
+								
+							<c:if test="${Math.floor(fn:length(subDateList) / 2 -1 ) == status.index }"	>
+								</ul>
+								</div>
+								<div class="col">
+								<ul>
+							</c:if>
+								
+						</c:forEach>
+					</div>
 					</ul>
-				</c:forEach>
+				</div>
 			</div>
 		</form>
 	</div>
 
-	<ul class="list-unstyled" id="subscribe-date-container">
+		<!-- 구독회원의 구독 최종 결과 정보 -->
+		<div id="re-write-content" class="container">
+			<div class="row justify-content-center">
+				<div class="col-8">
+						<!-- 평점 -->
+						
+						
+						<!-- 이미지 파일 -->
 
-	</ul>
+						<!-- 제목 -->
+						<div class="item form-group">
+							<label for="re-input1">구독 스케줄 날짜</label> <input readonly="readonly"
+								id="re-input1" class="form-control" name="reTitle"
+								value="${review.reTitle }">
+						</div>
+						
+						<!-- 작성자 -->
+						<div class="item form-group">
+							<label for="re-input3">구독자님의 정보</label>
+							<!-- input id="re-input3" class="form-control" value="" type="hidden" name="jinah-writer"-->
+							<input type="hidden" id="re-input3" class="form-control"
+								name="reWriterName" value="${review.reWriterName }" readonly>
+							<input readonly="readonly" class="form-control" value="${review.reWriterName }">
+						<br><br>
+						<!-- 결제 금액 -->
+						<!-- subsAmount -->
+						
+						<!-- 결제 옵션 -->
+						<!--  -->
+						
+						<!-- 이용한 세탁소 위치 정보 -->
+						<div class="item form-group">
+							<label for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
+								class="form-control" value="${review.storeName }" readonly>
+						</div>
+						<div class="item form-group">
+							<label for="re-input5"><span>${review.reWriterName }</span>님의 구독 세탁소 주소</label> <input id="re-input5"
+								class="form-control" value="${review.storeAddress }" readonly>
+						</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
