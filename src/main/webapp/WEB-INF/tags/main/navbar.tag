@@ -40,9 +40,9 @@
 						<ul class="dropdown-menu"
 							aria-labelledby="navbarScrollingDropdown">
 							<li><a class="dropdown-item" href="${appRoot }/member/mypage">나의 회원정보</a></li>
-							<li><a class="dropdown-item" href="${appRoot }/member/subinfo">나의 구독정보</a></li>
+							<li><a class="dropdown-item" href="#">나의 구독정보</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="${appRoot }/help/askList">나의 리뷰</a></li>
+							<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
 						</ul></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
