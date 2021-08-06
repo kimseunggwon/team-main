@@ -8,6 +8,8 @@ import org.zerock.domain.MemberVO;
 import org.zerock.domain.StoreVO;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
+import org.zerock.domain.cancelSubs.SubsCancelVO;
+import org.zerock.domain.cancelSubs.SubsCriteria;
 
 public interface WonhyeokMapper {
 
@@ -34,6 +36,18 @@ public interface WonhyeokMapper {
 	public B2bIntroduceVO getStoreInroducePageInfo(Long id);
 
 	public StoreVO getStoreInfo(String id);
+
+	public void cancelSubsRegister(SubsCancelVO vo);
+
+	public List<SubsCancelVO> getReviewList(SubsCriteria cri);
+
+	public int getTotalCount(SubsCriteria cri);
+
+	public SubsCancelVO getContentByBno(Long bno);
+
+	public int cancelSubsModify(SubsCancelVO vo);
+
+	public void cancelSubsRemove(Long bno);
 
 
 

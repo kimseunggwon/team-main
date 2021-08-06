@@ -15,6 +15,8 @@ import org.zerock.domain.StoreVO;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.UserReviewVO;
+import org.zerock.domain.cancelSubs.SubsCancelVO;
+import org.zerock.domain.cancelSubs.SubsCriteria;
 import org.zerock.mapper.WonhyeokMapper;
 
 import lombok.Setter;
@@ -173,6 +175,52 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 
 		return mapper.getStoreInfo(id);
 	}
+
+
+	@Override
+	public void cancelSubsRegister(SubsCancelVO vo) {
+		
+		mapper.cancelSubsRegister(vo);
+		
+	}
+
+
+	@Override
+	public List<SubsCancelVO> getReviewList(SubsCriteria cri) {
+		
+		return mapper.getReviewList(cri);
+	}
+
+
+	@Override
+	public int getTotalCount(SubsCriteria cri) {
+		
+		return mapper.getTotalCount(cri);
+	}
+
+
+	@Override
+	public SubsCancelVO getContentByBno(Long bno) {
+		
+		return mapper.getContentByBno(bno);
+	}
+
+
+	@Override
+	public boolean cancelSubsModify(SubsCancelVO vo) {
+		
+
+		return mapper.cancelSubsModify(vo) == 1;
+		
+	}
+
+
+	@Override
+	public void cancelSubsRemove(Long bno) {
+		mapper.cancelSubsRemove(bno);
+		
+	}
+
 
 
 	

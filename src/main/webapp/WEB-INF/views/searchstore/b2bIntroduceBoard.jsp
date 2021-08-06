@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
+<%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
+<%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
 
 <!DOCTYPE html>
 <html>
@@ -213,6 +213,9 @@ html {
 
 </head>
 <body style="display: block; width: 100%; margin-top: 20px">
+<div class="nav" style="margin-top: 60px;">
+<main:navbar></main:navbar>
+</div>
 	<div style="text-align: center;">
 		<a href="${appRoot }/member/main"> <img
 			src="${appRoot }/resources/image/others/brand_logo_300px.png"
@@ -284,5 +287,6 @@ html {
 			</div>
 		</div>
 	</div>
+	<bot:botnav></bot:botnav>
 </body>
 </html>
