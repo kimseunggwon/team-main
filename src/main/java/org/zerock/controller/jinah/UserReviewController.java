@@ -32,19 +32,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class UserReviewController {
 	
-	// 내가 해야 될 것 
-	// view - reviewList, reviewDetail, reviewWrite, reviewModify(remove)
-	// 모듈화(?) - 파일 업로드, SNS 연동, 리뷰게시물 검색, 위치 정보(게시물 내 - 원혁이랑 상의 필요)
-	// userReviewController
-	// userReviewService
-	// userReviewServiceImpl
-	// userReviewMapper.interface
-	// userReviewMapper.xml
-	
-	// start
-	
 	private UserReviewService service;
-	
 	
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
+import org.zerock.domain.StoreInfoVO;
 import org.zerock.domain.UserReviewVO;
 
 public interface UserReviewMapper {
@@ -42,6 +43,9 @@ public interface UserReviewMapper {
 
 	// 리뷰 평점 얻어오기 - getReviewStar
 	public int getReviewStar(int reBno);
+
+	// 구독자 정보 불러오기 >>> SubscribeInfoServiceImpl.java에 사용
+	public StoreInfoVO readSubInfo(MemberVO mvo);
 
 
 }

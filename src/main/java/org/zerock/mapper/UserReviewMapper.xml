@@ -174,5 +174,33 @@
 	WHERE 
 	 	re_bno = #{reBno}
 </select>
- 
+
+<!-- 구독자 정보 얻어오기 -->
+<select id="readSubInfo" resultType="org.zerock.domain.SubscriberInfoVO">
+	
+	<!-- private String subsId;
+	private String subsName;
+	private String subsAddress;
+	private Integer storeid;
+	private String subsOptions;
+	private String subsAmount; -->
+	
+	SELECT 
+		sub.subsName subsName,
+		sub.subsAddress subsAddress,
+		sub.subsOptions subsOptions,
+		sub.subsAmount subsAmount,
+		u.userAddress userAddress,
+		u.userPhonenum userPhonenum,
+		u.userNickname userNickname,
+		st.storename storeName,
+		st.storeaddress storeAddress,
+		st.storePhonenum storePhonenum
+	FROM
+		user u JOIN subscriber sub ON u.userid = sub.subsId
+			   JOIN storeinfo st ON st.id = sub.storeid
+	WHERE 
+		sub.subsId = #{userid}
+</select>
+
 </mapper>
