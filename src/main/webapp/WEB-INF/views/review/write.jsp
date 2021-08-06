@@ -212,6 +212,7 @@
 							class="form-control" value="${pinfo.member.userNickname }"
 							readonly>
 					</div>
+					<!-- data : userid -->
 					<input id="write-userid" type="hidden" name="reWriterName"
 						value="${pinfo.member.userid }" readonly>
 
