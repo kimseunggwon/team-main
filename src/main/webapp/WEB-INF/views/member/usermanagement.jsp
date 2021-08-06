@@ -160,12 +160,12 @@ $(function(){
 					<span>&times;</span>
 				</button>				
 				<h5 modal-title style="text-align: center; margin-top: 10px">
-					죽일까 마스터?
+					블랙리스트 처리 하시겠습니까?
 				</h5>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" id="black-user">죽여</button>
-				<button type="button" class="btn btn-success" data-dismiss="modal">살려</button>
+				<button type="button" class="btn btn-danger" id="black-user">블랙</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal">아니요</button>
 			</div>
 		</div>
 	</div>
