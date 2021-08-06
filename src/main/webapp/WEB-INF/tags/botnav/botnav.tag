@@ -22,8 +22,8 @@
 		
 		<br>
 		
-		 <div class="row justify-content-around mb-3">
-		 	<div class="row">
+		 <div class="row justify-content-around mb-5">
+		 	<div class="row mb-5">
 		 
 		 		<div class="mr-10">
 		 			<a href="${appRoot }/member/main">
@@ -33,7 +33,7 @@
 		 	
 		 	</div>
 		 	
-		 	<div class="row">
+		 	<div class="row mb-5">
 		 		<div>
 		 			서울시 강남구 삼성동 1234 우 : 123-1234
 		 			<br>
@@ -44,7 +44,7 @@
 				</div>
 		 	</div>
 		 	
-		 	<div class="row">
+		 	<div class="row mb-5">
 		 		<span >
 		 			<a href="#">
 		 			 	<img src="${appRoot }/resources/image/blog.jpg">
