@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import org.zerock.service.SubscribeInfoService;
 import org.zerock.service.WonhyeokRestService;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -37,6 +39,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SubscribeController {
 
+	@Setter(onMethod_ = @Autowired)
 	private WonhyeokRestService service;
 	private SubscribeInfoService subinfoservice;
 
@@ -135,7 +138,7 @@ public class SubscribeController {
 	@GetMapping("/finalinfo")
 	public String calendar(Model model, 
 			HttpServletRequest request, 
-			SubscribeDate dateData) {
+			SubscribeDate dateData,String userid) {
 
 		
 //		List<SubscribeDate> dateList = subinfoservice.getDateList(dateData);
@@ -203,10 +206,14 @@ public class SubscribeController {
 
 		List<String> realSubDateList = subinfoservice.getSubDateList(dateData);
 
+		
+		log.info(userid);
+		SubsFinalInfoVO vo = service.ABCD(userid);
 
 		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today_info", today_info);
 		model.addAttribute("subDateList", realSubDateList);
+		model.addAttribute("subsInfo", vo);
 
 		
 		
@@ -215,14 +222,6 @@ public class SubscribeController {
 		return "/subscribe/finalinfo";
 	}
 	
-	@GetMapping("/subsFinalInfo")
-	@ResponseBody
-	private AddressVO subsFinalInfo(String subsUserId) {
-		log.info(subsUserId);
-		AddressVO vo = service.getSubsFinalInfo(subsUserId);
-		log.info(vo);
-		return vo;
-	}
 	
 
 }

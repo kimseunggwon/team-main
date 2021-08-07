@@ -223,8 +223,8 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 	}
 
 @Override
-public AddressVO getSubsFinalInfo(String subsUserId) {
-	return mapper.getSubsFinalInfo(subsUserId);
+public SubsFinalInfoVO ABCD(String subsUserId) {
+	return mapper.ABCD(subsUserId);
 }
 
 	

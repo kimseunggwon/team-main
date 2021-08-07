@@ -50,7 +50,7 @@ public interface WonhyeokMapper {
 
 	public void cancelSubsRemove(Long bno);
 
-	public AddressVO getSubsFinalInfo(String subsUserId);
+	public SubsFinalInfoVO ABCD(String subsUserId);
 
 
 }

@@ -159,15 +159,22 @@ VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{su
 </insert>
 
 <!-- 구독정보 최종확인 데이터 갖고오기 -->
-<select id="getSubsFinalInfo" resultType="org.zerock.domain.AddressVO">
+<select id="ABCD" resultType="org.zerock.domain.SubsFinalInfoVO">
 
-SELECT
-	id id,
-	storename storename,
-	storeaddress storeaddress,
-	storePhonenum storePhonenum
-FROM storeinfo
-WHERE userid = #{subsUserId}
+SELECT 
+		subs.subsName subsName,
+		subs.subsAddress subsAddress,
+		u.userPhonenum userPhonenum,
+		u.userNickname userNickname,
+		subs.subsAmount subsAmount,
+		subs.subsOptions subsOptions,
+		st.storename storename,
+		st.storeaddress storeaddress,
+		st.storePhonenum storePhonenum
+
+FROM subscriber AS subs JOIN user AS u ON subs.subsId = u.userid
+						JOIN storeinfo AS st ON subs.storeid = st.id
+WHERE subs.subsId = #{userid};
 	
 
 </select>
