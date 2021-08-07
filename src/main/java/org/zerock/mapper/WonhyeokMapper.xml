@@ -158,6 +158,20 @@ INSERT INTO subscriber
 VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount}, #{serviceStartDate})
 </insert>
 
+<!-- 구독정보 최종확인 데이터 갖고오기 -->
+<select id="getSubsFinalInfo" resultType="org.zerock.domain.AddressVO">
+
+SELECT
+	id id,
+	storename storename,
+	storeaddress storeaddress,
+	storePhonenum storePhonenum
+FROM storeinfo
+WHERE userid = #{subsUserId}
+	
+
+</select>
+
 <!-- b2buser의 id로 가게정보 갖고오기 -->
 <select id="getStoreInfo" resultType="org.zerock.domain.StoreVO">
 SELECT  storename storeName, storeaddress storeUserAddress, storePhonenum storePhonenum

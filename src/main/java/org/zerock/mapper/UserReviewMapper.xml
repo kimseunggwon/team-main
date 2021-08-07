@@ -178,7 +178,7 @@
 <!-- 구독자 정보 얻어오기 -->
 <select id="readSubInfo" resultType="org.zerock.domain.SubscriberInfoVO">
 	
-	<!-- private String subsId;
+<!-- 	private String subsId;
 	private String subsName;
 	private String subsAddress;
 	private Integer storeid;
@@ -201,6 +201,6 @@
 			   JOIN storeinfo st ON st.id = sub.storeid
 	WHERE 
 		sub.subsId = #{userid}
-</select>
+</select> 
 
 </mapper>

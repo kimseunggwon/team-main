@@ -8,6 +8,5 @@ import org.zerock.domain.SubscribeDate;
 
 public interface SubscribeInfoService {
 	List<String> getSubDateList(SubscribeDate dateData);
-	
-	StoreInfoVO getSubInfo(MemberVO mvo);
+
 }

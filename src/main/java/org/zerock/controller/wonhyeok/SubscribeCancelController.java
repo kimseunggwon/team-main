@@ -81,11 +81,12 @@ public class SubscribeCancelController {
 		service.cancelSubsRemove(bno);
 	}
 	
-	@PostMapping("/cancelSubsRefund")
-	@ResponseBody
-	public void cancelSubsRefund(String subsid) {
-		
-		service.cancelSubsRemove(subsid);
-	}
+	/*
+	 * @PostMapping("/cancelSubsRefund")
+	 * 
+	 * @ResponseBody public void cancelSubsRefund(String subsid) {
+	 * 
+	 * service.cancelSubsRemove(subsid); }
+	 */
 }
 

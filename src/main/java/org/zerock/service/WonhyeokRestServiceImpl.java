@@ -12,6 +12,7 @@ import org.zerock.domain.AddressVO;
 import org.zerock.domain.B2bIntroduceVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.StoreVO;
+import org.zerock.domain.SubsFinalInfoVO;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.UserReviewVO;
@@ -221,7 +222,10 @@ public class WonhyeokRestServiceImpl implements WonhyeokRestService {
 		
 	}
 
-
+@Override
+public AddressVO getSubsFinalInfo(String subsUserId) {
+	return mapper.getSubsFinalInfo(subsUserId);
+}
 
 	
 

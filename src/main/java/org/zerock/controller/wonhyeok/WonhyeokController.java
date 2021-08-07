@@ -31,7 +31,7 @@ public class WonhyeokController {
 	}
 //	사장님 홍보 게시판 컨트롤러
 	@RequestMapping("/b2bIntroduceBoard")
-	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_B2BUSER')")
 	public void b2bIntroduce() {
 
 	}

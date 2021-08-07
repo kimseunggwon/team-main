@@ -1,12 +1,7 @@
 package org.zerock.controller.wonhyeok;
 
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,25 +9,22 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerock.domain.AddressVO;
 import org.zerock.domain.MemberVO;
-import org.zerock.domain.StoreInfoVO;
+import org.zerock.domain.SubsFinalInfoVO;
 import org.zerock.domain.SubscribeDate;
 import org.zerock.domain.SubscribeViewVO;
 import org.zerock.domain.SubscriberInfoVO;
 import org.zerock.domain.smsDomain.Coolsms;
 import org.zerock.domain.smsDomain.smsVO;
-import org.zerock.service.MemberService;
 import org.zerock.service.SubscribeInfoService;
 import org.zerock.service.WonhyeokRestService;
 
@@ -143,8 +135,7 @@ public class SubscribeController {
 	@GetMapping("/finalinfo")
 	public String calendar(Model model, 
 			HttpServletRequest request, 
-			SubscribeDate dateData,
-			MemberVO mvo){
+			SubscribeDate dateData) {
 
 		
 //		List<SubscribeDate> dateList = subinfoservice.getDateList(dateData);
@@ -211,17 +202,26 @@ public class SubscribeController {
 			}
 
 		List<String> realSubDateList = subinfoservice.getSubDateList(dateData);
-		StoreInfoVO subscriberInfo = subinfoservice.getSubInfo(mvo);
+
 
 		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today_info", today_info);
 		model.addAttribute("subDateList", realSubDateList);
-		model.addAttribute("subInfo", subscriberInfo);
+
 		
 		
 		// 구독 세탁소 정보
 
 		return "/subscribe/finalinfo";
+	}
+	
+	@GetMapping("/subsFinalInfo")
+	@ResponseBody
+	private AddressVO subsFinalInfo(String subsUserId) {
+		log.info(subsUserId);
+		AddressVO vo = service.getSubsFinalInfo(subsUserId);
+		log.info(vo);
+		return vo;
 	}
 	
 

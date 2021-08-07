@@ -729,7 +729,6 @@ $(function() {
 	<div class="col">
 		<div class="title">
 			<input class="button_sang" type="button" id="payPage" value="결제하기">
-			<%-- 			<img src="${imgIntroRoot}6/washline.jpg"> --%>
 		</div>
 	</div>
 
