@@ -28,7 +28,6 @@
 <script>
   // Replace with your view ID.
   var VIEW_ID = '248683561';
-  var appRoot = '${appRoot}';
 
   // Query the API and print the results to the page.
   function queryReport (startDate, endDate, expression, name, label) {
