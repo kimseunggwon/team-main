@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "macro-market-322105",
+  "private_key_id": "46acce13dd6df8f9a23ac8d2cfb96e9d098673a5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCcv/yiCeIxpbp7\nNTQ3js1MGBwhYyFlR6aZ8N7JYHU6mr2Neco/ALQw5JujPmq/fIX9DoKQlAn3M5Zd\nA14S1UA5J/ji33kdtgn6HVIaX9x9v6leyYew4isCdTNo40VJDXnOMvhtyMQx09x5\n2CW/rhuaLiFyHp2xAuB9fxP8upi5HvG0/6BvIwqAmz5e8QiAyOyijRjhry5dsmwx\nN0075vcF/cmedPxlpE0rj/odOnNZN0PbIUBsvxzkJQVFZJeYnwMKm9qssM95JGr7\nlRl7mqv4BIfxmMtzIZfqcYSVBqCLUCtMJmxpw2HoJbyApHqknYdHz4DT5DNVQ2jL\nXfCz/XiJAgMBAAECggEADjLj3we3KhkhjcSRgNDaLuDmN24D2elGIZ6sh6BJri/T\nKMwV8mQNbnpe0Mg4IjVU68nTMOaACpjtL2q9LEaN5T+GL4LftT3GpJXgWIxDbE6e\nuHvX40FxdO0J5Z/kqEvkszVxxHwRrZPL3muia70JOgugsvYsAZtJm4SV2mhKqkYL\nY7eHnRRlt1wgtg/Cm6DcYtH/FcaO+WOKzwfQKlCHtIxJIWmnT5YHQP64+bqylHP5\n7Yxmmh1B8D82i87+ZMcymJ3pJToJZwJlPis2ZyCK28C1dxQ174A0KRTxNzsBB9x1\n53m7f9/4376DZQJJvPCeCqmcS9NeR3LYmwxaGNEr4wKBgQDZj4MHiwHqJnN7Eczb\nUVQFLw0Mz7dWdQq8sn4eaP7gLDK4PyUKzTQiqp1CXpCLFQCKaM2g3jSA12V0c579\nSfhlN1NVJRujfFE+ckG7+cxU42P6/jDUGBV6O2DYKQGCGQT2BUxJ/1BHqQMejru1\ndL1BxNh5PsNda51tHGVKk/2/CwKBgQC4cfKGR2BrEsWXF4/pgjCIKbjCDy419mOV\n8QQJPJI6/AiINfz3IF5zCSG5IHWV8CSYpoNPlZ6jUNrJB4XmuyqDhzxI75DrK/IP\njhI0B5N6UiktNIkxIaUAdKaI7Jp8ZVXvLtkkyHACLLR5hs4nFowpKuw1H4vRwlud\ndtOvq2HzOwKBgQCTumw5sf1B1owxtDuLbOUFhBZzbZRLY7w/t2AGHDt9UuW50D7B\n3+cX5wxTpcy2dDNiyJlgM6IpHpmogl4iFZlSeUffmAv1bhPouELEdnF17tXT98iG\nLDhhQHKZNPbuNTj2KVDNKk2D61LP7BGvvC5Ku3RWl/Smuc0y6sYo5ua1UwKBgBy4\neZhZMvVZVfVCEQG+aQo63O8y5/I1LKqjfgpmKSsQJc/4AC0HGE33ZQ3rtQOlAj3W\n5+mTlcE+jOLyzfHwwRz8CPIeg8Vq8WVkrQb3CwroEktcu+Qvpf7dKzV1ClVGfkwh\nUmS85VwhU/T8fctuYmLisSdQgzgleJibcTkQic8TAoGBALlUatcT3Ja9hxfnK7hN\no2Sa+8zV7OF4zn03suqLwh3K54iMbXJlZD7NqDY2FFrPjmQlXjR1d4H9J7sYPVOI\n4qL4VgTnTBTNz8zyiObq0zSeIhfuOgy5ZPDqPxR/bd9UanXB7IwAyl9R8nLU8Fdb\ncRCjHPAw8FRbfbq2GCGNi+fk\n-----END PRIVATE KEY-----\n",
+  "client_email": "subscribe-laundryservice@macro-market-322105.iam.gserviceaccount.com",
+  "client_id": "109886575706334041369",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/subscribe-laundryservice%40macro-market-322105.iam.gserviceaccount.com"
+}

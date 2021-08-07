@@ -5,12 +5,25 @@
 <%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 <%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
+<%@ taglib prefix="ga" tagdir="/WEB-INF/tags" %>
+
 
 
 
 <!DOCTYPE html>  
 <html>
 <head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-204320906-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-204320906-1');
+</script>
+
 
 <mem:mybar></mem:mybar>
  
@@ -253,6 +266,9 @@ $(function(){
 				<a class="btn btn-secondary mb-3" href="${appRoot}/member/login">구독 신청!</a>
 			</sec:authorize>
 		</div>
+		
+	<canvas id="siteUse"></canvas>
+	<ga:ga></ga:ga>
 
 	<bot:botnav></bot:botnav>
 
