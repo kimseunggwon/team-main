@@ -13,4 +13,9 @@ public class ErrorController {
 	public void accessDenied() {
 		log.info("권한없음 페이지");
 	}
+	
+	@RequestMapping("/accessfail")
+	public void accessfail() {
+		log.info("불러오기 실패");
+	}
 }

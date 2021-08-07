@@ -22,11 +22,11 @@ body{
 }
 </style>
 
-<title>Access Denied</title>
+<title>Data Loading Fail</title>
 </head>
 <body>
 <div style="text-align: center; margin-top: 15%" class="container">
-	<h1 style="font-weight: bolder; font-size: 4em">접근 권한이 없는 페이지 입니다.</h1>
+	<h1 style="font-weight: bolder; font-size: 4em">데이터를 불러오는데 실패했습니다.</h1>
 	<h3 style="margin-top: 40px;">궁금하신 사항은 <a style="text-decoration: none;" href="${appRoot}/help/helpdesk">고객센터</a>로 문의해 주시기 바랍니다.</h3>
 	
 	<h5 style="margin-top: 110px;"><a style="text-decoration: none;" color: black;" href="${appRoot}/member/main">메인화면</a>으로 가기</h5>
