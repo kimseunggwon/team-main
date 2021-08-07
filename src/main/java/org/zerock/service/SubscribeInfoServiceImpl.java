@@ -93,10 +93,5 @@ public class SubscribeInfoServiceImpl implements SubscribeInfoService {
 
 		return realSubDateList;
 	}
-	
-	
-	@Override
-	public StoreInfoVO getSubInfo(MemberVO mvo) {
-		return mapper.readSubInfo(mvo);
-	}
+
 }

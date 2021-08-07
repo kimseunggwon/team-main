@@ -158,10 +158,103 @@ INSERT INTO subscriber
 VALUES (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount}, #{serviceStartDate})
 </insert>
 
+<!-- 구독정보 최종확인 데이터 갖고오기 -->
+<select id="ABCD" resultType="org.zerock.domain.SubsFinalInfoVO">
+
+SELECT 
+		subs.subsName subsName,
+		subs.subsAddress subsAddress,
+		u.userPhonenum userPhonenum,
+		u.userNickname userNickname,
+		subs.subsAmount subsAmount,
+		subs.subsOptions subsOptions,
+		st.storename storename,
+		st.storeaddress storeaddress,
+		st.storePhonenum storePhonenum
+
+FROM subscriber AS subs JOIN user AS u ON subs.subsId = u.userid
+						JOIN storeinfo AS st ON subs.storeid = st.id
+WHERE subs.subsId = #{userid};
+	
+
+</select>
+
 <!-- b2buser의 id로 가게정보 갖고오기 -->
 <select id="getStoreInfo" resultType="org.zerock.domain.StoreVO">
 SELECT  storename storeName, storeaddress storeUserAddress, storePhonenum storePhonenum
 FROM storeinfo
 WHERE id = #{id}
 </select>
+
+<!-- 구독취소게시판 내용 넣기 -->
+<insert id="cancelSubsRegister">
+INSERT INTO cancelSubsBoard 
+(subsid, title, content)
+VALUES
+(#{subsid}, #{title}, #{content})
+
+</insert>
+
+<!-- 구독취소리스트 갖고오기 -->
+<select id="getReviewList" resultType="org.zerock.domain.cancelSubs.SubsCancelVO">
+SELECT
+	bno bno,
+	subsid subsid,
+	title title,
+	content content,
+	updatedate updatedate
+FROM cancelSubsBoard
+ORDER BY bno DESC
+LIMIT #{from}, #{amount}
+
+</select>
+
+<!-- 구독취소리스트 갖고오기 -->
+ <select id="getTotalCount" resultType="int">
+  SELECT COUNT(*) FROM cancelSubsBoard
+  </select>
+  
+  <!-- 구독게시판 정보 갖고오기 -->
+  <select id="getContentByBno" resultType="org.zerock.domain.cancelSubs.SubsCancelVO">
+  SELECT
+	bno bno,
+	subsid subsid,
+	title title,
+	content content,
+	updatedate updatedate
+FROM cancelSubsBoard
+WHERE bno = #{bno}
+  </select>
+  
+  <!-- 구독게시판 수정 -->
+    <update id="cancelSubsModify">
+  	UPDATE cancelSubsBoard
+  	
+  	SET
+  	    title = #{title}, 
+  	    content = #{content},
+  	    updateDate = NOW()
+  	    
+  	WHERE
+  	    bno = #{bno}
+  
+  </update>
+  <!-- 구독 게시판 삭제 -->
+  <delete id="cancelSubsRemove">
+  	DELETE FROM cancelSubsBoard WHERE bno = #{bno}
+  </delete>
+  
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
