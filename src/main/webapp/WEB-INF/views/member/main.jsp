@@ -5,14 +5,12 @@
 <%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 <%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
-
+<%@ taglib prefix="map" tagdir="/WEB-INF/tags/MainMapTags" %>
 
 
 <!DOCTYPE html>  
 <html>
 <head>
-
-<mem:mybar></mem:mybar>
  
 
 
@@ -307,9 +305,14 @@ $(function(){
 		
 	</div>
 	
-	<div id="location">
-		<h1 class="text-center mt-4">지금 내 주변에 있는 빨래널자의 세탁방은?</h1>
-	</div>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<div id="location">
+			<h1 class="text-center mt-4">지금 내 주변에 있는 빨래널자의 세탁방은?</h1>
+		
+			<map:MainMapTags></map:MainMapTags>
+		
+		</div>
+	</sec:authorize>
 	
 	<br>
 		
