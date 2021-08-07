@@ -8,7 +8,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
 <style type="text/css">
 	@font-face {
 	    font-family: 'GongGothicMedium';

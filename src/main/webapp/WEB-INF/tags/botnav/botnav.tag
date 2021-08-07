@@ -3,6 +3,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 
+<style>
+#btnav {
+	margin-bottom: 100px;
+}
+</style>
 
 	<hr>
 
@@ -22,8 +27,9 @@
 		
 		<br>
 		
-		 <div class="row justify-content-around mb-3">
-		 	<div class="row">
+		<div id="btnav">
+		 <div class="row justify-content-around mb-5">
+		 	<div class="row mb-5">
 		 
 		 		<div class="mr-10">
 		 			<a href="${appRoot }/member/main">
@@ -33,7 +39,7 @@
 		 	
 		 	</div>
 		 	
-		 	<div class="row">
+		 	<div class="row mb-5">
 		 		<div>
 		 			서울시 강남구 삼성동 1234 우 : 123-1234
 		 			<br>
@@ -44,7 +50,7 @@
 				</div>
 		 	</div>
 		 	
-		 	<div class="row">
+		 	<div class="row mb-5">
 		 		<span >
 		 			<a href="#">
 		 			 	<img src="${appRoot }/resources/image/blog.jpg">
@@ -60,3 +66,4 @@
 		 	</div>
 		 		
 		 </div>
+		</div>
