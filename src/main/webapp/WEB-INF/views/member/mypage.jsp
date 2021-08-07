@@ -75,19 +75,19 @@ body {
 </ul>  
  -->
 
- 
+  
 
-  <div class="btn-group dropleft">  
-  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div class="btn-group dropleft">   
+  <button class="btn btn-info btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    메뉴보기 
   </button> 
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="${appRoot }/member/myget">내 정보확인</a>
-    <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> 
-  
+ <!--    <a class="dropdown-item" href="${appRoot }/member/subinfo">구독정보</a> -->
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
     <a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a>
-    <a class="dropdown-item" href="${appRoot }/review/list">사용자후기</a>
+    <a class="dropdown-item" href="${appRoot }/review/list">사용자 후기</a>
+    <a class="dropdown-item" href="${appRoot }/searchstore/b2bIntroduceBoard">홍보페이지 관리</a>   
   </div>
 </div> 
  

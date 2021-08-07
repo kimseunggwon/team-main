@@ -5,9 +5,8 @@
 <%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 <%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
+<%@ taglib prefix="map" tagdir="/WEB-INF/tags/MainMapTags" %>
 <%@ taglib prefix="ga" tagdir="/WEB-INF/tags" %>
-
-
 
 
 <!DOCTYPE html>  
@@ -70,22 +69,33 @@
 #reviewbox {
 	border: 3px solid #0583F2;
 	border-radius: 10%;
+	height: 350px;
+	width: 1110px;
 }
 
 /*구독 관련 정보 박스 */
 #subsinfo_box {
 	border: 3px solid #0583F2;
 	border-radius: 10%;
+	margin-top: 3%;
+	height: 1200px;
+	width: 1110px;
 }
 /* 서비스 관련 정보 박스 */
 #service_box {
 	border: 3px solid #0583F2;
 	border-radius: 10%;
+	margin-top: 3%;
+	height: 1500px;
+	width: 1110px;
 }
 /* 세탁방 위치 관련 정보 박스 */
 #location {
 	border: 3px solid #0583F2;
 	border-radius: 10%;
+	margin-top: 3%;
+	height: 500px;
+	width: 1110px;
 }
 </style>
 
@@ -186,47 +196,25 @@ $(function(){
 	
 	<br>
 	
+	<!-- 사용후기 박스 -->
 	<div id="reviewbox">
 		
 		<h1 class="text-center mt-4">빨래널자의 사용후기! 확인해볼까요?</h1>
 		
-		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  				<div class="carousel-inner">
-    				<div class="carousel-item active">
-      					<img src="..." class="d-block w-100" alt="...">
-    				</div>
-    				<div class="carousel-item">
-     					<img src="..." class="d-block w-100" alt="...">
-    				</div>
-    				<div class="carousel-item">
-      					<img src="..." class="d-block w-100" alt="...">
-    				</div>
-  				</div>
-  				
-  			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-   		 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    	 		<span class="sr-only">Previous</span>
- 	 		</a>
- 	 		
- 			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-    			<span class="sr-only">Next</span>
-  			</a>
-		</div>
 		
-		<div class="card-group">
+		<div class="card-group mt-4">
  			<div class="card ml-3 mr-3" style="border-radius: 10%; border : 3px solid #0583F2">
     			<div class="card-body">
       				<h5 class="card-title">12개월 연속 구독중인 "빨래싫어!" 님의 리뷰</h5>
       				<p class="card-text">빨래를 귀찮아하고 싫어하지만 옷은 많은 저한테는 딱인 서비스였어요. 처음에는 1달만 써봐야지! 하고...</p>
-      				<p class="card-text"><small class="text-muted"><a href="#"><더보기></a></small></p>
+      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=102&pageNum=1&amount=10&type=&keyword=&sort=200"><더보기></a></small></p>
     			</div>
   			</div>
  			<div class="card ml-3 mr-3" style="border-radius: 10%; border : 3px solid #0583F2">
     			<div class="card-body">
       				<h5 class="card-title">가장 많은 추천을 받은 "리뷰왕" 님의 리뷰</h5>
       				<p class="card-text">빨래널자의 서비스가 제 워라밸을 보장해줬어요. 아무래도 자취하는 입장에서는 제일 하기 싫은게 빨래인데..</p>
-      				<p class="card-text"><small class="text-muted"><a href="#"><더보기></a></small></p>
+      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=103&pageNum=1&amount=10&type=&keyword=&sort=200"><더보기></a></small></p>
     			</div>
   			</div>
 		</div>
@@ -242,28 +230,113 @@ $(function(){
 		</sec:authorize>
 	</div>
 	
-	<div class="row mt-5" id="subsinfo_box">
-	
+	<!-- 구독시스템 정보 박스 -->
+	<div id="subsinfo_box">
+		
+		<h1 class="text-center mt-4">빨래 널자의 구독시스템은 어떻게 구성되나요?</h1>
+		
+		<div class="container">
+ 		        
+ 		        <div class="row justify-content-center mt-3 mb-3">
+ 					<img alt="" src="${appRoot }/resources/image/main/signup.png">			
+ 				</div>
+    			<h4 class="text-center mg-4">
+      				1. 빨래널자의 구독서비스 신청!
+    			</h4>
+    			
+    			<div class="row justify-content-center">
+	    			<img alt="" src="${appRoot }/resources/image/main/화살표2.png">
+    			</div>
+    			
+    			<div class="row justify-content-center mt-3 mb-3">
+ 					<img alt="" src="${appRoot }/resources/image/main/put.png">			
+ 				</div>
+    			<h4 class="text-center mg-4">
+      				2. 서비스를 제공받을 빨래들을 지급된 빨래 가방에 넣어주세요!
+    			</h4>
+    			
+    			<div class="row justify-content-center">
+	    			<img alt="" src="${appRoot }/resources/image/main/화살표2.png">
+    			</div>
+    			
+ 				<div class="row justify-content-center mt-3 mb-3">
+ 					<img alt="" src="${appRoot }/resources/image/main/shipping2.jpg">			
+ 				</div>
+    			<h4 class="text-center mg-4">
+    				3.빨래 가방을 지정장소(ex. 집앞)에 수거 시간에 맞춰서 내놔주세요!
+    			</h4>
+    		
+ 				
+ 				<div class="row justify-content-center">
+	    			<img alt="" src="${appRoot }/resources/image/main/화살표2.png">
+    			</div>
+ 				
+ 				<div class="row justify-content-center mt-3 mb-3">
+ 					<img alt="" src="${appRoot }/resources/image/main/laundry.png">			
+ 				</div>
+    			<h4 class="text-center mg-4">
+      				4. 빨래 끝!
+    			</h4>
+  			
+		</div>
+		
 	</div>
 	
 	
-	<div class="row mt-5" id="service_box">
-	
+	<div id="service_box">
+		<h1 class="text-center mt-4">빨래널자가 특별한 이유 3가지!</h1>
+		<small class="row justify-content-center mt-4">빨래로부터의 해방감을 느껴보세요!</small>
+		
+				<div class="container">
+ 		        
+    			<h4 class="text-center mt-5">
+      				1. AI를 활용한 맞춤형 세탁! 보기 싫은 때, 지지 않는 얼룩? 걱정마세요!
+    			</h4>
+ 		        <div class="row justify-content-center mt-5">
+ 					<img alt="" src="${appRoot }/resources/image/main/AI.jpg">			
+ 				</div>
+    			
+    			
+    			
+    			<h4 class="text-center mt-5">
+      				2. 빨래널자 만의 위생관리 시스템으로 소중한 내 옷을 더욱 깨끗하게!
+    			</h4>
+    			<div class="row justify-content-center mt-5">
+ 					<img alt="" src="${appRoot }/resources/image/main/위생.jpg">			
+ 				</div>
+    			
+    			
+    			
+    			<h4 class="text-center mt-4">
+    				3. 빨래 접기에 드는 시간이 아까우신가요? 빨래는 모두 이쁘게 그리고 각지게 접어서 보내드립니다! 
+    			</h4>
+ 				<div class="row justify-content-center mt-5">
+ 					<img alt="" src="${appRoot }/resources/image/main/빨래 접기.jpg">			
+ 				</div>
+    		
+  			
+		</div>
+		
 	</div>
 	
-	<div class = "row mt-5" id="location">
-	
-	</div>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<div id="location">
+			<h1 class="text-center mt-4">지금 내 주변에 있는 빨래널자의 세탁방은?</h1>
+		
+			<map:MainMapTags></map:MainMapTags>
+		
+		</div>
+	</sec:authorize>
 	
 	<br>
 		
-		<div class="row justify-content-center fixed-bottom">
+		<div class="row justify-content-center fixed-bottom ">
 			<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_BLACK')">
-						<a class="btn btn-secondary mb-3"  id="main-subscribe" style="display:none;">구독 신청!</a>
+						<a class="btn btn-danger mb-3 mt-5"  id="main-subscribe" style="display:none; background-color: ##0583F2;">구독 신청!</a>
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
-				<a class="btn btn-secondary mb-3" href="${appRoot}/member/login">구독 신청!</a>
+				<a class="btn btn-danger mb-3 mt-5" id="main-subscribe2" style="background-color: ##0583F2; " href="${appRoot}/member/login">구독 신청!</a>
 			</sec:authorize>
 		</div>
 		
