@@ -30,7 +30,11 @@
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>Main</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&display=swap" rel="stylesheet">
 
 <style type="text/css">
 @font-face {
@@ -76,8 +80,11 @@ body {
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 	border-radius: 60px;
-	height: 400px;
+	height: 600px;
 	width: 1110px;
+}
+#review_card1 {
+	margin-top: 30px;
 }
 
 /*구독 관련 정보 박스 */
@@ -109,6 +116,19 @@ body {
 	height: 500px;
 	width: 1110px;
 }
+
+#go-review, #subscribe-btn1, #subscribe-btn2 {
+	padding: 5px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+.connection {
+	width: 20px;
+	padding: 5px;
+}
+
 </style>
 
 
@@ -193,7 +213,7 @@ $(function(){
 			<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
 			<div class="row justify-content-center">
 				<a href="${appRoot }/member/main"> 
-					<img src="${appRoot }/resources/image/others/brand_logo_400px.png" alt="...">
+					<img src="${appRoot }/resources/image/others/brand_logo_500px.png" alt="...">
 				</a>
 			</div>
 
@@ -201,20 +221,22 @@ $(function(){
 
 
 
-		<hr>
 	
 	<div id="alert1" class="alert alert-danger fade" role="alert"> </div>
+	</div>
 	
+	<hr style="border: 5px solid #E3F6FF">
+	
+	<div class="container">
 	
 	<br>
 	
 	<!-- 사용후기 박스 -->
-	<div id="reviewbox">
+	<div id="reviewbox1">
 		
-		<h1 class="text-center mt-4">빨래널자의 사용후기! 확인해볼까요?</h1>
+		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Londrina Solid', cursive;">HOT REVIEW</h1>
 		
-		
-		<div class="card-group mt-4">
+		<div id="" class="card-group mt-4">
  			<div class="card ml-3 mr-3" style="box-shadow: 5px 3px 30px gray;
 											   border: 3px solid white; -webkit-border-radius: 40px; -moz-border-radius: 40px;">
     			<div class="card-body">
@@ -223,6 +245,9 @@ $(function(){
       				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=102&pageNum=1&amount=10&type=&keyword=&sort=200"><더보기></a></small></p>
     			</div>
   			</div>
+		</div>
+		
+		<div id="review_card2" class="card-group mt-4">
  			<div class="card ml-3 mr-3" style="box-shadow: 5px 3px 30px gray;
 											   border: 3px solid white; -webkit-border-radius: 40px; -moz-border-radius: 40px;">
     			<div class="card-body">
@@ -238,7 +263,10 @@ $(function(){
 		<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_EMPUSER', 'ROLE_ADMIN') or isAnonymous()">
 			<div class="row justify-content-center mt-3 mb-3">
 	 		<a href="${appRoot }/review/list?sort=200">
-				<input class="btn btn-danger btn-lg" type="submit" value="사용자 후기!"> 
+	 			<button id="go-review" type="button" class="btn btn-primary"
+				data-toggle="modal" data-target="#staticBackdrop2">
+				<img alt="goreview" src="${appRoot }/resources/image/main/goreview.png">
+				</button>
 			 </a>
 			</div>
 		</sec:authorize>
@@ -260,7 +288,7 @@ $(function(){
     			</h4>
     			
     			<div class="row justify-content-center">
-	    			<img alt="" src="${appRoot }/resources/image/main/화살표2.png">
+	    			<img class="connection" alt="" src="${appRoot }/resources/image/main/화살표2.png">
     			</div>
     			
     			<div class="row justify-content-center mt-3 mb-3">
@@ -271,7 +299,7 @@ $(function(){
     			</h4>
     			
     			<div class="row justify-content-center">
-	    			<img alt="" src="${appRoot }/resources/image/main/화살표2.png">
+	    			<img class="connection" alt="" src="${appRoot }/resources/image/main/화살표2.png">
     			</div>
     			
  				<div class="row justify-content-center mt-3 mb-3">
@@ -283,7 +311,7 @@ $(function(){
     		
  				
  				<div class="row justify-content-center">
-	    			<img alt="" src="${appRoot }/resources/image/main/화살표2.png">
+	    			<img class="connection" alt="" src="${appRoot }/resources/image/main/화살표2.png">
     			</div>
  				
  				<div class="row justify-content-center mt-3 mb-3">
@@ -348,17 +376,16 @@ $(function(){
 		<div class="row justify-content-center fixed-bottom ">
 			<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_BLACK')">
 						<a id="main-subscribe" style="display:none; background-color: ##0583F2;">
-							<button class="btn btn-primary btn-lg btn-block">
-								구독 신청!
+							<button id="subscribe-btn1" class="btn btn-primary btn-lg btn-block">
+								<img alt="goreview" src="${appRoot }/resources/image/main/subscribebtn.png">
 							</button>
 						</a>
 			</sec:authorize>
 			
-			<%-- ************************** img 버튼 ************************* --%>
 			<sec:authorize access="isAnonymous()">
 				<a class="mb-3 mt-5" id="main-subscribe2" style="background-color: ##0583F2; " href="${appRoot}/member/login">
-				<button class="btn btn-primary btn-lg btn-block">
-				구독 신청!
+				<button id="subscribe-btn2" class="btn btn-primary btn-lg btn-block">
+					<img alt="goreview" src="${appRoot }/resources/image/main/subscribebtn.png">
 				</button>
 				</a>
 			</sec:authorize>
