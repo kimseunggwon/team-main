@@ -382,7 +382,7 @@ A:hover {
 						<hr><br>
 						
 						<!-- 결제 금액 -->
-						<!-- subsAmount -->
+					<!-- subsAmount -->
 						<div class="item form-group">
 							<label for="sub-inpu5">결제 금액</label> 
 							<input id="sub-input5" class="form-control" value="${subInfo.subsAmount }" readonly>
