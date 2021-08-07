@@ -354,45 +354,63 @@ A:hover {
 		<div id="re-write-content" class="container">
 			<div class="row justify-content-center">
 				<div class="col-8">
-						<!-- 평점 -->
-						
-						
-						<!-- 이미지 파일 -->
-
-						<!-- 제목 -->
 						<div class="item form-group">
-							<label for="re-input1">구독 스케줄 날짜</label> <input readonly="readonly"
-								id="re-input1" class="form-control" name="reTitle"
-								value="${review.reTitle }">
+							<label for="sub-input1">이름</label> 
+							<input id="sub-input1" class="form-control" value="${subInfo.subsName }" readonly>
 						</div>
 						
-						<!-- 작성자 -->
+						<!-- data : userid -->
+						<input type="hidden" name="userid"
+						value="${pinfo.member.userid }" readonly>
+						
 						<div class="item form-group">
-							<label for="re-input3">구독자님의 정보</label>
-							<!-- input id="re-input3" class="form-control" value="" type="hidden" name="jinah-writer"-->
-							<input type="hidden" id="re-input3" class="form-control"
-								name="reWriterName" value="${review.reWriterName }" readonly>
-							<input readonly="readonly" class="form-control" value="${review.reWriterName }">
-						<br><br>
+							<label for="sub-input2">나의 주소</label> 
+							<input id="sub-input2" class="form-control" value="${subInfo.userAddress }" readonly>
+						</div>
+						
+						<div class="item form-group">
+							<label for="sub-input3">연락처</label> 
+							<input id="sub-input3" class="form-control" value="${subInfo.userPhonenum }" readonly>
+						</div>
+						
+						<div class="item form-group">
+							<label for="sub-input4">닉네임</label> 
+							<input id="sub-input4" class="form-control" value="${subInfo.userNickname }" readonly>
+						</div>
+						
+						
+						<hr><br>
+						
 						<!-- 결제 금액 -->
-						<!-- subsAmount -->
+					<!-- subsAmount -->
+						<div class="item form-group">
+							<label for="sub-inpu5">결제 금액</label> 
+							<input id="sub-input5" class="form-control" value="${subInfo.subsAmount }" readonly>
+						</div>
 						
 						<!-- 결제 옵션 -->
-						<!--  -->
-						
+						<div class="item form-group">
+							<label for="sub-input6">선택한 구독 옵션</label> 
+							<input id="sub-input6" class="form-control" value="${subInfo.subsOptions }" readonly>
+						</div>
+						<hr><br>
 						<!-- 이용한 세탁소 위치 정보 -->
 						<div class="item form-group">
-							<label for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
-								class="form-control" value="${review.storeName }" readonly>
+							<label for="sub-input7">구독 세탁소 이름</label> 
+							<input id="sub-input7" class="form-control" value="${subInfo.storeName }" readonly>
 						</div>
+						
 						<div class="item form-group">
-							<label for="re-input5"><span>${review.reWriterName }</span>님의 구독 세탁소 주소</label> <input id="re-input5"
-								class="form-control" value="${review.storeAddress }" readonly>
+							<label for="sub-input8">구독 세탁소 주소</label> 
+							<input id="sub-input8" class="form-control" value="${subInfo.storeAddress }" readonly>
 						</div>
+						
+						<div class="item form-group">
+							<label for="sub-input9">구독 세탁소 연락처</label> 
+							<input id="sub-input9" class="form-control" value="${subInfo.storePhonenum }" readonly>
 						</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

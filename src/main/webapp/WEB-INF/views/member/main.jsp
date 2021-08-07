@@ -6,11 +6,25 @@
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
 <%@ taglib prefix="main" tagdir="/WEB-INF/tags/main"%>
 <%@ taglib prefix="map" tagdir="/WEB-INF/tags/MainMapTags" %>
+<%@ taglib prefix="ga" tagdir="/WEB-INF/tags" %>
 
 
 <!DOCTYPE html>  
 <html>
 <head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-204320906-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-204320906-1');
+</script>
+
+
+<mem:mybar></mem:mybar>
  
 
 
@@ -325,6 +339,9 @@ $(function(){
 				<a class="btn btn-danger mb-3 mt-5" id="main-subscribe2" style="background-color: ##0583F2; " href="${appRoot}/member/login">구독 신청!</a>
 			</sec:authorize>
 		</div>
+		
+	<canvas id="siteUse"></canvas>
+	<ga:ga></ga:ga>
 
 	<bot:botnav></bot:botnav>
 

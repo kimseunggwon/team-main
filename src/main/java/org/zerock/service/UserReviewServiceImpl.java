@@ -39,7 +39,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 public class UserReviewServiceImpl implements UserReviewService {
 	 
 	@Setter(onMethod_ = @Autowired)
-	private MemberMapper mapper;
+	private MemberMapper membermapper;
 	
 	// AWS related
 	private String bucketName2;
@@ -283,7 +283,7 @@ public class UserReviewServiceImpl implements UserReviewService {
 	@Override
 	public StoreInfoVO readsubs(MemberVO vo) {
 		
-		return mapper.readsubs(vo);
+		return membermapper.readsubs(vo);
 	}
 	
 	
