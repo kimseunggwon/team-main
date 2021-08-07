@@ -41,27 +41,12 @@ var userid = "${pinfo.member.userid}";
 
 <div class = "container">
 
-			<div class="row mt-5">
-				
-				 <div class="col align-self-start">
-				 
-				 </div>
-			
-				<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
-				<div class="col align-self-center mt-3">
+			<div class="row justify-content-center mt-5">
+
 					<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+						<img src="${appRoot }/resources/image/others/brand_logo_400px.png" alt="...">
 					</a>
-				</div>
-			
-				<!-- 간단한 검색을 할 수 있는 검색창 구현 -->
-				<div class="col align-self-end">
-			
-					<form class="d-flex">
-     	 				<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-      					<button class="btn btn-outline-success" type="submit">Search</button>
-    				</form>
-				</div>
+
 			</div>
 
 			
@@ -127,7 +112,7 @@ var userid = "${pinfo.member.userid}";
 	</div>
 </div>
 
-<div class="container">
+<div class="container mt-3">
 	<div class="row">
 		<div class="col-12">
 			<h3>답변 </h3>

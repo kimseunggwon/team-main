@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
+<%@ taglib prefix="sub" tagdir="/WEB-INF/tags/subscribe" %>
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -354,15 +355,29 @@ body {
 	-moz-border-radius: 40px;
 	border-radius: 40px;
 }
+
+#logo {
+	padding: 70px;
+}
+
+#searchName-btn {
+	padding-bottom: 30px;
+	background-color: white;
+	border: none;
+	outline: none;
+}
+
 </style>
 </head>
 <body>
+ 
+	<sub:navbar></sub:navbar>
+	
 	<div>
-		<a href="${appRoot }/member/main"> <img
-			src="${appRoot }/resources/image/others/brand_logo_300px.png"
+		<a href="${appRoot }/member/main"> <img id="logo"
+			src="${appRoot }/resources/image/others/brand_logo_400px.png"
 			alt="...">
 		</a>
-		<div>매장찾기</div>
 		
 		<div class="item item2">
 			<!-- 가게 제목으로 찾기 -->
@@ -371,14 +386,17 @@ body {
 			<!-- 내집 주소로 주변 찾기 -->
 			<button id="myAddress" class="button_sang" onclick="showhidebtn2()">우리집 주변 매장찾기</button>
 		</div>
-
+		<br><br><hr>
 		<!-- 가게 제목으로 검색할때 -->
 		<div id="searchName">
 			<div class="item item3">
-				<div>
-					<input id="name-store" type="text" placeholder="가게 이름을 적어주세요">
-					<button id="searchName-btn" class="button_sang1" type="submit">찾기</button>
+				<div style="padding: 20px;" class="input-group-lg col-xs-4">
+					<input class="form-control" id="name-store" type="text" 
+					aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+					placeholder="가게 이름을 적어주세요">
 				</div>
+				
+					<button id="searchName-btn" class="btn btn-lg button_sang1" type="submit"><img alt="findbtn" src="${appRoot }/resources/image/subscribe/findmap.png"></button>
 				<div>
 					<div id="map1reset"><div id="map1" style="width: 1000px; height: 600px;"></div></div>
 					<!-- 가게정보 -->
@@ -386,23 +404,30 @@ body {
 				</div>
 			</div>
 		</div>
-
+		<br><br>
 		<!-- 우리집 주소로 검색할때 -->
 		<div id="searchAddress" style="display: none;">
-			<div class="item item4">
-				<div>
-					<input type="text" id="myaddress" placeholder="주소를 검색해주세요" readonly><input class="button_sang1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호로 찾기"><br>
+			<div class="item item4" >
+				<div style="padding: 20px;" class="row justify-content-center">
+					<div class="input-group-prepend row justify-content-center">
+					<input class="form-control" id="name-store" type="text" 
+					id="myaddress" placeholder="주소를 검색해주세요" readonly>
+					
+					<br><br>
+					<input class="button_sang1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호로 찾기"><br>
+					
 					<input type="text" id="postcode" placeholder="우편번호" hidden>
 					<input type="text" id="address" placeholder="주소" hidden><br>
 					<input type="text" id="detailAddress" placeholder="상세주소" hidden>
 					<input type="text" id="extraAddress" placeholder="참고항목" hidden>
+				</div>
 				</div>
 				<div style="display: inline-block;">
 					<div id="map2" style="width: 1000px; height: 600px;"></div>
 				</div>
 			</div>
 		</div>
-	</div>
+		</div>
 <bot:botnav></bot:botnav>
 </body>
 

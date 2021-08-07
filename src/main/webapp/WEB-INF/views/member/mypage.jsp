@@ -13,13 +13,17 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>마이페이지</title>
 </head>
 <body>
 <style type="text/css">
 .jumbotron{
- 
-  background-color:#08d2ff;
+ 	box-shadow: 5px 3px 10px gray;
+	border: 3px solid #88C9F1;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 5px;
+	background-color: #88C9F1;
 }
 @font-face { 
     font-family: 'GongGothicMedium';
