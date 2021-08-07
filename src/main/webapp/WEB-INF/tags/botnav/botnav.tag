@@ -3,6 +3,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 
+<style>
+#btnav {
+	margin-bottom: 100px;
+}
+</style>
 
 	<hr>
 
@@ -22,6 +27,7 @@
 		
 		<br>
 		
+		<div id="btnav">
 		 <div class="row justify-content-around mb-5">
 		 	<div class="row mb-5">
 		 
@@ -60,3 +66,4 @@
 		 	</div>
 		 		
 		 </div>
+		</div>
