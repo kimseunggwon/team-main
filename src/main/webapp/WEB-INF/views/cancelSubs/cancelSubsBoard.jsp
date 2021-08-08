@@ -40,7 +40,27 @@
 	align-content: center;
 }
 </style>
-
+<script type="text/javascript">
+$(function() {
+		let userid = "${pinfo.member.userid}";
+		console.log(userid);
+		
+	$("#subscribe-cancel-btn").click(function() { 
+		$.ajax({
+			type : "POST",
+			url : "${appRoot}/cancelSubs/checkSubsUser",
+			data : {userid : userid},
+			success : function(data) {
+				if(data != "") {
+					location.href='${appRoot}/cancelSubs/cancelSubsRegister';
+				} else if (data == "") {
+					alert("고객님은 현재 구독중이 아닙니다.");
+				}
+			}
+		})
+	})
+})
+</script>
 </head>
 <body style="overflow-x: hidden;">
 
@@ -58,9 +78,7 @@
 	</div>
 
 		<div class="row justify-content-left mt-3">
-			<a href="${appRoot }/cancelSubs/cancelSubsRegister"  style="margin-left: 3%">
-				<button id="review-subscribe-btn" type="button" class="btn btn-primary">구독취소신청</button>
-			</a>
+				<button id="subscribe-cancel-btn"  style="margin-left: 3%" type="button" class="btn btn-primary">구독취소신청</button>
 		</div>
 
 		<table id="review-list-table" class="table table-striped">

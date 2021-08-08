@@ -72,7 +72,7 @@
 <script type="text/javascript">
 	$(function() {
 		const contentsVAL = 
-		`구독취소 양식
+`구독취소 양식
 고객 ID:
 고객번호:
 고객이름:
@@ -92,6 +92,7 @@ ex> 서비스를 4회 받으셨으면 2회는 정기결제 금액에서 환급�
 			let content = $("#contents").val();
 			let subsid = $("#subsid").val();
 			
+			
 			data = {
 					subsid : subsid,
 					title : title,
@@ -102,6 +103,7 @@ ex> 서비스를 4회 받으셨으면 2회는 정기결제 금액에서 환급�
 				data : data,
 				url : "${appRoot}/cancelSubs/cancelSubsRegister",
 				success : function() {
+					alert("구독취소 신청되었습니다"+ "\n 구독서비스취소 승인시 문자로 알려드립니다.");
 					location.href='${appRoot}/cancelSubs/cancelSubsBoard';
 				}
 				

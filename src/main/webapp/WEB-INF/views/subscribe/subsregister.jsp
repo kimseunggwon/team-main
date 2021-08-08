@@ -868,7 +868,7 @@ $(function() {
 				alert("결제 승인 취소")
 			}
 		})
-	
+
 })
 </script>
 </html>

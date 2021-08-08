@@ -101,7 +101,7 @@ body {
 
 		</div>
 		<div class="imgPage">
-			<img style="max-width: 100%; height: auto;"
+			<img style="max-width: 100%; height: 100%;"
 				src="${imgIntroRoot}${fileName }" />
 		</div>
 		<div class="like"></div>

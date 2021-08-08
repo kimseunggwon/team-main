@@ -227,6 +227,34 @@ public SubsFinalInfoVO ABCD(String subsUserId) {
 	return mapper.ABCD(subsUserId);
 }
 
+
+@Override
+public String checkSubsUser(String userid) {
+
+	return mapper.checkSubsUser(userid);
+}
+
+
+@Override
+public SubscriberInfoVO getCancelSubsUserRemove(String subsid) {
+	
+	return mapper.getCancelSubsUserRemove(subsid);
+}
+
+
+@Override
+public void insertCancelSubsUser(SubscriberInfoVO vo2) {
+	mapper.insertCancelSubsUser(vo2);
+	
+}
+
+
+@Override
+public boolean cancelSubsUserRemove(String subsid) {
+	
+	return mapper.cancelSubsUserRemove(subsid) == 1;
+}
+
 	
 
 

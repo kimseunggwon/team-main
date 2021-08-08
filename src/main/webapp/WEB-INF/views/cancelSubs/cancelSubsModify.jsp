@@ -66,10 +66,12 @@ $(function() {
 	let title = $("#title").val();
 	let content = $("#content").val();
 	let bno = "${board.bno}";
+	let subsid = "${board.subsid }";
 	let url = '${appRoot}/cancelSubs/cancelSubsGet?bno=' + bno;
 	
 	let data = {
 				bno : bno,
+				subsid : subsid,
 				title : title,
 				content : content
 				}

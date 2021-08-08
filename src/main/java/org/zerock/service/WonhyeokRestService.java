@@ -51,4 +51,12 @@ public interface WonhyeokRestService {
 
 	public SubsFinalInfoVO ABCD(String subsUserId);
 
+	public String checkSubsUser(String userid);
+
+	public SubscriberInfoVO getCancelSubsUserRemove(String subsid);
+
+	public void insertCancelSubsUser(SubscriberInfoVO vo2);
+
+	public boolean cancelSubsUserRemove(String subsid);
+
 }
