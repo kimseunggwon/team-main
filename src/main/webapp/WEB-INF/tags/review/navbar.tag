@@ -28,12 +28,24 @@
 		<c:param name="type" value="${recri.type }"></c:param>
 </c:url>
 
+<!-- 나의 리뷰 -->
+<c:url value="/review/list" var="myListUrl">
+	<c:if test="${not empty recri.pageNum }">
+		<c:param name="pageNum" value="${recri.pageNum }"></c:param>
+	</c:if>
+	<c:if test="${not empty recri.amount }">
+		<c:param name="amount" value="${recri.amount }"></c:param>
+	</c:if>
+		<c:param name="keyword" value="${pinfo.member.userNickname }"></c:param>
+		<c:param name="type" value="W"></c:param>
+</c:url>
+
 <%-- Navigation Bar 적용--%>
 <div class="container">
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
-		<a class="navbar-brand" href="#">구독하기</a>
+		<a class="navbar-brand" href="${appRoot }/subscribe/register">구독하기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarScroll" aria-controls="navbarScroll"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +68,7 @@
 							<li><a class="dropdown-item" href="${appRoot }/member/mypage">나의 회원정보</a></li>
 							<li><a class="dropdown-item" href="#">나의 구독정보</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
+							<li><a class="dropdown-item" href="${myListUrl }">나의 리뷰</a></li>
 						</ul></li>
 				</sec:authorize>
 				<li class="nav-item active"><a class="nav-link"

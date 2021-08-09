@@ -22,13 +22,17 @@
 
 #select-list {
 }
+
+#btn {
+height: 78px;
+}
 </style>
 
 <!-- Search Start -->
 	<div class="container-1 row justify-content-center">
 		<form class="d-flex align-items-center"action="${appRoot }/review/list" method="get">
-			<div id="select-list" class="item">
-				<select name="type" class="form-inline my-2 my-lg-0">
+			<div class="item">
+				<select id="select-list" name="type" class="form-inline my-2 my-lg-0">
 					<option value="">Select</option>
 					<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>
 					<option value="C" ${recri.type	== "C" ? 'selected' : '' }>내용</option>
@@ -50,7 +54,7 @@
 			</div>
 
 			<div class="item">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+				<button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 			</div>
 
 			<input type="hidden" name="pageNum" value="1"> <input

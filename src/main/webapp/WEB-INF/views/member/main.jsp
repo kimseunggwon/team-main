@@ -34,7 +34,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 
 <style type="text/css">
 @font-face {
@@ -44,6 +44,13 @@
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
+}
+
+@font-face {
+    font-family: 'BinggraeSamanco-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
@@ -210,7 +217,7 @@ $(function(){
 		<div class="row justify-content-center  mt-5 mb-5">
 
 
-			<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
+			<!-- 브랜드 로고 이미지 -->
 			<div class="row justify-content-center">
 				<a href="${appRoot }/member/main"> 
 					<img src="${appRoot }/resources/image/others/brand_logo_500px.png" alt="...">
@@ -231,10 +238,10 @@ $(function(){
 	
 	<br>
 	
-	<!-- 사용후기 박스 -->
+	<!-- 메인 - HOT REVIEW -->
 	<div id="reviewbox1">
 		
-		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Londrina Solid', cursive;">HOT REVIEW</h1>
+		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">HOT REVIEW</h1>
 		
 		<div id="" class="card-group mt-4">
  			<div class="card ml-3 mr-3" style="box-shadow: 5px 3px 30px gray;
@@ -242,7 +249,7 @@ $(function(){
     			<div class="card-body">
       				<h5 class="card-title">12개월 연속 구독중인 "빨래싫어!" 님의 리뷰</h5>
       				<p class="card-text">빨래를 귀찮아하고 싫어하지만 옷은 많은 저한테는 딱인 서비스였어요. 처음에는 1달만 써봐야지! 하고...</p>
-      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=102&pageNum=1&amount=10&type=&keyword=&sort=200"><더보기></a></small></p>
+      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=102&pageNum=1&amount=10&type=&keyword=&sort=200">더보기 >>></a></small></p>
     			</div>
   			</div>
 		</div>
@@ -253,7 +260,7 @@ $(function(){
     			<div class="card-body">
       				<h5 class="card-title">가장 많은 추천을 받은 "리뷰왕" 님의 리뷰</h5>
       				<p class="card-text">빨래널자의 서비스가 제 워라밸을 보장해줬어요. 아무래도 자취하는 입장에서는 제일 하기 싫은게 빨래인데..</p>
-      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=103&pageNum=1&amount=10&type=&keyword=&sort=200"><더보기></a></small></p>
+      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=103&pageNum=1&amount=10&type=&keyword=&sort=200">더보기 >>></a></small></p>
     			</div>
   			</div>
 		</div>
@@ -276,16 +283,16 @@ $(function(){
 	<!-- 구독시스템 정보 박스 -->
 	<div id="subsinfo_box">
 		
-		<h1 class="text-center mt-4">빨래 널자의 구독시스템은 어떻게 구성되나요?</h1>
+		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">How To Subscribe?</h1>
 		
 		<div class="container">
  		        
  		        <div class="row justify-content-center mt-3 mb-3">
  					<img alt="" src="${appRoot }/resources/image/main/signup.png">			
  				</div>
-    			<h4 class="text-center mg-4">
-      				1. 빨래널자의 구독서비스 신청!
-    			</h4>
+    			<div class="text-center mg-4">
+      				첫번째, 빨래널자의 서비스를 구독합니다. 
+    			</div>
     			
     			<div class="row justify-content-center">
 	    			<img class="connection" alt="" src="${appRoot }/resources/image/main/화살표2.png">
@@ -294,9 +301,9 @@ $(function(){
     			<div class="row justify-content-center mt-3 mb-3">
  					<img alt="" src="${appRoot }/resources/image/main/put.png">			
  				</div>
-    			<h4 class="text-center mg-4">
-      				2. 서비스를 제공받을 빨래들을 지급된 빨래 가방에 넣어주세요!
-    			</h4>
+    			<div class="text-center mg-4">
+      				두번째, 구독이 완료되면 회원님의 구독 스케줄에 따라 지정된 장소에 세탁물을 보관합니다.
+    			</div>
     			
     			<div class="row justify-content-center">
 	    			<img class="connection" alt="" src="${appRoot }/resources/image/main/화살표2.png">
@@ -305,9 +312,9 @@ $(function(){
  				<div class="row justify-content-center mt-3 mb-3">
  					<img alt="" src="${appRoot }/resources/image/main/shipping2.jpg">			
  				</div>
-    			<h4 class="text-center mg-4">
-    				3.빨래 가방을 지정장소(ex. 집앞)에 수거 시간에 맞춰서 내놔주세요!
-    			</h4>
+    			<div class="text-center mg-4">
+    				세번째, 구독 스케줄에 따라서 세탁물의 수거 및 반납이 반복됩니다. 
+    			</div>
     		
  				
  				<div class="row justify-content-center">
@@ -317,9 +324,9 @@ $(function(){
  				<div class="row justify-content-center mt-3 mb-3">
  					<img alt="" src="${appRoot }/resources/image/main/laundry.png">			
  				</div>
-    			<h4 class="text-center mg-4">
-      				4. 빨래 끝!
-    			</h4>
+    			<div class="text-center mg-4">
+      				매일 매일 새 옷을 입는 것 같은 행복한 일상이 시작됩니다. <br> 세탁으로 인한 피로함이 없는 새로운 일상을 시작해보시겠습니까?
+    			</div>
   			
 		</div>
 		
@@ -327,7 +334,7 @@ $(function(){
 	
 	
 	<div id="service_box">
-		<h1 class="text-center mt-4">빨래널자가 특별한 이유 3가지!</h1>
+		<div class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">Why Special?</div>
 		<small class="row justify-content-center mt-4">빨래로부터의 해방감을 느껴보세요!</small>
 		
 				<div class="container">
