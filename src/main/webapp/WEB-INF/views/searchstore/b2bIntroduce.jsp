@@ -91,7 +91,6 @@ body {
 		$('.storeName').text(test ? storename : storename + " 빨래방");
 		
 		var likeAVG = "${avg}";
-		console.log(likeAVG);
 		$('.like').text(likeAVG == "" ? "평점 " + "0.00" : "평점 " + likeAVG);
 	})
 </script>
