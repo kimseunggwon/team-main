@@ -9,7 +9,8 @@
 <html>
 <head>
 
-<mem:mybar></mem:mybar>
+
+<mem:mainpage></mem:mainpage>
 <br>
 <br>
 <br> 

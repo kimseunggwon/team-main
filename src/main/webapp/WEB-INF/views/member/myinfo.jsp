@@ -6,9 +6,9 @@
 <%@ taglib prefix="mem" tagdir="/WEB-INF/tags/member"%>
 
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
-<mem:mybar></mem:mybar>
+<mem:mainpage></mem:mainpage>
 <br>
 <br>
 <br> 
