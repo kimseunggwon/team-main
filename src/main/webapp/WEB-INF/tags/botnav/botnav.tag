@@ -9,9 +9,9 @@
 }
 </style>
 
-	<hr>
+	<hr style="maring-top: 200px;">
 
-	<div class="row justify-content-center mt-5">
+	<div style="margin-top: 100px; "class="row justify-content-center mt-5">
 			
 			<h1>
 				1588 - 0000
