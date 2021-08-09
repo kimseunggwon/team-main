@@ -15,6 +15,8 @@ public class SubscriberInfoVO {
 	private Integer storeid;
 	private String subsOptions;
 	private String subsAmount;
+	private Long payCount;
+	private String userPhonenum;
 
 	// 구독 날짜 관련
 	private Date serviceStartDate;

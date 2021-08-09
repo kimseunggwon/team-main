@@ -212,8 +212,6 @@ $(function(){
 <div class = "container">
 
 
-
-
 		<div class="row justify-content-center  mt-5 mb-5">
 
 
@@ -372,8 +370,9 @@ $(function(){
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<div id="location">
 			<h1 class="text-center mt-4">지금 내 주변에 있는 빨래널자의 세탁방은?</h1>
-		
+		  <div class="row justify-content-center">
 			<map:MainMapTags></map:MainMapTags>
+		  </div>
 		
 		</div>
 	</sec:authorize>

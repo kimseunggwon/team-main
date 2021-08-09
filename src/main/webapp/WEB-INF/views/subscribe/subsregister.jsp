@@ -322,7 +322,7 @@ body {
 												};
 												let marker = new naver.maps.Marker(
 														laundrymarker);
-												
+											
 											}
 											/* 매장 사진  */ 
 											$("#fileNameId1").attr("src",(data[0].fileName != null ? '${imgIntroRoot}' + `\${data[0].id}` + '/' + `\${data[0].fileName}` : "${appRoot }/resources/image/readyimg.jpg"));
@@ -868,7 +868,7 @@ $(function() {
 				alert("결제 승인 취소")
 			}
 		})
-	
+
 })
 </script>
 </html>

@@ -244,6 +244,48 @@ WHERE bno = #{bno}
   	DELETE FROM cancelSubsBoard WHERE bno = #{bno}
   </delete>
   
+  <!-- 구독탈퇴시키기 - 구독자데이터 갖고오기 -->
+  <select id="getCancelSubsUserRemove" resultType="org.zerock.domain.SubscriberInfoVO">
+ SELECT 
+  	sub.subsId subsId,
+  	sub.subsName subsName,
+  	sub.subsAddress subsAddress,
+  	sub.storeid storeid,
+  	sub.subsOptions subsOptions,
+  	sub.subsAmount subsAmount,
+  	sub.payCount payCount,
+  	sub.serviceStartDate serviceStartDate,
+    u.userPhonenum userPhonenum
+  
+  FROM subscriber AS sub JOIN user AS u ON sub.subsId = u.userid
+  WHERE subsId = #{subsid}
+  
+  </select>
+  
+  <!-- 구독탈퇴시키기 - 데이터옮기기 -->
+  <insert id="insertCancelSubsUser">
+  INSERT INTO subsCancelList
+  (userId, userName, userAddress, storeid, subsOptions, subsAmount, payCount, serviceStartDate)
+  VALUES
+  (#{subsId}, #{subsName}, #{subsAddress}, #{storeid}, #{subsOptions}, #{subsAmount}, #{payCount}, #{serviceStartDate})
+  </insert>
+  
+  <!-- 구독탈퇴시키기 - 구독자테이블 데이터 지우기 -->
+  <delete id="cancelSubsUserRemove">
+  DELETE FROM subscriber WHERE subsid = #{subsid}
+  </delete>
+  
+  <select id="checkSubsUser" resultType="String">
+ SELECT subsId
+FROM subscriber
+WHERE subsId = #{userid};
+  </select>
+  
+  <select id="checkSubsBoard" resultType="String">
+SELECT subsid
+FROM cancelSubsBoard
+WHERE subsid = #{userid};
+  </select>
 </mapper>
 
 

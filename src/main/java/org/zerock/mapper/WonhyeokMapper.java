@@ -52,5 +52,15 @@ public interface WonhyeokMapper {
 
 	public SubsFinalInfoVO ABCD(String subsUserId);
 
+	public String checkSubsUser(String userid);
+
+	public SubscriberInfoVO getCancelSubsUserRemove(String subsid);
+
+	public void insertCancelSubsUser(SubscriberInfoVO vo2);
+
+	public int cancelSubsUserRemove(String subsid);
+
+	public String checkSubsBoard(String userid);
+
 
 }

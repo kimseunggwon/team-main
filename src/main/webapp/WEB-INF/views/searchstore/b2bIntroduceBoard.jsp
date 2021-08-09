@@ -271,7 +271,7 @@ html {
 				<div class="modal-body">
 					<div class="wrapper-modal">
 						<div class="imgPage">
-							<img style="max-width: 100%; height: auto;" id="preImage" src="#" />
+							<img style="max-width: 100%; height: 100%;" id="preImage" src="#" />
 						</div>
 						<!-- <div class="like"></div>  -->
 						<div class="storeInfo">
