@@ -33,17 +33,10 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="${appRoot }/help/helpdesk">고객센터 <span class="sr-only">(current)</span></a>
 				</li>
-					<li class="nav-item dropdown active"><a
-						class="nav-link dropdown-toggle" href="${appRoot }/member/mypage"
-						id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
-						aria-expanded="false"> 마이페이지 </a>
-						<ul class="dropdown-menu"
-							aria-labelledby="navbarScrollingDropdown">
-							<li><a class="dropdown-item" href="${appRoot }/member/mypage">나의 회원정보</a></li>
-							<li><a class="dropdown-item" href="#">나의 구독정보</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="#">나의 리뷰</a></li>
-						</ul></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="${appRoot }/member/mypage">마인페이지 <span class="sr-only">(current)</span></a>
+				</li>
+					
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item active"><a class="nav-link"
