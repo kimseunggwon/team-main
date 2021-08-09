@@ -9,12 +9,6 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
-		<a class="navbar-brand" href="#">구독하기</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarScroll" aria-controls="navbarScroll"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
 		<div class="collapse flex-grow-0  navbar-collapse justify-content-end"
 			id="navbarScroll">
 			<ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll"

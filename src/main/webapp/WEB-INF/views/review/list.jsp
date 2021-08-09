@@ -58,6 +58,39 @@
 
 </style>
 
+<!-- 구독 신청 버튼 권한 부여 -->
+<script type="text/javascript">
+$(function(){
+	let loginID = "${pinfo.member.userid}"; 
+	$("#review-write-btn").click(function () {
+		$.ajax({
+			type: "POST",
+			url: "${appRoot}/member/getLoginInfo",
+			data: {
+				userid : loginID
+			},
+			success: function(data) {
+				
+				let confirmID = data;
+				console.log(confirmID);
+				if(confirmID == "") {
+					if (loginID == 'admin') {
+						location.href = "${appRoot}/review/write";
+						return false;
+					}
+					alert("구독자에 한해서만 리뷰를 작성할 수 있습니다.")
+				} else if (confirmID != "" ) {
+					location.href = "${appRoot}/review/write";
+				}		
+			},
+			error : function() {
+				console.log("실패")
+			}
+		})
+	})
+})
+</script>
+
 <script>
 	const reBno = "${review.reBno }";
 	const appRoot = "${appRoot}";
@@ -190,7 +223,7 @@
 							class="move-btn btn btn-primary btn-lg">지금 빨래 구독하기</button></a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
-					<a href="${appRoot }/review/write"><button
+					<a href="#"><button
 							id="review-write-btn" type="button" class="move-btn btn btn-primary btn-lg">구독
 							리뷰 남기기</button></a>
 				</sec:authorize>

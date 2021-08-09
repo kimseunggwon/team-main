@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
-
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo" scope="request"/>
+</sec:authorize>
 <%-- Pagination 적용 --%>
 <!-- 리뷰 목록 (list)  -->
 <c:url value="/review/list" var="listUrl">
@@ -40,12 +42,39 @@
 		<c:param name="type" value="W"></c:param>
 </c:url>
 
+
+<!-- 구독 신청 버튼 권한 부여 -->
+<script type="text/javascript">
+$(function(){
+	let loginID = "${pinfo.member.userid}";
+	$.ajax({
+		type: "POST",
+		url: "${appRoot}/member/getLoginInfo",
+		data: {
+			userid : loginID
+		},
+		success: function(data) {
+			
+			let confirmID = data;
+			console.log(confirmID);
+			if(confirmID == "") {
+				$("#main-subscribe").show();
+			} 		
+		},
+		error : function() {
+			console.log("실패")
+		}
+	})
+})
+</script>
+
+
 <%-- Navigation Bar 적용--%>
 <div class="container">
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
-		<a class="navbar-brand" href="${appRoot }/subscribe/subsregister">구독하기</a>
+		<a id="main-subscribe" style="display:none;"class="navbar-brand" href="${appRoot }/subscribe/subsregister">구독하기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarScroll" aria-controls="navbarScroll"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -62,11 +91,10 @@
 					<li class="nav-item dropdown active"><a
 						class="nav-link dropdown-toggle" href="${appRoot }/member/mypage"
 						id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
-						aria-expanded="false"> 마이페이지 </a>
+						aria-expanded="false"> 나의 정보 </a>
 						<ul class="dropdown-menu"
 							aria-labelledby="navbarScrollingDropdown">
-							<li><a class="dropdown-item" href="${appRoot }/member/mypage">나의 회원정보</a></li>
-							<li><a class="dropdown-item" href="#">나의 구독정보</a></li>
+							<li><a class="dropdown-item" href="${appRoot }/member/mypage">마이페이지</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="${myListUrl }">나의 리뷰</a></li>
 						</ul></li>

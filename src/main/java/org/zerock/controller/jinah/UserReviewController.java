@@ -36,6 +36,7 @@ public class UserReviewController {
 	
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, 
 							UserReviewVO review,
 							Model model) {
@@ -70,7 +71,7 @@ public class UserReviewController {
 	
 	// 리뷰 작성하기 (이미지 파일 포함) - userReviewWrite
 	@PostMapping("/write")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public String reviewWrite(UserReviewVO review,
 								@RequestParam("file") MultipartFile[] file,
 								ReviewCriteria recri,
@@ -99,7 +100,7 @@ public class UserReviewController {
 	
 	// 리뷰 작성하기 - 이미지 파일 없이
 	@GetMapping("/write")
-	@PreAuthorize("isAuthenticated() or hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public void reviewWrite(@ModelAttribute("recri") ReviewCriteria recri) {
 	
 		// + 위치 정보
@@ -109,6 +110,7 @@ public class UserReviewController {
 	
 	// 리뷰 상세 얻어오기 - userReviewGet
 	@GetMapping("/get")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public void reviewGet(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
 						  UserReviewVO review,
@@ -132,7 +134,7 @@ public class UserReviewController {
 	
 	// 리뷰 파일 수정하기 (이미지 파일 없이) - userReviewModify
 	@GetMapping("/modify")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public void reviewModify(@RequestParam("reBno") int reBno,
 						  @ModelAttribute("recri") ReviewCriteria recri,
 						  UserReviewVO review,
@@ -147,7 +149,7 @@ public class UserReviewController {
 	
 	// 리뷰 파일 수정하기 (이미지 파일 포함) - userReviewModify
 	@PostMapping("/modify")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public String reviewModify(UserReviewVO review,
 							   ReviewCriteria recri,
 							   MultipartFile[] file,
@@ -180,7 +182,7 @@ public class UserReviewController {
 	
 	// 리뷰 삭제하기 - userReviewRemove
 	@PostMapping("/remove")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public String reviewRemove(@RequestParam("reBno") int reBno,
 							   ReviewCriteria recri,
 							   RedirectAttributes rttr,
@@ -210,7 +212,7 @@ public class UserReviewController {
 	
 	// 리뷰 좋아요 - userReviewLikeCount
 	@PostMapping("/get")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	@ResponseBody
 	public int reviewLikeCount(@RequestParam("reBno") int reBno,
 							   @RequestParam("userid") String userid) {

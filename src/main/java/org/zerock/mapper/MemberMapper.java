@@ -37,4 +37,6 @@ public interface MemberMapper {
 	public int updateauth(String id);
 
 	public StoreInfoVO readsubs(MemberVO vo);
+
+	public String getSubsOptions(String userid);
 }

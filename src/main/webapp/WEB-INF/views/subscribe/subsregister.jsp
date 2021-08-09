@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
+<%@ taglib prefix="sub" tagdir="/WEB-INF/tags/subscribe" %>
+<%@ taglib prefix="young" tagdir="/WEB-INF/tags/main" %>
 
 
 <!DOCTYPE html>
@@ -9,6 +11,12 @@
 <head>
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 <title>구독페이지</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+
+
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=53f2oltjp5&submodules=geocoder"></script>
 <script type="text/javascript"
@@ -160,7 +168,6 @@ body {
 }
 
 .button_sang {
-	background-color: #169EF2;
 	border: none;
 	color: white;
 	padding: 16px 32px;
@@ -187,7 +194,7 @@ body {
 .dateBlock {
 	display: inline-flex;
     text-align: left;
-    margin-left: 33.33%;
+    margin-left: 26%;
 	margin-top: 3%;
     margin-bottom: 3%;    
 }
@@ -632,27 +639,29 @@ $(function() {
 
 </script>
 <body>
-	<div style="text-align: center; margin-top: 50px;">
-		<a href="${appRoot }/member/main"> <img
-			src="${appRoot }/resources/image/others/brand_logo_300px.png"
-			alt="...">
-		</a>
-			<div style="font-size: 16px">구독결제하기</div>
-	</div>
-	<div class="wrapper">
+
+	<young:navbar></young:navbar>
 	
+	<div class="container">
+		<div class="row justify-content-center">
+			<a href="${appRoot }/member/main"> <img style="padding: 70px;" id="logo" alt="jinah-logo"
+				src="${appRoot }/resources/image/others/brand_logo_400px.png">
+			</a>
+		</div>
+	</div>
+
+	<div class="wrapper">
 		<div class="col">
-				<div>구독 계약 기간</div>
-		<div class="dateBlock">
-			<div class="dateStamp">
-				<div style="font-size: 32px">오늘 구독하시면</div>
+		<div class="dateBlock" >
+			<div class="dateStamp"  style="text-align: center; 	box-shadow: 0px 0px 6px 10px #B4DDF5;">
+				<div style="font-size: 32px;">오늘 구독하시면</div>
 				<div id="userid"><b style="font-size: 25px;color: #AD480E">${pinfo.member.userName}</b>님의 구독기간은</div>
 				<div style="font-size: 25px; color:#787878; padding: 1.5% " id="serviceStartDay"></div>
 				<div style="font-size: 25px; color:#787878; padding: 1.5% " id="serviceEndDay"></div>
 				<input id="serviceEndDay_final" type="text" readonly="readonly" hidden>
 			</div>
 			<div class="Qlqlr">
-			<div><img src="${appRoot }/resources/image/den.jpg" onmouseover="$('.QlqlrShort').show();"
+			<div><img src="${appRoot }/resources/image/subscribe/surprise.png" onmouseover="$('.QlqlrShort').show();"
 				onmouseout="$('.QlqlrShort').hide();"></div>
 					<div class="QlqlrShort" style="display: none">
 						<div>*구독 계약기간은 14일입니다</div>
@@ -664,7 +673,7 @@ $(function() {
 				</div>
 		</div>
 		
-			<div class="title" style="text-align: center;">구독 종류 선택</div>
+		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">Option</h1>
 			<div class="box1" id="box1-1">
 				<div class="text1">1인 가구</div>
 				<div class="text2">설명</div>
@@ -686,7 +695,7 @@ $(function() {
 		</div>
 
 		<div class="col">
-			<div class="title" style="text-align: center;">빨래방 선택</div>
+		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">Select Store</h1>
 			<div class="box2" id="box2-1">
 				<div class="box_sub1">
 					<img id="fileNameId1" style="max-width: 100%; height: auto;" src="">
@@ -716,7 +725,7 @@ $(function() {
 			</div>
 
 			<div>
-				<button id="addressList_modal_btn" class="button_sang" type="button"
+				<button style="background-color: #88C9F1;" id="addressList_modal_btn" class="button_sang" type="button"
 					data-toggle="modal" data-target="#addressList-modal">
 					다른 빨래방 <br>찾아보기
 				</button>
@@ -727,7 +736,7 @@ $(function() {
 	</div>
 	<div class="col">
 		<div class="title">
-			<input class="button_sang" type="button" id="payPage" value="결제하기">
+			<input style="width: 500px; background-color: #0583F2; " class="button_sang" type="button" id="payPage" value="결제하기">
 		</div>
 	</div>
 
@@ -759,8 +768,9 @@ $(function() {
 			</div>
 		</div>
 	</div>
+<div class="container">
 <bot:botnav></bot:botnav>
-
+</div>
 
 </body>
 

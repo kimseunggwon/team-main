@@ -215,10 +215,10 @@ $(function(){
 					<label class="form-check-label col-5" for="checkbox2">아이디 저장</label>
 				</div>
 				
-				<div class="row justify-content-center">
+				<div style="margin-top: 20px;"class="row justify-content-center">
 					<input class="button" id="sang-login-btn" type="submit" value="로그인">
 				</div>
-				<div class="row justify-content-center mt-5" style="text-align: center;">
+				<div class="row justify-content-center" style="text-align: center; margin-top:20px;">
 					<a style="text-decoration: none; color: black;" id="sang-findid-btn" class="col-4" href="${appRoot}/member/findid">아이디 찾기</a>
 					<a style="text-decoration: none; color: black;" id="sang-findpw-btn" class="col-4" href="${appRoot}/member/findpw">비밀번호 찾기</a>
 					<a style="text-decoration: none; color: black;" id="sang-signup-btn" class="col-4" href="${appRoot }/member/signup">회원가입</a>

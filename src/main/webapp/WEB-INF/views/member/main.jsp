@@ -108,7 +108,7 @@ body {
 	border: 3px solid white;
 	border-radius: 10%;
 	margin-top: 3%;
-	height: 1500px;
+	height: 1700px;
 	width: 1110px;
 }
 /* 세탁방 위치 관련 정보 박스 */
@@ -397,8 +397,6 @@ $(function(){
 		</div>
 		
 		
-	<canvas id="siteUse"></canvas>
-	<ga:ga></ga:ga>
 
 	<bot:botnav></bot:botnav>
 

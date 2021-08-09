@@ -109,15 +109,6 @@ public class MemberServiceImpl implements MemberService {
 		return cnt == 1;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public MemberVO read(String name) {
 		
@@ -203,6 +194,11 @@ public class MemberServiceImpl implements MemberService {
 		int cnt = mapper.updateauth(id);
 		
 		return cnt == 1;
+	}
+	
+	@Override
+	public String getSubsOptions(String userid) {
+		return mapper.getSubsOptions(userid);
 	}
 }
 

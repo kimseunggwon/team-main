@@ -31,4 +31,6 @@ public interface MemberService {
 	boolean modify(MemberVO vo, String oldPassword);
 
 	boolean updateauth(String id);
+
+	String getSubsOptions(String userid);
 }
