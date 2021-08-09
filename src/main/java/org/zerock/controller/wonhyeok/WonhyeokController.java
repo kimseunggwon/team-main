@@ -37,7 +37,7 @@ public class WonhyeokController {
 	}
 	// 등록 서버URL
 	@PostMapping("/b2bIntroduceBoard")
-	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_B2BUSER')")
 	public void b2bIntroduce(B2bIntroduceVO Introduce, @RequestParam("file") MultipartFile file) {
 
 		Integer id = service.getid(Introduce);
