@@ -61,7 +61,7 @@
 <br>
 <br>
 <h1>요일별 사용량</h1> 
-<div style="height: 100px; background-color: rgba(255,0,0,0.1);">
+<div style="height: 100px; background-color: rgba(255,0,0,0.1);"> 
   <div class="h-25 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">월요일 </div>
   <div class="h-50 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">화요일 </div>
   <div class="h-75 d-inline-block" style="width: 120px; background-color: rgba(0,0,255,.1)">수요일 </div>
@@ -73,6 +73,73 @@
  
 
 </div>
+
+   <br><br><br> 
+ 
+	<div class="row justify-content-center">
+			<form action="${appRoot }/help/ask">
+			 	
+			 </form>
+		</div>
+		
+		<div class="row justify-content-center">
+			
+			<h1>
+				1588 - 0000
+			</h1>
+			
+		</div>
+		
+		<div class="row justify-content-center">
+			고객 센터 운영 시간
+			 평일(월~금) 09:00 ~ 18:30
+			 / 주말(토) 09:00 ~ 13:00
+		</div>
+		
+		<br> 
+		
+		<hr>
+		
+		 <div class="row justify-content-around mb-3">
+		 	<div class="row">
+		 
+		 		<div class="mr-10">
+		 			<a href="${appRoot }/member/main">
+						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+					</a>
+		 		</div>
+		 	
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<div>
+		 			서울시 강남구 삼성동 1234 우 : 123-1234
+		 			<br>
+					TEL:02-123-1234 Email:email@domain.com
+					<br>
+					COPYRIGHT (C) 빨래널자 ALL RIHGTS RESERVED
+					<br>
+				</div>
+		 	</div>
+		 	
+		 	<div class="row">
+		 		<span >
+		 			<a href="#">
+		 			 	<img src="${appRoot }/resources/image/blog.jpg">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/facebook.gif">
+		 			</a>
+		 			<a href="#">
+		 				<img  src="${appRoot }/resources/image/twitter.gif">
+		 			</a>
+		 		</span>
+		 	</div>
+		 		
+		 </div>
+		
+	</div>
+
 </body>
 </html>
 

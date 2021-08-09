@@ -91,7 +91,8 @@ body {
     <a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장찾기</a> 
     <a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a>
     <a class="dropdown-item" href="${appRoot }/review/list">사용자 후기</a>
-    <a class="dropdown-item" href="${appRoot }/searchstore/b2bIntroduceBoard">홍보페이지 관리</a>   
+    <a class="dropdown-item" href="${appRoot }/searchstore/b2bIntroduceBoard">홍보페이지 관리</a>
+    <a class="dropdown-item" href="${appRoot}/cancelSubs/cancelSubsBoard">구독 취소</a>      
   </div>
 </div> 
  
