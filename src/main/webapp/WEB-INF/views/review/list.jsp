@@ -44,6 +44,18 @@
 	justify-content: space-around;
 	align-content: center;
 }
+
+.move-btn {
+	margin: 20px;
+}
+
+.move btn-primary.disabled,
+.move btn-primary:disabled {
+    color: #212529;
+    background-color: #7cc;
+    border-color: #5bc2c2
+}
+
 </style>
 
 <script>
@@ -134,7 +146,7 @@
 	
 		 
 		 <!-- 페이지네이션 -->
-		 <div>
+		 <div style="padding-top: 50px;">
 		 	<nav aria-label="Page navigation example">
 		 		<ul id="list-pagination1" class="pagination justify-content-center">
 		 			<c:if test="${reviewPageMaker.prev }">
@@ -166,25 +178,25 @@
 
 		<!-- 구독작성/구독하기/로그인 Root Forwarding Buttons -->
 		<div class="container">
-			<div class="row justify-content-center d-flex justify-content-around">
+			<div class="row justify-content-center d-flex justify-content-center">
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<a href="${appRoot }/subscribe"><button
-							id="review-subscribe-btn" type="button" class="btn btn-primary">지금
+							id="review-subscribe-btn" type="button" class="move-btn btn btn-primary btn-lg">지금
 							빨래 구독하기</button></a>
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${appRoot }/member/login"><button
 							id="review-subscribe-login-btn" type="button"
-							class="btn btn-primary">지금 빨래 구독하기</button></a>
+							class="move-btn btn btn-primary btn-lg">지금 빨래 구독하기</button></a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
 					<a href="${appRoot }/review/write"><button
-							id="review-write-btn" type="button" class="btn btn-primary">구독
+							id="review-write-btn" type="button" class="move-btn btn btn-primary btn-lg">구독
 							리뷰 남기기</button></a>
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${appRoot }/member/login"><button
-							id="review-write-login-btn" type="button" class="btn btn-primary">구독
+							id="review-write-login-btn" type="button" class="move-btn btn btn-primary btn-lg">구독
 							리뷰 남기기</button></a>
 				</sec:authorize>
 			</div>
