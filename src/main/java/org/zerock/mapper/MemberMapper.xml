@@ -162,8 +162,10 @@
 	        st.storename storename
 	    FROM user AS u JOIN subscriber AS sub ON u.userid = sub.subsId 
 					   JOIN user_review AS ur ON sub.subsId = ur.re_writer 
-	                   JOIN storeinfo AS st ON st.id = sub.storeid 
-		WHERE ur.re_writer = #{userid}
+	                   JOIN storeinfo AS st ON st.id = sub.storeid
+		where ur.re_writer = #{userid}
+		ORDER BY sub.serviceStartDate desc
+        LIMIT 0, 1;
 	</select>
 
 </mapper>

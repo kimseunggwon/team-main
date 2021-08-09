@@ -43,7 +43,7 @@
 <script type="text/javascript">
 $(function() {
 		let userid = "${pinfo.member.userid}";
-		console.log(userid);
+
 		
 	$("#subscribe-cancel-btn").click(function() { 
 		$.ajax({

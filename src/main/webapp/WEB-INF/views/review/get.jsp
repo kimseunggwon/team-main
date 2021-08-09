@@ -6,7 +6,7 @@
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav" %>
 
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
@@ -77,7 +77,7 @@
 <script src="${appRoot }/resources/js/review/get-modify-reviewstar.js"></script>
 
 </head>
-<body>
+<body> 
 
 	<rev:navbar></rev:navbar>
 
