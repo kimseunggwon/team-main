@@ -60,5 +60,7 @@ public interface WonhyeokMapper {
 
 	public int cancelSubsUserRemove(String subsid);
 
+	public String checkSubsBoard(String userid);
+
 
 }

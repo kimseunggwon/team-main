@@ -255,6 +255,13 @@ public boolean cancelSubsUserRemove(String subsid) {
 	return mapper.cancelSubsUserRemove(subsid) == 1;
 }
 
+
+@Override
+public String checkSubsBoard(String userid) {
+
+	return mapper.checkSubsBoard(userid);
+}
+
 	
 
 

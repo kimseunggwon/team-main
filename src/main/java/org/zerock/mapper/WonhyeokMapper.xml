@@ -280,6 +280,12 @@ WHERE bno = #{bno}
 FROM subscriber
 WHERE subsId = #{userid};
   </select>
+  
+  <select id="checkSubsBoard" resultType="String">
+SELECT subsid
+FROM cancelSubsBoard
+WHERE subsid = #{userid};
+  </select>
 </mapper>
 
 

@@ -80,6 +80,9 @@ body {
 	padding-left: 8px;
     padding-top: 3px;
 }
+.like {
+	font-size: 30px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -89,7 +92,7 @@ body {
 		
 		var likeAVG = "${avg}";
 		console.log(likeAVG);
-		$('.like').text(likeAVG == "" ? "0.00" : likeAVG);
+		$('.like').text(likeAVG == "" ? "평점 " + "0.00" : "평점 " + likeAVG);
 	})
 </script>
 

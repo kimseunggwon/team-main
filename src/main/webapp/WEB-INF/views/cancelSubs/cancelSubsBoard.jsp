@@ -52,7 +52,19 @@ $(function() {
 			data : {userid : userid},
 			success : function(data) {
 				if(data != "") {
-					location.href='${appRoot}/cancelSubs/cancelSubsRegister';
+					$.ajax({
+						type : "POST",
+						url : "${appRoot}/cancelSubs/checkSubsBoard",
+						data : {userid : userid},
+						success : function(data) {
+							if(data != "") {
+								alert("이미 구독취소신청이 되었습니다.")
+							} else if (data == "") {
+				 				location.href='${appRoot}/cancelSubs/cancelSubsRegister'; 
+							}
+						}
+					})
+					
 				} else if (data == "") {
 					alert("고객님은 현재 구독중이 아닙니다.");
 				}

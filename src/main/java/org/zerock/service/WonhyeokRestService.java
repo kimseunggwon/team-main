@@ -59,4 +59,6 @@ public interface WonhyeokRestService {
 
 	public boolean cancelSubsUserRemove(String subsid);
 
+	public String checkSubsBoard(String userid);
+
 }

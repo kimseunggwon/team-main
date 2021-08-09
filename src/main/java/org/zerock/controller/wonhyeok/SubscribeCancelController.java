@@ -53,6 +53,13 @@ public class SubscribeCancelController {
 		return service.checkSubsUser(userid);
 	}
 	
+	@PostMapping("/checkSubsBoard")
+	@ResponseBody
+	public String checkSubsBoard(String userid) {
+		return service.checkSubsBoard(userid);
+		
+	}
+	
 // 구독취소 등록
 	@RequestMapping("/cancelSubsRegister")
 	@PreAuthorize("hasRole('ROLE_USER')")
