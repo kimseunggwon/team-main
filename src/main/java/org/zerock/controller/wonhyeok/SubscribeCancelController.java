@@ -1,5 +1,7 @@
 package org.zerock.controller.wonhyeok;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +123,7 @@ public class SubscribeCancelController {
 		  userInfo.put("userPhonenum", vo1.getUserPhonenum());
 		  userInfo.put("SubsName", vo1.getSubsName());
 		  
-		  log.info("구독자 데이터갖고오기" + vo1);
+
 		  // 구독자 데이터 옮기기
 		  SubscriberInfoVO vo2 = new SubscriberInfoVO();
 		  vo2.setSubsId(vo1.getSubsId());
@@ -133,7 +135,7 @@ public class SubscribeCancelController {
 		  vo2.setPayCount(vo1.getPayCount());
 		  vo2.setServiceStartDate(vo1.getServiceStartDate());
 		  
-		  log.info("구독자 데이터 옮기기" + vo2);
+
 		  
 		  //구독자 데이터 subsCancelList로 옮기기
 		  service.insertCancelSubsUser(vo2);
@@ -157,10 +159,14 @@ public class SubscribeCancelController {
 			Coolsms coolsms = new Coolsms(api_key, api_secret);
 
 			HashMap<String, String> set = new HashMap<String, String>();
-
+			
+			LocalDate today = LocalDate.now();
+			String S_todat = String.valueOf(today);
+			
+			
 			set.put("to", userPhonenum); // 받는 사람
 			set.put("from", "01037278235"); // 발신번호
-			set.put("text", SubsName + "님의 빨래널자-구독서비스가 금일부로 취소되었습니다"); // 문자내용
+			set.put("text", SubsName + "님의 빨래널자-구독서비스가" + S_todat + " 부터 취소되었습니다"); // 문자내용
 			set.put("type", "sms"); // 문자 타입
 
 
@@ -169,12 +175,14 @@ public class SubscribeCancelController {
 			if ((boolean) result.get("status") == true) {
 				// 메시지 보내기 성공 및 전송결과 출력
 				System.out.println("성공");
-				System.out.println(result.get("group_id")); // 그룹아이디
-				System.out.println(result.get("result_code")); // 결과코드
-				System.out.println(result.get("result_message")); // 결과 메시지
-				System.out.println(result.get("success_count")); // 메시지아이디
-				System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
-			} else {
+				/*
+				 * System.out.println(result.get("group_id")); // 그룹아이디
+				 * System.out.println(result.get("result_code")); // 결과코드
+				 * System.out.println(result.get("result_message")); // 결과 메시지
+				 * System.out.println(result.get("success_count")); // 메시지아이디
+				 * System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+				 */			
+				} else {
 				// 메시지 보내기 실패
 				System.out.println("실패");
 				System.out.println(result.get("code")); // REST API 에러코드

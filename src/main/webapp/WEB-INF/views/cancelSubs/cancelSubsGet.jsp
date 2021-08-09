@@ -59,8 +59,6 @@
 </style>
 <script type="text/javascript">
 $(function() {
-	console.log("${pinfo.member.userid}");
-	console.log("${board.subsid}");
 	
 	$("#removeBTN").click(function() {
 		let bno = "${board.bno}";

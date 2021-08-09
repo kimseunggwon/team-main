@@ -42,8 +42,6 @@ $(function() {
 				let lat = parseFloat(items[0].x);
 				let lag = parseFloat(items[0].y);
 
-				console.log(lat);
-				console.log(lag);
 				
 	
 	/* 지도 */
@@ -79,9 +77,7 @@ $(function() {
 			data : JSON.stringify(data),
 			contentType : "application/json",
 			success : function(list) {
-				
-				console.log(list);
-				
+
 				/* 집주변 빨래방 마커 */
 				for(let store of list ){
 					
@@ -118,7 +114,7 @@ $(function() {
 				
 				function storeInfoURL(btn) {
 					var id = $(btn).attr('data-id');
-					console.log(id);
+
 					
 					let url = "${appRoot}/searchstore/b2bIntroduce/" + id
 					let name = "빨래스타그램";

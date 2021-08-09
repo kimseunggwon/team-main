@@ -452,8 +452,7 @@ body {
 				
 				function storeInfoURL(btn) {
 					var id = $(btn).parent('div').attr('data-id');
-					console.log(id);
-					
+				
 					let url = "${appRoot}/searchstore/b2bIntroduce/" + id
 					let name = "빨래스타그램";
 					let option = "width = 620, height = 950, top = 100, left = 200, location = no"
@@ -593,9 +592,9 @@ body {
 $(function() {
 		let date = new Date();
 		let dateWeek = date.getDay();
-		console.log(date);
+
 		let dateString = date.toISOString();
-		console.log(dateString);
+
 		if(dateWeek == 0) {
 			date.setDate(date.getDate() + 8);
 			$("#serviceStartDay").text(date.toISOString().substr(0,10) + "부터");

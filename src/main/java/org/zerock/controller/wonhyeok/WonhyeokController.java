@@ -72,7 +72,6 @@ public class WonhyeokController {
 	public String b2bIntroducepage(@PathVariable("id") Long id,RedirectAttributes rttr) {
 		
 		B2bIntroduceVO vo = service.getStoreInroducePageInfo(id);
-		log.info(vo);
 		
 		if ( vo.getFileName() == null) {
 			rttr.addFlashAttribute("id", vo.getId());
