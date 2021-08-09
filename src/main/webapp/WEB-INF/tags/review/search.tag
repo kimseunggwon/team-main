@@ -21,17 +21,41 @@
 }
 
 #select-list {
+  width: 150px;
+  height: 78px;
+  background: rgb(242, 242, 242);
+  border: none;
+  font-size: 12pt;
+  float: left;
+  color: rgb(0, 0, 0);
+  padding-left: 30%;
+  position: relative;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  outline-style: none;
 }
 
 #btn {
-height: 78px;
+  width: 100x;
+  height: 78px;
+  background: rgb(242, 242, 242);
+  border: none;
+  font-size: 10pt;
+  color: rgb(0, 0, 0);
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  outline-style: none;
 }
 </style>
 
 <!-- Search Start -->
 	<div class="container-1 row justify-content-center">
 		<form class="d-flex align-items-center"action="${appRoot }/review/list" method="get">
-			<div class="item">
+			<div class="item" style="padding-right: 10px;">
 				<select id="select-list" name="type" class="form-inline my-2 my-lg-0">
 					<option value="">Select</option>
 					<option value="T" ${recri.type	== "T" ? 'selected' : '' }>제목</option>
@@ -53,7 +77,7 @@ height: 78px;
 					id="jinah-search1" placeholder="Search" />
 			</div>
 
-			<div class="item">
+			<div class="item" style="position:relative; padding-left: 100px;">
 				<button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 			</div>
 
