@@ -13,6 +13,8 @@
 <html>
 <head>
 
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-204320906-1"></script>
 <script>
@@ -23,10 +25,7 @@
   gtag('config', 'UA-204320906-1');
 </script>
 
-
 <mem:mybar></mem:mybar>
- 
-
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
