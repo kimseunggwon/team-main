@@ -350,42 +350,59 @@ A:hover {
 		</form>
 	</div>
 
-<!-- <script type="text/javascript">
+ <script type="text/javascript">
 $(function() {
-	$("#finalSubsInfo").one(function({
-
-		submit();
-	}); 
-
-	console.log("쩌ㅏ잔")
+	$.ajax({
+		type : "POST",
+		url : "${appRoot}/subscribe/ABCD" ,
+		data : { userid : "${pinfo.member.userid}"},
+		success : function(data) {
+			console.log(data);
+			$("#sub-input1").val(data.subsName);
+			$("#sub-input2").val(data.subsAddress);
+			$("#sub-input3").val(data.userPhonenum);
+			$("#sub-input4").val(data.userNickname);
+			$("#sub-input5").val(data.subsAmount);
+			$("#sub-input6").val(data.subsOptions);
+			$("#sub-input7").val(data.storename);
+			$("#sub-input8").val(data.storeaddress);
+			$("#sub-input9").val(data.storePhonenum);
+			
+		},
+		error : function() {
+			console.log("실패");
+		}
+	})
 })
-</script>   -->
+</script>  
+
+
 		<!-- 구독회원의 구독 최종 결과 정보 -->
 		<div id="re-write-content" class="container">
 			<div class="row justify-content-center">
 				<div class="col-8">
-						<div class="item form-group">
-							<label for="sub-input1">이름</label> 
-							<input id="sub-input1" class="form-control" value="${subsInfo.subsName }" readonly>
-						</div>
 						<form id="finalSubsInfo" action="${appRoot}/subscribe/finalinfo" method="get">
 							<!-- data : userid -->
-							<input type="hidden" name="userid" value="${pinfo.member.userid }" readonly>
+							<input type="hidden" name="userid" value="${pinfo.member.userid }"  readonly>
 						</form>
+						<div class="item form-group">
+							<label for="sub-input1">이름</label> 
+							<input id="sub-input1" class="form-control" readonly>
+						</div>
 						
 						<div class="item form-group">
 							<label for="sub-input2">나의 주소</label> 
-							<input id="sub-input2" class="form-control" value="${subsInfo.subsAddress }" readonly>
+							<input id="sub-input2" class="form-control" readonly>
 						</div>
 						
 						<div class="item form-group">
 							<label for="sub-input3">연락처</label> 
-							<input id="sub-input3" class="form-control" value="${subsInfo.userPhonenum }" readonly>
+							<input id="sub-input3" class="form-control"  readonly>
 						</div>
 						
 						<div class="item form-group">
 							<label for="sub-input4">닉네임</label> 
-							<input id="sub-input4" class="form-control" value="${subsInfo.userNickname }"  readonly>
+							<input id="sub-input4" class="form-control"  readonly>
 						</div>
 						
 						
@@ -395,29 +412,29 @@ $(function() {
 					<!-- subsAmount -->
 						<div class="item form-group">
 							<label for="sub-inpu5">결제 금액</label> 
-							<input id="sub-input5" class="form-control" value="${subsInfo.subsAmount }" readonly>
+							<input id="sub-input5" class="form-control" readonly>
 						</div>
 						
 						<!-- 결제 옵션 -->
 						<div class="item form-group">
 							<label for="sub-input6">선택한 구독 옵션</label> 
-							<input id="sub-input6" class="form-control" value="${subsInfo.subsOptions }"  readonly>
+							<input id="sub-input6" class="form-control" readonly>
 						</div>
 						<hr><br>
 						<!-- 이용한 세탁소 위치 정보 -->
 						<div class="item form-group">
 							<label for="sub-input7">구독 세탁소 이름</label> 
-							<input id="sub-input7" class="form-control" value="${subsInfo.storename }"  readonly>
+							<input id="sub-input7" class="form-control"  readonly>
 						</div>
 						
 						<div class="item form-group">
 							<label for="sub-input8">구독 세탁소 주소</label> 
-							<input id="sub-input8" class="form-control" value="${subsInfo.storeaddress }"  readonly>
+							<input id="sub-input8" class="form-control"  readonly>
 						</div>
 						
 						<div class="item form-group">
 							<label for="sub-input9">구독 세탁소 연락처</label> 
-							<input id="sub-input9" class="form-control" value="${subsInfo.storePhonenum }"  readonly>
+							<input id="sub-input9" class="form-control" readonly>
 						</div>
 						
 				</div>
