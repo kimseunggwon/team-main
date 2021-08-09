@@ -166,7 +166,7 @@ public class SubscribeCancelController {
 			
 			set.put("to", userPhonenum); // 받는 사람
 			set.put("from", "01037278235"); // 발신번호
-			set.put("text", SubsName + "님의 빨래널자-구독서비스가" + S_todat + " 부터 취소되었습니다"); // 문자내용
+			set.put("text", SubsName + "님의 빨래널자-구독서비스가" + S_todat + " 부로 취소되었습니다"); // 문자내용
 			set.put("type", "sms"); // 문자 타입
 
 
