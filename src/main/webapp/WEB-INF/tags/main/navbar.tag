@@ -34,7 +34,7 @@
 					href="${appRoot }/help/helpdesk">고객센터 <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active"><a class="nav-link"
-					href="${appRoot }/member/mypage">마인페이지 <span class="sr-only">(current)</span></a>
+					href="${appRoot }/member/mypage">마이페이지 <span class="sr-only">(current)</span></a>
 				</li>
 					
 				</sec:authorize>
