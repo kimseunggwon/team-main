@@ -7,6 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 <title>b2b사장님 가게홍보 게시판</title>
 <head>
