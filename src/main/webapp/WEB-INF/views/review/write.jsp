@@ -217,13 +217,13 @@
 						value="${pinfo.member.userid }" readonly>
 
 					<!-- 이용한 세탁소 위치 정보 -->
-					<div class="item form-group">
-						<label for="re-input4">나의 구독 세탁소 이름</label> <input id="re-input4"
-							class="form-control" value="${review.storeName }" readonly>
-					</div>
-					<div class="item form-group">
-						<label for="re-input5">나의 구독 세탁소 주소</label> <input id="re-input5"
-							class="form-control" value="${review.storeAddress }" readonly>
+	               <div class="item form-group">
+	                  <label for="re-input4">나의 구독 세탁소 이름</label> <input id="re-input4"
+	                     class="form-control" value="" name="storeName" readonly>
+	               </div>
+	               <div class="item form-group">
+	                  <label for="re-input5">나의 구독 세탁소 주소</label> <input id="re-input5"
+                     class="form-control" value="" name="storeAddress" readonly>
 					</div>
 					<input class="btn btn-primary" id="write-submit" type="submit"
 						value="리뷰 등록하기">

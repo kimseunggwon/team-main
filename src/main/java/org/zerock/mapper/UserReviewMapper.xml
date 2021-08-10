@@ -88,8 +88,8 @@
 
 <!-- 리뷰 작성 및 레코드 삽입(insert)  -->
 <insert id="insertReviewSelectkey" useGeneratedKeys="true" keyColumn="re_bno" keyProperty="reBno">
-	INSERT INTO user_review (re_title, re_content, re_writer, re_stars)
-	VALUES (#{reTitle}, #{reContent}, #{reWriterName}, #{reStars})
+   INSERT INTO user_review (re_title, re_content, re_writer, re_stars, storename, storeAddress)
+   VALUES (#{reTitle}, #{reContent}, #{reWriterName}, #{reStars}, #{storeName}, #{storeAddress})
 </insert>
 
 <!-- 리뷰 상세 읽기 -->
