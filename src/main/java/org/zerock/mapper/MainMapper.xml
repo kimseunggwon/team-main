@@ -17,6 +17,6 @@
 	WHERE u.userid = #{userid}
 	
 	</select>
-	
+
 	
 </mapper>
