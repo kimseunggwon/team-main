@@ -8,6 +8,8 @@
 <html>
 <head>
 
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Insert title here</title>

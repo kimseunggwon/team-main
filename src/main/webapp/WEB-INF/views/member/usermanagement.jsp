@@ -9,6 +9,8 @@
 <html>
 <head>
 
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>고객 관리</title>
@@ -157,15 +159,15 @@ $(function(){
 		<div class="modal-content">
 			<div class="modal-geader">
 				<button type="button" class="close" data-dismiss="modal">
-					<span>&times;</span>
+					<span style="margin-top: 10px; margin-right: 10px">&times;</span>
 				</button>				
 				<h5 modal-title style="text-align: center; margin-top: 10px">
 					블랙리스트 처리 하시겠습니까?
 				</h5>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" id="black-user">블랙</button>
-				<button type="button" class="btn btn-success" data-dismiss="modal">아니요</button>
+			<div style="text-align: center;" class="">
+				<button style="width: 400px;" type="button" class="btn btn-danger" id="black-user">블랙</button>
+				<button style="width: 400px;" type="button" class="btn btn-success" data-dismiss="modal">아니요</button>
 			</div>
 		</div>
 	</div>

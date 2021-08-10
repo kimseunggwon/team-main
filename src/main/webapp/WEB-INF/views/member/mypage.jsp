@@ -11,6 +11,8 @@
 <html>
 <head>
 
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <mem:mainpage></mem:mainpage>
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
@@ -105,7 +107,7 @@ body {
 
 		<!-- 구독 신청 버튼 권한 부여 -->
 		<script type="text/javascript">
-			$(function() {
+			$(function() {  
 				let loginID = "${pinfo.member.userid}";
 				$.ajax({
 							type : "POST",
@@ -119,7 +121,9 @@ body {
 								console.log(confirmID);
 								
 								if (data == '') {
-									$("#mypage-subinfo2").show();
+									$(".mypage-subinfo2").show();
+									$("#mypage-subinfo-2").show();
+									$("#mypage-subinfo-21").show();
 									
 								} else if (data != '') {
 									$.ajax ({
@@ -138,9 +142,11 @@ body {
 										
 									})
 									
-									$("#mypage-subinfo1").show();
-								}
-							},
+									$(".mypage-subinfo1").show();
+									$("#mypage-subinfo-1").show();
+									$("#mypage-subinfo-22").show(); 
+								} 
+							}, 
 							error : function() {
 								console.log("실패");
 							}
@@ -152,30 +158,48 @@ body {
 		<div class="jumbotron">
 			<h1 class="display-4">안녕하세요 ${member.userName } 회원님</h1>
 				<br>
-				<div style="display:none;" id="mypage-subinfo1">고객님이 이용중인 서비스는<span style="font-size: 30px; color: #0583F2;"id="sub-options"></span>입니다.</div>
-				<div style="display:none;" id="mypage-subinfo2">혹시 아직 서비스를 이용하지 않고
+				<div style="display:none;" class="mypage-subinfo1">고객님이 이용중인 서비스는<span style="font-size: 30px; color: #0583F2;"id="sub-options"></span>입니다.</div>
+				<div style="display:none;" class="mypage-subinfo2">혹시 아직 서비스를 이용하지 않고
 					계신가요~? <br> 서둘러 밑에 구독하기 버튼을 눌러주세요!</div>
 			<hr class="my-4">
 
-			<div class="row">
+			<div class="row" >
 				<div class="col-sm-6">
-					<div class="card">
-						<div class="card-body">
+					<div class="card"> 
+					
+						<div class="card-body" style="display:none;" id="mypage-subinfo-21">
 							<h5 class="card-title">싱글 구독</h5>
 							<p class="card-text">혼자 사는 싱글들을 위한 맞춤형 구독</p>
 							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">1인
 								가구 구독</a>
+						</div> 
+						<div class="card-body" style="display:none;" id="mypage-subinfo-22">
+							<h5 class="card-title">구독 완료</h5>
+							<p class="card-text"></p>
+							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">
+								</a>
 						</div>
-					</div>
+						
+						
+					</div> 
 				</div>
 				<div class="col-sm-6">
 					<div class="card">
-						<div class="card-body">
+					
+						<div class="card-body" style="display:none;" id="mypage-subinfo-2">
 							<h5 class="card-title">대형 구독</h5>
 							<p class="card-text">가족 구성원들과 함께 이용하는 구독 서비스</p>
 							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">다세대
 								가구 구독</a>
-						</div>
+						</div> 
+						 
+						<div class="card-body" style="display:none;" id="mypage-subinfo-1"> 
+							<h5 class="card-title">구독 완료</h5>
+							<p class="card-text"></p>
+							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">
+								</a>
+						</div> 
+						
 					</div>
 				</div>
 			</div>

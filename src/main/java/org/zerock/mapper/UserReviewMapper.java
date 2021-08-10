@@ -47,5 +47,5 @@ public interface UserReviewMapper {
 	// 구독자 정보 불러오기 >>> SubscribeInfoServiceImpl.java에 사용
 	public StoreInfoVO readSubInfo(MemberVO mvo);
 
-
+	
 }
