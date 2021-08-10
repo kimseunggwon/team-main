@@ -22,7 +22,11 @@ public interface HelpMapper {
 		
 	public int delete(long bno);
 	
+	public int AdminDelete(long bno);
+	
 	public int update(HelpVO help);
+	
+	public int AdminUpdate(HelpVO help);
 	
 	public int getTotalCountUser(Pagenation pag);
 	

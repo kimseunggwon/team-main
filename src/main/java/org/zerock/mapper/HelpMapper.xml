@@ -132,6 +132,10 @@
   		DELETE FROM ask_board WHERE bno = #{bno}
   	</delete>
    
+   <delete id="AdminDelete">
+   		DELETE FROM ask_board WHERE bno = #{bno}
+   </delete>
+   
  	<update id="update">
   		UPDATE ask_board
   	
@@ -144,6 +148,18 @@
   		WHERE
   			bno = #{bno}	
  	 </update>
+  
+  	<update id="AdminUpdate">
+  		UPDATE ask_board
+  		
+  		SET
+  			title = #{title},
+  			content = #{content},
+  			writer = #{writer},
+  			updateDate = NOW()
+  		WHERE
+  			bno = #{bno}
+  	</update>
   
   	<delete id="removeByUserid">
   		DELETE FROM ask_board

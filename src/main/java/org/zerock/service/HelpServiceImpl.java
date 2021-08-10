@@ -153,6 +153,37 @@ public class HelpServiceImpl implements HelpService {
 		}
 		return modify(help);
 	}
+	
+	
+	/* 관리자 수정 관련 추가*/
+	@Override
+	public boolean AdminModify(HelpVO help) {
+		return mapper.update(help) == 1;
+	}
+	
+	@Override
+	@Transactional
+	public boolean AdminModify(HelpVO help, MultipartFile[] mfile) {
+		HelpVO oldBoard = mapper.read(help.getBno());
+		removeFile(oldBoard);
+
+		// tbl_board_file은 삭제 후 인서트
+		fileMapper.deleteByBno(help.getBno());
+		
+		for (MultipartFile file : mfile) {
+			if(file != null && file.getSize() > 0) {
+				// s3는 삭제 후 재업로드
+				upload(help, file);
+				
+				
+				AskFileVO vo = new AskFileVO();
+				vo.setBno(help.getBno());
+				vo.setFileName(file.getOriginalFilename());
+				fileMapper.insert(vo);
+			}			
+		}
+		return modify(help);
+	}
 
 	@Override
 	@Transactional
@@ -174,6 +205,27 @@ public class HelpServiceImpl implements HelpService {
 		return cnt == 1;
 	}
 
+	/*관리자 삭제 관련 추가*/
+	@Override
+	@Transactional
+	public boolean AdminRemove(Long bno) {
+		//댓글 삭제
+		replyMapper.deleteByBno(bno);
+		
+		//파일 삭제(s3)
+		HelpVO vo = mapper.read(bno);
+		removeFile(vo);
+
+		//파일 삭제 (db)
+		fileMapper.deleteByBno(bno);
+		
+		
+		//게시물 삭제
+		int cnt = mapper.delete(bno);
+		
+		return cnt == 1;
+	}
+	
 	private void removeFile(HelpVO vo) {
 		//String buckeyName = "";
 		for (String file : vo.getFileName()) {
@@ -188,9 +240,10 @@ public class HelpServiceImpl implements HelpService {
 		}
 		
 		
-		
-		
 	}
+	
+	
+	
 
 	@Override
 	public List<HelpVO> getListUser(Pagenation pag) {
