@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.domain.HotReviewVO1;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.StoreInfoVO;
@@ -47,6 +48,10 @@ public interface UserReviewService {
 
 	// 가게 주소 불러오기
 	StoreInfoVO readsubs(MemberVO vo);
+
+	// hotreview
+	HotReviewVO1 getHot1();
+	HotReviewVO1 getHot2();
 	
 	
 }

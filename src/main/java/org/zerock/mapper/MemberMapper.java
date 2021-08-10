@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.zerock.domain.AuthVO;
 import org.zerock.domain.B2BmemberVO;
+import org.zerock.domain.HotReviewVO1;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.StoreInfoVO;
 import org.zerock.domain.StoreVO;
@@ -39,4 +40,8 @@ public interface MemberMapper {
 	public StoreInfoVO readsubs(MemberVO vo);
 
 	public String getSubsOptions(String userid);
+
+	public HotReviewVO1 getHot1();
+
+	public HotReviewVO1 getHot2();
 }

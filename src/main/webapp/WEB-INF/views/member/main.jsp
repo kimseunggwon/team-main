@@ -235,6 +235,59 @@ $(function(){
 	
 	<br>
 	
+	<script type="text/javascript">
+	$(function() {
+		$.ajax({
+			type : "get",
+			url : "${appRoot}/review/getgetget1",
+			success : function(data) {
+				if (data != "") {
+					$("#1-1").text(data.payCount +'개월 연속 구독중인 "' + data.reWriterName + '" 님의 리뷰');
+					$("#1-2").text(data.reContent);
+					$("#1-3").attr("href", "${appRoot }/review/get?reBno=" + data.reBno + "&pageNum=1&amount=10&type=&keyword=&sort=100");
+
+				} else if (data == "") {
+					$("#1-1").text("이상합니다!");
+					$("#1-2").text("이상합니다!");
+					$("#1-3").attr("href", "${appRoot }/member/main");
+					
+				}
+
+			},
+			error : function() {
+				console.log("Hot Review 불러오기 실패");
+			}
+
+		});
+		
+	});
+	$(function() {
+		$.ajax({
+			type : "get",
+			url : "${appRoot}/review/getgetget2",
+			success : function(data) {
+				if (data != "") {
+					$("#2-1").text('가장 많은 추천을 받은 "' + data.reWriterName +'" 님의 리뷰');
+					$("#2-2").text(data.reContent);
+					$("#2-3").attr("href", "${appRoot }/review/get?reBno=" + data.reBno + "&pageNum=1&amount=10&type=&keyword=&sort=100");
+
+				} else if (data == "") {
+					$("#2-1").text("이상합니다!");
+					$("#2-2").text("이상합니다!");
+					$("#2-3").attr("href", "${appRoot }/member/main");
+					
+				}
+
+			},
+			error : function() {
+				console.log("Hot Review 불러오기 실패");
+			}
+
+		});
+		
+	});
+	</script>
+	
 	<!-- 메인 - HOT REVIEW -->
 	<div id="reviewbox1">
 		
@@ -244,9 +297,9 @@ $(function(){
  			<div class="card ml-3 mr-3" style="box-shadow: 5px 3px 30px gray;
 											   border: 3px solid white; -webkit-border-radius: 40px; -moz-border-radius: 40px;">
     			<div class="card-body">
-      				<h5 class="card-title">12개월 연속 구독중인 "빨래싫어!" 님의 리뷰</h5>
-      				<p class="card-text">빨래를 귀찮아하고 싫어하지만 옷은 많은 저한테는 딱인 서비스였어요. 처음에는 1달만 써봐야지! 하고...</p>
-      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/list?pageNum=1&amount=10&type=&keyword=&sort=100">더보기 >>></a></small></p>
+      				<h5 id="1-1" class="card-title"></h5>
+      				<p id="1-2" class="card-text"></p>
+      				<p class="card-text"><small class="text-muted"><a id="1-3" href="">더보기 >>></a></small></p>
     			</div>
   			</div>
 		</div>
@@ -255,9 +308,9 @@ $(function(){
  			<div class="card ml-3 mr-3" style="box-shadow: 5px 3px 30px gray;
 											   border: 3px solid white; -webkit-border-radius: 40px; -moz-border-radius: 40px;">
     			<div class="card-body">
-      				<h5 class="card-title">가장 많은 추천을 받은 "리뷰왕" 님의 리뷰</h5>
-      				<p class="card-text">빨래널자의 서비스가 제 워라밸을 보장해줬어요. 아무래도 자취하는 입장에서는 제일 하기 싫은게 빨래인데..</p>
-      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/list?pageNum=1&amount=10&type=&keyword=&sort=100">더보기 >>></a></small></p>
+      				<h5 id="2-1" class="card-title"></h5>
+      				<p id="2-2" class="card-text"></p>
+      				<p class="card-text"><small class="text-muted"><a id="2-3" href="">더보기 >>></a></small></p>
     			</div>
   			</div>
 		</div>

@@ -1,6 +1,5 @@
 package org.zerock.controller.jinah;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,12 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.HotReviewVO1;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.ReviewPageDTO;
@@ -241,4 +240,39 @@ public class UserReviewController {
 		}
 		
 	}
+	
+	@GetMapping("/getgetget1")
+	@ResponseBody
+	public HotReviewVO1 getgetget1() {
+		
+		log.info("Hot Review1 불러오는중");
+		HotReviewVO1 vo1 = service.getHot1();
+		
+		log.info(vo1);
+		
+		
+		if (vo1 == null) {
+			return null;
+		} else {
+			return vo1;
+		}
+	}
+	
+	@GetMapping("/getgetget2")
+	@ResponseBody 
+	public HotReviewVO1 getgetget2() {
+		
+		log.info("Hot Review2 불러오는중"); 
+		HotReviewVO1 vo2 = service.getHot2();
+		
+		log.info(vo2);
+	
+	
+		if (vo2 == null) {
+			return null;
+		} else {
+			return vo2;
+		}
+	}
+	
 }

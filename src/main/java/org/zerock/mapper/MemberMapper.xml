@@ -176,4 +176,39 @@
 	WHERE 
 		subsId = #{userid}
 </select>
+
+<select id="getHot1" resultType="org.zerock.domain.HotReviewVO1"> 
+	SELECT 
+		r.re_bno reBno, 
+		r.re_title reTitle, 
+		r.re_content reContent, 
+		r.re_writer reWriter, 
+		u.userNickname reWriterName, 
+		sub.payCount payCount 
+	FROM 
+		user_review r JOIN user u ON r.re_writer = u.userid 
+					  JOIN subscriber sub ON sub.subsId = u.userid 
+	ORDER BY sub.payCount DESC 
+	LIMIT 0, 1 
+</select>
+<select id="getHot2" resultType="org.zerock.domain.HotReviewVO1"> 
+	SELECT 
+		r.re_bno reBno, 
+		r.re_title reTitle, 
+		r.re_content reContent, 
+		r.re_writer reWriter,
+		u.userNickname reWriterName 
+	FROM 
+		user_review r JOIN user u ON r.re_writer = u.userid 
+	ORDER BY r.likecount DESC 
+	LIMIT 0, 1
+</select>
+
+
+
+
+
+
+
+
 </mapper>
