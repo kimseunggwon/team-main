@@ -105,11 +105,15 @@
 		r.viewcount viewCount,
 		r.re_stars reStars,
 		f.fileName fileName,
-		u.userNickname reWriterName 
+		u.userNickname reWriterName,
+		r.storename storeName,
+		r.storeAddress storeAddress 
 		
 		FROM user_review r
 		LEFT JOIN user_review_file f ON r.re_bno = f.bno
 			 JOIN user u ON r.re_writer = u.userid
+		LEFT JOIN storeinfo st ON st.userid = u.userid
+			 
 		WHERE 
 			r.re_bno = #{reBno}
 </select>
@@ -125,6 +129,8 @@
 <result property="viewCount" column="viewCount" />
 <result property="reStars" column="reStars" />
 <result property="reWriterName" column="reWriterName" />
+<result property="storeName" column="storeName" />
+<result property="storeAddress" column="storeAddress" />
 <collection property="fileName" resultMap="fileNameMap"></collection>
 </resultMap>
 
