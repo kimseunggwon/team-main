@@ -49,6 +49,7 @@ public class SubscribeCancelController {
 	}
 	
 	@PostMapping("/checkSubsUser")
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	public String checkSubsUser(String userid) {
 
@@ -56,6 +57,7 @@ public class SubscribeCancelController {
 	}
 	
 	@PostMapping("/checkSubsBoard")
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	public String checkSubsBoard(String userid) {
 		return service.checkSubsBoard(userid);
@@ -64,13 +66,13 @@ public class SubscribeCancelController {
 	
 // 구독취소 등록
 	@RequestMapping("/cancelSubsRegister")
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_BLACK')")
 	public void cancelSubsRegister() {
 
 	}
 	
 	@PostMapping("/cancelSubsRegister")
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_BLACK')")
 	@ResponseBody
 	public void cancelSubsRegister(SubsCancelVO vo) {
 		service.cancelSubsRegister(vo);
@@ -106,6 +108,14 @@ public class SubscribeCancelController {
 	@PreAuthorize("principal.username == #subsid")
 	@ResponseBody
 	public void cancelSubsRemove(Long bno,String subsid) {
+		
+		service.cancelSubsRemove(bno);
+	}
+	
+	@PostMapping("/cancelSubsRemoveADMIN")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@ResponseBody
+	public void cancelSubsRemoveADMIN(Long bno,String subsid) {
 		
 		service.cancelSubsRemove(bno);
 	}

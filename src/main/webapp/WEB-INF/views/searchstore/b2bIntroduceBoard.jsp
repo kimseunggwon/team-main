@@ -118,7 +118,7 @@ html {
 	color: white;
 	padding: 16px 32px;
 	text-align: center;
-	font-size: 18px;
+	font-size: 12px;
 	margin: 4px 2px;
 	opacity: 1;
 	transition: 0.3s;
@@ -186,31 +186,50 @@ html {
 			$("#introduce-modal").text(introduce);
 		}) 
 		
-		$("#register").click(function() {
-			let id = "${pinfo.member.id}"
+$("#register").click(function() {
 			
-			var form = new FormData();
-			form.append("file", $("#introduceImage")[0].files[0]);
-			form.append("id", id);
-			form.append("storeinfo", $("#storeinfo").val());
-			form.append("introduce", $("#introduce").val());
-
-			$.ajax({
-				type : "POST",
-				url : "${appRoot}/searchstore/b2bIntroduceBoard",
-				data : form,
-				enctype : "multipart/form-data",
-				processData : false,
-				contentType : false,
-				cache : false,
-				success : function() {
-					alert("등록성공 !! " + "이쁘게 홍보해드릴게여^*^");
-				},
-				error : function() {
-					console.log("등록실패");
-				}
-			})
+			if($("#introduceImage")[0].files[0] == null) {
+				alert("사진을 등록해주세요")
+			} else {
+				let id = "${pinfo.member.id}"
+				var form = new FormData();
+				form.append("file", $("#introduceImage")[0].files[0]);
+				form.append("id", id);
+				form.append("storeinfo", $("#storeinfo").val());
+				form.append("introduce", $("#introduce").val());
+	
+	
+				$.ajax({
+					type : "POST",
+					url : "${appRoot}/searchstore/b2bIntroduceBoard",
+					data : form,
+					enctype : "multipart/form-data",
+					processData : false,
+					contentType : false,
+					cache : false,
+					success : function() {
+						alert("등록성공 !! " + "이쁘게 홍보해드릴게여^*^");
+						location.href='${appRoot}/member/mypage'; 
+					},
+					error : function() {
+						console.log("등록실패");
+					}
+				})
+				
+			}
+			
 		})
+		
+				/* 가게정보 갖고오기(모달 검색 리스트) */
+			$("#BoardURL").click(function() {
+					let id1 = "${pinfo.member.id}"
+					
+					let url = "${appRoot}/searchstore/b2bIntroduce/" + id1
+					let name = "빨래스타그램";
+					let option = "width = 620, height = 950, top = 100, left = 200, location = no"
+					
+					window.open(url, name, option);
+				})
 	})
 </script>
 
@@ -255,6 +274,7 @@ html {
 		<div class="box_5">
 			<button id="preview-modal-btn" class="button_sang" type="button"
 				data-toggle="modal" data-target="#preview-modal" >미리보기</button>
+				<button id="BoardURL" class="button_sang">현재 내 가게 홍보상태 보기</button>
 			<button id="register" class="button_sang">등록</button>
 		</div>
 	</div>
