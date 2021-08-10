@@ -36,7 +36,6 @@ public class UserReviewController {
 	
 	// 리뷰 목록 얻어오기 - userReviewList
 	@GetMapping("/list")
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public void reviewList(@ModelAttribute("recri") ReviewCriteria recri, 
 							UserReviewVO review,
 							Model model) {
