@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.SubsFinalInfoVO;
@@ -96,7 +97,7 @@ public class SubscribeController {
 	@GetMapping("/finalinfo")
 	public String calendar(Model model, 
 			HttpServletRequest request, 
-			SubscribeDate dateData,String userid) {
+			SubscribeDate dateData) {
 
 		
 //		List<SubscribeDate> dateList = subinfoservice.getDateList(dateData);
@@ -165,19 +166,27 @@ public class SubscribeController {
 		List<String> realSubDateList = subinfoservice.getSubDateList(dateData);
 
 		
-		log.info(userid);
-		SubsFinalInfoVO vo = service.ABCD(userid);
+		/*
+		 * log.info(userid); SubsFinalInfoVO vo = service.ABCD(userid);
+		 */
 
 		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
 		model.addAttribute("today_info", today_info);
 		model.addAttribute("subDateList", realSubDateList);
-		model.addAttribute("subsInfo", vo);
+		/* model.addAttribute("subsInfo", vo); */
 
 		
 		
 		// 구독 세탁소 정보
 
 		return "/subscribe/finalinfo";
+	}
+	
+	@PostMapping("ABCD")
+	@ResponseBody
+	public SubsFinalInfoVO ABCD(String userid) {
+		SubsFinalInfoVO vo = service.ABCD(userid);
+		return vo;
 	}
 	
 	
