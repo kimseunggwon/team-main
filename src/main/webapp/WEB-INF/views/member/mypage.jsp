@@ -52,10 +52,10 @@ body {
 			<a href="${appRoot }/member/main"> <img style="padding: 70px;"id="logo" alt="jinah-logo"
 				src="${appRoot }/resources/image/others/brand_logo_400px.png">
 			</a>
-		</div>
+		</div> 
 		<br> <br>
 
-		<!-- 12
+		<!-- navbar 전에
  <ul class="nav justify-content-end">
   
   <sec:authorize access="isAnonymous()">
@@ -105,28 +105,28 @@ body {
 
 
 
-		<!-- 구독 신청 버튼 권한 부여 -->
+		<!-- 구독 신청 버튼 권한 부여 + subsoptions정보 불러오기 -->
 		<script type="text/javascript">
 			$(function() {  
 				let loginID = "${pinfo.member.userid}";
 				$.ajax({
 							type : "POST",
-							url : "${appRoot}/member/getLoginInfo",
+							url : "${appRoot}/member/getLoginInfo",  
 							data : {
-								userid : loginID
+								userid : loginID 
 							},
-							success : function(data) {
+							success : function(data) {   
 
 								let confirmID = data;
 								console.log(confirmID);
 								
 								if (data == '') {
-									$(".mypage-subinfo2").show();
+									$(".mypage-subinfo2").show(); 
 									$("#mypage-subinfo-2").show();
 									$("#mypage-subinfo-21").show();
 									
 								} else if (data != '') {
-									$.ajax ({
+									$.ajax ({               
 										type: "post",
 										url: "${appRoot}/member/getsubsoptions",
 										data: {
@@ -158,12 +158,14 @@ body {
 		<div class="jumbotron">
 			<h1 class="display-4">안녕하세요 ${member.userName } 회원님</h1>
 				<br>
+				<sec:authorize access="hasRole('ROLE_USER')">
 				<div style="display:none;" class="mypage-subinfo1">고객님이 이용중인 서비스는<span style="font-size: 30px; color: #0583F2;"id="sub-options"></span>입니다.</div>
 				<div style="display:none;" class="mypage-subinfo2">혹시 아직 서비스를 이용하지 않고
 					계신가요~? <br> 서둘러 밑에 구독하기 버튼을 눌러주세요!</div>
 			<hr class="my-4">
-
-			<div class="row" >
+ 
+            
+			<div class="row">
 				<div class="col-sm-6">
 					<div class="card"> 
 					
@@ -192,8 +194,8 @@ body {
 							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">다세대
 								가구 구독</a>
 						</div> 
-						 
-						<div class="card-body" style="display:none;" id="mypage-subinfo-1"> 
+						  
+						 <div class="card-body" style="display:none;" id="mypage-subinfo-1"> 
 							<h5 class="card-title">구독 완료</h5>
 							<p class="card-text"></p>
 							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">
@@ -203,6 +205,7 @@ body {
 					</div>
 				</div>
 			</div>
+			</sec:authorize>
 
 		</div>
 
