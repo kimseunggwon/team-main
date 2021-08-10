@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="hel" tagdir="/WEB-INF/tags/help"%>
 <%@ taglib prefix="bot" tagdir="/WEB-INF/tags/botnav"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>1:1 문의글 리스트(관리자)</title>
 <style type="text/css">
 @font-face {
     font-family: 'GongGothicMedium';
@@ -34,28 +35,13 @@
 
 <div class = "container">
 	
-	<div class="row mt-5">
 				
-				 <div class="col align-self-start">
-				 
-				 </div>
-			
-				<!-- 빨래 널자(회사) 로고 이미지가 들어갈 위치 -->
-				<div class="col align-self-center mt-3">
+	<div class="row justify-content-center mt-5">
+
 					<a href="${appRoot }/member/main">
-						<img src="${appRoot }/resources/image/others/brand_logo_300px.png" alt="...">
+						<img src="${appRoot }/resources/image/others/brand_logo_400px.png" alt="...">
 					</a>
-				</div>
-			
-				<!-- 간단한 검색을 할 수 있는 검색창 구현 --> 
-				<div class="col align-self-end">
-			
-					<form class="d-flex">
-     	 				<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-      					<button class="btn btn-outline-success" type="submit">Search</button>
-    				</form>
-				</div>
-			</div>
+	</div>
 	
 	
 	<div>
@@ -110,9 +96,6 @@
 </table>
 	
 	
-	
-	<!-- pagenation -->
-	
 	<!-- pagenation 적용을 위한 코드 추가 -->
 
 	<div>
@@ -147,8 +130,7 @@
 	<bot:botnav></bot:botnav>
 	
 		</div>
-</div>
-	
+	</div>
 
 </body>
 </html>

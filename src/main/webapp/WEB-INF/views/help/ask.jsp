@@ -11,6 +11,8 @@
 <link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
+
+<!-- 1:1 문의글 작성시 조건을 만족하지 못하면 글이 작성되지 않도록 함. -->
 <script type="text/javascript">
 	
 	$(function() {

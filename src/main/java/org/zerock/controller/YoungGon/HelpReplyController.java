@@ -28,6 +28,7 @@ public class HelpReplyController {
 		
 	private AskReplyService service;
 	
+	/* 관리자만 댓글을 생성할 수 있도록 함 */
 	@PostMapping("/new")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> create(@RequestBody AskReplyVO vo) {
@@ -41,6 +42,7 @@ public class HelpReplyController {
 		}
 	}
 	
+	/* 해당 글을 확인하면 작성되어 있는 댓글을 확인할 수 있도록 함. */
 	@GetMapping("/pages/{bno}")
 	@PreAuthorize("isAuthenticated()")
 	public List<AskReplyVO> getList(@PathVariable("bno") Long bno) {
@@ -48,6 +50,7 @@ public class HelpReplyController {
 		return service.getList(bno);
 	}
 	
+	/* 관리자만 댓글 상세 확인창을 확인할 수 있도록 함. */
 	@GetMapping("/{rno}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public AskReplyVO get(@PathVariable("rno") Long rno) {
@@ -55,6 +58,7 @@ public class HelpReplyController {
 		return service.get(rno);
 	}
 	
+	/* 관리자만 댓글을 삭제할 수 있도록 함. */
 //	@RequestMapping(value = "/{rno}", method = RequestMethod.DELETE)
 	@DeleteMapping("/{rno}")
 	@PreAuthorize("principal.username == #vo.replyer")
@@ -69,6 +73,7 @@ public class HelpReplyController {
 		}
 	}
 	
+	/* 관리자만 댓글을 수정할 수 있도록 함. */
 	@RequestMapping(value = "/{rno}", method = RequestMethod.PUT)
 	@PreAuthorize("principal.username == #vo.replyer")
 	public ResponseEntity<String> modify(@RequestBody AskReplyVO vo, @PathVariable Long rno) {

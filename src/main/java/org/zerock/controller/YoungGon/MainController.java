@@ -19,48 +19,49 @@ public class MainController {
 	
 	private MainService service;
 	
+	/* 메인 페이지 접속 */
 	@RequestMapping("/main")
 	public String main() {
-
 		
 		return "member/main";
 	}
 	
-	
+	/* 로그인 페이지 접속 */
 	@RequestMapping("mainLogin")
 	public String login() {
-
 		
 		return "member/login";
 	}
 	
+	/* 로그아웃 */
 	@RequestMapping("mainLogout")
 	public String logout() {
 
-		
 		return "member/main";
 	}
 	
-	
+	/* 마이페이지 접속 */
 	@RequestMapping("mainMypage")
 	public String myPage() {
-
 		
 		return "member/mypage";
 	}
 	
+	/* 회원가입 페이지 접속 */
 	@RequestMapping("mainSignup")
 	public String signUp() {
 		
 		return "member/signup";
 	}
 	
+	/* 고객센터 페이지 접속 */
 	@RequestMapping("mainHelpdesk")
 	public String helpdesk() {
 		
 		return "help/helpdesk";
 	}
 	
+	/* 로그인 유저 정보 확인 */
 	@PostMapping("/getLoginInfo")
 	@ResponseBody
 	public String getLoginInfo(String userid) {
@@ -70,6 +71,7 @@ public class MainController {
 		
 	}
 	
+	/* 로그인 한 유저의 권한 확인 */
 	@GetMapping("/getMemberAuth")
 	@ResponseBody
 	public String getMemberAuth(String userid) {

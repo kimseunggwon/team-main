@@ -21,7 +21,7 @@ var userid = "${pinfo.member.userid}";
 
 <script src="${appRoot }/resources/js/get.js"></script>
 
-<title>Insert title here</title>
+<title>1:1 문의글 확인 창</title>
 
 <style type="text/css">
 @font-face {
@@ -54,7 +54,7 @@ var userid = "${pinfo.member.userid}";
 			
 		
 		
-		<div>
+<div>
 
 			<div id="alert1" class="alert alert-primary fade" role="alert">
 			</div>
@@ -144,7 +144,7 @@ var userid = "${pinfo.member.userid}";
 
 
 
-<%-- 댓글 입력 모달 --%>
+<%-- 답변 입력 모달 --%>
 
 <div class="modal fade" id="reply-insert-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -177,7 +177,7 @@ var userid = "${pinfo.member.userid}";
   </div>
 </div>
 
-<%-- 댓글 수정, 삭제 모달 --%>
+<%-- 답변 수정, 삭제 모달 --%>
 <div class="modal fade" id="reply-modify-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

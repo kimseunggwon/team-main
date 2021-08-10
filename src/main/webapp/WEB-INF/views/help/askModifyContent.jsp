@@ -12,7 +12,7 @@
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>1:1 문의글 수정 / 삭제 창(유저)</title>
 
 <style type="text/css">
 @font-face {
@@ -27,6 +27,7 @@
 }
 </style>
 
+<!-- 1:1 문의글 삭제 시 확인 창 나옴 -->
 <script>
 $(document).ready(function() {
 	var modifyUrl = "${appRoot }/help/askModifyContent";
