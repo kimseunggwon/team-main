@@ -24,6 +24,30 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.jinah-layout {
+	box-shadow: 1px 1px 20px #A3A3A3;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	padding: 30px;
+}
+
+
 * {
 	font-family: 'GongGothicMedium';
 }
@@ -71,6 +95,10 @@
 	flex-direction: row;
 	justify-content: space-around;
 	align-content: center;
+}
+
+.move-btn {
+	margin: 20px;
 }
 </style>
 
@@ -132,7 +160,7 @@
 	</div> 
 	<!-- Review Grading (stars) End -->
 
-	<div class="container">
+	<div class="jinah-layout container">
 		 <div class="row justify-content-center">
 		 		<div class="col-8">
 			 		<form id="re-modify-form1" action="${appRoot }/review/modify" method="post" enctype="multipart/form-data"> 
@@ -140,7 +168,7 @@
 						<c:if test="${not empty review.fileName }">
 							<c:forEach items="${review.fileName }" var="rfile">
 								<div>
-									<img class="img-fluid"
+									<img class="center img-fluid"
 										src="${imgReviewRoot }${review.reBno}/${rfile }">
 								</div>
 							</c:forEach>
@@ -171,7 +199,17 @@
 			 			<input type="hidden" name="reWriterName" value="${pinfo.member.userid }" readonly>
 			 			
 			 			<input type="hidden" name="reBno" value="${review.reBno }" readonly>
-
+							
+						<!-- 이용한 세탁소 위치 정보 -->
+						<div class="item form-group">
+							<label for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
+								class="form-control" value="${review.storeName }" readonly>
+						</div>
+						<div class="item form-group">
+							<label for="re-input5"><span>${review.reWriterName }</span>님의 구독 세탁소 주소</label> <input id="re-input5"
+								class="form-control" value="${review.storeAddress }" readonly>
+						</div>	
+							
 						<!-- 평점 -->			 			
 			 			<input hidden id="stars-submit" value="" name="newReStars">
 			 			
@@ -297,19 +335,19 @@
 	</c:if>
 
 	<!-- 구독작성/구독하기/로그인 Root Forwarding Buttons -->
-	<div class="container">
-		<div class="row justify-content-center d-flex justify-content-around">
+	<div style="margin-top:50px;"class="container">
+		<div class="row justify-content-center d-flex justify-content-center">
 			<sec:authorize access="hasRole('ROLE_USER')">
 				<a href="${appRoot }/subscribe"><button
-						id="review-subscribe-btn" type="button" class="btn btn-primary">지금
-						빨래 구독하기</button></a>
+						id="review-subscribe-btn" type="button" 
+						class="move-btn btn btn-outline-danger btn-lg">지금 빨래 구독하기</button></a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROLE_USER')">
 				<a href="${appRoot }/review/write"><button id="review-write-btn"
-						type="button" class="btn btn-primary">구독 리뷰 남기기</button></a>
+						type="button" class="move-btn btn btn-outline-dark btn-lg">구독 리뷰 남기기</button></a>
 			</sec:authorize>
 			<a href="${appRoot }/review/list"><button type="button"
-					class="btn btn-info">다른 리뷰 보러가기</button></a>
+					class="move-btn btn btn-outline-info btn-lg">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
 	

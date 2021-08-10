@@ -25,6 +25,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	font-family: 'GongGothicMedium';
 }
@@ -127,9 +134,6 @@ $(function(){
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					정렬 방식</button>
 				<div class="dropdown-menu dropdown-menu-right">
-					<a class="dropdown-item" href="#">BEST 5</a>
-					<div class="order-new dropdown-divider"></div>
-					
 						<c:url value="/review/list" var="popUrl">
 	 						<c:param name="pageNum" value="${reviewPageMaker.recri.pageNum}" />
 	 						<c:param name="amount" value="${reviewPageMaker.recri.amount}" />
@@ -214,22 +218,22 @@ $(function(){
 			<div class="row justify-content-center d-flex justify-content-center">
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<a href="${appRoot }/subscribe"><button
-							id="review-subscribe-btn" type="button" class="move-btn btn btn-primary btn-lg">지금
+							id="review-subscribe-btn" type="button" class="move-btn btn btn-danger btn-lg">지금
 							빨래 구독하기</button></a>
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${appRoot }/member/login"><button
 							id="review-subscribe-login-btn" type="button"
-							class="move-btn btn btn-primary btn-lg">지금 빨래 구독하기</button></a>
+							class="move-btn btn btn-danger btn-lg">지금 빨래 구독하기</button></a>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
 					<a href="#"><button
-							id="review-write-btn" type="button" class="move-btn btn btn-primary btn-lg">구독
+							id="review-write-btn" type="button" class="move-btn btn btn-success btn-lg">구독
 							리뷰 남기기</button></a>
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${appRoot }/member/login"><button
-							id="review-write-login-btn" type="button" class="move-btn btn btn-primary btn-lg">구독
+							id="review-write-login-btn" type="button" class="move-btn btn btn-success btn-lg">구독
 							리뷰 남기기</button></a>
 				</sec:authorize>
 			</div>

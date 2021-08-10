@@ -22,8 +22,23 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
 	font-family: 'GongGothicMedium';
+}
+
+.jinah-layout {
+	box-shadow: 1px 1px 20px #A3A3A3;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	margin-top: 50px;
+	margin-bottom: 10px;
 }
 
 .review-star-child {
@@ -31,6 +46,14 @@
 	background-color: white;
 	border: none;
 	outline: none;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	padding: 30px;
 }
 
 #jinah-star1, #jinah-star2, #jinah-star3, #jinah-star4, #jinah-star5 {
@@ -95,6 +118,7 @@
 
 		<rev:search></rev:search>
 
+<div class="jinah-layout">
 	<!-- Review Grading (stars) Start -->
 	<div id="review-star-parent" style="display: inline;" class="container">
 		<div class="review-star-parent row justify-content-center d-flex align-items-center">
@@ -134,7 +158,7 @@
 						<c:if test="${not empty review.fileName }">
 							<c:forEach items="${review.fileName }" var="rfile">
 								<div>
-									<img class="img-fluid"
+									<img class="center img-fluid"
 										src="${imgReviewRoot }${review.reBno}/${rfile }">
 								</div>
 							</c:forEach>
@@ -162,6 +186,7 @@
 								name="reWriterName" value="${review.reWriterName }" readonly>
 							<input readonly="readonly" class="form-control" value="${review.reWriterName }">
 						<br><br>
+						
 						<!-- 이용한 세탁소 위치 정보 -->
 						<div class="item form-group">
 							<label for="re-input4"><span>${review.reWriterName }</span>님의 구독 세탁소 이름</label> <input id="re-input4"
@@ -189,14 +214,17 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="container">
-		<div class="row justify-content-center">
-			<span id="review-total-count"> ${review.likeCount }</span> 명이 이 게시물을
-			좋아합니다.
+	<div style="padding: 20px 0px;" class="container">
+		<div style="color:black; padding-top: 50px; font-size: 25px; font-family: 'Cafe24SsurroundAir';" 
+		class="row justify-content-center">
+			<span style="color: #35A9F2; font-family: 'Cafe24SsurroundAir';" id="review-total-count">
+			${review.likeCount }</span>&nbsp;명의 구독자님이 이 게시물을 좋아합니다.
 		</div>
 	</div>
 	<div style="display:none;" id="likerslist"></div>
+
 
 	<!-- 좋아요 Modal (회원 접근 가능) -->
 	<sec:authorize access="isAuthenticated()">
@@ -271,9 +299,9 @@
 	</div>
 	</sec:authorize>
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row justify-content-center" style="margin: 20px;">
 			<a href="${appRoot }/review/list"><button type="button"
-					class="btn btn-info">다른 리뷰 보러가기</button></a>
+					class="btn btn-info btn-lg">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
 	<div class="container">

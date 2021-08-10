@@ -53,7 +53,7 @@
 }
 
 #btn:hover {
-	background-color: green;
+	background-color: #6AB9FF;
 	color: white;
 }
 </style>

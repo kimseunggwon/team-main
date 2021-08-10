@@ -246,7 +246,7 @@ $(function(){
     			<div class="card-body">
       				<h5 class="card-title">12개월 연속 구독중인 "빨래싫어!" 님의 리뷰</h5>
       				<p class="card-text">빨래를 귀찮아하고 싫어하지만 옷은 많은 저한테는 딱인 서비스였어요. 처음에는 1달만 써봐야지! 하고...</p>
-      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=102&pageNum=1&amount=10&type=&keyword=&sort=200">더보기 >>></a></small></p>
+      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/list?pageNum=1&amount=10&type=&keyword=&sort=100">더보기 >>></a></small></p>
     			</div>
   			</div>
 		</div>
@@ -257,7 +257,7 @@ $(function(){
     			<div class="card-body">
       				<h5 class="card-title">가장 많은 추천을 받은 "리뷰왕" 님의 리뷰</h5>
       				<p class="card-text">빨래널자의 서비스가 제 워라밸을 보장해줬어요. 아무래도 자취하는 입장에서는 제일 하기 싫은게 빨래인데..</p>
-      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/get?reBno=103&pageNum=1&amount=10&type=&keyword=&sort=200">더보기 >>></a></small></p>
+      				<p class="card-text"><small class="text-muted"><a href="${appRoot }/review/list?pageNum=1&amount=10&type=&keyword=&sort=100">더보기 >>></a></small></p>
     			</div>
   			</div>
 		</div>
