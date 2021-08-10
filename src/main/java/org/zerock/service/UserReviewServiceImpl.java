@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.domain.HotReviewVO1;
 import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReviewCriteria;
 import org.zerock.domain.StoreInfoVO;
@@ -284,6 +285,15 @@ public class UserReviewServiceImpl implements UserReviewService {
 	public StoreInfoVO readsubs(MemberVO vo) {
 		
 		return membermapper.readsubs(vo);
+	}
+	
+	@Override
+	public HotReviewVO1 getHot1() {
+		return membermapper.getHot1();
+	}
+	@Override
+	public HotReviewVO1 getHot2() {
+		return membermapper.getHot2();
 	}
 	
 	
