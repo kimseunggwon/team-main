@@ -6,6 +6,9 @@
 
 <!DOCTYPE html>
 <html>
+
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <head>
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>

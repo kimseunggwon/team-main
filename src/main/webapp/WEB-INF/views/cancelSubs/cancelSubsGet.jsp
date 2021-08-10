@@ -8,6 +8,8 @@
 <html>
 <head>
 
+<link href="${appRoot }/resources/favicon/brand_logo.png" rel="shortcut icon" type="image/x-icon">
+
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 <title>구독취소신청서 보기</title>
 <style type="text/css">
