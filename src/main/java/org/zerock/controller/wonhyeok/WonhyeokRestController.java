@@ -25,7 +25,7 @@ public class WonhyeokRestController {
 	private WonhyeokRestService service;
 	
 	@PostMapping("/searchstore")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER') || hasRole('ROLE_ADMIN')")
 	public List<AddressVO> find(String storename) {
 
 		List<AddressVO> vo = service.getsearchbystorename(storename);
@@ -36,7 +36,7 @@ public class WonhyeokRestController {
 	}
 	
 	@PostMapping(value = "/searchaddress", produces = {"application/json; charset=utf-8"})
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER') || hasRole('ROLE_ADMIN')")
 	public List<AddressVO> findarround(@RequestBody AddressVO vo) {
 		List<AddressVO> list = service.getlatlag(vo);
 		
@@ -45,7 +45,7 @@ public class WonhyeokRestController {
 	}
 
 	@PostMapping(value = "/tagGetB2bStoreInfo", produces = {"application/json; charset=utf-8"})
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER') || hasRole('ROLE_ADMIN')")
 	@ResponseBody
 	public List<AddressVO> tagGetB2bStoreInfo(@RequestBody AddressVO vo) {
 		List<AddressVO> list = service.getlatlag(vo);

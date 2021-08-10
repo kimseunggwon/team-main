@@ -262,13 +262,13 @@
 												 let marker = new naver.maps.Marker(laundrymarker);
 												 
 												 $(".storeInfoBtn").click(function() {
-														console.log("되냐?")
+
 														storeInfoURL(this);
 														})
 													
 													function storeInfoURL(btn) {
 														var id = $(btn).attr('data-id');
-														console.log(id);
+														
 														
 														let url = "${appRoot}/searchstore/b2bIntroduce/" + id
 														let name = "빨래스타그램";

@@ -93,7 +93,7 @@ body {
 				<a class="dropdown-item" href="${appRoot}/searchstore/searchMap">매장 찾기</a>
 				<a class="dropdown-item" href="${appRoot }/help/askList">나의 1:1문의내역</a> 
 				<a class="dropdown-item" href="${appRoot }/review/list">구독 리뷰</a> 
-				<sec:authorize access="hasRole('ROLE_B2BUSER')">
+				<sec:authorize access="hasAnyRole('ROLE_B2BUSER', 'ROLE_EMPUSER')">
 					<a class="dropdown-item" href="${appRoot }/searchstore/b2bIntroduceBoard">홍보페이지 관리</a> 
 				</sec:authorize>
 					<a class="dropdown-item" href="${appRoot}/cancelSubs/cancelSubsBoard">구독

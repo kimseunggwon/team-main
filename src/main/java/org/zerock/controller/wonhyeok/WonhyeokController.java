@@ -26,18 +26,19 @@ public class WonhyeokController {
 	private WonhyeokRestService service;
 	
 	@RequestMapping("/searchMap")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER') || hasRole('ROLE_ADMIN')")
 	public void searchstore() {
 
 	}
 //	사장님 홍보 게시판 컨트롤러
 	@RequestMapping("/b2bIntroduceBoard")
-	@PreAuthorize("hasRole('ROLE_B2BUSER')")
+	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER')")
 	public void b2bIntroduce() {
 
 	}
 	// 등록 서버URL
 	@PostMapping("/b2bIntroduceBoard")
-	@PreAuthorize("hasRole('ROLE_B2BUSER')")
+	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER')")
 	public void b2bIntroduce(B2bIntroduceVO Introduce, @RequestParam("file") MultipartFile file) {
 
 		Integer id = service.getid(Introduce);
@@ -54,7 +55,7 @@ public class WonhyeokController {
 	}
 
 	@GetMapping("/getStoreInfo")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER')")
 	@ResponseBody
 	public StoreVO getStoreInfo(String id) {
 		
@@ -62,13 +63,13 @@ public class WonhyeokController {
 		
 	}
 	@GetMapping("/b2bIntroduce")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER') || hasRole('ROLE_ADMIN')")
 	public void b2bIntroducepage() {
 
 	}
 	
 	@RequestMapping("/b2bIntroduce/{id}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_B2BUSER') || hasRole('ROLE_EMPUSER') || hasRole('ROLE_ADMIN')")
 	public String b2bIntroducepage(@PathVariable("id") Long id,RedirectAttributes rttr) {
 		
 		B2bIntroduceVO vo = service.getStoreInroducePageInfo(id);

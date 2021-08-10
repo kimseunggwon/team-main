@@ -59,7 +59,7 @@
 </style>
 <script type="text/javascript">
 $(function() {
-	
+	/* 작성자 본인 삭제버튼 */
 	$("#removeBTN").click(function() {
 		let bno = "${board.bno}";
 		let subsid = "${board.subsid }"
@@ -74,6 +74,31 @@ $(function() {
 					subsid : subsid
 					},
 				url : "${appRoot}/cancelSubs/cancelSubsRemove",
+				success : function() {
+					alert("삭제 되었습니다");
+					location.href='${appRoot}/cancelSubs/cancelSubsBoard'; 
+				}
+		})	
+		} else {
+			alert("취소되었습니다.");
+		}
+	})
+	
+	/* ADMIN전용 삭제 버튼 */
+	$("#removeBTN_ADMIN").click(function() {
+		let bno = "${board.bno}";
+		let subsid = "${board.subsid }"
+		let checkMsg = "게시글을 삭제하시겠습니까?"
+				
+		let check = confirm(checkMsg);	
+		if(check) {
+		$.ajax({
+				type : "POST",
+				data : {
+					bno : bno,
+					subsid : subsid
+					},
+				url : "${appRoot}/cancelSubs/cancelSubsRemoveADMIN",
 				success : function() {
 					alert("삭제 되었습니다");
 					location.href='${appRoot}/cancelSubs/cancelSubsBoard'; 
@@ -189,7 +214,6 @@ $(function() {
 
 						<c:set var="boardId" value="${board.subsid }"/> 
 						<c:set var="loginId" value="${pinfo.member.userid }"/>
-						<%-- <c:set var="AdminAUTH" value=""/>  --%>
 						<c:if test="${loginId eq boardId }">
 							<a href="${modifyUrl }">
 								<button class="btn btn-primary">수정</button>
@@ -203,6 +227,7 @@ $(function() {
 					
 						
 						<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+							<button id="removeBTN_ADMIN" class="btn btn-primary" style="background-color:#E61B7B; border-color: #E61B7B">삭제</button>
 							<button id="refundCashBTN" class="btn btn-primary" style="background-color:#454144;border-color: #454144">환급모드</button>
 							<button id="refundBTN" class="btn btn-primary" style="background-color:#454144;border-color: #454144">환불승인</button>
 						</sec:authorize>
