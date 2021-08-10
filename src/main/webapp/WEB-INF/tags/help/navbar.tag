@@ -35,7 +35,9 @@ $(function(){
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-light justify-content-end"
 		style="background-color: white;">
+		<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_BLACK')">		
 		<a class="navbar-brand" id="nav-subs" style="display: none;">구독하기</a>
+		</sec:authorize>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarScroll" aria-controls="navbarScroll"
 			aria-expanded="false" aria-label="Toggle navigation">

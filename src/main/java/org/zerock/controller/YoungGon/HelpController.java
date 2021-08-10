@@ -165,4 +165,60 @@ public class HelpController {
 		// forward /WEB-INF/views/board/register.jsp
 	}
 	
+	/*관리자 삭제 권한*/
+	@PostMapping("/askAdminRemove")
+	@PreAuthorize("hasRole('ROLE_ADMIN')") // 720 쪽
+	public String askAdminRemove(@RequestParam("bno") Long bno, 
+			Pagenation pag, RedirectAttributes rttr, String writer) {
+		//parameter 수집
+		
+		//service 일 시킴
+		boolean success = service.AdminRemove(bno);
+		//결과 담고
+		if (success) {
+			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("messageTitle", "삭제 성공");
+			rttr.addFlashAttribute("messageBody", "삭제 되었습니다.");
+		}
+		
+		rttr.addAttribute("pageNum", pag.getPageNum());
+		rttr.addAttribute("amount", pag.getAmount());
+		rttr.addAttribute("type", pag.getType());
+		rttr.addAttribute("keyword", pag.getKeyword());
+		
+		//forward or redirect
+		return "redirect:/help/askListAdmin";
+	}
+	
+	@GetMapping("/askAdminModifyContent")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public void askAdminModifyContent(Long bno, Model model) {
+		HelpVO vo = service.askGet(bno);
+			      
+		model.addAttribute("help", vo);
+	}
+	
+	/*관리자 수정 권한*/
+	@PostMapping("/askAdminModifyContent")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String askAdminModifyContent(HelpVO help, MultipartFile[] file, Pagenation pag, RedirectAttributes rttr) {
+		
+		boolean success = service.AdminModify(help);
+		
+		if(success) {
+			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("messageTitle", "수정 성공");
+			rttr.addFlashAttribute("messageBody", "수정 되었습니다.");
+		}
+		
+		rttr.addAttribute("pageNum", pag.getPageNum());
+		rttr.addAttribute("amount", pag.getAmount());
+		rttr.addAttribute("type", pag.getType());
+		rttr.addAttribute("keyword", pag.getKeyword());
+		
+		// forward of redirect
+		return "redirect:/help/askListAdmin";
+		
+	}
+	
 }

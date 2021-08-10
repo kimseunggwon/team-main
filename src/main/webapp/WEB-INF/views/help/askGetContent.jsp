@@ -97,6 +97,14 @@ var userid = "${pinfo.member.userid}";
 					<c:param name="keyword" value="${pag.keyword }" />
 				</c:url>
 				
+				<c:url value="/help/askAdminModifyContent" var="adminModifyUrl">
+					<c:param name="bno" value="${help.bno }" />
+					<c:param name="pageNum" value="${pag.pageNum }" />
+					<c:param name="amount" value="${pag.amount }" />
+					<c:param name="type" value="${pag.type }"/>
+					<c:param name="keyword" value="${pag.keyword }" />
+				</c:url>
+				
 				 <sec:authorize access="principal.username == #help.writer">
 					
 						<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
@@ -104,7 +112,7 @@ var userid = "${pinfo.member.userid}";
 				</sec:authorize>
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
+					<a class="btn btn-secondary" href="${adminModifyUrl}">수정/삭제</a>
 				</sec:authorize>
 			
 			</form>
@@ -196,8 +204,10 @@ var userid = "${pinfo.member.userid}";
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
         <span id="reply-modify-delete-btn-wrapper">
-	        <button id="reply-modify-btn1" type="button" class="btn btn-primary">댓글 수정</button>
-    	    <button id="reply-delete-btn1" type="button" class="btn btn-danger">댓글 삭제</button>
+        	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		        <button id="reply-modify-btn1" type="button" class="btn btn-primary">댓글 수정</button>
+    		    <button id="reply-delete-btn1" type="button" class="btn btn-danger">댓글 삭제</button>
+        	</sec:authorize>
         </span>
       </div>
     </div>

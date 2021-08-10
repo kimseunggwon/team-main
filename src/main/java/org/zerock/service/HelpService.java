@@ -14,7 +14,11 @@ public interface HelpService {
 	
 	public boolean modify(HelpVO help);
 	
+	public boolean AdminModify(HelpVO help);
+	
 	public boolean remove(Long help);
+	
+	public boolean AdminRemove(Long help);
 	
 	public List<HelpVO> getListUser(Pagenation pag);
 	
@@ -27,4 +31,7 @@ public interface HelpService {
 	public void register(HelpVO help, MultipartFile[] file);
 	
 	public boolean modify(HelpVO help, MultipartFile[] file);
+	
+	public boolean AdminModify(HelpVO help, MultipartFile[] file);
+	
 }
