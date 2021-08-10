@@ -158,6 +158,7 @@ body {
 		<div class="jumbotron">
 			<h1 class="display-4">안녕하세요 ${member.userName } 회원님</h1>
 				<br>
+				
 				<sec:authorize access="hasRole('ROLE_USER')">
 				<div style="display:none;" class="mypage-subinfo1">고객님이 이용중인 서비스는<span style="font-size: 30px; color: #0583F2;"id="sub-options"></span>입니다.</div>
 				<div style="display:none;" class="mypage-subinfo2">혹시 아직 서비스를 이용하지 않고
@@ -176,14 +177,14 @@ body {
 								가구 구독</a>
 						</div> 
 						<div class="card-body" style="display:none;" id="mypage-subinfo-22">
-							<h5 class="card-title">구독 완료</h5>
+							<h5 class="card-title">${member.userName }님 구독 완료</h5>
 							<p class="card-text"></p>
-							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">
+							<a href="" class="btn btn-info"><i class="fas fa-hand-sparkles"></i>
 								</a>
 						</div>
 						
-						
-					</div> 
+						 
+					</div>  
 				</div>
 				<div class="col-sm-6">
 					<div class="card">
@@ -195,11 +196,11 @@ body {
 								가구 구독</a>
 						</div> 
 						  
-						 <div class="card-body" style="display:none;" id="mypage-subinfo-1"> 
-							<h5 class="card-title">구독 완료</h5>
-							<p class="card-text"></p>
-							<a href="${appRoot }/subscribe/subsregister" class="btn btn-info">
-								</a>
+						<div class="card-body" style="display:none;" id="mypage-subinfo-1"> 
+							<h5 class="card-title">${member.userName }님 구독 정보</h5> 
+							<p class="card-text"></p>  
+							<a href="${appRoot }/subscribe/finalinfo" class="btn btn-info"> 
+								<i class="fas fa-info"></i></a>   
 						</div> 
 						
 					</div>
