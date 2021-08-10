@@ -115,6 +115,7 @@ public class MyPageController {
 		model.addAttribute("member", member);
 	}
 	
+	//mypage에서 내구독정보 불러오기 
 	@PostMapping(value = "/getsubsoptions", produces = "text/plain; charset=utf-8")	
 	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
