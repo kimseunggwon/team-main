@@ -118,7 +118,6 @@
 			</div>
 		</div>
 
-		<rev:search></rev:search>
 
 <div class="jinah-layout">
 	<!-- Review Grading (stars) Start -->
