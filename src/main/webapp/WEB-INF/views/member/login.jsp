@@ -173,9 +173,9 @@ $(function(){
 			</div>
 			
 			
-				<div>
-					<img style="position: absolute; z-index: -1" alt="" src="${appRoot }/resources/image/로그인 테두리3.png">
-				</div>
+			<div>
+				<img style="position: absolute; z-index: -1" alt="" src="${appRoot }/resources/image/로그인 테두리3.png">
+			</div>
 			<div class="row justify-content-center mt-5">
 			
 			<form id="sang-login-form" action="${appRoot}/login" method="post">
