@@ -153,7 +153,7 @@ $(function(){
 	
 </div>
 
-
+<!-- 블랙리스트 모달 -->
 <div class="modal fade" id="black-list-modal">
 	<div class="modal-dialog">
 		<div class="modal-content">

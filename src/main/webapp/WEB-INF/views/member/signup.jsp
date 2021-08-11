@@ -19,10 +19,10 @@
 
 <style type="text/css">
 	@font-face {
-	    font-family: 'GongGothicMedium';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 	}
 	h5 {
 	font-family: GongGothicMedium;
@@ -120,10 +120,9 @@
 <script type="text/javascript">
 
 var passwordfin = false;
+
 // 아이디 중복 확인 focusout
 $(function() {
-	
-	
 	/* .on("propertychange change keyup paste input",function(){ */
 	$("#sang-id").focusout(function(){
 		var idVal = $("#sang-id").val();
@@ -133,7 +132,6 @@ $(function() {
 			$("#id-message").removeClass("text-success");
 			$("#id-message").addClass("text-danger");
 			messageElem.text("아이디를 입력해주세요.");
-			
 			
 		} else {
 			// 아이디가 입력되어있을 때
@@ -166,6 +164,7 @@ $(function() {
 		}
 	});
 	
+	// 패스워드 확인 일치 유무
 	$("#sang-pw-conform, #sang-pw").keyup(function() {
 		var pw1 = $("#sang-pw").val();
 		var pw2 = $("#sang-pw-conform").val();
@@ -215,6 +214,7 @@ $(function() {
 	
 	var authurl = "${appRoot}"+"/member/authNumber";
 	
+	// 이메일의 정규식
 	$("#sang-authnum").click(function() {
 		var idE = $("#sang-email").val();
 		/* var idP = $("#sang-pnum").val(); */
@@ -235,7 +235,7 @@ $(function() {
 		});
 	});
 	
-		
+	// 인증번호 확인
 	$("#sang-inz-btn").click(function(){
 		var idI = $("#sang-inz-input").val();
 		$.post(authurl, {idI: idI}, function(data) {
@@ -251,6 +251,7 @@ $(function() {
 		});
 	});
 	
+	// 어떤 이미지를 선택하느냐에 따른 이미지 변화
 	$("#sang-normal-img").click(function(e){
 		e.preventDefault();
 		
@@ -275,6 +276,7 @@ $(function() {
 		$("#sang-b2b-img").attr("src", "${appRoot}/resources/image/사업자2.png");
 	})
 	
+	// 사업자 번호가 1111일 때 경로 변경
 	$("#sang-businessnum").keyup(function(){
 		var businessnum = $("#sang-businessnum").val();
 		var companynum = "1111";
@@ -287,7 +289,7 @@ $(function() {
 		}
 	})
 	
-    
+    // 전화번호에 숫자만 사용
     $("#sang-pnum, #sang-storepnum").keyup(function(){
 		var userp = $("#sang-pnum").val();
 		var b2bp = $("#sang-storepnum").val();
@@ -327,6 +329,7 @@ $(function() {
     $("#signup").click(function(e) {
     	e.preventDefault();
     
+    	<%-- 회원가입 양식, 정규식 --%>
 		if($("#sang-id").val().trim() == ""){
 			console.log("#sang-id");
 			alert("아이디는 필수 입력 사항입니다.");
@@ -452,7 +455,8 @@ $(function() {
     			$("#sang-businessnum").focus();
     			return false;
     		}
-          
+         
+		// 네이버 주소 검색
        naver.maps.Service.geocode({
             query: address // String 타입의 주소값
         }, function(status, response) {
