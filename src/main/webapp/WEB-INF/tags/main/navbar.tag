@@ -19,7 +19,7 @@
 			<ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll"
 				style="max-height: 1000px;">
 				
-
+				<!-- 관리자 계정에게만 고객관리와 1:1 문의 글 확인 메뉴가 보이도록 함. -->
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="nav-item active"><a class="nav-link"
 					href="${appRoot }/member/usermanagement">고객관리 <span class="sr-only">(current)</span></a>
@@ -29,6 +29,7 @@
 				</li>
 				</sec:authorize>
 				
+				<!-- 로그인 한 계정만 고객센터 접속과 마이페이지 확인 메뉴가 보이도록 함.-->
 				<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER', 'ROLE_BLACK')">
 				<li class="nav-item active"><a class="nav-link"
 					href="${appRoot }/help/helpdesk">고객센터 <span class="sr-only">(current)</span></a>

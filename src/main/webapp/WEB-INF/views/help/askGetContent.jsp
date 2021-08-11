@@ -21,7 +21,7 @@ var userid = "${pinfo.member.userid}";
 
 <script src="${appRoot }/resources/js/get.js"></script>
 
-<title>Insert title here</title>
+<title>1:1 문의글 확인 창</title>
 
 <style type="text/css">
 @font-face {
@@ -54,7 +54,7 @@ var userid = "${pinfo.member.userid}";
 			
 		
 		
-		<div>
+<div>
 
 			<div id="alert1" class="alert alert-primary fade" role="alert">
 			</div>
@@ -144,13 +144,13 @@ var userid = "${pinfo.member.userid}";
 
 
 
-<%-- 댓글 입력 모달 --%>
+<%-- 답변 입력 모달 --%>
 
 <div class="modal fade" id="reply-insert-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">새 댓글</h5>
+        <h5 class="modal-title" id="exampleModalLabel">새 답변</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -164,25 +164,25 @@ var userid = "${pinfo.member.userid}";
             <input type="hidden" value="${pinfo.member.userid }" class="form-control" id="reply-replyer-input1">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">댓글</label>
+            <label for="message-text" class="col-form-label">답변</label>
             <textarea class="form-control" id="reply-reply-textarea1"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="reply-insert-btn1" type="button" class="btn btn-primary">댓글 입력</button>
+        <button id="reply-insert-btn1" type="button" class="btn btn-primary">답변 입력</button>
       </div>
     </div>
   </div>
 </div>
 
-<%-- 댓글 수정, 삭제 모달 --%>
+<%-- 답변 수정, 삭제 모달 --%>
 <div class="modal fade" id="reply-modify-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">댓글 수정/삭제</h5>
+        <h5 class="modal-title">답변 수정/삭제</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -197,7 +197,7 @@ var userid = "${pinfo.member.userid}";
             <input type="hidden" class="form-control" id="reply-replyer-input2" readonly>
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">댓글</label>
+            <label for="message-text" class="col-form-label">답변</label>
             <textarea class="form-control" id="reply-reply-textarea2"></textarea>
           </div>
         </form>
@@ -207,8 +207,8 @@ var userid = "${pinfo.member.userid}";
         
         <span id="reply-modify-delete-btn-wrapper">
         	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		        <button id="reply-modify-btn1" type="button" class="btn btn-primary">댓글 수정</button>
-    		    <button id="reply-delete-btn1" type="button" class="btn btn-danger">댓글 삭제</button>
+		        <button id="reply-modify-btn1" type="button" class="btn btn-primary">답변 수정</button>
+    		    <button id="reply-delete-btn1" type="button" class="btn btn-danger">답변 삭제</button>
         	</sec:authorize>
         </span>
       </div>

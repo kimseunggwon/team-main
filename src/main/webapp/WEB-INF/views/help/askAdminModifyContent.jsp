@@ -10,7 +10,7 @@
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>1:1 문의글 수정/삭제 페이지 (관리자)</title>
 
 <style type="text/css">
 @font-face {
@@ -25,6 +25,7 @@
 }
 </style>
 
+<!-- 삭제 시 확인 메세지가 출력되도록 한다. -->
 <script>
 $(document).ready(function() {
 	var modifyUrl = "${appRoot }/help/askAdminModifyContent";

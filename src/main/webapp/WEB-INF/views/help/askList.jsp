@@ -14,7 +14,7 @@
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>1:1 문의글 리스트(유저)</title>
 
 <style type="text/css">
 @font-face {
@@ -41,7 +41,7 @@
 					<a href="${appRoot }/member/main">
 						<img src="${appRoot }/resources/image/others/brand_logo_400px.png" alt="...">
 					</a>
-			</div>
+	</div>
 	
 	
 	<div>
@@ -60,6 +60,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<%--유저들은 자신이 작성한 1:1 문의글만 보이도록 함. --%>
 		 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_B2BUSER', 'ROLE_EMPUSER', 'ROLE_BLACK')">
 					<c:forEach items="${list }" var="help">
 				<c:if test="${pinfo.member.userid eq help.writer}">
@@ -94,7 +95,7 @@
 					</c:forEach>
 		</sec:authorize>
 			   	
-			   	
+		<%--관리자는 모든 유저가 작성한 1:1 문의글이 보이도록 함. --%>	   	
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			 <c:forEach items="${list }" var="help">
 				<tr>
@@ -131,7 +132,7 @@
 	
 	
 	
-	<!-- pagenation -->
+
 	
 	<!-- pagenation 적용을 위한 코드 추가 -->
 

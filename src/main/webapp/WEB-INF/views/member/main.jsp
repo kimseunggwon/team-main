@@ -25,8 +25,6 @@
   gtag('config', 'UA-204320906-1');
 </script>
 
-<mem:mybar></mem:mybar>
-
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Main</title>
@@ -180,7 +178,7 @@ $(function(){
 	})
 })
 </script>
-
+<!-- 블랙리스트 회원에게 뜨는 안내창 -->
 <script type="text/javascript">
 	$(function() {
 		let loginid = "${pinfo.member.userid}";
@@ -382,7 +380,7 @@ $(function(){
 		
 	</div>
 	
-	
+	<!-- 구독 혜택 안내 박스 -->
 	<div id="service_box">
 		<div class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">Why Special?</div>
 		<small class="row justify-content-center mt-4">빨래로부터의 해방감을 느껴보세요!</small>
@@ -419,6 +417,7 @@ $(function(){
 		
 	</div>
 	
+	<!-- 로그인한 계정이 잇을 경우에만 자신의 위치정보를 기반으로 세탁방 정보가 나오도록 설정 -->
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<div id="location">
 			<h1 class="text-center mt-4">지금 내 주변에 있는 빨래널자의 세탁방은?</h1>
@@ -430,7 +429,8 @@ $(function(){
 	</sec:authorize>
 	
 	<br>
-		
+	
+	<!-- 구독하기 버튼이 구독하지 않은 일반유저와 블랙 유저에게만 보이도록 함. -->
 		<div class="row justify-content-center fixed-bottom ">
 			<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_BLACK')">
 						<a id="main-subscribe" style="display:none; background-color: ##0583F2;">
@@ -439,7 +439,7 @@ $(function(){
 							</button>
 						</a>
 			</sec:authorize>
-			
+	<!-- 구독하기 버튼이 방문자에게도 보이지만 이를 누르면 로그인창으로 이동되도록 함. -->	
 			<sec:authorize access="isAnonymous()">
 				<a class="mb-3 mt-5" id="main-subscribe2" style="background-color: ##0583F2; " href="${appRoot}/member/login">
 				<button id="subscribe-btn2" class="btn btn-primary btn-lg btn-block">

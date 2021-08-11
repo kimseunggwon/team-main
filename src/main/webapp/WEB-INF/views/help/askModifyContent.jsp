@@ -12,7 +12,7 @@
 
 <%@ include file = "/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>1:1 문의글 수정 / 삭제 창(유저)</title>
 
 <style type="text/css">
 @font-face {
@@ -27,6 +27,33 @@
 }
 </style>
 
+<!-- 1:1 문의글 수정시 조건을 만족하지 못하면 글이 작성되지 않도록 함. -->
+<script type="text/javascript">
+	
+	$(function() {
+		$("#ask-submit-btn").click(function(e) {
+			e.preventDefault();
+			askCheck = document.forms.ask;
+			if(askCheck.title.value == "" && askCheck.content.value == "") {
+				alert("문의 제목과 내용을 입력해주세요!")
+				return false; 
+			} else if(askCheck.title.value == "") {
+				alert("문의 제목을 입력해주세요!")
+				return false;
+			} else if (askCheck.content.value == "") {
+				alert("문의 내용을 입력해주세요!")
+				return false;
+				}
+			else {
+				$(askCheck).submit();
+				//return true;
+			}
+		});
+	});
+</script>
+
+
+<!-- 1:1 문의글 삭제 시 확인 창 나옴 -->
 <script>
 $(document).ready(function() {
 	var modifyUrl = "${appRoot }/help/askModifyContent";
@@ -63,7 +90,7 @@ $(document).ready(function() {
 	
 	<div class="row">
 		<div class="col-12">
-			<form id="modify-form1" action="${appRoot }/help/askModifyContent" method="post" enctype="multipart/form-data">
+			<form id="modify-form1" name="ask" action="${appRoot }/help/askModifyContent" method="post" enctype="multipart/form-data">
 				<input hidden name="bno" value="${help.bno }" />
 				<div class="form-group">
 					<label for="input1">제목</label>
@@ -98,7 +125,7 @@ $(document).ready(function() {
 				<input hidden name="type" value="${pag.type }">
 				<input hidden name="keyword" value="${pag.keyword }" />
 				
-				<input class="btn btn-warning" type="submit" value="수정" />
+				<input id="ask-submit-btn" class="btn btn-warning" type="submit" value="수정" />
 				<input id="board-remove-btn1" class="btn btn-danger" type="button" value="삭제" />
 			</form>
 		</div>
