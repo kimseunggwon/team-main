@@ -8,7 +8,7 @@
 <!-- 리뷰 페이지네이션 -->
 <sql id="ReviewCriteria">
 	<where>
-		<foreach item="type" separator="OR" collection="reviewTypeArr">
+		<foreach item="type" separator="OR" collection="reviewTypeArr" open="(" close=")">
 			<choose>
 				<when test='type == "T"'>
 					re_title LIKE CONCAT('%', #{keyword}, '%')
@@ -55,9 +55,12 @@
 		r.re_stars reStars,
 		u.userNickname reWriterName
 	FROM user_review r JOIN user u
-	ON r.re_writer = 'admin'
+	ON r.re_writer = u.userid
+	
 	
 	<include refid="ReviewCriteria"></include>
+	AND r.re_writer = 'admin'
+	
 	GROUP BY r.re_bno
 	ORDER BY r.re_bno DESC
 	LIMIT #{from}, #{amount}
