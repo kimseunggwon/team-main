@@ -110,7 +110,7 @@ $(function(){
 
 	<rev:navbar></rev:navbar>
 
-
+	<!-- 메인 로고 이미지 위치 -->
 	<div class="container">
 		<div class="row justify-content-center">
 			<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
