@@ -13,10 +13,10 @@
 <title>아이디 찾기</title>
 <style type="text/css">
 	@font-face {
-	    font-family: 'GongGothicMedium';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 	}
 	h5 {
 	font-family: GongGothicMedium;
@@ -64,12 +64,13 @@
     font-family: Noto Sans KR,sans-serif,Malgun Gothic,맑은 고딕,Dotum,돋움,Tahoma;
 	}
 	.button:hover {
-		background: #0583F2;
+	background: #0583F2;
 	}
 </style>
 
 <script type="text/javascript">
 
+<%-- 이름, 이메일로 아이디 찾기 --%>
 $(function() {
 	$("#signup").click(function() {
 		

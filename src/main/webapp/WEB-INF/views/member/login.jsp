@@ -26,19 +26,19 @@
 body{
 	font-family: 'GongGothicMedium';
 }
-.container-1 input.search{
-  width: 420px;
-  height: 78px;
-  background: rgb(242, 242, 242);
-  border: none;
-  font-size: 12pt;
-  float: left;
-  color: rgb(0, 0, 0);
-  padding-left: 45px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  border-radius: 40px;
-  outline-style: none;
+.container-1 input.search {
+	width: 420px;
+	height: 78px;
+	background: rgb(242, 242, 242);
+	border: none;
+	font-size: 12pt;
+	float: left;
+	color: rgb(0, 0, 0);
+	padding-left: 45px;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	outline-style: none;
 }
 .button {
 	background-color: #169EF2;
@@ -83,6 +83,7 @@ $(function(){
 		
 	}); */
 	
+	// 이미지 선택에 따른 이미지 변화
 	$("#sang-normal-img").click(function(e){
 		e.preventDefault();
 		
@@ -107,6 +108,7 @@ $(function(){
 </script>
 
 <script>
+	// 로그인 유지와 아이디 기억
     $(document).ready(function()
     {
         var userId = getCookie("cookieUserId"); 
@@ -199,17 +201,6 @@ $(function(){
 	
 				<br>
 				
-				<!-- 		
-				<div>
-					<label for="input1">이름</label>				
-					<input id="input1" name="username" autofocus/>
-				</div>
-				<div>
-					<label for="input2">패스워드</label>
-					<input id="input2" type="password" name="password" />
-				</div> 
-				-->
-				
 				<div class="row align-items-center">
 					<input id="checkbox1" type="checkbox" name="remember-me" class="col-1"> <!-- name어트리뷰트가 가장 중요 -->
 					<label class="form-check-label col-5" for="checkbox1">로그인 유지</label>
@@ -225,12 +216,6 @@ $(function(){
 					<a style="text-decoration: none; color: black;" id="sang-findpw-btn" class="col-4" href="${appRoot}/member/findpw">비밀번호 찾기</a>
 					<a style="text-decoration: none; color: black;" id="sang-signup-btn" class="col-4" href="${appRoot }/member/signup">회원가입</a>
 				</div>
-				
-				<%-- <sec:authorize access="isAuthenticated()">
-				  <form action="${appRoot }/logout" method="post">
-				  	<input type="submit" class="btn btn-outline-secondary" value="로그아웃">
-				  </form>
-			  	</sec:authorize> --%>
 				
 			</form>
 			
