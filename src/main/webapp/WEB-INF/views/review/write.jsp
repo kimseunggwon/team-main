@@ -16,6 +16,10 @@
 <meta charset="UTF-8">
 <title>Review - write JSP File</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style type="text/css">
 @font-face {
 	font-family: 'GongGothicMedium';
@@ -28,6 +32,18 @@
 
 * {
 	font-family: 'GongGothicMedium';
+}
+
+.jinah-layout {
+	box-shadow: 1px 1px 20px #A3A3A3;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1110px;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	margin-top: 50px;
+	margin-bottom: 10px;
 }
 
 .review-star-child {
@@ -61,13 +77,11 @@
 	cursor: pointer;
 }
 
-/* 왜 안될까? */
-#jinah-search-form1 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-content: center;
+.write-btn:hover {
+	background-color: #FF5289;
+	color: #FFFFF;
 }
+
 </style>
 
 <link rel="stylesheet" type="text/css"
@@ -80,11 +94,11 @@
 <script src="${appRoot }/resources/js/review/uploadajax.js"></script>
 <script src="${appRoot }/resources/js/review/reviewstar-write.js"></script>
 
+<!-- 구독자 이용 세탁소 정보 JS -->
 <script type="text/javascript">
 	$(function() {
 
 		var idVal = $("#write-userid").val();
-
 		var data = {userid : idVal};
 		
 		$.ajax({
@@ -103,16 +117,13 @@
 					console.log("구독중 아님");
 					$("#re-input4").val("구독중이 아닙니다.");
 					$("#re-input5").val("구독중이 아닙니다.");
-					
 				}
 
 			},
 			error : function() {
 				console.log("구독 세탁소 이름 주소 불러오기 실패");
 			}
-
 		});
-		
 	});
 </script>
 
@@ -121,10 +132,7 @@
 
 	<rev:navbar></rev:navbar>
 
-	<%-- 
-			여기는 [글쓰기] JSP 파일입니다 :) 
-		--%>
-
+	<!-- 메인 로고 -->
 	<div class="container">
 		<div class="row justify-content-center">
 			<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
@@ -135,7 +143,8 @@
 
 	<rev:search></rev:search>
 
-	<!-- Review Grading (stars) Start -->
+<div class="jinah-layout">
+	<!-- 리뷰 평점 -->
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<div id="review-star-parent" style="display: inline;"
 			class="container">
@@ -162,24 +171,21 @@
 					<i class="review-star-icon far fa-star" id="jinah-star5"></i>
 				</button>
 				<div>
-
 					<input class="review-result btn btn-warning" type="submit"
 						value="등록하기">
-
-					<%-- 여기에 별 개수를 계산한 값을 넣어주기 --%>
-					<label for="jinah-restars">평점</label><span id="reStars"
-						name="reStars">${review.reStars }</span>
-
 				</div>
 			</div>
+		</div>
+		<div style="margin: 20px; font-family: 'Pacifico', cursive;" class="row justify-content-center">
+					<span style="font-size: 30px; font-family: 'Pacifico', cursive;">Your grading is...</span>
+					<span style="color: #0583F2; font-size: 30px; font-family: 'Pacifico', cursive;" id="reStars" name="reStars">${review.reStars }</span>
 		</div>
 	</sec:authorize>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<input hidden id="review-star-result" name="reviewStars" value="5">
 	</sec:authorize>
-	<!-- Review Grading (stars) End -->
 
-	<!-- Main Writing Content -->
+	<!-- 리뷰 글 쓰기 input -->
 	<div id="re-write-content" class="container">
 		<div class="row justify-content-center">
 			<div class="col-8">
@@ -227,9 +233,10 @@
 	                  <label for="re-input5">나의 구독 세탁소 주소</label> <input id="re-input5"
                      class="form-control" value="" name="storeAddress" readonly>
 					</div>
-					<input class="btn btn-primary" id="write-submit" type="submit"
+					<input class="write-btn btn btn-primary btn-lg" id="write-submit" type="submit"
 						value="리뷰 등록하기">
-
+					
+					<!-- 평점 필수 입력 JS -->
 					<script>
 						$(function() {
 							$("#write-submit").click(function(e) {
@@ -244,24 +251,25 @@
 						})
 					</script>
 
-					<!-- 평점 -->
+					<!-- 평점 Value 넣기 -->
 					<input hidden id="stars-submit" value="" name="reStars"> <input
 						hidden id="stars-admin" value="${pinfo.member.userid }">
 				</form>
 			</div>
 		</div>
 	</div>
+</div>
 
 
-
-
-	<div class="container">
+	
+	<div style="padding: 30px 0px;" class="container">
 		<div class="row justify-content-center">
 			<a href="${appRoot }/review/list"><button type="button"
-					class="btn btn-info">다른 리뷰 보러가기</button></a>
+					class="btn btn-info btn-lg">다른 리뷰 보러가기</button></a>
 		</div>
 	</div>
 	
+	<!-- Footer -->
 	<div class="container">
 		<bot:botnav></bot:botnav>
 	</div>

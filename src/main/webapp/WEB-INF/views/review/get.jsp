@@ -16,6 +16,10 @@
 <meta charset="UTF-8">
 <title>Review - get JSP File</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style type="text/css">
 @font-face {
     font-family: 'GongGothicMedium';
@@ -82,13 +86,6 @@
 	padding: 50px;
 }
 
-/* 왜 안될까? */
-#jinah-search-form1 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-content: center;
-}
 </style>
 
 <script>
@@ -102,14 +99,14 @@
 <script src="${appRoot }/resources/js/review/get-modify-reviewstar.js"></script>
 
 </head>
-<body> 
-
+<body style="overflow-x: hidden;"> 
+	
+	<!-- 상위 네비게이션 -->
 	<rev:navbar></rev:navbar>
 
 	<div class="container">
-		<%--
-		여기는 리뷰를 얻어오는 [리뷰 상세] JSP 파일입니다 :) 
-		 --%>
+	
+		<!-- 메인 로고 -->
 		<div class="container">
 			<div class="row justify-content-center">
 				<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
@@ -120,7 +117,7 @@
 
 
 <div class="jinah-layout">
-	<!-- Review Grading (stars) Start -->
+	<!-- 리뷰 평점 -->
 	<div id="review-star-parent" style="display: inline;" class="container">
 		<div class="review-star-parent row justify-content-center d-flex align-items-center">
 			<button data-operation="like" type="button" class="item review-star-child">
@@ -142,18 +139,19 @@
 			</div>
 		</div>
 	</div> 
-	<!-- Review Grading (stars) End -->
 
-		<!-- Main Writing Content -->
+		<!-- 리뷰 글 상세 -->
 		<div id="re-write-content" class="container">
 			<div class="row justify-content-center">
 				<div class="col-8">
 						<!-- 평점 -->
 						<sec:authorize access="hasRole('ROLE_USER')">
 							<input hidden id="review-star-result" name="reviewStars" value="${reviewStars }" >
-							<span>평점은 : ${reviewStars }</span>
+							<div style="margin: 20px;" class="row justify-content-center">
+								<span style="color: #000000; font-size: 30px; font-family: 'Pacifico', cursive;">Star Grading is...&nbsp;</span>
+								<span style="color: #0583F2; font-size: 30px; font-family: 'Pacifico', cursive;">${reviewStars }</span>
+							</div>
 						</sec:authorize>
-						
 						
 						<!-- 이미지 파일 -->
 						<c:if test="${not empty review.fileName }">
@@ -216,7 +214,8 @@
 		</div>
 	</div>
 </div>
-
+	
+	<!-- 좋아요 정보 -->
 	<div style="padding: 20px 0px;" class="container">
 		<div style="color:black; padding-top: 50px; font-size: 25px; font-family: 'Cafe24SsurroundAir';" 
 		class="row justify-content-center">

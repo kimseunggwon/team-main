@@ -31,6 +31,7 @@ public class HelpController {
 	
 	private HelpService service;
 	
+	/* 고객센터 접속 */
 	@RequestMapping("/helpdesk")
 	@PreAuthorize("isAuthenticated()")
 	public String go() {
@@ -39,7 +40,7 @@ public class HelpController {
 		return "help/helpdesk";
 	}
 	
-	
+	/* 1:1 문의글 작성 창으로 접속 */
 	@RequestMapping("/ask")
 	@PreAuthorize("isAuthenticated()")
 	public String goAsk() {
@@ -48,7 +49,7 @@ public class HelpController {
 		return "help/ask";
 	}
 	
-	/* 글 작성 등록 */
+	/* 1:1 문의글 작성 등록 */
 	@RequestMapping("register")
 	@PreAuthorize("isAuthenticated()")
 	public String register(HelpVO help, @RequestParam("file") MultipartFile[] file, RedirectAttributes rttr) {
@@ -65,6 +66,7 @@ public class HelpController {
 		return "redirect:/help/askList";
 	}
 	
+	/* 유저들이 자신이 작성한 1:1 문의글 내역을 확인할 수 있도록 함.(자신이 작성한 것만) */
 	@GetMapping("/askList")
 	@PreAuthorize("isAuthenticated()")
 	public void userList(@ModelAttribute("pag") Pagenation pag, Model model, Principal principal) {
@@ -78,8 +80,9 @@ public class HelpController {
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(pag, total));
 
-		}
+	}
 	
+	/* 관리자가 유저들이 작성한 1:1 문의글 내역을 확인할 수 있도록 함.(모든 1:1 문의글) */
 	@GetMapping("/askListAdmin")
 	@PreAuthorize("isAuthenticated()")
 	public void adminList(@ModelAttribute("pag") Pagenation pag, Model model) {
@@ -91,9 +94,9 @@ public class HelpController {
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(pag, total));
 
-		}
+	}
 	
-	
+	/* 유저가 자신이 작성한 1:1 문의글을 확인할 수 있도록 함. */
 	@GetMapping({"/askGetContent", "/askModifyContent"})
 	@PreAuthorize("isAuthenticated()")
 	public void askGetContent(@RequestParam("bno") Long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
@@ -102,6 +105,7 @@ public class HelpController {
 		askGet(bno, pag, model);
 	}
 	
+	/* 유저가 자신이 작성한 1:1 문의글을 확인할 수 있도록 함. */
 	@GetMapping("/get")
 	   public void askGet(@RequestParam("bno") long bno, @ModelAttribute("pag") Pagenation pag, Model model) {
 	      
@@ -112,7 +116,7 @@ public class HelpController {
 	      
 	   }
 
-
+	/* 유저가 자신이 작성한 1:1 문의글만 수정할 수 있도록 함. */
 	@PostMapping("/askModifyContent")
 	@PreAuthorize("principal.username == #help.writer")
 	public String askModifyContent(HelpVO help, Pagenation pag, @RequestParam("file") MultipartFile[] file, RedirectAttributes rttr) {
@@ -135,6 +139,7 @@ public class HelpController {
 		
 	}
 	
+	/* 유저가 자신이 작성한 1:1 문의글만 삭제할 수 있도록 함. */
 	@PostMapping("/askRemove")
 	@PreAuthorize("principal.username == #writer") // 720 쪽
 	public String askRemove(@RequestParam("bno") Long bno, 
@@ -159,13 +164,14 @@ public class HelpController {
 		return "redirect:/help/askList";
 	}
 	
+	/* 1:1 문의글 등록 */
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()") // 교재 673~674p
 	public void register(@ModelAttribute("pag") Pagenation pag) {
 		// forward /WEB-INF/views/board/register.jsp
 	}
 	
-	/*관리자 삭제 권한*/
+	/*관리자가 1:1 문의글에 대한 삭제 권한을 가지도록 함*/
 	@PostMapping("/askAdminRemove")
 	@PreAuthorize("hasRole('ROLE_ADMIN')") // 720 쪽
 	public String askAdminRemove(@RequestParam("bno") Long bno, 
@@ -190,6 +196,7 @@ public class HelpController {
 		return "redirect:/help/askListAdmin";
 	}
 	
+	/*관리자가 1:1 문의글에 대한 수정을 진행할 때 작성자의 기존 정보를 가져오도록 함*/
 	@GetMapping("/askAdminModifyContent")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void askAdminModifyContent(Long bno, Model model) {
@@ -198,7 +205,7 @@ public class HelpController {
 		model.addAttribute("help", vo);
 	}
 	
-	/*관리자 수정 권한*/
+	/*관리자가 1:1 문의글에 대한 수정 권한을 가지도록 함*/
 	@PostMapping("/askAdminModifyContent")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String askAdminModifyContent(HelpVO help, MultipartFile[] file, Pagenation pag, RedirectAttributes rttr) {

@@ -27,8 +27,8 @@ public class Mapper1 {
 	@Test public void textUpdate() { 
 	 
 
-		MemberVO vo = mapper.read("kim"); 
-		String newpw = "111"; 
+		MemberVO vo = mapper.read("user"); 
+		String newpw = "user"; 
 		vo.setUserpw(encoder.encode(newpw)); 
 		assertEquals(1, mapper.update(vo));
 	}

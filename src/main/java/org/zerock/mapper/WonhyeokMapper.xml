@@ -30,7 +30,8 @@ SELECT
 	storelat storelat,
 	storelag storelag
 FROM storeinfo 
-	  
+WHERE storelat > #{storelat} - 0.03 AND storelat < #{storelat} + 0.03 
+AND storelag > #{storelag} - 0.03 AND storelag < #{storelag} + 0.03
 ORDER BY SQRT(pow(#{storelat} - storelat, 2) + pow(#{storelag} - storelag,2))
 LIMIT 6
 

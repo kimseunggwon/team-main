@@ -48,8 +48,13 @@ body {
 
 
 
+<<<<<<< HEAD
 </head>
 <body>
+=======
+</head> 
+<body style="overflow-x: hidden;">
+>>>>>>> branch 'master' of https://github.com/kimseunggwon/team-main.git
 
 
 

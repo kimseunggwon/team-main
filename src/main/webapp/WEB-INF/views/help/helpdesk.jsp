@@ -250,7 +250,7 @@
 		<!-- 1:1 문의 글 작성 페이지로 이동되는 버튼 생성 -->
 		<div class="row justify-content-center">
 			<form action="${appRoot }/help/ask">
-			 	<input class="btn btn-danger btn-lg" type="submit" value="1:1 문의">
+			 	<input class="btn btn-danger btn-lg" type="submit" value="1:1 문의글 작성">
 			 </form>
 		</div>
 		

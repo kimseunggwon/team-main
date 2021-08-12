@@ -3,8 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+ 
+
+
+
 <mapper namespace="org.zerock.mapper.AskReplyMapper">
 
+<!-- 유저 계정으로 접속하여 1:1 게시글에 달린 댓글(답글) 삭제 -->
 	<delete id="removeByBnoByUser">
 		DELETE FROM ask_reply
 		WHERE bno IN (
@@ -12,17 +17,19 @@
 		)
 	</delete>
 
+<!-- 유저의 id로 1:1 게시글에 달린 댓글(답글) 삭제 -->
 	<delete id="removebyUserid">
 	DELETE FROM ask_reply
 	WHERE replyer = #{userid}
 	</delete>
 
-
+<!-- 댓글 작성 -->
 	<insert id="insert">
 		INSERT INTO ask_reply (bno, reply, replyer)
 		VALUES (#{bno}, #{reply}, #{replyer})
 	</insert>
 
+<!-- 댓글 가져오기 -->
 <select id="read" resultType="org.zerock.domain.AskReplyVO">
 	SELECT 
 		r.rno rno,
@@ -40,15 +47,18 @@
 
 </select>
 
+<!-- 댓글 삭제 -->
 	<delete id="delete">
 		DELETE FROM ask_reply WHERE rno = #{rno}
 	</delete>
 
+<!-- 댓글에 키 값 부여 -->
 	<insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="rno" keyColumn="rno">
 		INSERT INTO ask_reply (bno, reply, replyer)
 		VALUES (#{bno}, #{reply}, #{replyer})
 	</insert>
 
+<!-- 답글 수정 -->
 	<update id="update">
 		UPDATE ask_reply
 		SET reply = #{reply},
@@ -57,6 +67,7 @@
 		WHERE rno = #{rno}
 	</update>
 	
+	<!-- 답글 내역 가져오기 -->
 	<select id="getList" resultType="org.zerock.domain.AskReplyVO">
 		SELECT
 			r.rno rno,
@@ -74,10 +85,12 @@
 		
 	</select>
 
+	<!-- 답글 수 확인 -->
 	<select id="getCountByBno" resultType="int">
 		SELECT COUNT(*) FROM ask_reply WHERE bno = #{bno}
 	</select>
 
+<!-- 답글 게시글 삭제와 함께 삭제되도록 함. -->
 	<delete id="deleteByBno">
 	DELETE FROM ask_reply
 	WHERE bno = #{bno}

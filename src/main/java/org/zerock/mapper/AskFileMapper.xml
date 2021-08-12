@@ -5,16 +5,19 @@
 
 <mapper namespace="org.zerock.mapper.AskFileMapper">
 
+	<!-- 1:1 문의글에 파일을 첨부하여 1:1 문의글을 작성하도록 함. -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="rno" keyColumn="rno">
 		INSERT INTO ask_board_file (bno, fileName)
 		VALUES (#{bno}, #{fileName})
 	</insert>
 	
+	<!-- 게시글 번호에 따라서 파일이 첨부되어 있는 1:1 문의글을 삭제하도록 함. -->
 	<delete id="deleteByBno">
 		DELETE FROM ask_board_file
 		WHERE bno = #{bno}
 	</delete>
 	
+	<!-- 유저의 아이디에 따라서 파일이 첨부되어 있는 1:1 문의글이 삭제되도록 하였다. -->
 	<delete id="removeByUserid">
 		DELETE FROM ask_board_file
 		WHERE bno IN (

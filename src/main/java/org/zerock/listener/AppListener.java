@@ -32,6 +32,8 @@ public class AppListener implements ServletContextListener {
     	application.setAttribute("appRoot", application.getContextPath());
     	
     	// aws s3 bucket 주소
+    	
+    	// 1:1 문의글 관련 파일이 저장되는 AWS s3 bucket 주소
     	String bucketUrl1 = "https://swteam1.s3.ap-northeast-2.amazonaws.com/help/";
     	application.setAttribute("askImgRoot", bucketUrl1);
 

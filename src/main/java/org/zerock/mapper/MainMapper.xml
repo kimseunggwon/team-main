@@ -5,12 +5,14 @@
   
 <mapper namespace="org.zerock.mapper.MainMapper">
 
+	<!-- 로그인 한 계정의 구독 여부 확인 -->
 	<select id="subscribe" resultType="String">
 		SELECT s.subsId
 			FROM user AS u JOIN subscriber AS s ON u.userid = s.subsId
 		WHERE subsId = #{userid};
 	</select>
 	
+	<!-- 로그인 한 계정의 권한 가져옴 -->
 	<select id="getAuthByuserid" resultType="String">
 	SELECT au.auth
 	FROM user AS u JOIN user_auth AS au ON u.userid = au.userid

@@ -111,7 +111,6 @@ body {
 
 .text2 {
 	height: 33.33%;
-	text-align: left;
 }
 
 .text3 {
@@ -215,6 +214,33 @@ body {
 </style>
 <script type="text/javascript">
 	$(function() {
+		<!-- 구독 신청 버튼 권한 부여 -->
+		let loginID = "${pinfo.member.userid}";
+		$.ajax({
+			type: "POST",
+			url: "${appRoot}/member/getLoginInfo",
+			data: {
+				userid : loginID
+			},
+			success: function(data) {
+				
+				let confirmID = data;
+				console.log(confirmID);
+				if(confirmID != "") {
+					
+					alert("현재 이미 구독중입니다");
+					
+					location.href = "${appRoot}/member/main";
+
+				} 		
+			},
+			error : function() {
+				console.log("실패")
+			}
+		})
+
+
+		
 		/* 구독종류 클릭 모션 */
 		function clickSubsType(elem1) {
 			$(".box1").css("box-shadow", "0px 0px 6px 10px rgb(32 33 36/ 28%)");
@@ -279,7 +305,7 @@ body {
 										type : "POST",
 										url : "${appRoot}/subscribe/getNearStoreInfo",
 										data : data,
-										success : function(data) {
+		 								success : function(data) {
 											console.log(data);
 											
 
@@ -679,17 +705,17 @@ $(function() {
 		<h1 class="text-center mt-4" style="color:#0583F2; padding-bottom: 10px; font-size: 80px; font-family: 'Bangers', cursive;">Option</h1>
 			<div class="box1" id="box1-1">
 				<div class="text1">1인 가구</div>
-				<div class="text2">설명</div>
+				<div class="text2">하루에 1명이서 <br> 약5벌 정도의 빨래가 나오는 고객님에게<br> 추천</div>
 				<div class="text3">1000 $</div>
 			</div>
 			<div class="box1" id="box1-2">
 				<div class="text1">2인 가구</div>
-				<div class="text2">설명</div>
+				<div class="text2">하루에 2명이서 <br> 약12벌 정도의 빨래가 나오는 고객님에게<br> 추천 </div>
 				<div class="text3">2000 $</div>
 			</div>
 			<div class="box1" id="box1-3">
 				<div class="text1">4인 가구</div>
-				<div class="text2">설명</div>
+				<div class="text2">하루에 4명이서 <br> 약25벌 정도의 빨래가 나오는 고객님에게<br> 추천</div>
 				<div class="text3">3000 $</div>
 			</div>
 			<input id="finalAmount" value="" type="text" readonly="readonly"

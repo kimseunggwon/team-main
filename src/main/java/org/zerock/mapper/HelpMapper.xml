@@ -5,6 +5,7 @@
   
 <mapper namespace="org.zerock.mapper.HelpMapper">
 	
+ <!-- 1:1 문의글의 pagenation에 들어갈 정보 -->	
 	<sql id="pagenation">
 		<where>
 			<foreach item="type" separator="OR" collection="typeArr">
@@ -23,17 +24,19 @@
 		</where>
 	</sql>
 
+	<!-- 관리자 계정으로 접속했을 때 불러오는 1:1 문의 게시글의 수 -->
   <select id="getTotalCountAdmin" resultType="int">
   	SELECT COUNT(*) FROM ask_board A
   	<include refid="pagenation"></include>
   </select>
 
+	<!-- 일반 유저 계정으로 접속했을 때 불러오는 1:1 문의 게시글의 수 -->
 	<select id="getTotalCountUser" resultType="int">
   	SELECT COUNT(*) FROM ask_board WHERE writer = #{writer}
   	<include refid="pagenation"></include>
   </select>
 
-	<!-- 권한 부여와 관련해서 추가 작성 필요 -->
+	<!-- 일반 유저의 경우 자신이 작성한 글만 가져오도록 함. -->
 	<select id="getList" resultType="org.zerock.domain.HelpVO">
 		
 		SELECT
@@ -47,6 +50,7 @@
 		
 	</select>
 	
+<!-- 유저 계정으로 접속했을 때 해당 유저가 작성한 1:1 문의글의 갯수에 따라서 pagenation이 다르게 출력되도록 함. -->	
   <select id="getListWithPagingUser" resultType="org.zerock.domain.HelpVO">
   	
   	SELECT
@@ -68,6 +72,7 @@
   				   
   </select>
 
+<!-- 관리자 계정으로 접속했을 때 불러오는 1:1 문의글 갯수에 따라서 pagenation이 다르게 출력되도록 함. -->
 	<select id="getListWithPagingAdmin" resultType="org.zerock.domain.HelpVO">
   	
   	SELECT
@@ -88,16 +93,19 @@
   				   
   </select>
 
+<!-- 1:1 문의글을 작성할 때 작성자가 작성한 제목, 내용, 작성자를 통해서 문의글을 작성함. -->
 	<insert id="insert">
 		INSERT INTO ask_board (title, content, writer)
 		VALUES (#{title}, #{content}, #{writer})
 	</insert>
 
+<!-- 1:1 문의글을 작성할 때 고정적으로 해당 게시글에 번호가 들어가게 함. -->
 	<insert id="insertSelectkey" useGeneratedKeys="true" keyProperty="bno" keyColumn="bno">
 		INSERT INTO ask_board (title, content, writer)
 		VALUES (#{title}, #{content}, #{writer})
 	</insert>
 
+<!-- 게시글을 확인할 수 있도록 함. -->
 	 <select id="read" resultMap="helpMap">
   		SELECT
   			A.bno bno,
@@ -113,6 +121,7 @@
   		WHERE A.bno = #{bno}
  	 </select>
 
+<!-- 게시글 번호에 따라서 다른 1:1 문의글 정보가 생성되도록 함. -->
 	<resultMap type="org.zerock.domain.HelpVO" id="helpMap">
 	<id property="bno" column="bno" />
 	<result property="title" column="title" />
@@ -128,14 +137,17 @@
 		<result column="fileName" />
 	</resultMap> 
 
+	<!-- 일반 계정이 자신이 쓴 1:1 문의글을 삭제할 때 쓰임. -->
 	<delete id="delete">
   		DELETE FROM ask_board WHERE bno = #{bno}
   	</delete>
    
+   <!-- 관리자 계정이 유저가 쓴 1:1 문의글을 삭제할 때 쓰임. -->
    <delete id="AdminDelete">
    		DELETE FROM ask_board WHERE bno = #{bno}
    </delete>
    
+   <!-- 일반 계정이 자신이 쓴 1:1 문의글을 수정할 때 쓰임. -->
  	<update id="update">
   		UPDATE ask_board
   	
@@ -149,6 +161,7 @@
   			bno = #{bno}	
  	 </update>
   
+  	<!-- 관리자 계정이 1:1 문의글을 수정할 때 쓰임. -->
   	<update id="AdminUpdate">
   		UPDATE ask_board
   		
@@ -161,6 +174,7 @@
   			bno = #{bno}
   	</update>
   
+  	<!-- 유저 아이디에 따라서 1:1 문의글이 삭제되도록 함. -->
   	<delete id="removeByUserid">
   		DELETE FROM ask_board
   		WHERE writer = #{userid}

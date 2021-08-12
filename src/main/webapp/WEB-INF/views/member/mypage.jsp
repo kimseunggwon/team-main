@@ -20,7 +20,7 @@
 
 <title>마이페이지</title>
 </head>
-<body>
+<body style="overflow-x: hidden;">
 	<style type="text/css">
 .jumbotron {
 	box-shadow: 5px 3px 10px gray;
