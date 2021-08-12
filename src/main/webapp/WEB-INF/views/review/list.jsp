@@ -107,7 +107,8 @@ $(function(){
 
 </head>
 <body style="overflow-x: hidden;">
-
+	
+	<!--  상위 네비게이션 -->
 	<rev:navbar></rev:navbar>
 
 	<!-- 메인 로고 이미지 위치 -->
@@ -120,10 +121,8 @@ $(function(){
 	</div>
 
 	<div class="container">
-		<%--
-		 	여기는 [리뷰 리스트] JSP 파일입니다 :)
-		 --%>
 		 
+		 <!-- 검색 바 -->	
 		<rev:search></rev:search>
 		
 		<!-- 리뷰 게시물 총 개수 -->

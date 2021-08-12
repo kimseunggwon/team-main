@@ -18,6 +18,10 @@
 <title>review Modify JSP File</title>
 </head>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style type="text/css">
 @font-face {
     font-family: 'GongGothicMedium';
@@ -92,13 +96,6 @@
   cursor: pointer;
 }
 
-#jinah-search-form1 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-content: center;
-}
-
 .move-btn {
 	margin: 20px;
 }
@@ -116,13 +113,12 @@
 <script src="${appRoot }/resources/js/review/uploadajax.js"></script>
 <script src="${appRoot }/resources/js/review/reviewstar-modify.js"></script>
 
-
-
 <body>
-
+	
+	<!-- 상위 네비게이션 -->
 	<rev:navbar></rev:navbar>
-
-		<%-- 여기는 [글 수정 및 삭제하기] JSP 파일입니다 :) --%>
+	
+	<!-- 메인 로고 -->
 	<div class="container">
 		<div class="row justify-content-center">
 			<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
@@ -131,9 +127,10 @@
 		</div>
 	</div>
 
-
+	<!-- 검색 바 -->
 	<rev:search></rev:search>
-	<!-- Review Grading (stars) Start -->
+	
+	<!-- 리뷰 평점 -->
 	<div id="review-star-parent" style="display: inline;" class="container">
 		<div class="review-star-parent row justify-content-center d-flex align-items-center">
 			<button data-operation="like" type="button" class="item review-star-child">
@@ -154,14 +151,15 @@
 			<div>
 			
 			<input id="review-star-modify-btn" class="btn btn-warning" type="submit" value="평점 수정하기">
-			
-			<%-- 여기에 별 개수를 계산한 값을 넣어주기 --%>
-				<label for="new-restars">평점</label><span name="newReStars" id="new-restars"></span> 
 			</div>
 		</div>
 	</div> 
-	<!-- Review Grading (stars) End -->
-
+				<div style="margin: 20px; font-family: 'Pacifico', cursive;" class="row justify-content-center">
+					<span style="font-size: 30px; font-family: 'Pacifico', cursive;">Your grading is...</span>
+					<span style="color: #0583F2; font-size: 30px; font-family: 'Pacifico', cursive;" name="newReStars" id="new-restars"></span> 
+				</div> 
+	
+	<!-- 리뷰 글 수정 input -->
 	<div class="jinah-layout container">
 		 <div class="row justify-content-center">
 		 		<div class="col-8">

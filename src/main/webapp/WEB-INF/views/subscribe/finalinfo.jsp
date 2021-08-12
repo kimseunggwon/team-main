@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sub" tagdir="/WEB-INF/tags/subscribe" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,11 @@
 
 <meta charset="UTF-8">
 <title>Subscription Information File</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+
 <style TYPE="text/css">
 @font-face {
 	font-family: 'GongGothicMedium';
@@ -44,19 +50,16 @@ body {
 }
 
 td {
-	font-family: "돋움";
 	font-size: 9pt;
 	color: #595959;
 }
 
 th {
-	font-family: "돋움";
 	font-size: 9pt;
 	color: #000000;
 }
 
 select {
-	font-family: "돋움";
 	font-size: 9pt;
 	color: #595959;
 }
@@ -68,28 +71,24 @@ select {
 
 A:link {
 	font-size: 9pt;
-	font-family: "돋움";
 	color: #000000;
 	text-decoration: none;
 }
 
 A:visited {
 	font-size: 9pt;
-	font-family: "돋움";
 	color: #000000;
 	text-decoration: none;
 }
 
 A:active {
 	font-size: 9pt;
-	font-family: "돋움";
 	color: red;
 	text-decoration: none;
 }
 
 A:hover {
 	font-size: 9pt;
-	font-family: "돋움";
 	color: red;
 	text-decoration: none;
 }
@@ -217,15 +216,30 @@ A:hover {
 .shadow-container {
 	box-shadow: 5px 3px 20px gray;
 }
+.jinah-layout {
+	box-shadow: 1px 1px 20px #A3A3A3;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+li {
+	font-family: 'Prata', serif;
+	font-size: 22px;
+	line-height: 2;
+}
 </style>
 <!-- script src="${appRoot }/resources/js/subscribe/subscribe-calendar.js" -->
 </head>
 <body>
+	
+	<!-- 상위 내비게이션 -->
+	<sub:navbar></sub:navbar>
+	
 	<div class="container">
-		<%-- 진아가 
-		여기는 [구독 최종 확인] 페이지입니다.
-		--%>
 		
+	
 		<div class="container">
 			<div class="row justify-content-center">
 				<a href="${appRoot }/member/main"> <img id="logo" alt="jinah-logo"
@@ -234,15 +248,14 @@ A:hover {
 			</div>
 			<br><br>
 			<div class="row justify-content-center">
-				<span><h2>스케줄 설계 완료</h2></span>
+				<span style="font-size: 30px; background-color: #EBEEFF;">스케줄 설계 완료</span>
 			</div>
 		</div>
 
-		
-		<form name="calendarFrm" id="calendarFrm" action="" method="GET">
+	<div class="jinah-layout">
+			<form name="calendarFrm" id="calendarFrm" action="" method="GET">
 
 			<div class="calendar">
-
 				<!--날짜 네비게이션  -->
 				<div class="navigation">
 					<a class="before_after_year"
@@ -330,16 +343,15 @@ A:hover {
 				</table>
 				</div>
 
-				<div class="row">
-					
-					<div class="col">
-					<ul>
+				<div style="margin: 30px; font-size: 20px;" class="row justify-content-center">
+					<div class="col sub-date-list">
+					<ul style="font-family: 'Abril Fatface', cursive;">
 						<c:forEach var="subDate" items="${subDateList }" varStatus="status">
 								<li>${subDate }</li>
 								
 							<c:if test="${Math.floor(fn:length(subDateList) / 2 -1 ) == status.index }"	>
 								</ul>
-								</div>
+								</div> 
 								<div class="col">
 								<ul>
 							</c:if>
@@ -351,6 +363,7 @@ A:hover {
 			</div>
 		</form>
 	</div>
+</div>
 
  <script type="text/javascript">
 $(function() {
@@ -376,18 +389,19 @@ $(function() {
 		}
 	})
 })
-</script>  
-
-
+</script>   
+		<br>	
+		<hr>
 		<!-- 구독회원의 구독 최종 결과 정보 -->
 		<div id="re-write-content" class="container">
 			<div class="row justify-content-center">
 				<div class="col-8">
+						<span style="font-size: 30px; background-color: #EBEEFF;">상세 이용 정보</span>
 						<form id="finalSubsInfo" action="${appRoot}/subscribe/finalinfo" method="get">
 							<!-- data : userid -->
 							<input type="hidden" name="userid" value="${pinfo.member.userid }"  readonly>
 						</form>
-						<div class="item form-group">
+						<div style="margin-top: 30px;" class="item form-group">
 							<label for="sub-input1">이름</label> 
 							<input id="sub-input1" class="form-control" readonly>
 						</div>
