@@ -77,7 +77,7 @@ $(function() {
 </script>
 </head>
 <body style="overflow-x: hidden;">
-
+<div class = "container"> 
 	<rev:navbar></rev:navbar>
 
 
@@ -151,5 +151,7 @@ $(function() {
 
 		
 		<bot:botnav></bot:botnav>
+		
+		</div>
 </body>
 </html>

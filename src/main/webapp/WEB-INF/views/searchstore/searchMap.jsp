@@ -45,6 +45,10 @@
 			
 			var storename = $("#name-store").val()
 			
+			if(storename == "") {
+				alert("가게 이름을 적어주세요");
+			} else {
+				
 			var data = {
 				storename : storename
 			}
@@ -111,6 +115,7 @@
 					}
 				}
 			})
+			}
 		})
 	})
 
@@ -377,14 +382,7 @@ body {
 	<div class="nav">
 		<main:navbar></main:navbar>
 	</div>
-	<div style="margin-top: 70px;">
-		<a href="${appRoot }/member/main"> <img
-			src="${appRoot }/resources/image/others/brand_logo_300px.png"
-			alt="...">
-		</a>
-		<div>매장찾기</div>
 
- 
 	<sub:navbar></sub:navbar>
 	
 	<div>
@@ -437,7 +435,7 @@ body {
 					id="myaddress" placeholder="주소를 검색해주세요" readonly>
 					
 					<br><br>
-					<input class="button_sang1" type="button" onclick="sample6_execDaumPostcode()" value="우편번호로 찾기"><br>
+
 					
 					<input type="text" id="postcode" placeholder="우편번호" hidden>
 					<input type="text" id="address" placeholder="주소" hidden><br>
